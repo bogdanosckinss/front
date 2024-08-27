@@ -18,6 +18,8 @@ export default function AuthForm() {
             response = await privateAxios.post('http://localhost:3000/auth/create', {
                 phone_number: phone,
                 name: name
+            },{
+                withCredentials: true
             })
         } catch (err) {
             console.log(err)
@@ -37,7 +39,10 @@ export default function AuthForm() {
             response = await privateAxios.post('http://localhost:3000/auth/confirm-phone', {
                 confirmationToken: localStorage.getItem('confirmationToken'),
                 confirmationCode: confirmationCode
-            })
+            },
+                {
+                    withCredentials: true
+                })
         } catch (err) {
             console.log(err)
         }
@@ -58,7 +63,7 @@ export default function AuthForm() {
     }
 
     return (
-        <form>
+        <form style={{border: 'solid black 1px', padding: 10, margin: 10}}>
             {
                 isRequestSent ?
                     <div>

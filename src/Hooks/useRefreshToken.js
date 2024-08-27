@@ -15,9 +15,12 @@ const useRefreshToken = () => {
         'auth/refresh-access',
         {},
         {
-          headers: { Authorization: `Bearer ${accessToken}` },
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+                        "Same-Site": 'strict'
+          },
           withCredentials: true,
-        }
+        },
       )
       console.log(response.data.accessToken)
       const parsedToken = parseJWT(response.data.accessToken)
