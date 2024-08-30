@@ -1,0 +1,338 @@
+@import url('./video-header.css');
+.video-body {
+  background-color: var(--darkBlue);
+}
+.video-main__container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 360px;
+}
+.video-main__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 50px;
+}
+.video-main__item {
+  border-radius: 15px;
+  background-color: #3267d1;
+  /* overflow: hidden; */
+  width: 100%;
+  height: 698px;
+  position: relative;
+}
+.video-main__item-cover {
+  position: relative;
+  border-radius: 17px;
+  height: 100%;
+  max-height: 642px;
+  overflow: hidden;
+}
+.video-main__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+}
+.video-main__item-cover::after {
+  position: absolute;
+  content: '';
+  display: block;
+  border-radius: 17px;
+  width: 100%;
+  height: 321px;
+  background-image: url(../../img/video-bg.svg);
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+.video__author-info {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  display: flex;
+  align-items: flex-end;
+}
+.video__author-img {
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 11px;
+}
+.video__author-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.video__author-name {
+  font-family: 'myfontExtraBold';
+  font-size: 19px;
+  line-height: 1.25;
+  color: #fff;
+}
+.video__author-ditails {
+  font-size: 16px;
+  line-height: 1.25;
+  color: #fff;
+  /* font-family: 'myfontLight'; */
+}
+.video__bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 108px;
+}
+.video__btn {
+  position: relative;
+  margin: 0 0 20px 100px;
+  width: 160px;
+  height: 50px;
+  background-color: transparent;
+}
+.video__hearts {
+  position: absolute;
+  width: 180px;
+  height: 254px;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* overflow: hidden; */
+  display: none;
+
+  /* background-color: red; */
+}
+
+/* .video__hearts {
+    width: 117px;
+    height: 254px;
+    position: relative;
+    overflow: hidden;
+} */
+.video-heart {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+  animation: heartAnimation 4s forwards; /* Анимация будет длиться 2 секунды */
+  animation-play-state: paused; /* Pause animation by default */
+}
+
+@keyframes heartAnimation {
+  0% {
+    transform: translateX(-30%) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(calc(-70% + var(--offset-x))) translateY(-600%);
+    opacity: 0;
+  }
+}
+.video__hearts-cover {
+  width: 100%;
+  height: 100%;
+}
+.video__btn-span-text {
+  display: block;
+  position: relative;
+  z-index: 3;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--pink);
+  font-family: 'myfontExtraBold';
+  transition: all 0.2s ease-in;
+}
+.video__btn-span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+.video__btn-span svg {
+  fill: white;
+  transition: all 0.2s ease-in;
+}
+.video__btn:hover .video__btn-span svg,
+.video-main__item.liked .video__btn-span svg {
+  fill: var(--pink);
+}
+.video__btn:hover .video__btn-span-text,
+.video-main__item.liked .video__btn-span-text {
+  color: white;
+}
+
+.video__song-info {
+  display: flex;
+  align-items: center;
+  padding: 0 18px 17px;
+  position: relative;
+  z-index: 2;
+}
+.video__song-full-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 19px;
+  line-height: 1;
+  color: #fff;
+  display: block;
+  width: calc(100% - 28px);
+}
+.video__song-full-name-cover {
+  box-sizing: border-box;
+  white-space: nowrap;
+  /* text-overflow: ellipsis; */
+  overflow: hidden;
+  animation: marquee 9s linear infinite;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+.video__song-icon {
+  width: 23px;
+  height: 18px;
+  margin-right: 5px;
+}
+.video__song-icon svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.video__down {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 18px;
+}
+.video__likes {
+  display: flex;
+  align-items: center;
+}
+.video__likes.active .video__like-icon svg {
+  fill: var(--pink);
+}
+
+.video__like-icon {
+  width: 21px;
+  height: 17px;
+  margin-right: 8px;
+}
+.video__like-icon svg {
+  fill: white;
+  width: 100%;
+  height: 100%;
+}
+.video__like-info {
+  font-size: 18px;
+  line-height: 1.25;
+  color: #fff;
+}
+.video__share {
+  display: flex;
+  align-items: center;
+  transition: all 0.25s ease-in;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.video__share:hover,
+.video__share.active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.video__share-icon {
+  width: 18px;
+  height: 16px;
+  margin-right: 8px;
+}
+.video__share-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.video__share-text {
+  font-size: 18px;
+  line-height: 1.25;
+  text-align: center;
+  color: #fff;
+}
+.share-popup {
+  position: absolute;
+  bottom: 0;
+  right: -257px;
+  width: 249px;
+  height: 42px;
+  border-radius: 10px;
+  background-color: white;
+  align-items: center;
+  justify-content: space-between;
+  display: none;
+}
+.share-popup.active {
+  display: flex;
+}
+.share-popup-input {
+  padding: 12px 15px;
+  border-radius: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 177px;
+  color: #0647c7;
+}
+.share-popup-input::placeholder {
+  font-size: 16px;
+  line-height: 1;
+  color: #0647c7;
+  font-family: 'myfontRegular';
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.tooltip button {
+  position: relative;
+  border-radius: 0 10px 10px 0;
+  padding: 9px;
+  background-color: #e1f0ff;
+  width: 42px;
+  height: 42px;
+}
+.tooltiptext {
+  font-family: 'myfontRegular';
+  position: absolute;
+  bottom: -36px;
+  white-space: nowrap;
+  background: #404040;
+  border-radius: 2px;
+  padding: 3px 4px;
+  width: 111px;
+  height: 18px;
+  font-size: 12px;
+  line-height: 1;
+  color: #fff;
+  left: -35px;
+  opacity: 0;
+  transition: all 0.15s ease-in;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.tooltip button:hover .tooltiptext {
+  bottom: -26px;
+  opacity: 1;
+}
+.tooltip.active .tooltiptext {
+  bottom: -26px;
+  opacity: 1;
+}

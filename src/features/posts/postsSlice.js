@@ -2,6 +2,11 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     posts: [],
+    selectedVideoIndex: 0,
+    query: '',
+    searchOptions: [],
+    loading: false,
+    hideNotFoundNote: false
 }
 
 export const postsSlice = createSlice({
@@ -9,6 +14,7 @@ export const postsSlice = createSlice({
     initialState,
     reducers: {
         setPosts: (state, action) => {
+            state.selectedVideoIndex = 0
             state.posts = action.payload
         },
         removeLike: (state, action) => {
@@ -34,9 +40,25 @@ export const postsSlice = createSlice({
                     videoLikes: [...post?.videoLikes, {user: {id: action.payload.userId}, video_id: post.id}]
                 }
             })
+        },
+        setSelectedVideoIndex: (state, action) => {
+            state.selectedVideoIndex = action.payload
+        },
+        setQuery: (state, action) => {
+            state.query = action.payload
+        },
+        setSearchOptions: (state, action) => {
+            state.hideNotFoundNote = false
+            state.searchOptions = action.payload
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload
+        },
+        setHideNotFoundNote: (state, action) => {
+            state.hideNotFoundNote = action.payload
         }
     },
 })
 
-export const { setPosts, removeLike, addLike } = postsSlice.actions
+export const {setHideNotFoundNote, setLoading, setSearchOptions, setQuery, setPosts, removeLike, addLike, setSelectedVideoIndex } = postsSlice.actions
 export default postsSlice.reducer

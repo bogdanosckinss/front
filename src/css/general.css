@@ -1,0 +1,30 @@
+:root {
+  --blue: #e1f0ff;
+
+  --darkBlue: #0647c7;
+  --white: #fff;
+  --error: #ff4f3e;
+  --green: #06c92e;
+  --pink: #ff0199;
+  /* --plyr-color-main: #ff0199 !important; */
+}
+body {
+  font-family: 'myfontRegular';
+}
+@font-face {
+  font-family: 'myfontLight';
+  src: url('../fonts/CRO35DM.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'myfontRegular';
+  src: url('../fonts/CRO55DM.woff') format('woff');
+}
+@font-face {
+  font-family: 'myfontBold';
+  src: url('../fonts/CRA65DM.woff') format('woff');
+}
+@font-face {
+  font-family: 'myfontExtraBold';
+  src: url('../fonts/CRA75DM.woff') format('woff');
+}

@@ -1,0 +1,271 @@
+.header {
+  margin-top: 0;
+  margin-bottom: 33px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 48px;
+  width: 100%;
+  z-index: 5;
+}
+.header__container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1190px;
+  padding: 0 15px;
+}
+.header__wrapper {
+  background: #2f65d1;
+  border-radius: 14px;
+  padding: 8px 37px 8px 13px;
+}
+.header__block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__logo {
+  width: 158px;
+  height: 50px;
+}
+.header__logo a,
+.header__logo img {
+  width: 100%;
+  height: 100%;
+}
+.header__logo svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header__form {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 360px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  padding: 15px;
+  transition: background-color 0.25s ease-in;
+  height: 44px;
+  margin-left: -32px;
+}
+
+.header__form:hover input::placeholder,
+.header__form:focus-within input::placeholder,
+.header__form:active input::placeholder,
+.header__form:active input,
+.header__form:focus-within input,
+.header__form:hover input {
+  color: white;
+  opacity: 1;
+}
+
+.header__form:hover .header__search-icon svg,
+.header__form:focus-within .header__search-icon svg,
+.header__form:active .header__search-icon svg {
+  fill: white;
+}
+
+.header__form:focus-within,
+.header__form:active,
+.header__form:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.header__search-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 13px;
+}
+.header__search-icon svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  fill: rgba(255, 255, 255, 0.5);
+  transition: all 0.25s ease-in;
+}
+.header__search-input::placeholder {
+  font-family: 'myfontRegular';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 0.875;
+  transition: all 0.25s ease-in;
+  color: rgba(255, 255, 255, 0.5);
+}
+.header__search-input {
+  font-family: 'myfontRegular';
+  transition: all 0.25s ease-in;
+  font-size: 16px;
+  line-height: 0.875;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+  width: 270px;
+}
+.header__search-load {
+  display: none;
+  animation: spin 2s linear infinite;
+  width: 14px;
+  height: 14px;
+}
+.header__search-load svg {
+  width: 100%;
+  height: 100%;
+}
+
+.header__search-close {
+  display: none;
+  cursor: pointer;
+  width: 19px;
+  height: 19px;
+}
+.header__search-close svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.header-search__result-list a {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.header-search__result-list {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  display: none;
+  border-radius: 12px;
+  width: 360px;
+  min-height: 40px;
+  max-height: 150px;
+  overflow-y: scroll;
+  background: #83a3e3;
+  padding: 15px;
+  z-index: 1;
+}
+
+/* Стилизация для WebKit (Chrome, Safari, Edge, Opera) */
+.header-search__result-list::-webkit-scrollbar {
+  width: none; /* Ширина скроллбара */
+}
+
+.header-search__result-list::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Цвет фона трека скроллбара */
+  border: 1px solid transparent; /* Красная рамка для трека скроллбара */
+}
+
+.header-search__result-list::-webkit-scrollbar-thumb {
+  background-color: blue; /* Цвет ползунка */
+  border-radius: 10px; /* Скругление углов ползунка */
+  border: 3px solid transparent; /* Красная рамка вокруг ползунка */
+}
+
+/* Стилизация для Firefox */
+.header-search__result-list {
+  scrollbar-width: none; /* Узкий скроллбар */
+  scrollbar-color: blue white; /* Цвета ползунка и трека */
+}
+
+/* Стилизация для IE и Edge (старые версии) */
+.header-search__result-list {
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Автоматическое скрытие скроллбара в IE */
+}
+
+.header-search__result-list::-ms-scrollbar {
+  width: none; /* Ширина скроллбара */
+}
+
+.header-search__result-list::-ms-scrollbar-track {
+  background: #f1f1f1; /* Цвет фона трека скроллбара */
+  border: 1px solid transparent; /* Красная рамка для трека скроллбара */
+}
+
+.header-search__result-list::-ms-scrollbar-thumb {
+  background-color: blue; /* Цвет ползунка */
+  border-radius: 20px; /* Скругление углов ползунка */
+  border: 3px solid transparent; /* Красная рамка вокруг ползунка */
+}
+
+.header-search__result-list .header-search__result-item:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+.header-search__result-item {
+  border-radius: 8px;
+  padding: 7px 9px;
+  transition: background-color 0.25s ease-in;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  height: 30px;
+}
+.header-search__result-loop {
+  width: 14px;
+  height: 14px;
+  margin-right: 12px;
+  display: block;
+}
+.header-search__result-loop svg {
+  fill: white;
+  width: 100%;
+  height: 100%;
+}
+.header-search__result-text {
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+  width: 100%;
+  max-width: 270px;
+  margin-right: 5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.header-search__result-link {
+  width: 10px;
+  height: 10px;
+  margin-right: 0;
+}
+.header-search__result-link svg {
+  width: 100%;
+  height: 100%;
+}
+.header__button-block {
+  position: relative;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: center;
+  color: #0647c7;
+  transition: color 0.25s ease-in;
+}
+.header__button-block span {
+  z-index: 1;
+  position: relative;
+}
+.header__button-block svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  fill: var(--blue);
+  transition: fill 0.25s ease-in;
+}
+.header__button-block:hover svg {
+  fill: var(--pink);
+}
+.header__button-block:hover {
+  color: var(--white);
+}

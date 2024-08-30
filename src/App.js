@@ -1,38 +1,76 @@
 import React, {useEffect} from "react";
-import AuthForm from "./Auth/AuthForm";
-import Upload from "./Content/Upload";
-import Posts from "./Content/Posts";
-import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
-import useRefreshToken from "./Hooks/useRefreshToken";
-import SinglePost from "./Content/SinglePost";
-import Search from "./Content/Search";
+import {Routes, Route, BrowserRouter as Router} from 'react-router-dom';
+import useRefreshToken from "./hooks/useRefreshToken";
+import Login from "./pages/Login";
+import CodeConfirmation from "./pages/CodeConfirmation";
+import Videos from "./pages/Videos";
+import UploadSong from "./pages/Moderation/UploadSong";
+import VideoModeration from "./pages/Moderation/VideoModeration";
+import TopDownVideos from "./pages/TopDownVideos";
+import Account from "./pages/Account";
+import {useDispatch, useSelector} from "react-redux";
+import {setLoading} from "./features/auth/authSlice";
+import Middleware from "./middleware/Middleware";
 
 function App() {
-        const refresh = useRefreshToken()
+    const refresh = useRefreshToken()
+    const dispatch = useDispatch()
+    const { loading, isAuthenticated } = useSelector((state) => state.auth)
 
-        useEffect(() => {
-            async function checkAuth() {
-                await refresh()
-            }
-            checkAuth()
-        }, []);
+    useEffect(() => {
+        dispatch(setLoading(true))
+        async function checkAuth() {
+            await refresh()
+        }
+        checkAuth().then(() => dispatch(setLoading(false)))
+    }, [])
+
+    function AuthenticatedRouteComponent(props) {
+        if (loading || !isAuthenticated) {
+            return(
+                <div>Loading...</div>
+            )
+        }
+
+        return(
+            props.children
+        )
+    }
 
     return (
+        <Router>
+            <Middleware>
+                <Routes>
+                    <Route path="/video-moderation" element={<VideoModeration />} />
+                    <Route path="/song" element={<UploadSong />} />
 
-            <Router>
-                <div>
-                    <Search />
-                    <Routes>
-                        <Route path="/auth" element={<AuthForm />} />
-                        <Route path="/posts" element={<Posts />} />
-                        <Route path="/post/:id" element={<SinglePost />} />
-                        <Route path="/search" element={<Posts />} />
-                        <Route path="/" element={<Upload />} />
-                    </Routes>
-                </div>
-            </Router>
+                    <Route path="/code-confirmation" element={<CodeConfirmation />} />
+                    <Route path="/login" element={<Login />} />
+
+                    <Route path="/video/:id" element={
+                        <AuthenticatedRouteComponent>
+                            <TopDownVideos />
+                        </AuthenticatedRouteComponent>
+                    } />
+                    <Route path="/videos-top-down" element={
+                        <AuthenticatedRouteComponent>
+                            <TopDownVideos />
+                        </AuthenticatedRouteComponent>
+                    } />
+                    <Route path="/account" element={
+                        <AuthenticatedRouteComponent>
+                            <Account />
+                        </AuthenticatedRouteComponent>
+                    } />
+                    <Route path="/" element={
+                        <AuthenticatedRouteComponent>
+                            <Videos />
+                        </AuthenticatedRouteComponent>
+                    } />
+                </Routes>
+            </Middleware>
+        </Router>
     )
-
 }
 
-export default App;
+export default App
