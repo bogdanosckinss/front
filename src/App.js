@@ -48,14 +48,10 @@ function App() {
                     <Route path="/login" element={<Login />} />
 
                     <Route path="/video/:id" element={
-                        <AuthenticatedRouteComponent>
-                            <TopDownVideos />
-                        </AuthenticatedRouteComponent>
+                        <TopDownVideos />
                     } />
                     <Route path="/videos-top-down" element={
-                        <AuthenticatedRouteComponent>
-                            <TopDownVideos />
-                        </AuthenticatedRouteComponent>
+                        <TopDownVideos />
                     } />
                     <Route path="/account" element={
                         <AuthenticatedRouteComponent>

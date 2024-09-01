@@ -7,7 +7,8 @@ export default function Middleware(props) {
     const { loading, isAuthenticated } = useSelector((state) => state.auth)
 
     useEffect(() => {
-        if (loading) {
+        const isVideoRoute = window.location.pathname.split('/')[1] == 'video'
+        if (loading || isVideoRoute) {
             return
         }
 
