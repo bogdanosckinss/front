@@ -8,7 +8,9 @@ export default function Middleware(props) {
 
     useEffect(() => {
         const isVideoRoute = window.location.pathname.split('/')[1] == 'video'
-        if (loading || isVideoRoute) {
+        const isListVideosRoute = window.location.pathname.split('/')[1] == 'videos-top-down'
+
+        if (loading || isVideoRoute || isListVideosRoute) {
             return
         }
 

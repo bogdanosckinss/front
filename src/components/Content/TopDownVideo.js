@@ -100,7 +100,10 @@ export default function TopDownVideo({video}) {
     return (
         <>
             <Helmet>
+                <meta property="og:url" content={window.location.href} />
+                <meta property="og:type" content='article' />
                 <meta property="og:title" content={video?.users?.name} />
+                <meta property="og:site_name" content={video?.song?.title} />
                 <meta name="twitter:title" content={video?.users?.name} />
 
                 <meta name="description" content={video?.song?.title} />

@@ -17,7 +17,6 @@ const useRefreshToken = () => {
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-                        "Same-Site": 'strict'
           },
           withCredentials: true,
         },
