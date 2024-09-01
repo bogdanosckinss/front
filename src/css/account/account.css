@@ -11,11 +11,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 360px;
 }
-.account-data {
-  border-radius: 14px;
-  background: #386cd2;
-}
+
 .account__image {
   display: flex;
   align-items: center;
@@ -93,8 +91,9 @@
 }
 .account-data {
   padding: 36px 56px 27px;
-  margin-bottom: 360px;
   width: 100%;
+  border-radius: 14px;
+  background: #386cd2;
 }
 .account__title {
   margin-bottom: 21px;
@@ -419,16 +418,19 @@
 }
 .plyr--video .plyr__controls {
   background: rgba(0, 0, 0, 0.25);
-  padding: 0 0 0 !important;
-  height: 40px !important;
-  bottom: 15px !important;
+  padding: 0 0 0;
+  height: 40px;
 }
 .plyr__controls {
   flex-wrap: wrap;
+  justify-content: space-between;
+}
+.plyr button {
+  margin-left: 13px;
 }
 .plyr__controls .plyr__progress__container {
   width: 100%;
-  flex: none !important;
+  flex: none;
   order: -1;
   padding-left: 0 !important;
   margin-left: 0 !important;
@@ -464,6 +466,7 @@
 .plyr__progress {
   left: 0;
   margin-right: 0;
+  width: 100%;
 }
 .plyr__progress__buffer {
 }
@@ -483,32 +486,65 @@
   background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(3px);
 }
+.plyr__control[data-plyr='fullscreen'] svg {
+  fill: none;
+}
 .plyr--video .plyr__control:focus-visible,
 .plyr--video .plyr__control:hover,
 .plyr--video .plyr__control[aria-expanded='true'] {
-  background-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(3px);
+  /* background-color: rgba(255, 255, 255, 0.4); */
+  /* backdrop-filter: blur(3px); */
 }
 .plyr__control--overlaid svg {
   fill: var(--pink);
 }
+.plyr__volume {
+  align-items: center;
+  display: none;
+  position: absolute;
+  left: auto;
+  top: -58px;
+  right: 10px;
+  transform: rotate(-90deg);
+}
+.plyr__volume {
+  height: 14px;
+  border-radius: 68px;
+  background: rgba(0, 0, 0, 0.25);
+}
+.plyr__volume input[type='range']::-moz-range-track {
+  height: 3px;
+  border-radius: 68px;
+  background: rgba(0, 0, 0, 0.25);
+}
+.plyr__volume input[type='range']::-moz-range-progress {
+  border-radius: 68px;
+  height: 3px;
+  background: #fff;
+}
+.plyr__volume input[type='range']::-moz-range-thumb {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.plyr__time {
+  font-size: 12px;
+  line-height: 1;
+  color: #fff;
+  font-family: 'myfontRegular';
+}
+.plyr__time.plyr__time--current {
+  margin-right: 4px;
+}
+.plyr__time + .plyr__time::before {
+  content: '⁄';
+  margin-right: 6px;
+  margin-right: var(--plyr-control-spacing, 6px);
+}
 .plyr__controls__item.plyr__volume {
   position: relative;
 }
-.plyr__controls__item.plyr__volume:hover input[data-plyr='volume'] {
-  opacity: 1;
-}
-input[data-plyr='volume'] {
-  position: absolute !important;
-  transform: rotate(-90deg) !important;
-  top: -100%;
-  left: -20px;
-  opacity: 0;
-}
-input[data-plyr='volume']::-moz-range-thumb {
-  width: 6px !important;
-  height: 6px !important;
-}
+
 .plyr__controls__item.plyr__volume [type='range'] {
   height: 14px;
   background: rgba(0, 0, 0, 0.25);
@@ -534,4 +570,141 @@ input[data-plyr='volume']::-moz-range-thumb {
 .plyr__control[aria-expanded='true'] {
   background-color: transparent !important;
   backdrop-filter: none;
+}
+.account__sent-btn {
+  padding: 19px 34px;
+  background-color: transparent;
+  position: relative;
+  display: block;
+  margin: 39px auto 0;
+}
+.account__sent-btn span {
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: center;
+  color: #ff0199;
+  transition: all 0.4s ease-in;
+  position: relative;
+  z-index: 1;
+}
+.account__sent-btn svg {
+  transition: all 0.4s ease-in;
+
+  fill: white;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.account__sent-btn:hover svg {
+  fill: var(--pink);
+}
+.account__sent-btn:hover span {
+  color: #fff;
+}
+.account__sent-information {
+  width: 337px;
+  margin: 10px auto;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28;
+  text-align: center;
+  color: #fff;
+  opacity: 0.5;
+}
+
+.support-others {
+  background-color: white;
+}
+.application-approved-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.application-approved-tooltip .application-approved-tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.application-approved-tooltip .application-approved-tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.application-approved-tooltip:hover .application-approved-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.account__video-nor-posted-icon {
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 71px;
+  height: 71px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.player-flex-block {
+  align-items: center;
+}
+.plyr__control[data-plyr='fullscreen'] .plyr__tooltip {
+  border-radius: 2px;
+  padding: 3px 4px;
+  width: 82px;
+  height: 18px;
+  font-size: 12px;
+  line-height: 1;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  right: 2px;
+  left: auto;
+  border: none;
+  bottom: 123%;
+  transform: none;
+  margin-bottom: 0;
+}
+.plyr .plyr__control:focus-visible .plyr__tooltip,
+.plyr .plyr__control:hover .plyr__tooltip,
+.plyr__tooltip--visible {
+  opacity: 1;
+  transform: translate(-10%) scale(1);
+}
+.plyr__control[data-plyr='fullscreen'] .plyr__tooltip:before {
+  display: none;
+  transform: none;
+}
+.plyr__control.plyr__control--overlaid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: 0;
+}
+.plyr__control.plyr__control--overlaid:hover {
+  background-color: #fff !important;
 }

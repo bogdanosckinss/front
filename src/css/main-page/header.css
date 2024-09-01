@@ -1,0 +1,21 @@
+.header__nav {
+  display: flex;
+  align-items: center;
+}
+.header__list {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  margin-right: 60px;
+}
+.header__list li a {
+  font-size: 16px;
+  line-height: 1.55;
+  text-align: center;
+  color: #fff;
+  font-family: 'myfontBold';
+}
+.header__button-real {
+  text-transform: none;
+  color: white;
+}

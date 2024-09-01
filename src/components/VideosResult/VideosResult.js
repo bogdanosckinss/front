@@ -58,7 +58,6 @@ export default function VideosResult() {
     )
 
     useEffect(() => {
-        document.body.classList.add('videos-body')
         dispatch(setPosts([]))
         async function fetchPosts() {
             await getContent()

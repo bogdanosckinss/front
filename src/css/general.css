@@ -19,12 +19,51 @@ body {
 @font-face {
   font-family: 'myfontRegular';
   src: url('../fonts/CRO55DM.woff') format('woff');
+  /* font-weight: 400; */
 }
 @font-face {
   font-family: 'myfontBold';
   src: url('../fonts/CRA65DM.woff') format('woff');
+  font-weight: 700;
 }
 @font-face {
   font-family: 'myfontExtraBold';
   src: url('../fonts/CRA75DM.woff') format('woff');
+  font-weight: 800;
+}
+.body-main {
+  background-color: rgba(6, 71, 199, 1);
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+}
+.button-special {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-special span {
+  position: relative;
+  z-index: 1;
+  transition: all 0.2s ease-out;
+}
+.button-special svg {
+  transition: all 0.2s ease-out;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.header__button-real {
+  background-color: transparent;
+}
+.body-main footer {
+  position: static;
+}
+.body-main .footer__container {
+  margin-top: 0;
+}
+.body-main .footer__wrapper {
+  padding-top: 36px;
 }

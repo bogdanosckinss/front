@@ -91,7 +91,8 @@
 }
 .form {
   width: 560px;
-  height: 401px;
+  height: min-content;
+  min-height: 270px;
   padding: 52px 100px 63px;
   border-radius: 14px;
   background-color: var(--blue);
@@ -233,4 +234,101 @@
   margin-bottom: 5px;
   text-align: center;
   display: block;
+}
+.forms-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  width: 560px;
+  height: auto;
+  z-index: 7;
+}
+.forms-popup.active {
+  display: block;
+}
+.login-btn-close {
+  position: absolute;
+  left: auto;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  border-radius: 108px;
+  padding: 2px;
+  width: 28px;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.05);
+}
+.login__forw-wrapper {
+  position: relative;
+  width: 560px;
+}
+.login-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 6;
+  display: none;
+}
+.login-bg.active {
+  display: block;
+}
+.form-problems {
+  padding: 52px 64px 64px;
+}
+.form-problems__btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 29px;
+}
+.form-problems__buttin {
+  position: relative;
+  width: 203px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  transition: all 0.2s ease-out;
+}
+.form-problems__buttin span {
+  position: relative;
+  z-index: 1;
+  font-size: 18px;
+  line-height: 1.25;
+}
+.form-problems__buttin svg {
+  position: absolute;
+  transition: all 0.2s ease-out;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.form-problems__buttin:first-child {
+  color: white;
+}
+.form-problems__buttin:last-child {
+  color: #0647c7;
+}
+.form-problems__buttin:first-child svg {
+  fill: #0647c7;
+}
+.form-problems__buttin:last-child svg {
+  fill: white;
+}
+.form-problems__buttin:first-child:hover svg {
+  fill: white;
+}
+.form-problems__buttin:first-child:hover {
+  color: #0647c7;
+}
+.form-problems__buttin:last-child:hover svg {
+  fill: #0647c7;
+}
+.form-problems__buttin:last-child:hover {
+  color: white;
 }

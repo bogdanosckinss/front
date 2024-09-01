@@ -1,0 +1,138 @@
+.songs {
+}
+.songs__title {
+  font-size: 50px;
+  line-height: 1.12;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  font-family: 'myfontExtraBold';
+  margin: 0 auto 12px;
+  width: 100%;
+  max-width: 772px;
+}
+.songs__subtitle {
+  font-size: 24px;
+  line-height: 1;
+  text-align: center;
+  color: #fff;
+}
+.songs__list {
+  margin-top: 52px;
+  width: 100%;
+  max-height: 955px;
+  overflow: hidden;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+.songs__list.expanded {
+  height: max-content;
+}
+.songs__item {
+  border-radius: 18px;
+  width: 260px;
+  height: 406px;
+  overflow: hidden;
+  background: #fff;
+}
+.songs__img {
+  border-radius: 18px;
+  overflow: hidden;
+  width: 100%;
+  height: 260px;
+  margin-bottom: 16px;
+}
+.songs__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.songs__item-title {
+  position: relative;
+  padding-left: 42px;
+  font-size: 18px;
+  line-height: 1;
+  color: #000;
+  font-family: 'myfontExtraBold';
+  margin-bottom: 6px;
+}
+.songs__item-title::before {
+  display: block;
+  position: absolute;
+  left: 6px;
+  top: 0;
+  content: '';
+  width: 23px;
+  height: 17px;
+  background-image: url(../../img/songs-icon.svg);
+  background-size: contain;
+}
+.songs__item-singer {
+  font-size: 18px;
+  line-height: 1;
+  color: #000;
+  padding-left: 42px;
+}
+.songs__item-download {
+  margin: 16px auto 0;
+  width: 228px;
+  height: 54px;
+  padding: 18px 26px;
+  font-size: 18px;
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+}
+.songs__item-download svg {
+  fill: #0073e6;
+}
+.songs__item-download:hover {
+  color: var(--darkBlue);
+}
+.songs__item-download:hover svg {
+  fill: white;
+}
+.songs-show-more__button {
+  z-index: 3;
+  font-family: 'myfontExtraBold';
+  font-size: 18px;
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: center;
+  color: #0073e6;
+  margin: 0 auto 0;
+  width: 240px;
+  height: 54px;
+}
+.songs-show-more__button svg {
+  fill: #e1f0ff;
+}
+
+.songs-show-more__button:hover svg {
+  fill: white;
+}
+.songs-show-more__button span {
+  display: block;
+  width: 240px;
+  margin: 0 auto;
+}
+.songs-show-more {
+  position: relative;
+  margin-top: -28px;
+}
+.songs-show-more.active:after {
+  display: none;
+}
+.songs-show-more::after {
+  bottom: 24px;
+  transform: rotate(180deg);
+  display: block;
+  content: '';
+  background: linear-gradient(180deg, #0647c7 0%, rgba(6, 71, 199, 0) 100%);
+  position: absolute;
+  width: 100%;
+  height: 215px;
+}
