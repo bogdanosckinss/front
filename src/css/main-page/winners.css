@@ -9,7 +9,7 @@
 .winners__title-span-special {
   background-color: var(--pink);
   border-radius: 100px;
-  transform: rotate(-4deg);
+  transform: rotate(-4deg) translateX(-50%);
   width: 206px;
   height: 71px;
   display: inline-block;
@@ -22,8 +22,8 @@
   padding: 10px 7px;
   font-family: 'myfontExtraBold';
   position: absolute;
-  top: 42px;
-  left: 107px;
+  top: -8px;
+  left: 9%;
   z-index: 1;
 }
 .winners__title-span-first {
@@ -86,6 +86,8 @@
   right: -114px;
   content: '';
   background-image: url(../../img/winners-star.svg);
+  background-repeat: no-repeat;
+
   background-size: contain;
   width: 116px;
   height: 116px;
@@ -98,6 +100,8 @@
   right: -68px;
   content: '';
   background-image: url(../../img/winners-heart.svg);
+  background-repeat: no-repeat;
+
   background-size: contain;
   width: 115px;
   height: 100px;
@@ -108,6 +112,8 @@
   font-family: 'myfontRegular';
   background-image: url(../../img/winners-plus.svg);
   background-size: contain;
+  background-repeat: no-repeat;
+
   content: '';
   position: absolute;
   top: 69px;
@@ -234,4 +240,381 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+.winners__title-span-we {
+  position: relative;
+}
+@media (max-width: 1200px) {
+  .prizes__title {
+    font-size: 42px;
+    margin: 80px auto 40px;
+  }
+  .winners__block {
+    padding: 20px 15px 9px;
+    justify-content: space-between;
+  }
+  .winners__block-info-f {
+    margin-right: 70px;
+  }
+  .winners__block-number-s {
+    margin-right: 52px;
+  }
+  .winners__block-number-f {
+    margin-right: 98px;
+  }
+  .winners__block-number-f::after {
+    width: 80px;
+    height: 80px;
+    top: 20px;
+    right: -81px;
+  }
+  .winners__block-number {
+    font-size: 100px;
+  }
+  .winners__block-number-s::after {
+    width: 80px;
+    top: 24px;
+    left: auto;
+    right: -18px;
+  }
+  .winners__block-number-s::before {
+    width: 34px;
+    height: 34px;
+    top: 43px;
+    left: -43px;
+  }
+  .prizes__flex {
+    flex-wrap: wrap;
+  }
+  .prizes__left {
+    width: 100%;
+    height: 389px;
+    padding: 50px 120px;
+  }
+  .prizes__img {
+    left: 120px;
+  }
+  .prizes__right {
+    flex-direction: row;
+    width: 100%;
+  }
+  .prizes__right-block {
+    width: calc(100% / 2 - 20px);
+    /* height: 156px; */
+  }
+}
+@media (max-width: 991px) {
+  .winners__title-span {
+    font-size: 42px;
+    display: block;
+    margin: 0 auto;
+  }
+  .winners__title-span-special {
+    width: 160px;
+    height: 50px;
+    font-size: 30px;
+    left: 17%;
+  }
+  .winners__block {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 20px 30px 120px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .winners__block-number {
+    width: calc(100% / 3);
+  }
+  .winners__block-number-f {
+    order: -4;
+    margin-right: 0;
+  }
+  .winners__block-number-s {
+    order: -3;
+    margin-right: 0;
+  }
+  .winners__block-number-f::after {
+    right: auto;
+    left: 50px;
+  }
+  .winners__block-number-s::after {
+    right: auto;
+    left: 70px;
+  }
+  .winners__block-number-s::before {
+    left: -70px;
+  }
+  .winners__block-info {
+    width: calc(100% / 2 - 30px);
+    margin: 0;
+  }
+  .winners__block-bear {
+    top: auto;
+    bottom: -15px;
+  }
+  .prizes__left {
+    width: 100%;
+    height: 389px;
+    padding: 50px 25px;
+  }
+  .prizes__img {
+    left: 15px;
+  }
+  .prizes__right-block:first-child .prizes__right-img {
+    top: -25px;
+  }
+}
+@media (max-width: 768px) {
+  .prizes__left-block::after {
+    display: none;
+  }
+  .winners__block {
+    justify-content: flex-start;
+  }
+  .winners__title {
+    width: auto;
+  }
+  .winners__title-span {
+    font-size: 32px;
+  }
+  .winners__title-span-special {
+    font-size: 24px;
+    width: 115px;
+    height: 48px;
+  }
+  .winners__block-info {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+  .winners__block-number {
+    width: auto;
+  }
+  .winners__block-number-f {
+    margin-left: -13px;
+    margin-right: 140px;
+  }
+  .winners__block-number-f::after {
+    left: 40px;
+  }
+  .winners__block-number-s::before {
+    left: -40px;
+  }
+  .prizes__right-block {
+    padding: 74px 15px 30px;
+    width: calc(100% / 2 - 10px);
+  }
+  .prizes__right {
+    gap: 20px;
+  }
+  .prizes__left {
+    padding: 234px 25px 30px;
+  }
+  .prizes__left-block {
+    width: 100%;
+    text-align: center;
+  }
+  .prizes__img {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 321px;
+    height: 335px;
+    top: -46px;
+  }
+}
+@media (max-width: 700px) {
+  .winners__title-span-special {
+    top: -13px;
+    font-size: 24px;
+    width: 115px;
+    height: 48px;
+    left: calc(100vw / 4 - 1%);
+  }
+}
+@media (max-width: 650px) {
+  .winners {
+    padding: 50px 0 0;
+  }
+  .winners__title-span-special {
+    left: 30%;
+  }
+  .prizes__title {
+    font-size: 36px;
+    margin: 50px auto 40px;
+  }
+  .prizes__left-text {
+    font-size: 16px;
+  }
+}
+@media (max-width: 550px) {
+  .winners__title {
+    font-size: 32px;
+    margin-left: -15px;
+  }
+  .winners {
+    padding: 69px 0 0;
+  }
+  .winners__title-span {
+    margin-left: -10px;
+  }
+  .winners__title-span-special {
+    left: 29%;
+    top: -6px;
+    height: 40px;
+    transform: rotate(-5deg) translateX(-50%);
+  }
+  .winners__block {
+    margin-top: 22px;
+    margin-left: 5px;
+    padding: 8px 27px 79px;
+  }
+  .winners__block-number {
+    font-size: 84px;
+    line-height: 1.24;
+  }
+  .winners__block-number-f {
+    margin-left: -2px;
+    margin-right: 145px;
+  }
+  .winners__block-number-f::after {
+    width: 67px;
+    height: 67px;
+    left: 32px;
+  }
+  .winners__block-number-s::before {
+    width: 28px;
+    height: 28px;
+    left: -51px;
+    top: 37px;
+  }
+  .winners__block-number-s::after {
+    width: 64px;
+    height: 57px;
+    left: 50px;
+  }
+  .winners__block--title {
+    font-size: 20px;
+    line-height: 1.24;
+  }
+  .winners__block-info {
+  }
+  .winners__block-text {
+    font-size: 14px;
+    line-height: 1.28;
+  }
+  .winners__block-info-f {
+    width: 100%;
+    max-width: 248px;
+    margin-top: 14px;
+  }
+  .winners__block-info-s {
+    max-width: 230px;
+    margin-bottom: 0;
+  }
+  .winners__block-bear {
+    width: 119px;
+    height: 110px;
+    bottom: -13px;
+    right: 16px;
+  }
+  .prizes__right {
+    flex-wrap: wrap;
+  }
+  .prizes__right-block {
+    width: 100%;
+    height: 156px;
+    padding: 74px 35px 30px;
+  }
+  .prizes__right-block:first-child .prizes__right-img {
+    top: -14px;
+    left: 30px;
+  }
+  .prizes__right-block:last-child .prizes__right-img {
+    top: -25px;
+    left: 21px;
+  }
+  .prizes__title {
+    font-size: 32px;
+    line-height: 1.12;
+    margin: 72px auto 0;
+    padding-right: 15px;
+  }
+  .prizes__img {
+    left: 49%;
+    transform: translateX(-50%);
+    width: 345px;
+    height: 335px;
+    top: -43px;
+  }
+  .prizes__left-title {
+    font-size: 20px;
+    line-height: 1.16;
+    letter-spacing: -0.02em;
+    margin-bottom: 2px;
+    padding-right: 18px;
+    text-align: left;
+  }
+  .prizes__left-text {
+    font-size: 14px;
+    line-height: 1.28;
+    text-align: left;
+  }
+
+  .prizes__left {
+    padding: 256px 25px 30px 34px;
+  }
+  .prizes__flex {
+    gap: 20px;
+    padding-top: 44px;
+    overflow: hidden;
+  }
+  .prizes__right {
+    gap: 17px;
+  }
+}
+@media (max-width: 370px) {
+  .winners__block-number {
+    font-size: 70px;
+  }
+  .winners__block-number-f::after {
+    width: 58px;
+    height: 58px;
+    left: 32px;
+    top: 13px;
+  }
+  .winners__block-number-f {
+    margin-right: 125px;
+  }
+  .winners__block-number-s::after {
+    width: 58px;
+    height: 48px;
+    left: 50px;
+    top: 19px;
+  }
+  .winners__block-number-s::before {
+    width: 25px;
+    height: 25px;
+    left: -43px;
+    top: 30px;
+  }
+  .winners__block-bear {
+    width: 114px;
+    height: 108px;
+    bottom: -13px;
+    right: 16px;
+  }
+  .prizes__left {
+    padding: 247px 16px 30px 34px;
+  }
+  .prizes__left-title {
+    font-size: 18px;
+  }
+  .prizes__right-block {
+    padding: 74px 16px 30px 35px;
+  }
+  .winners__title {
+    margin-left: 0;
+  }
+  .winners__title-span {
+    margin-left: 0;
+  }
 }

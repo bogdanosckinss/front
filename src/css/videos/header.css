@@ -15,7 +15,10 @@
   padding: 0 15px;
 }
 .header__wrapper {
-  background: #2f65d1;
+  -webkit-backdrop-filter: blur(53px); /* Для поддержки Safari */
+  backdrop-filter: blur(53px);
+  background-image: url(../../img/Background.svg);
+  background-size: cover;
   border-radius: 14px;
   padding: 8px 37px 8px 13px;
 }

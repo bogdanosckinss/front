@@ -1,0 +1,132 @@
+.hero {
+  overflow: hidden;
+  padding: 119px 0 91px;
+}
+.hero .container {
+  position: relative;
+}
+.hero-text {
+  font-size: 21px;
+  line-height: 1.25;
+  text-align: center;
+  color: #fff;
+}
+.hero__image {
+  position: absolute;
+  width: 2252px;
+  height: 1412px;
+  top: -48.5%;
+  left: 41.5%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+.hero__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero__bottom {
+  margin-top: 853px;
+}
+
+.hero .join__btns {
+  flex-direction: row;
+  gap: 14px;
+  justify-content: center;
+  margin-top: -145px;
+}
+.hero__rules {
+  font-size: 16px;
+  line-height: 1.5625;
+  text-align: center;
+  color: rgba(225, 240, 255, 0.45);
+  margin-top: 12px;
+}
+.hero__rules a {
+  color: white;
+}
+@media (max-width: 1200px) {
+  .hero__image {
+    width: 2000px;
+    height: 1300px;
+    top: -43.5%;
+  }
+  .hero__bottom {
+    margin-top: 825px;
+  }
+}
+@media (max-width: 991px) {
+  .hero__image {
+    width: 1400px;
+    height: 1000px;
+    top: -33.5%;
+  }
+  .hero__bottom {
+    margin-top: 711px;
+  }
+}
+@media (max-width: 768px) {
+  .hero__image {
+    width: 1300px;
+    height: 780px;
+    top: -34.5%;
+  }
+  .hero__bottom {
+    margin-top: 559px;
+  }
+}
+@media (max-width: 650px) {
+  .hero {
+    overflow: hidden;
+    padding: 118px 0 70px;
+  }
+  .hero__image {
+    width: 1000px;
+    height: 600px;
+    top: -23.5%;
+  }
+  .hero__bottom {
+    margin-top: 490px;
+  }
+}
+@media (max-width: 550px) {
+  .hero {
+    padding: 87px 0 70px;
+  }
+  .hero-text {
+    font-size: 16px;
+  }
+  .hero-text span {
+    display: none;
+  }
+  .hero__image {
+    width: 819px;
+    height: 688px;
+    left: 49.5%;
+    top: -27.5%;
+  }
+  .hero__bottom {
+    margin-top: 506px;
+  }
+  .hero .join__btns {
+    gap: 10px;
+  }
+  .hero__rules {
+    margin: 12px auto 0;
+    max-width: 238px;
+    line-height: 1.2;
+  }
+}
+@media (max-width: 370px) {
+  .hero__image {
+    width: 559px;
+    height: 572px;
+    left: 49.5%;
+    top: -12.5%;
+  }
+  .join__button svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}

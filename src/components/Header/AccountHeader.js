@@ -11,7 +11,7 @@ export default function AccountHeader() {
         e.preventDefault()
 
         try {
-            await privateAxios.delete('http://localhost:3000/auth/logout')
+            await privateAxios.delete('/auth/logout')
             localStorage.clear()
             dispatch(setIsAuthenticated(false))
             dispatch(setUserInfo({}))
@@ -36,8 +36,8 @@ export default function AccountHeader() {
                                 >
                                     <path
                                         d="M21.0005 27.0002L13.5005 18.0002L21.0005 9.00024"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                     />
                                 </svg>
                             </a>

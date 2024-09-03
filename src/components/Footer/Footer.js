@@ -1,6 +1,7 @@
 import React from "react";
 import '../../css/footer.css'
 import footerLogo from '../../img/footer_logo.svg'
+import footerLogoMobile from '../../img/footer_logo-mob.svg'
 
 export default function Footer() {
     return (
@@ -12,7 +13,17 @@ export default function Footer() {
                             <div className="footer__left">
                                 <div className="footer__logo">
                                     <a href="">
-                                        <img src={footerLogo} alt="logo"/>
+                                        <picture>
+                                            <source
+                                                srcSet={footerLogo}
+                                                media="(min-width: 550px)"
+                                            />
+
+                                            <img
+                                                src={footerLogoMobile}
+                                                alt="Описание изображения"
+                                            />
+                                        </picture>
                                     </a>
                                 </div>
                             </div>
@@ -38,13 +49,16 @@ export default function Footer() {
                                 </div>
                             </div>
 
-                            <p className="footer__botton-p">© KIDS PROJECT, 2024</p>
-                            <p>Все права защищены</p>
+                            <p className="footer__botton-p">
+                                © Группа компаний «Детский мир» & KIDS PROJECT, 2024
+                            </p>
+                            <p className="footer__botton-rights">Все права защищены</p>
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
+
 
     )
 }

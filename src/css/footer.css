@@ -74,6 +74,8 @@
   margin-bottom: 8px;
 }
 .footer__polit a {
+  font-family: 'myfontLight';
+
   font-weight: 400;
   font-size: 14px;
   line-height: 1;
@@ -101,4 +103,37 @@
   font-weight: 400;
   font-size: 12px;
   color: #0647c7;
+}
+@media (max-width: 550px) {
+  .footer__logo {
+    width: 200px;
+    height: 70px;
+  }
+  .footer__logo a {
+    padding: 10px 27px 13px 21px;
+  }
+  .body-main footer {
+    margin-top: -24px !important;
+  }
+  .footer__s {
+    gap: 0 !important;
+  }
+  .footer__left {
+    margin-bottom: 28px;
+  }
+  .footer__temp {
+    margin-bottom: 8px;
+  }
+  .footer__date {
+    padding: 10px 15px;
+  }
+  .footer__apply {
+    padding: 7px 9px;
+  }
+  .footer__botton-p {
+    width: 213px;
+  }
+  .footer__polits {
+    margin-bottom: 31px !important;
+  }
 }

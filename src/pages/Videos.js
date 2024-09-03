@@ -11,6 +11,7 @@ export default function Videos() {
     const { searchOptions, query, loading, hideNotFoundNote } = useSelector((state) => state.posts)
 
     useEffect(() => {
+        document.body.classList.forEach(item => document.body.classList.remove(item))
         document.body.classList.add('videos-body')
     }, []);
 

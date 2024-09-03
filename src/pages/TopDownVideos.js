@@ -39,6 +39,7 @@ export default function TopDownVideos() {
     }
 
     useEffect(() => {
+        document.body.classList.forEach(item => document.body.classList.remove(item))
         document.body.classList.add('video-body')
         dispatch(setPosts([]))
         async function fetchPosts() {

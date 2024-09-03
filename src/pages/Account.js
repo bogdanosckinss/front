@@ -4,6 +4,7 @@ import AccountInfo from "../components/AccountInfo/AccountInfo";
 
 export default function Account() {
     useEffect(() => {
+        document.body.classList.forEach(item => document.body.classList.remove(item))
         document.body.classList.add('videos-body')
     }, [])
 

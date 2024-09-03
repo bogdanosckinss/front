@@ -76,6 +76,8 @@
   padding-left: 42px;
 }
 .songs__item-download {
+  font-family: 'myfontExtraBold';
+
   margin: 16px auto 0;
   width: 228px;
   height: 54px;
@@ -126,6 +128,9 @@
 .songs-show-more.active:after {
   display: none;
 }
+.songs-show-more.active {
+  margin-top: 30px;
+}
 .songs-show-more::after {
   bottom: 24px;
   transform: rotate(180deg);
@@ -135,4 +140,90 @@
   position: absolute;
   width: 100%;
   height: 215px;
+}
+@media (max-width: 1200px) {
+  .songs__list {
+    justify-content: center;
+  }
+  .songs__title {
+    font-size: 42px;
+    max-width: 653px;
+  }
+}
+@media (max-width: 650px) {
+  .songs__title {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  .songs__subtitle {
+    font-size: 20px;
+  }
+  .songs__list {
+    margin-top: 30px;
+    gap: 20px;
+  }
+  .songs__item {
+    width: 159px;
+    height: 249px;
+    border-radius: 6px;
+  }
+  .songs__img {
+    border-radius: 6px;
+    height: 159px;
+    margin-bottom: 9px;
+  }
+  .songs__item-title {
+    font-size: 12px;
+    margin-bottom: 4px;
+    padding-left: 26px;
+  }
+
+  .songs__item-title::before {
+    width: 14px;
+    height: 12px;
+    background-size: contain;
+    background-image: url(../../img/songs-icon-mob.svg);
+  }
+  .songs__item-singer {
+    font-size: 12px;
+    padding-left: 26px;
+  }
+  .songs__item-download {
+    width: 140px;
+    height: 33px;
+    margin-top: 8px;
+  }
+  .songs__item-download svg {
+    width: 100%;
+    height: 100%;
+  }
+  .songs__item-download span {
+    font-size: 13px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .songs-show-more {
+  }
+}
+@media (max-width: 550px) {
+  .songs__title {
+    font-size: 32px;
+    line-height: 1.12;
+  }
+  .songs__subtitle {
+    font-size: 18px;
+    padding: 0 20px;
+  }
+  .songs-show-more {
+    margin-top: -18px;
+  }
+}
+@media (max-width: 370px) {
+  .songs__list {
+    margin-top: 30px;
+    gap: 10px;
+  }
+  .songs__item {
+    width: calc(100% / 2 - 5px);
+  }
 }

@@ -21,9 +21,9 @@ export default function VideoMain() {
                     <div className="video-main__block">
                         <ul className="video-main__list">
                             {
-                                videos.map(video => {
+                                videos.map((video, key) => {
                                     return(
-                                        <TopDownVideo video={video} />
+                                        <TopDownVideo key={key} video={video} />
                                     )
                                 })
                             }

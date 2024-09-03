@@ -11,6 +11,7 @@ import Account from "./pages/Account";
 import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "./features/auth/authSlice";
 import Middleware from "./middleware/Middleware";
+import Index from "./pages/Index";
 
 function App() {
     const refresh = useRefreshToken()
@@ -58,10 +59,15 @@ function App() {
                             <Account />
                         </AuthenticatedRouteComponent>
                     } />
-                    <Route path="/" element={
+
+                    <Route path="/videos" element={
                         <AuthenticatedRouteComponent>
                             <Videos />
                         </AuthenticatedRouteComponent>
+                    } />
+
+                    <Route path="/" element={
+                            <Index />
                     } />
                 </Routes>
             </Middleware>

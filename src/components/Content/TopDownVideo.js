@@ -120,13 +120,10 @@ export default function TopDownVideo({video}) {
                     options={{controls: ['play', 'current-time', 'mute', 'progress', 'volume', 'fullscreen']}}
                     source={{type: 'video', title: 'Video', sources: [
                             {
-                                src: video,
+                                src: video?.link,
                                 size: 720
                             }
                         ]}} />
-                <video className="video-main__video" autoPlay loop>
-                    {/*{video?.link ? <source type="video/mp4" src={video?.link}/> : '' }*/}
-                </video>
                 <div className="video__author-info">
                     <div className="video__author-img">
                         {video?.users?.image ? <img src={video?.users?.image} alt="img"/> : ''}

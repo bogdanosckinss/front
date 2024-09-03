@@ -1,0 +1,132 @@
+.faq {
+  padding: 119px 0 0;
+}
+.faq__title {
+  font-size: 50px;
+  line-height: 1.06;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: 'myfontExtraBold';
+  text-align: center;
+}
+.faq__list {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.faq__item {
+  border-radius: 24px;
+  padding: 23px 41px 36px 39px;
+  margin-top: 0;
+  border: none;
+  height: 80px;
+}
+.faq__item.is-active {
+  height: max-content;
+}
+.ac .ac-trigger {
+  font-size: 30px !important;
+  color: #000 !important;
+  font-family: 'myfontBold' !important;
+  padding: 0 !important;
+}
+.ac .ac-panel {
+  transition: none;
+}
+.ac .ac-panel .ac-text {
+  padding: 10px 0 0 0 !important;
+  font-size: 18px !important;
+  line-height: 1.32 !important;
+  color: #000 !important;
+  font-family: 'myfontLight' !important;
+}
+.ac .ac-trigger::after {
+  content: '' !important;
+  width: 35px !important;
+  height: 35px !important;
+  right: -1px !important;
+  background-image: url(../../img/faq-plus.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.ac.is-active > .ac-header .ac-trigger::after {
+  background-image: url(../../img/faq-open.svg);
+  content: '' !important;
+  width: 44px !important;
+  height: 45px !important;
+}
+.ac .ac-trigger:focus {
+  color: var(--pink);
+}
+@media (max-width: 1200px) {
+  .ac .ac-trigger {
+    font-size: 24px;
+  }
+  .faq {
+    padding: 80px 0 0;
+  }
+  .faq__title {
+    font-size: 42px;
+  }
+}
+@media (max-width: 991px) {
+  .ac .ac-trigger {
+    font-size: 22px;
+    padding-right: 60px;
+  }
+  .faq__item {
+    height: auto;
+  }
+  .ac .ac-trigger::after {
+    width: 30px;
+    height: 30px;
+  }
+  .ac.is-active > .ac-header .ac-trigger::after {
+    width: 38px;
+    height: 39px;
+  }
+}
+@media (max-width: 650px) {
+  .faq {
+    padding: 70px 0 0;
+  }
+  .faq__title {
+    font-size: 36px;
+  }
+}
+@media (max-width: 550px) {
+  .faq {
+  }
+  .faq__title {
+    font-size: 32px;
+    line-height: 1.12;
+    padding: 0;
+  }
+  .faq__list {
+    margin-top: 19px;
+    gap: 16px;
+  }
+  .faq__item {
+    border-radius: 12px;
+    padding: 11px 40px 12px 18px;
+  }
+  .ac .ac-trigger {
+    font-size: 16px;
+    padding-right: 0;
+  }
+  .ac .ac-trigger::after {
+    right: -23.5px;
+    width: 21px;
+    height: 21px;
+    top: 8px;
+  }
+  .ac .ac-panel .ac-text {
+    font-size: 14px;
+    line-height: 1.32;
+  }
+  .ac.is-active > .ac-header .ac-trigger::after {
+    width: 34px;
+    height: 34px;
+  }
+}

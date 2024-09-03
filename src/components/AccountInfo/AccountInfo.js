@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState} from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import {UploadFileService} from "../../services/uploadFileService";
 import uploadIcon from '../../img/account__upload-video-icon.svg'
-import applicationSent from '../../img/application-sent.svg'
 import Plyr from "plyr-react"
 import "plyr-react/plyr.css"
 import {useDispatch, useSelector} from "react-redux";
@@ -87,7 +86,6 @@ export default function AccountInfo() {
 
     async function getProfile() {
         try {
-            // todo: new api
             const response = await privateAxios.get('users')
             setPhone(response.data.phone_number)
             setCity(response.data.city)
@@ -97,6 +95,7 @@ export default function AccountInfo() {
             setSocialMediaLink(response.data.social_media_link)
             setEmail(response.data.email)
             setConfirmed(response.data.confirmed)
+            setImage(response.data.image)
 
             const videosCount = response.data.videos.length
 
@@ -135,8 +134,10 @@ export default function AccountInfo() {
                 age: age,
             })
             setErrorDuringLoading(false)
+            setAlreadyUploaded(true)
         } catch (e) {
             setErrorDuringLoading(true)
+            setAlreadyUploaded(false)
         }
     }
 
@@ -203,7 +204,7 @@ export default function AccountInfo() {
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
-                                        <g clip-path="url(#clip0_38_4924)">
+                                        <g clipPath="url(#clip0_38_4924)">
                                             <path
                                                 d="M36 25.179C35.8749 25.5855 35.7958 26.0147 35.6156 26.3956C34.8661 27.9812 33.5923 28.8405 31.8294 28.9882C31.6896 29 31.5489 29 31.4082 29C22.4679 29 13.5283 29 4.58925 29C2.53107 29 0.8573 27.8718 0.24849 26.0329C0.0946321 25.5587 0.0158337 25.0638 0.0148982 24.5658C-0.00165559 19.3758 -0.00441421 14.1861 0.00662162 8.99673C0.00662162 6.57458 1.82845 4.77665 4.27381 4.76662C6.05426 4.75933 7.83563 4.76662 9.61607 4.76662H9.98394C10.1458 4.25449 10.2534 3.75056 10.4603 3.29128C11.3257 1.36941 12.8312 0.215743 14.9473 0.0936332C16.9824 -0.0312111 19.0233 -0.0312111 21.0584 0.0936332C23.5654 0.259484 25.3247 1.91617 25.8765 4.35291C25.905 4.47775 25.9381 4.60077 25.9795 4.76389H26.3473C28.0947 4.76389 29.842 4.79851 31.5893 4.75568C34.0568 4.69645 35.7342 6.50259 35.9485 8.30143C35.9485 8.33242 35.9816 8.35975 35.9991 8.39256L36 25.179ZM18.0217 27.2066C22.4728 27.2066 26.9249 27.2139 31.376 27.1957C31.8308 27.2028 32.2821 27.1159 32.7012 26.9405C33.7542 26.4566 34.191 25.5736 34.1892 24.4336C34.1806 19.3269 34.1806 14.2195 34.1892 9.11155C34.1892 8.98398 34.1837 8.8564 34.1763 8.72973C34.1498 8.26325 33.9757 7.81688 33.6788 7.45395C33.1518 6.79146 32.4419 6.54268 31.6105 6.54724C29.5725 6.55332 27.5343 6.55332 25.4957 6.54724C24.7664 6.54724 24.4896 6.31942 24.3268 5.61137C24.257 5.30761 24.1864 5.00386 24.1153 4.7001C23.7309 3.07804 22.4682 1.90979 20.8965 1.86514C18.9653 1.81046 17.034 1.81958 15.1027 1.86514C14.0847 1.88974 13.2579 2.39094 12.6086 3.1801C12.0329 3.86447 11.8895 4.70557 11.6908 5.52571C11.4876 6.38048 11.276 6.54997 10.3858 6.54997C8.37178 6.54997 6.35682 6.54177 4.34186 6.54997C2.80696 6.55818 1.81558 7.51501 1.81282 9.0186C1.8024 14.1825 1.80485 19.3478 1.82018 24.5147C1.81849 24.9422 1.9101 25.365 2.08872 25.7541C2.57429 26.7637 3.44061 27.2121 4.56166 27.2121C9.04896 27.206 13.5356 27.2042 18.0217 27.2066Z"
                                                 fill="white"
@@ -402,9 +403,9 @@ export default function AccountInfo() {
                                                   >
                                                     <path
                                                         d="M18 9.99951L12 14.9995L6 9.99951"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
                                                     />
                                                   </svg>
                                                 </span>
@@ -416,9 +417,9 @@ export default function AccountInfo() {
                                                     id="select-dropdown"
                                                 >
                                                     {
-                                                        songs.map(song => {
+                                                        songs.map((song, key) => {
                                                             return (
-                                                                <li onClick={(e) => {
+                                                                <li key={key} onClick={(e) => {
                                                                     e.preventDefault()
                                                                     selectOption(song)
                                                                 }} role="option">

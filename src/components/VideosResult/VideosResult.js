@@ -72,9 +72,9 @@ export default function VideosResult() {
                 <div className="videos-result__container">
                     <ul className="videos-result__list">
                         {
-                            posts?.map(post => {
+                            posts?.map((post, key) => {
                                 return (
-                                    <Post post={post} />
+                                    <Post key={key} post={post} />
                                 )
                             })
                         }
