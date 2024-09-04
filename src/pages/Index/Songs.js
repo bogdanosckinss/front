@@ -21,6 +21,7 @@ export default function Songs() {
            withCredentials: false,
            headers: {
                'Content-Type': 'audio/wav',
+               "Same-Site": 'strict'
            }
        });
        const blob = new Blob([data], {
