@@ -14,15 +14,9 @@ export default function Middleware(props) {
             return
         }
 
-        if (isAuthenticated && window.location.pathname == '/login' || window.location.pathname == '/code-confirmation') {
+        if (!isAuthenticated && window.location.pathname != '/') {
             navigate({
                 pathname: '/',
-            }, {replace: false})
-        }
-
-        if (!isAuthenticated && window.location.pathname != '/login') {
-            navigate({
-                pathname: '/login',
             }, {replace: false})
         }
     }, [isAuthenticated, loading])
