@@ -256,7 +256,7 @@ export default function AccountInfo() {
                                             <label className="account__upload-video-label">
                                                 {video ?
                                                     <Plyr
-                                                        options={{controls: ['play', 'current-time', 'mute', 'progress', 'volume', 'fullscreen']}}
+                                                        options={{controls: ['play', 'current-time', 'progress', 'fullscreen']}}
                                                         source={{
                                                             type: 'video', title: 'Video', sources: [
                                                                 {
