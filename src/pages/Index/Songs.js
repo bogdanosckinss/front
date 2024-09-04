@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import photo from '../../img/photo.jpg'
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import axios from "axios";
 
 export default function Songs() {
     const privateAxios = useAxiosPrivate()
@@ -14,25 +15,28 @@ export default function Songs() {
         privateAxios.get('/content/songs').then(data => setSongs(data.data))
     }, [])
 
-    function downloadMinus(link) {
+   async function downloadMinus(link) {
+       const { data } = await axios.get(link, {
+           responseType: 'arraybuffer',
+           withCredentials: false,
+           headers: {
+               'Content-Type': 'audio/wav',
+           }
+       });
+       const blob = new Blob([data], {
+           type: 'audio/wav'
+       });
+       const url = URL.createObjectURL(blob);
+       console.log(url)
 
-        new Promise((res, rej) => {
-            fetch(link, {
-                mode: 'no-cors'
-            }).then(res => res.blob()).then(file => {
-                const tempUrl = URL.createObjectURL(file);
-                const aTag = document.createElement("a");
-                aTag.href = tempUrl;
-                aTag.download = 'minus.mp3';
-                document.body.appendChild(aTag);
-                aTag.click();
-                URL.revokeObjectURL(tempUrl);
-                aTag.remove();
-                res();
-            }).catch(err => {
-                rej(err);
-            });
-        });
+       var a = document.createElement('a');
+       a.href = url;
+       a.target = '_blank';
+       a.download = 'minus.mp3';
+       document.body.appendChild(a);
+       a.click();
+       document.body.removeChild(a);
+
 
         // var xhr = new XMLHttpRequest();
         // console.log(link)
