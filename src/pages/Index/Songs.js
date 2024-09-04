@@ -2,6 +2,8 @@ import React, {useEffect, useRef, useState} from "react";
 import photo from '../../img/photo.jpg'
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import axios from "axios";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import {storage} from "../../utils/firebase";
 
 export default function Songs() {
     const privateAxios = useAxiosPrivate()
@@ -16,13 +18,12 @@ export default function Songs() {
     }, [])
 
    async function downloadMinus(link) {
+
        const { data } = await axios.get(link, {
            responseType: 'arraybuffer',
            withCredentials: false,
            headers: {
                'Content-Type': 'audio/wav',
-               "Access-Control-Allow-Origin": '*',
-               'Access-Control-Allow-Headers': '*'
            }
        });
        const blob = new Blob([data], {
