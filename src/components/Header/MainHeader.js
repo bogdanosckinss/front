@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import logo from '../../img/logo-main.svg'
 import {useDispatch, useSelector} from "react-redux";
 import {setIsAuthenticated, setShowAuth, setUserInfo} from "../../features/auth/authSlice";
@@ -8,6 +8,18 @@ export default function MainHeader() {
     const dispatch = useDispatch()
     const privateAxios = useAxiosPrivate()
     const { isAuthenticated } = useSelector((state) => state.auth)
+    const mobhead = useRef()
+    const burger = useRef()
+
+    function toggleMob(e) {
+        e.preventDefault()
+        document.querySelector('#mobile_menu_toggle').classList.toggle('active');
+        document.querySelector('.mobile__menu').classList.toggle('active');
+        document.querySelector('.js-login-bg').classList.toggle('active');
+
+        document.querySelector('.top__hamburger').classList.toggle('active');
+        document.body.classList.toggle('hidden');
+    }
 
     async function toggleAuth(e) {
         e.preventDefault()
@@ -68,14 +80,14 @@ export default function MainHeader() {
                     </div>
                 </div>
             </header>
-            <div className="header__mobile mobile__menu">
-                <a id="mobile_menu_toggle" href="#">
+            <div ref={mobhead} className="header__mobile mobile__menu">
+                <a onClick={toggleMob} id="mobile_menu_toggle" href="#">
                     <span></span>
                     <span></span>
                     <span></span>
                 </a>
             </div>
-            <div className="top__hamburger">
+            <div ref={burger} className="top__hamburger">
                 <div className="top__hamburger-cover">
                     <div className="top__hamburger-logo">
                         <a href="./">
