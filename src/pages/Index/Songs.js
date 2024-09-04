@@ -21,7 +21,6 @@ export default function Songs() {
            withCredentials: false,
            headers: {
                'Content-Type': 'audio/wav',
-               "Same-Site": 'strict',
                "Access-Control-Allow-Origin": '*',
                'Access-Control-Allow-Headers': '*'
            }
