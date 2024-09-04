@@ -10,15 +10,15 @@ export default function Middleware(props) {
         const isVideoRoute = window.location.pathname.split('/')[1] == 'video'
         const isListVideosRoute = window.location.pathname.split('/')[1] == 'videos-top-down'
 
-        if (loading || isVideoRoute || isListVideosRoute) {
-            return
-        }
-
-        if (!isAuthenticated && window.location.pathname != '/') {
-            navigate({
-                pathname: '/',
-            }, {replace: true})
-        }
+        // if (loading || isVideoRoute || isListVideosRoute) {
+        //     return
+        // }
+        //
+        // if (!isAuthenticated && window.location.pathname != '/') {
+        //     navigate({
+        //         pathname: '/',
+        //     }, {replace: true})
+        // }
     }, [isAuthenticated, loading])
 
     return(
