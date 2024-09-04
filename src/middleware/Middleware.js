@@ -17,7 +17,7 @@ export default function Middleware(props) {
         if (!isAuthenticated && window.location.pathname != '/') {
             navigate({
                 pathname: '/',
-            }, {replace: false})
+            }, {replace: true})
         }
     }, [isAuthenticated, loading])
 
