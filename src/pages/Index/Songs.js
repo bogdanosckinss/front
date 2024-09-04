@@ -22,7 +22,8 @@ export default function Songs() {
            headers: {
                'Content-Type': 'audio/wav',
                "Same-Site": 'strict',
-               "Access-Control-Allow-Origin": '*'
+               "Access-Control-Allow-Origin": '*',
+               'Access-Control-Allow-Headers': '*'
            }
        });
        const blob = new Blob([data], {
