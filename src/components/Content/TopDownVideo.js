@@ -117,7 +117,7 @@ export default function TopDownVideo({video}) {
         <li ref={postRef} className={'video-main__item ' + (isLiked() ? 'liked' : '')}>
             <div className="video-main__item-cover">
                 <Plyr
-                    options={{controls: ['play', 'current-time', 'mute', 'progress', 'volume', 'fullscreen']}}
+                    options={{controls: ['play', 'current-time', 'progress', 'fullscreen']}}
                     source={{type: 'video', title: 'Video', sources: [
                             {
                                 src: video?.link,

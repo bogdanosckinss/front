@@ -19,3 +19,12 @@
 @import url('./account/account.css');
 @import url('./main-page/main-page.css');
 @import url('./main-page/winners.css');
+
+.plyr__controls {
+    bottom: 40px !important;
+}
+
+.plyr__progress__container {
+    width: 100%;
+    display: contents;
+}
