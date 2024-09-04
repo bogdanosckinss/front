@@ -121,7 +121,7 @@ export default function Login() {
 
     function formatPhoneNumber(number) {
         const cleaned = ('' + number).replace(/\D/g, '');
-        const formatted = '+ (' + cleaned.slice(1, 4) + ') ' + cleaned.slice(4, 7) + '-' + cleaned.slice(7, 9) + '-' + cleaned.slice(9, 11);
+        const formatted = '+ 7 (' + cleaned.slice(1, 4) + ') ' + cleaned.slice(4, 7) + '-' + cleaned.slice(7, 9) + '-' + cleaned.slice(9, 11);
 
         return formatted;
     }

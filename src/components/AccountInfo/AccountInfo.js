@@ -449,47 +449,47 @@ export default function AccountInfo() {
                                                     }
                                                 </ul>
                                             </div>
-                                            {alreadyUploaded ?
-                                                <>
-                                                    {   !confirmed ?
-                                                        <ApplicationSent />
-                                                        : ''
-                                                    }
-                                                    { confirmed && video.allowed ?
-                                                        <ApplicationPosted />
-                                                        : ''
-                                                    }
-                                                    { confirmed && !video.allowed ?
-                                                        <ApplicationNotPosted />
-                                                        : ''
-                                                    }
-                                                </> :
-                                                <div className="account-form__radios">
-                                                    <label className="account-form__label-check">
-                                                        <input value={acceptRules} onChange={toggleAcceptRules}
-                                                               className="account-form__check-input" type="checkbox"/>
-                                                        <span className="account-form__checkmark"></span>
-                                                        <p>
-                                                            С
-                                                            <a href="https://www.eapteka.ru/company/policy/"
-                                                            > правилами конкурса </a
-                                                            > ознакомлен и согласен
-                                                        </p>
-                                                    </label>
-                                                    <label className="account-form__label-check">
-                                                        <input value={acceptPrivacyPolicy}
-                                                               onChange={toggleAcceptPrivacyPolicy}
-                                                               className="account-form__check-input" type="checkbox"/>
-                                                        <span className="account-form__checkmark"></span>
-                                                        <p>
-                                                            Выражаю свое согласие на
-                                                            <a href="https://www.eapteka.ru/company/policy/"
-                                                            > обработку персональных данных
-                                                            </a>
-                                                        </p>
-                                                    </label>
-                                                </div>
-                                            }
+                                            {/*{alreadyUploaded ?*/}
+                                            {/*    <>*/}
+                                            {/*        {   !confirmed ?*/}
+                                            {/*            <ApplicationSent />*/}
+                                            {/*            : ''*/}
+                                            {/*        }*/}
+                                            {/*        { confirmed && video.allowed ?*/}
+                                            {/*            <ApplicationPosted />*/}
+                                            {/*            : ''*/}
+                                            {/*        }*/}
+                                            {/*        { confirmed && !video.allowed ?*/}
+                                            {/*            <ApplicationNotPosted />*/}
+                                            {/*            : ''*/}
+                                            {/*        }*/}
+                                            {/*    </> :*/}
+                                            {/*    <div className="account-form__radios">*/}
+                                            {/*        <label className="account-form__label-check">*/}
+                                            {/*            <input value={acceptRules} onChange={toggleAcceptRules}*/}
+                                            {/*                   className="account-form__check-input" type="checkbox"/>*/}
+                                            {/*            <span className="account-form__checkmark"></span>*/}
+                                            {/*            <p>*/}
+                                            {/*                С*/}
+                                            {/*                <a href="https://www.eapteka.ru/company/policy/"*/}
+                                            {/*                > правилами конкурса </a*/}
+                                            {/*                > ознакомлен и согласен*/}
+                                            {/*            </p>*/}
+                                            {/*        </label>*/}
+                                            {/*        <label className="account-form__label-check">*/}
+                                            {/*            <input value={acceptPrivacyPolicy}*/}
+                                            {/*                   onChange={toggleAcceptPrivacyPolicy}*/}
+                                            {/*                   className="account-form__check-input" type="checkbox"/>*/}
+                                            {/*            <span className="account-form__checkmark"></span>*/}
+                                            {/*            <p>*/}
+                                            {/*                Выражаю свое согласие на*/}
+                                            {/*                <a href="https://www.eapteka.ru/company/policy/"*/}
+                                            {/*                > обработку персональных данных*/}
+                                            {/*                </a>*/}
+                                            {/*            </p>*/}
+                                            {/*        </label>*/}
+                                            {/*    </div>*/}
+                                            {/*}*/}
                                         </div>
                                     </div>
                                     <button className="account__sent-btn"></button>
