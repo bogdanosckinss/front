@@ -12,7 +12,7 @@ export default function Rules() {
         <div className="roules">
             <div className="roules__wrapper">
                 <div className="container">
-                    <h1 className="roules__title">правила участия</h1>
+                    <h1 className="roules__title">Правила участия</h1>
                     <ul className="roules__list">
                         <li className="roules__item">
                             <div className="roules__img">

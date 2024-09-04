@@ -53,7 +53,7 @@ export default function Songs() {
             <div className="songs__wrapper">
                 <div className="container">
                     <div className="songs__title">
-                        выбирай песню и Покажи свой талант всей стране
+                        Выбирай песню и покажи свой талант всей стране
                     </div>
                     <div className="songs__subtitle">
                         Сними видео и выступи на одной сцене с любимыми блогерами
