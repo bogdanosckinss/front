@@ -16,6 +16,7 @@ export default function Songs() {
 
     function downloadMinus(link) {
         var xhr = new XMLHttpRequest();
+        console.log(link)
         xhr.open('GET', link, true);
         xhr.responseType = 'blob';
         xhr.onload = function () {
@@ -31,6 +32,7 @@ export default function Songs() {
         };
         xhr.onerror = err => {
             alert('Failed to download');
+            console.log(err)
         };
         xhr.send();
     }
