@@ -27,7 +27,7 @@ function App() {
     }, [])
 
     function AuthenticatedRouteComponent(props) {
-        if (loading || !isAuthenticated) {
+        if (loading) {
             return(
                 <div>Loading...</div>
             )
@@ -61,7 +61,9 @@ function App() {
                     } />
 
                     <Route path="/videos" element={
-                        <Videos />
+                        <AuthenticatedRouteComponent>
+                            <Videos />
+                        </AuthenticatedRouteComponent>
                     } />
 
                     <Route path="/" element={
