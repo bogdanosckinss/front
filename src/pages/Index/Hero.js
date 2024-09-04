@@ -12,7 +12,7 @@ export default function Hero() {
 
     function toggleModal(link) {
         if (!isAuthenticated) {
-            dispatch(setShowAuth(false))
+            dispatch(setShowAuth(true))
             return
         }
         navigate('/' + link)
