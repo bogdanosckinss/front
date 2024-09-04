@@ -17,7 +17,9 @@ export default function Songs() {
     function downloadMinus(link) {
 
         new Promise((res, rej) => {
-            fetch(link).then(res => res.blob()).then(file => {
+            fetch(link, {
+                mode: 'no-cors'
+            }).then(res => res.blob()).then(file => {
                 const tempUrl = URL.createObjectURL(file);
                 const aTag = document.createElement("a");
                 aTag.href = tempUrl;
