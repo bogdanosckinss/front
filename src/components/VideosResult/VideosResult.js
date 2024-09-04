@@ -79,7 +79,7 @@ export default function VideosResult() {
                             })
                         }
 
-                        { !noMoreVideosFound ? <button onClick={findMoreAsync}>LOAD MORE</button> : 'No more videos found' }
+                        {/*{ !noMoreVideosFound ? <button onClick={findMoreAsync}>LOAD MORE</button> : 'No more videos found' }*/}
                     </ul>
                 </div>
             </div>

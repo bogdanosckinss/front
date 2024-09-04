@@ -61,9 +61,7 @@ function App() {
                     } />
 
                     <Route path="/videos" element={
-                        <AuthenticatedRouteComponent>
-                            <Videos />
-                        </AuthenticatedRouteComponent>
+                        <Videos />
                     } />
 
                     <Route path="/" element={
