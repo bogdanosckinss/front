@@ -58,7 +58,7 @@ export default function Songs() {
                     <div className="songs__subtitle">
                         Сними видео и выступи на одной сцене с любимыми блогерами
                     </div>
-                    <ul ref={songsList} className={'songs__list ' + (showAll ? 'expanded' : '')}  style={showAll ? {maxHeight: getMaxHeight()} : {maxHeight: `2000px`}}>
+                    <ul ref={songsList} className={'songs__list ' + (showAll ? 'expanded' : '')}  style={showAll ? {maxHeight: '2000px'} : {maxHeight: `${songsList.scrollHeight}px`}}>
                         {
                             songs.map((song, key) => {
                                 return (
