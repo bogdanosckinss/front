@@ -15,26 +15,43 @@ export default function Songs() {
     }, [])
 
     function downloadMinus(link) {
-        var xhr = new XMLHttpRequest();
-        console.log(link)
-        xhr.open('GET', link, true);
-        xhr.responseType = 'blob';
-        xhr.onload = function () {
-            var urlCreator = window.URL || window.webkitURL;
-            var imageUrl = urlCreator.createObjectURL(this.response);
-            var tag = document.createElement('a');
-            tag.href = imageUrl;
-            tag.target = '_blank';
-            tag.download = 'minus.mp3';
-            document.body.appendChild(tag);
-            tag.click();
-            document.body.removeChild(tag);
-        };
-        xhr.onerror = err => {
-            alert('Failed to download');
-            console.log(err)
-        };
-        xhr.send();
+
+        new Promise((res, rej) => {
+            fetch(link).then(res => res.blob()).then(file => {
+                const tempUrl = URL.createObjectURL(file);
+                const aTag = document.createElement("a");
+                aTag.href = tempUrl;
+                aTag.download = link.replace(/^.*[\\\/]/, '');
+                document.body.appendChild(aTag);
+                aTag.click();
+                URL.revokeObjectURL(tempUrl);
+                aTag.remove();
+                res();
+            }).catch(err => {
+                rej(err);
+            });
+        });
+
+        // var xhr = new XMLHttpRequest();
+        // console.log(link)
+        // xhr.open('GET', link, true);
+        // xhr.responseType = 'blob';
+        // xhr.onload = function () {
+        //     var urlCreator = window.URL || window.webkitURL;
+        //     var imageUrl = urlCreator.createObjectURL(this.response);
+        //     var tag = document.createElement('a');
+        //     tag.href = imageUrl;
+        //     tag.target = '_blank';
+        //     tag.download = 'minus.mp3';
+        //     document.body.appendChild(tag);
+        //     tag.click();
+        //     document.body.removeChild(tag);
+        // };
+        // xhr.onerror = err => {
+        //     alert('Failed to download');
+        //     console.log(err)
+        // };
+        // xhr.send();
     }
 
     const getMaxHeight = () => {
