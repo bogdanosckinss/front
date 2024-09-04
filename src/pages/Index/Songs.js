@@ -23,7 +23,7 @@ export default function Songs() {
                 const tempUrl = URL.createObjectURL(file);
                 const aTag = document.createElement("a");
                 aTag.href = tempUrl;
-                aTag.download = link.replace(/^.*[\\\/]/, '');
+                aTag.download = 'minus.mp3';
                 document.body.appendChild(aTag);
                 aTag.click();
                 URL.revokeObjectURL(tempUrl);
