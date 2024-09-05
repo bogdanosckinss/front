@@ -7,6 +7,9 @@ export default function Account() {
     useEffect(() => {
         document.body.classList.forEach(item => document.body.classList.remove(item))
         document.body.classList.add('videos-body')
+
+        const appRoot = document.querySelector('html')
+        appRoot.setAttribute('notranslate', true)
     }, [])
 
     return (

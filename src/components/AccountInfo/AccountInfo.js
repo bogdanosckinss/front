@@ -341,7 +341,9 @@ export default function AccountInfo() {
                                                 {
                                                     video ?
                                                         <>
-                                                            {renderVideo}
+                                                            <span>
+                                                                {renderVideo}
+                                                            </span>
                                                         </>
                                                         :
                                                         <>
@@ -407,7 +409,7 @@ export default function AccountInfo() {
                                                     <input
                                                         value={age}
                                                         onChange={(e) => setAge(e.target.value)}
-                                                        type="text"
+                                                        type="number"
                                                         className="account__form-input"
                                                         placeholder="Возраст"
                                                     />
