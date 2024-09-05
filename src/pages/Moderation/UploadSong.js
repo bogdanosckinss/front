@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import {UploadFileService} from "../../services/uploadFileService";
+import axios from "axios";
 
 export default function UploadSong() {
     const privateAxios = useAxiosPrivate()
@@ -20,6 +21,21 @@ export default function UploadSong() {
         }catch (e) {
             console.log(e)
         }
+    }
+
+    function test() {
+        axios.post('https://api.exolve.ru/messaging/v1/SendSMS', {
+                "number": "79842698582",
+                "destination": "79051243600",
+                "text": 'Код'
+            },
+            {
+                headers: {
+                    Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJRV05sMENiTXY1SHZSV29CVUpkWjVNQURXSFVDS0NWODRlNGMzbEQtVHA0In0.eyJleHAiOjIwNDA4MjI1OTMsImlhdCI6MTcyNTQ2MjU5MywianRpIjoiZjU2ZTE2ZDAtZWE4ZC00MjBiLTkyMTktOTg5NWM0NTllNjBiIiwiaXNzIjoiaHR0cHM6Ly9zc28uZXhvbHZlLnJ1L3JlYWxtcy9FeG9sdmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiY2Q0YmVhOTEtNmUwOS00MTVlLTljYjYtZTE3YjUwMDc2NTI1IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYTEyNjczMGYtNDgxMC00YjRjLTlmZmUtZjMzMTZkOTIyMDNmIiwic2Vzc2lvbl9zdGF0ZSI6ImZjN2EzMzczLTk2MmYtNDliYi04NzQwLWFlYzI4YjgyMjlhNiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1leG9sdmUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJleG9sdmVfYXBwIHByb2ZpbGUgZW1haWwiLCJzaWQiOiJmYzdhMzM3My05NjJmLTQ5YmItODc0MC1hZWMyOGI4MjI5YTYiLCJ1c2VyX3V1aWQiOiJiNzk3OTA0Yi0zOThlLTRlZjYtYWU2NS1iYTZiOTc0ZGE0NTQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImNsaWVudEhvc3QiOiIxNzIuMjAuMi4yMiIsImNsaWVudElkIjoiYTEyNjczMGYtNDgxMC00YjRjLTlmZmUtZjMzMTZkOTIyMDNmIiwiYXBpX2tleSI6dHJ1ZSwiYXBpZm9uaWNhX3NpZCI6ImExMjY3MzBmLTQ4MTAtNGI0Yy05ZmZlLWYzMzE2ZDkyMjAzZiIsImJpbGxpbmdfbnVtYmVyIjoiMTIzMzk2MiIsImFwaWZvbmljYV90b2tlbiI6ImF1dDFjYmRlYjg4LTU4ODAtNDA2Ny05ZTdjLWZjOTQ2MWZmYjc1OSIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1hMTI2NzMwZi00ODEwLTRiNGMtOWZmZS1mMzMxNmQ5MjIwM2YiLCJjdXN0b21lcl9pZCI6IjQ0OTYzIiwiY2xpZW50QWRkcmVzcyI6IjE3Mi4yMC4yLjIyIn0.T_qjSPsbRcWnEjbiLKVhoL70hmOjbX6o8-wZ3qWkOoA8ez57ILTVwIUcj9-Kw0W33XZbIIMRa0aNAoqd1Jg5h8aTZFjS9gNKpNSLlK8CpvpRWfuPP3tZoN0VsEb4uSJLzFQzIRjyCUtceomIb7gVuLeNWs0W-y2pq7fgbSU3j-TmIBsyEXX-A9uws2sNdJK67HXP_JJzsspDJwmMWikTlgABIvYJbLa8BVQMKKsk23-sZ1voCmB5YILNcu84BVJ83ilwiVBSXNomNLxY8LhqidWA38wUQ8aArPlNwzPVE0_no9xMdAnU54QpZyt4LYg8XhdGMFQYIrEgtwJFUASOaA`
+                }
+            }).then((res) => {
+            console.log(res)
+        })
     }
 
     useEffect(() => {
@@ -61,6 +77,8 @@ export default function UploadSong() {
     return (
         <form style={{border: 'solid black 1px', padding: 10, margin: 10}}>
             <div>
+
+                <button onClick={test}>TEST</button>
                 <div>
                     <label>Minus</label>
                     <input onChange={async (e) => await uploadSongMinus(e.target.files[0])} type='file'
