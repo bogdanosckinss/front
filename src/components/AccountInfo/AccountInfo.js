@@ -214,7 +214,7 @@ export default function AccountInfo() {
                 <div className="account-container">
                     <div className="account-info">
                         <div className="account__image">
-                            {uploadingImage ? '' : <div className="account__letter">К</div>}
+                            {uploadingImage ? '' : <div className="account__letter">{name.split('')[0]?.toUpperCase()}</div>}
                             <div className="account__image-icon">
                                 <label className="account__upload-label">
                                     <input

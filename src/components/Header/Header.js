@@ -80,6 +80,22 @@ export default function Header() {
             setOptions([]);
             try {
                 const response = await privateAxios.get(`content/search/videos?query=${query}`);
+                const composedOptions = response.data.map(video => {
+                    if (video.song.title.toLowerCase().includes(query.toLowerCase())) {
+                        return video.song.title + ' ' + video.song.author_name
+                    }
+
+                    if (video.song.author_name.toLowerCase().includes(query.toLowerCase())) {
+                        return video.song.author_name
+                    }
+
+                    const composedLastname = video.users.lastname + ' ' + video.users.name
+                    const composedLastnameReversed = video.users.name + ' ' + video.users.lastname
+                    if (composedLastname.toLowerCase().includes(query.toLowerCase()) || composedLastnameReversed.toLowerCase().includes(query.toLowerCase())) {
+                        return composedLastname
+                    }
+                })
+                //console.log(composedOptions) TODo: fix
                 setOptions(response.data);
                 dispatch(setSearchOptions(response.data))
                 // dispatch(setPosts(response.data));

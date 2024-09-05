@@ -14,7 +14,7 @@ export default function Winners() {
                             <span className="winners__title-span">
                                 <span className="winners__title-span-first">
                                     <span className="winners__title-span-we">
-                                        <span className="winners__title-span-special"> 1.10.2024</span>мы </span>
+                                        <span className="winners__title-span-special">3.10.2024</span>мы </span>
                                      объявим
                                 </span>
                                 3 победителей конкурса
@@ -30,52 +30,15 @@ export default function Winners() {
                             <div className="winners__block-info winners__block-info-f">
                                 <div className="winners__block--title">1-ым победителем</div>
                                 <p className="winners__block-text">
-                                    Станет участник, набравший рекордное количество лайков под своим
-                                    видео на сайте конкурса
+                                    Станет участник, набравший рекордное количество лайков  под своим
+                                    видео на сайте конкурса
                                 </p>
                             </div>
                             <div className="winners__block-info winners__block-info-s">
                                 <div className="winners__block--title">2-x победителей</div>
                                 <p className="winners__block-text">
-                                    Определит профессиональное жюри СуперЛайкШоу
+                                    Определит профессиональное жюри команды Детского мира и СуперЛайкШоу
                                 </p>
-                            </div>
-                        </div>
-                        <div id="prizes" className="prizes__title">Призы победителей конкурса</div>
-                        <div className="prizes__flex">
-                            <div className="prizes__left">
-                                <div className="prizes__img">
-                                    <img src={prizes} alt=""/>
-                                </div>
-                                <div className="prizes__left-block">
-                                    <div className="prizes__left-title">
-                                        Вытупление на премии «СуперЛайкШоу-2024»
-                                    </div>
-                                    <div className="prizes__left-text">
-                                        Победители запишут трек детского мира и выступят с ним на розовой
-                                        дорожке Музыкальной Премии СТС Kids х Kids Project
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="prizes__right">
-                                <div className="prizes__right-block">
-                                    <div className="prizes__right-img">
-                                        <img src={prizesSmall1} alt=""/>
-                                    </div>
-                                    <div className="prizes__left-text">
-                                        Победителей наградят на главной сцене премии вместе с артистами
-                                        премии «СуперЛайкШоу-2024»
-                                    </div>
-                                </div>
-                                <div className="prizes__right-block">
-                                    <div className="prizes__right-img">
-                                        <img src={prizesSmall2} alt=""/>
-                                    </div>
-                                    <div className="prizes__left-text">
-                                        Каждый победитель получит подарочный сертификат на запись своей
-                                        песни в профессиональной студии звукозаписи
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

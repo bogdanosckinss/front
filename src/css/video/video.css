@@ -101,7 +101,7 @@
 }
 .video__bottom {
   position: absolute;
-  bottom: 30px;
+  bottom: 45px;
   width: 100%;
   height: 108px;
 }
@@ -162,9 +162,9 @@
   display: block;
   position: relative;
   z-index: 3;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1;
-  text-transform: uppercase;
+  text-transform: none;
   text-align: center;
   color: var(--pink);
   font-family: 'myfontExtraBold';
@@ -292,13 +292,27 @@
   position: absolute;
   bottom: 0;
   right: -257px;
-  width: 249px;
-  height: 42px;
+  width: 250px;
+  height: 80px;
   border-radius: 10px;
   background-color: white;
   align-items: center;
   justify-content: space-between;
   display: none;
+  flex-direction: column;
+}
+.share-popup .account-share-socials {
+  height: 52px !important;
+}
+.share-popup .account-share-social svg {
+  margin-top: -14px;
+}
+.share-popup-copy-block {
+  display: flex;
+  width: 100%;
+  margin-top: -14px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 .share-popup.active {
   display: flex;
@@ -309,7 +323,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 177px;
+  width: 208px;
   color: #0647c7;
 }
 .share-popup-input::placeholder {

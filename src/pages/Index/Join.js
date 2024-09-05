@@ -25,9 +25,9 @@ export default function Join() {
                     <div className="container">
                         <div className="join__flex">
                             <div className="join__left">
-                                <div className="join__title">Присоединяйся к «Звёздам будущего»</div>
+                                <div className="join__title">Присоединяйся  к «Звёздам  будущего»</div>
                                 <div className="join__subtitle">
-                                    И зажги свою звезду на небосклоне талантов СуперЛайкШоу!
+                                    И зажги свою звезду на небосклоне талантов СуперЛайкШоу!
                                 </div>
                                 <div className="join__btns">
                                     <button onClick={() => toggleModal('account')} className="button-special join__button">
@@ -60,7 +60,8 @@ export default function Join() {
                                     </button>
                                 </div>
                                 <p className="join__p">
-                                    Нажимая кнопку вы соглашаетесь с Правилами участия в конкурсе
+                                    Нажимая кнопку вы соглашаетесь с <a href="/rules">
+                                    Правилами участия в конкурсе</a>
                                 </p>
                             </div>
                             <div className="join__img">

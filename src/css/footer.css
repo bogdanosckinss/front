@@ -39,7 +39,7 @@
 .footer__s {
   display: flex;
   align-items: flex-start;
-  margin-right: 320px;
+  margin-right: 218px;
 }
 .footer__temp {
   margin-right: 40px;
@@ -72,7 +72,7 @@
   padding: 10px 20px;
 }
 .footer__polit {
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 .footer__polit a {
   font-family: 'myfontLight';
@@ -81,6 +81,10 @@
   font-size: 14px;
   line-height: 1;
   color: rgba(6, 71, 199, 0.7);
+}
+.footer__polit a:hover {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
 }
 .footer__polit:last-child {
   margin-bottom: 0;

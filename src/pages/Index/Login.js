@@ -11,13 +11,16 @@ export default function Login() {
     const [isChecked, setIsChecked] = useState(false);
     const privateAxios = useAxiosPrivate()
     const [name, setName] = useState('')
-    const [phone, setPhone] = useState('')
+    const [phone, setPhone] = useState('+7 (___) ___-__-__')
     const [code, setCode] = useState('')
     const [token, setToken] = useState('')
     const [restart, setRestart] = useState(false)
     const inputsRef = useRef([]);
     const codeListRef = useRef(null);
     const [error, setError] = useState(false);
+    const [support, setSupport] = useState(false);
+    const [hideConfirmation, setHideConfirmation] = useState(false);
+    const [isMasked, setIsMasked] = useState(false);
 
     const handleCheckboxChange = (e) => {
         setIsChecked(e.target.checked)
@@ -26,10 +29,12 @@ export default function Login() {
     async function sendCodeViaSms(event) {
         event.preventDefault()
 
+        const formattedPhone = phone.replaceAll('(', '').replaceAll(')', '').replaceAll('-', '').replaceAll(' ', '')
+
         let response = {}
         try {
             response = await privateAxios.post('auth/create', {
-                phone_number: phone,
+                phone_number: formattedPhone,
                 name: name
             },{
                 withCredentials: true
@@ -47,16 +52,35 @@ export default function Login() {
     function handleNumberInput(event) {
         const value = event.target.value
 
-        if (value.length > 12) {
-            return
+        let input = value.replace(/\D/g, '');
+
+        if (input.length > 1) {
+            input = `+7 (${input.substring(1, 4)}) ${input.substring(4, 7)}-${input.substring(7, 9)}-${input.substring(9, 11)}`;
         }
 
-        setPhone(value)
+        setPhone(input)
     }
+
+    const handleInputFocus = () => {
+        if (!isMasked) {
+            setPhone('+7 (___) ___-__-__');
+            setIsMasked(true);
+        }
+    };
+
 
     function hideModal() {
         dispatch(setShowAuth(false))
         setToken('')
+        setSupport(false)
+        setHideConfirmation(false)
+    }
+
+    function showModal() {
+        dispatch(setShowAuth(true))
+        setToken('')
+        setSupport(false)
+        setHideConfirmation(false)
     }
 
     function resetRestart() {
@@ -142,7 +166,7 @@ export default function Login() {
 
     return (
         <div className="login">
-            <div onClick={hideModal} className="login-bg js-login-bg" style={showAuth ? {display: 'block'} : {display: 'none'}}></div>
+            <div id='login-bg' onClick={hideModal} className="login-bg js-login-bg" style={showAuth ? {display: 'block'} : {display: 'none'}}></div>
             <div className="login__container forms-popup js-forms-popup" style={showAuth && !token ? {display: 'block'} : {display: 'none'}}>
                 <div className="login__forw-wrapper">
                     <button className="login-btn-close js-login-btn-close" onClick={hideModal}>
@@ -169,7 +193,7 @@ export default function Login() {
                         ><input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Ваше имя"
                         /></label>
                         <label className="login__label"
-                        ><input value={phone} onChange={handleNumberInput} type="text" placeholder="Ваш номер телефона"
+                        ><input value={phone} onFocus={handleInputFocus} className="js-phone-input" onChange={handleNumberInput} type="text" placeholder="Ваш номер телефона"
                         /></label>
                         <div className="login__agree">
                             <label className="login__label-check">
@@ -181,9 +205,16 @@ export default function Login() {
                                 />
                                 <span className="checkmark"></span>
                                 <p>
-                                    Даю согласие на обработку персональных данных в соответствии
-                                    c&nbsp;
-                                    <a href="https://www.eapteka.ru/company/policy/"
+                                    Даю согласие на обработку данных в соответствии c
+                                    <a
+                                        href="https://bonus.detmir.ru/pdn_lk
+"
+                                    >
+                                        политикой обработки персональных данных
+                                    </a>
+                                    <br/>
+                                    и
+                                    <a href="https://www.detmir.ru/privacy_policy/"
                                     >политикой конфиденциальности</a
                                     >.
                                 </p>
@@ -191,8 +222,8 @@ export default function Login() {
                         </div>
                         <button
                             onClick={sendCodeViaSms}
-                            className={'login__button js-login__button ' + ((isChecked && phone.length == 12) ? 'active' : '')}
-                            disabled={!isChecked || phone.length != 12}>
+                            className={'login__button js-login__button ' + ((isChecked && phone.length == 18) ? 'active' : '')}
+                            disabled={!isChecked || phone.length < 18   }>
                             <span>Получить код по СМС</span>
                             <svg
                                 width="361"
@@ -209,7 +240,7 @@ export default function Login() {
                     </form>
                 </div>
             </div>
-            <div className="login__container forms-popup js-forms-popup" style={showAuth && token ? {display: 'block'} : {display: 'none'}}>
+            <div className="login__container forms-popup js-forms-popup" style={showAuth && token && !hideConfirmation ? {display: 'block'} : {display: 'none'}}>
                 <div className="login__forw-wrapper">
                     <button onClick={hideModal} className="login-btn-close js-login-btn-close">
                         <svg
@@ -251,7 +282,10 @@ export default function Login() {
                         </ul>
                         <p className={'code__error-text ' + (error ? 'error' : '')}>Введён неверный код</p>
                         <code className="code__text-p">Запросить код в СМС через 00:<Timer restart={restart} resetRestart={resetRestart} /></code>
-                        <code className="code__text-p">Не приходит СМС</code>
+                        <code className="code__text-p" style={{cursor: 'pointer'}} onClick={() => {
+                            setSupport(true)
+                            setHideConfirmation(true)
+                        }}>Не приходит СМС</code>
                         <div className="code__agree"></div>
                         <button onClick={confirmPhone}
                                 className={'login__button js-code-login__button ' + (isCodeValid() ? 'accept active' : 'error')}
@@ -272,7 +306,7 @@ export default function Login() {
                     </form>
                 </div>
             </div>
-            <Support />
+            <Support support={support} showAuth={showAuth} token={token} close={() => hideModal()} tryAgain={showModal} />
         </div>
     )
 }

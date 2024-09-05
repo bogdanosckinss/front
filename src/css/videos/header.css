@@ -2,6 +2,7 @@
   margin-top: 0;
   margin-bottom: 33px;
   position: fixed;
+
   left: 50%;
   transform: translateX(-50%);
   top: 48px;
@@ -12,7 +13,7 @@
   margin: 0 auto;
   width: 100%;
   max-width: 1190px;
-  padding: 0 15px;
+  /* padding: 0 15px; */
 }
 .header__wrapper {
   -webkit-backdrop-filter: blur(53px); /* Для поддержки Safari */
@@ -245,13 +246,13 @@
 }
 .header__button-block {
   position: relative;
-  font-weight: 400;
   font-size: 14px;
   line-height: 1;
   text-transform: capitalize;
   text-align: center;
   color: #0647c7;
   transition: color 0.25s ease-in;
+  font-family: 'myfontBold';
 }
 .header__button-block span {
   z-index: 1;

@@ -43,16 +43,19 @@ export default function Footer() {
                             <div className="footer__botton">
                                 <div className="footer__polits">
                                     <div className="footer__polit">
-                                        <a href="">Политика конфиденциальности</a>
+                                        <a href="https://www.detmir.ru/privacy_policy/">Политика конфиденциальности</a>
                                     </div>
                                     <div className="footer__polit">
-                                        <a href="">Правила участия в конкурсе</a>
+                                        <a href="https://bonus.detmir.ru/pdn_lk"
+                                        >Политика обработки персональных данных
+                                        </a>
+                                    </div>
+                                    <div className="footer__polit">
+                                        <a href="/rules">Правила участия в конкурсе</a>
                                     </div>
                                 </div>
 
-                                <p className="footer__botton-p">
-                                    © Группа компаний «Детский мир» & KIDS PROJECT, 2024
-                                </p>
+                                <p className="footer__botton-p">© KIDS PROJECT, 2024</p>
                                 <p className="footer__botton-rights">Все права защищены</p>
                             </div>
                         </div>

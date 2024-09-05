@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function Support() {
+export default function Support({support, showAuth, token, close, tryAgain}) {
     return (
-        <div className="login__container forms-popup js-forms-popup">
+        <div className={'login__container forms-popup js-forms-popup ' + ((support && showAuth && token) ? 'active' : '')}>
             <div className="login__forw-wrapper">
-                <button className="login-btn-close js-login-btn-close">
+                <button onClick={close} className="login-btn-close js-login-btn-close">
                     <svg
                         width="24"
                         height="24"
@@ -26,7 +26,10 @@ export default function Support() {
                     <h1 className="login__title">Проблемы со входом?</h1>
                     <p className="code__text">Обратитесь в службу поддержки</p>
                     <div className="form-problems__btns">
-                        <button className="form-problems__buttin">
+                        <button onClick={(e) => {
+                            e.preventDefault()
+                            tryAgain()
+                        }} className="form-problems__buttin">
                             <span> Попробовать снова</span>
                             <svg
                                 width="203"

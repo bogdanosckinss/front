@@ -66,6 +66,10 @@ export default function VideosResult() {
         fetchPosts()
     }, [])
 
+    function isLastLine(key) {
+        return key == posts.length - 1
+    }
+
     return (
         <div className="videos-result">
             <div className="videos-result__wrapper">
@@ -74,7 +78,7 @@ export default function VideosResult() {
                         {
                             posts?.map((post, key) => {
                                 return (
-                                    <Post key={key} post={post} />
+                                    <Post key={key} post={post} isLastLine={isLastLine(key)} findMoreAsync={findMoreAsync} />
                                 )
                             })
                         }

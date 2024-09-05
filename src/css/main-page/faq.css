@@ -53,8 +53,9 @@
 .ac.is-active > .ac-header .ac-trigger::after {
   background-image: url(../../img/faq-open.svg) !important;
   content: '' !important;
-  width: 44px !important;
-  height: 45px !important;
+  width: 26px !important;
+  height: 13px !important;
+  right: 3px !important;
 }
 .ac .ac-trigger:focus {
   color: var(--pink) !important;
@@ -72,8 +73,12 @@
 }
 @media (max-width: 991px) {
   .ac .ac-trigger {
+    line-height: 1.25 !important;
     font-size: 22px !important;
     padding-right: 60px !important;
+  }
+  .ac-text a {
+    color: #0073e6;
   }
   .faq__item {
     height: auto;

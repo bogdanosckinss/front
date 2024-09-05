@@ -2,12 +2,12 @@
 }
 .songs__title {
   font-size: 50px;
-  line-height: 1.12;
+  line-height: 0.92;
   /* text-transform: uppercase; */
   text-align: center;
   color: #fff;
   font-family: 'myfontExtraBold';
-  margin: 0 auto 12px;
+  margin: 0 auto 18px;
   width: 100%;
   max-width: 772px;
 }
@@ -57,17 +57,22 @@
   color: #000;
   font-family: 'myfontExtraBold';
   margin-bottom: 6px;
+  width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .songs__item-title::before {
   display: block;
   position: absolute;
-  left: 6px;
+  left: 12px;
   top: 0;
   content: '';
-  width: 23px;
-  height: 17px;
-  background-image: url(../../img/songs-icon.svg);
+  width: 22px;
+  height: 18px;
+  background-image: url(../../img/songs-icon.png);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 .songs__item-singer {
   font-size: 18px;

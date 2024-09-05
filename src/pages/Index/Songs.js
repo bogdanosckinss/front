@@ -69,8 +69,7 @@ export default function Songs() {
                             Выбирайте песню и покажите талант ребёнка всей стране
                         </div>
                         <div className="songs__subtitle">
-                            Снимайте видео, и ваш ребёнок выступит на одной сцене с любимыми
-                            блогерами
+                            Для участия в конкурсе необходимо использовать представленные песни
                         </div>
                         <ul ref={songsListRef} className={'songs__list ' + (showAll ? 'expanded' : '')}>
                             {

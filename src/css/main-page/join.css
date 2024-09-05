@@ -53,17 +53,12 @@
 .join__button:last-child svg {
   fill: #0073e6;
 }
-.join__button:first-child:hover span {
-  color: white;
-}
+
 .join__button:first-child:hover svg {
-  fill: #0073e6;
-}
-.join__button:last-child:hover span {
-  color: #0073e6;
+  fill: #e7edfa;
 }
 .join__button:last-child:hover svg {
-  fill: white;
+  fill: #338feb;
 }
 .join__p {
   margin-top: 13px;
@@ -74,11 +69,14 @@
   color: rgba(225, 240, 255, 0.45);
   max-width: 324px;
 }
+.join__p a {
+  color: #fff;
+}
 .join__img {
   position: absolute;
   width: 1062px;
   height: 665px;
-  top: -90px;
+  top: -91px;
   left: 358px;
   z-index: 1;
 }

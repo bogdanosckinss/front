@@ -12,6 +12,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "./features/auth/authSlice";
 import Middleware from "./middleware/Middleware";
 import Index from "./pages/Index";
+import Rules from "./pages/Rules";
 
 function App() {
     const refresh = useRefreshToken()
@@ -47,6 +48,7 @@ function App() {
 
                     <Route path="/code-confirmation" element={<CodeConfirmation />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/rules" element={<Rules />} />
 
                     <Route path="/video/:id" element={
                         <TopDownVideos />

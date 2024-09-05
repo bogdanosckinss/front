@@ -1,10 +1,11 @@
 .winners {
-  padding: 113px 0 0;
+  padding: 134px 0 0;
 }
 .winners__title {
   width: 718px;
   margin: 0 auto;
   position: relative;
+  text-align: center;
   font-family: 'myfontExtraBold';
 }
 .winners__title-span-special {
@@ -23,18 +24,21 @@
   padding: 10px 7px;
   font-family: 'myfontExtraBold';
   position: absolute;
-  top: -8px;
-  left: -110px;
+  top: -16px;
+  left: -100px;
   z-index: 1;
 }
 .winners__title-span-first {
   display: block;
   margin: 0 auto;
+  width: 463px;
+  padding-left: 50px;
+  text-align: right;
 }
 .winners__title-span {
   position: relative;
   font-size: 50px;
-  line-height: 1.06;
+  line-height: 1;
   /* text-transform: uppercase; */
   text-align: center;
   color: #fff;
@@ -46,7 +50,7 @@
   background-color: #fff;
   align-items: center;
   padding: 20px 46px 9px 50px;
-  margin-top: 40px;
+  margin-top: 48px;
   height: 210px;
 }
 .winners__block-bear {
@@ -132,6 +136,7 @@
 .winners__block-info-s {
   width: 250px;
   order: -1;
+  /* margin-top: -13px; */
 }
 .winners__block--title {
   font-size: 24px;
@@ -146,8 +151,11 @@
   line-height: 1.28;
   color: #000;
 }
+.prizes {
+  margin-bottom: 121px;
+}
 .prizes__title {
-  margin: 120px auto 40px;
+  margin: 29px auto 40px;
   font-size: 50px;
   line-height: 1.06;
   /* text-transform: uppercase; */
@@ -160,87 +168,55 @@
   justify-content: space-between;
   gap: 40px;
 }
-.prizes__left {
-  border-radius: 18px;
-  background-color: #0073e6;
-  display: flex;
-  justify-content: flex-end;
-  padding: 46px 47px 27px;
-  position: relative;
-  width: 760px;
-}
-.prizes__left-block {
-  width: 309px;
-  position: relative;
-}
-.prizes__left-block:after {
-  display: block;
-  position: absolute;
-  content: '';
-  width: 152px;
-  height: 151px;
-  background-repeat: no-repeat;
-  background-image: url(../../img/prizes-hearts.svg);
-  bottom: -10px;
-  left: 73px;
-}
-.prizes__img {
-  position: absolute;
-  width: 421px;
-  height: 346px;
-  left: 4px;
-  top: 15px;
-}
-.prizes__left-title {
-  font-size: 24px;
-  line-height: 1.16;
-  letter-spacing: -0.02em;
-  /* text-transform: uppercase; */
-  color: #fff;
-  font-family: 'myfontExtraBold';
-  margin-bottom: 9px;
-}
-.prizes__left-text {
-  font-size: 18px;
-  line-height: 1.32;
-  letter-spacing: -0.01em;
-  color: #fff;
-  font-family: 'myfontLight';
-}
-.prizes__right {
-  width: 360px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
+
 .prizes__right-block {
   position: relative;
   border-radius: 18px;
   background-color: #0073e6;
-  height: 174px;
-  padding: 0 22px 30px 37px;
+  height: 200px;
+  padding: 20px 22px 20px 37px;
   display: flex;
-  align-items: flex-end;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+.prizes__left-text p {
+  font-size: 18px;
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+.prizes__subtitle {
+  font-family: 'myfontExtraBold';
+
+  font-size: 24px;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 8px;
 }
 .prizes__right-img {
   position: absolute;
 }
 .prizes__right-block:first-child .prizes__right-img {
-  width: 79px;
-  height: 68px;
-  left: 26px;
-  top: -10px;
+  width: 270px;
+  height: 188px;
+  left: 23px;
+  top: 12px;
 }
 .prizes__right-block:nth-child(2) .prizes__right-img {
-  width: 117px;
-  height: 100px;
-  left: 22px;
-  top: -38px;
+  width: 219px;
+  height: 187px;
+  left: 10px;
+  top: 6px;
 }
 .prizes__right-img img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+.prizes__left-text {
+  width: 300px;
 }
 .winners__title-span-we {
   position: relative;
@@ -286,6 +262,7 @@
   }
   .prizes__flex {
     flex-wrap: wrap;
+    gap: 20px;
   }
   .prizes__left {
     width: 100%;
@@ -300,8 +277,39 @@
     width: 100%;
   }
   .prizes__right-block {
-    width: calc(100% / 2 - 20px);
-    /* height: 156px; */
+    width: calc(100% / 2 - 10px);
+    padding: 10px 15px 15px 37px;
+  }
+  .prizes__right-block:nth-child(2) .prizes__right-img {
+    width: 188px;
+    height: 157px;
+    left: 1px;
+    top: 24px;
+  }
+  .prizes__right-block:first-child .prizes__right-img {
+    width: 223px;
+    height: 153px;
+    left: 9px;
+    top: 34px;
+  }
+}
+@media (max-width: 1040px) {
+  .prizes__flex {
+    align-items: center;
+    justify-content: center;
+  }
+  .prizes__right-block {
+    width: 100%;
+    padding: 23px 30px 15px 37px;
+  }
+  .prizes__left-text {
+    width: 616px;
+  }
+  .prizes__right-block:first-child .prizes__right-img {
+    left: calc(100% / 9);
+  }
+  .prizes__right-block:last-child .prizes__right-img {
+    left: calc(100% / 9);
   }
 }
 @media (max-width: 991px) {
@@ -314,7 +322,21 @@
     width: 160px;
     height: 50px;
     font-size: 30px;
-    left: 17%;
+    left: -80px;
+    top: -1px;
+  }
+  .prizes__right-block {
+    width: 630px;
+    padding: 23px 30px 15px 37px;
+  }
+  .prizes__right-block:first-child .prizes__right-img {
+    left: calc(100% / 11);
+  }
+  .prizes__right-block:last-child .prizes__right-img {
+    left: calc(100% / 10 - 3%);
+  }
+  .prizes__title {
+    margin: 0px auto 40px;
   }
   .winners__block {
     height: auto;
@@ -361,8 +383,8 @@
   .prizes__img {
     left: 15px;
   }
-  .prizes__right-block:first-child .prizes__right-img {
-    top: -25px;
+  .prizes__left-text {
+    width: 65%;
   }
 }
 @media (max-width: 768px) {
@@ -400,10 +422,6 @@
   .winners__block-number-s::before {
     left: -40px;
   }
-  .prizes__right-block {
-    padding: 74px 15px 30px;
-    width: calc(100% / 2 - 10px);
-  }
   .prizes__right {
     gap: 20px;
   }
@@ -415,11 +433,17 @@
     text-align: center;
   }
   .prizes__img {
-    left: 50%;
-    transform: translateX(-50%);
-    width: 321px;
-    height: 335px;
-    top: -46px;
+    /*left: 50%;*/
+    /*transform: translateX(-50%);*/
+    /*width: 321px;*/
+    /*height: 335px;*/
+    /*top: -46px;*/
+  }
+  .prizes__right-block:first-child .prizes__right-img {
+    left: calc(100% / 10 - 5%);
+  }
+  .prizes__right-block:last-child .prizes__right-img {
+    left: calc(100% / 10 - 5%);
   }
 }
 @media (max-width: 700px) {
@@ -444,6 +468,23 @@
   }
   .prizes__left-text {
     font-size: 16px;
+    width: 100%;
+  }
+  .prizes__right-block {
+    height: 370px;
+    padding: 26px 23px;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+  .prizes__right-block:first-child .prizes__right-img {
+    width: 230px;
+    height: 218px;
+    left: 40px;
+  }
+  .prizes__right-block:last-child .prizes__right-img {
+    width: 264px;
+    height: 226px;
+    left: 40px;
   }
 }
 @media (max-width: 550px) {
@@ -519,19 +560,6 @@
   }
   .prizes__right {
     flex-wrap: wrap;
-  }
-  .prizes__right-block {
-    width: 100%;
-    height: 156px;
-    padding: 74px 35px 30px;
-  }
-  .prizes__right-block:first-child .prizes__right-img {
-    top: -14px;
-    left: 30px;
-  }
-  .prizes__right-block:last-child .prizes__right-img {
-    top: -25px;
-    left: 21px;
   }
   .prizes__title {
     font-size: 32px;

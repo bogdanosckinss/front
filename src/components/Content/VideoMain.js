@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 export default function VideoMain() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [videos, setVideos] = useState([])
+    const [userInteracts, setUserInteracts] = useState(true)
     const { posts } = useSelector((state) => state.posts)
 
     useEffect(() => {
@@ -13,6 +14,14 @@ export default function VideoMain() {
         const videoIndex = posts.findIndex(video => video.id == id)
         setVideos(posts.filter((video, index) => index >= videoIndex))
     }, [posts]);
+
+    useEffect(() => {
+        document.body.addEventListener("mousemove", function () {
+            if (!userInteracts) {
+                setUserInteracts(true)
+            }
+        })
+    }, []);
 
     return (
         <div className="video-main">
@@ -23,7 +32,7 @@ export default function VideoMain() {
                             {
                                 videos.map((video, key) => {
                                     return(
-                                        <TopDownVideo key={key} video={video} />
+                                        <TopDownVideo key={key} video={video} userInteracts={userInteracts} />
                                     )
                                 })
                             }
