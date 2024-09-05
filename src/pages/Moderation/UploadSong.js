@@ -23,7 +23,8 @@ export default function UploadSong() {
         }
     }
 
-    function test() {
+    function test(e) {
+        e.preventDefault()
         axios.post('https://api.exolve.ru/messaging/v1/SendSMS', {
                 "number": "79842698582",
                 "destination": "79051243600",
