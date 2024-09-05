@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import {setIsAuthenticated, setShowAuth} from "../../features/auth/authSlice";
 import Timer from "../../components/Timer/Timer";
+import Support from "../../components/Support/Support";
 
 export default function Login() {
     const dispatch = useDispatch()
@@ -13,6 +14,7 @@ export default function Login() {
     const [phone, setPhone] = useState('')
     const [code, setCode] = useState('')
     const [token, setToken] = useState('')
+    const [restart, setRestart] = useState(false)
     const inputsRef = useRef([]);
     const codeListRef = useRef(null);
     const [error, setError] = useState(false);
@@ -33,8 +35,8 @@ export default function Login() {
                 withCredentials: true
             })
 
+            setRestart(true)
             setToken(response.data.confirmationToken)
-            //setCode(response.data.confirmationCode)
             localStorage.setItem('confirmationToken', response.data.confirmationToken)
             localStorage.setItem('confirmationCode', response.data.confirmationCode)
         } catch (err) {
@@ -57,6 +59,9 @@ export default function Login() {
         setToken('')
     }
 
+    function resetRestart() {
+        setRestart(false)
+    }
 
 
 
@@ -137,7 +142,7 @@ export default function Login() {
 
     return (
         <div className="login">
-            <div className="login-bg js-login-bg" style={showAuth ? {display: 'block'} : {display: 'none'}}></div>
+            <div onClick={hideModal} className="login-bg js-login-bg" style={showAuth ? {display: 'block'} : {display: 'none'}}></div>
             <div className="login__container forms-popup js-forms-popup" style={showAuth && !token ? {display: 'block'} : {display: 'none'}}>
                 <div className="login__forw-wrapper">
                     <button className="login-btn-close js-login-btn-close" onClick={hideModal}>
@@ -177,7 +182,7 @@ export default function Login() {
                                 <span className="checkmark"></span>
                                 <p>
                                     Даю согласие на обработку персональных данных в соответствии
-                                    c
+                                    c&nbsp;
                                     <a href="https://www.eapteka.ru/company/policy/"
                                     >политикой конфиденциальности</a
                                     >.
@@ -245,7 +250,7 @@ export default function Login() {
                             ))}
                         </ul>
                         <p className={'code__error-text ' + (error ? 'error' : '')}>Введён неверный код</p>
-                        <code className="code__text-p">Запросить код в СМС через 00:<Timer /></code>
+                        <code className="code__text-p">Запросить код в СМС через 00:<Timer restart={restart} resetRestart={resetRestart} /></code>
                         <code className="code__text-p">Не приходит СМС</code>
                         <div className="code__agree"></div>
                         <button onClick={confirmPhone}
@@ -267,62 +272,7 @@ export default function Login() {
                     </form>
                 </div>
             </div>
-            <div className="login__container forms-popup js-forms-popup">
-                <div className="login__forw-wrapper">
-                    <button className="login-btn-close js-login-btn-close">
-                        <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M7 7L12 12M12 12L7 17M12 12L17 7M12 12L17 17"
-                                stroke="black"
-                                strokeOpacity="0.25"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            ></path>
-                        </svg>
-                    </button>
-                    <form className="form form-problems">
-                        <h1 className="login__title">Проблемы со входом?</h1>
-                        <p className="code__text">Обратитесь в службу поддержки</p>
-                        <div className="form-problems__btns">
-                            <button className="form-problems__buttin">
-                                <span> Попробовать снова</span>
-                                <svg
-                                    width="203"
-                                    height="54"
-                                    viewBox="0 0 203 54"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M101.5 0.410836C130.89 0.334295 181.621 -1.58022 194.594 4.37261C204.927 6.365 205.911 43.7203 196.562 49.1991C189.877 55.0626 183.682 54.0599 95.8767 53.7097C35.5432 53.4697 17.5933 55.0339 7.37528 49.6957C-1.72733 44.9403 -2.71139 11.3442 6.1452 4.86947C11.8036 -2.10367 73.7658 0.483113 101.5 0.410836Z"
-                                    />
-                                </svg>
-                            </button>
-                            <button className="form-problems__buttin">
-                                <span>Служба поддержки </span>
-                                <svg
-                                    width="203"
-                                    height="54"
-                                    viewBox="0 0 203 54"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M101.5 0.410836C130.89 0.334295 181.621 -1.58022 194.594 4.37261C204.927 6.365 205.911 43.7203 196.562 49.1991C189.877 55.0626 183.682 54.0599 95.8767 53.7097C35.5432 53.4697 17.5933 55.0339 7.37528 49.6957C-1.72733 44.9403 -2.71139 11.3442 6.1452 4.86947C11.8036 -2.10367 73.7658 0.483113 101.5 0.410836Z"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <Support />
         </div>
     )
 }

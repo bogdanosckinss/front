@@ -1,4 +1,25 @@
 @import url('./video-header.css');
+
+.plyr__volume {
+  display: flex;
+  flex-direction: row-reverse;
+  top: -30px !important;
+  right: -42px !important;
+  background: transparent !important;
+}
+
+.plyr__controls > button:last-child {
+  bottom: 3px;
+}
+
+.icon--not-pressed, .icon--pressed {
+  fill: white !important;
+}
+
+.plyr__volume button {
+  transform: rotate(90deg);
+}
+
 .video-body {
   background-color: var(--darkBlue);
 }

@@ -1,11 +1,17 @@
 import React, {useEffect, useState} from "react";
 
-export default function Timer() {
+export default function Timer({restart, resetRestart}) {
     const [seconds, setSeconds] = useState(60)
     const [isActive, setIsActive] = useState(true)
 
     useEffect(() => {
         let interval = null;
+
+        if (restart) {
+            resetRestart()
+            setIsActive(true)
+            setSeconds(60)
+        }
 
         if (isActive) {
             interval = setInterval(() => {
@@ -23,7 +29,7 @@ export default function Timer() {
         }
 
         return () => clearInterval(interval)
-    }, [isActive, seconds])
+    }, [isActive, seconds, restart])
 
     return(
         <>

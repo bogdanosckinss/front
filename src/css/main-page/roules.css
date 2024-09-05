@@ -4,6 +4,7 @@
 .roules__title {
   font-size: 50px;
   line-height: 1.06;
+  /* text-transform: uppercase; */
   color: #fff;
   font-family: 'myfontExtraBold';
   text-align: center;
@@ -51,7 +52,7 @@
 .roules__item-title {
   font-size: 24px;
   line-height: 1.24;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: #fd039a;
   font-family: 'myfontExtraBold';
   margin-bottom: 3px;
@@ -74,7 +75,7 @@
 .roules-attention__title {
   font-size: 24px;
   line-height: 1.24;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: #fff;
   font-family: 'myfontExtraBold';
   margin-bottom: 3px;
@@ -99,9 +100,9 @@
   transform: translate(-50%, -50%);
 }
 .roules-attention__btn span {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   text-align: center;
   color: #0073e6;
   transition: all 0.2s ease-out;

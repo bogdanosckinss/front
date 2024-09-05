@@ -21,10 +21,13 @@ export default function MainHeader() {
         document.body.classList.toggle('hidden');
     }
 
-    async function toggleAuth(e) {
+    async function toggleAuth(e, isMobile) {
         e.preventDefault()
 
         if (!isAuthenticated) {
+            if (isMobile) {
+                toggleMob(e)
+            }
             dispatch(setShowAuth(true))
             return
         }
@@ -57,7 +60,7 @@ export default function MainHeader() {
                                     <li><a href="">Как проголосовать</a></li>
                                 </ul>
                                 <button
-                                    onClick={toggleAuth}
+                                    onClick={(e) => toggleAuth(e)}
                                     className="header__button-block header__button-real js-header__button-block"
                                 >
                                     <span>{isAuthenticated ? 'Выйти' : 'Войти'}</span>
@@ -107,6 +110,7 @@ export default function MainHeader() {
                         </li>
                     </ul>
                     <button
+                        onClick={(e) => toggleAuth(e, true)}
                         className="button-special join__button header-hamb-btn js-header__button-block-mob"
                     >
                         <span className="">{isAuthenticated ? 'Выйти' : 'Войти'}</span>

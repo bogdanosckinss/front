@@ -2,9 +2,10 @@
   padding: 113px 0 0;
 }
 .winners__title {
-  width: 762px;
+  width: 718px;
   margin: 0 auto;
   position: relative;
+  font-family: 'myfontExtraBold';
 }
 .winners__title-span-special {
   background-color: var(--pink);
@@ -23,7 +24,7 @@
   font-family: 'myfontExtraBold';
   position: absolute;
   top: -8px;
-  left: 9%;
+  left: -110px;
   z-index: 1;
 }
 .winners__title-span-first {
@@ -34,7 +35,7 @@
   position: relative;
   font-size: 50px;
   line-height: 1.06;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   text-align: center;
   color: #fff;
 }
@@ -135,7 +136,7 @@
 .winners__block--title {
   font-size: 24px;
   line-height: 1.24;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: #ff0199;
   font-family: 'myfontExtraBold';
   margin-bottom: 3px;
@@ -149,6 +150,7 @@
   margin: 120px auto 40px;
   font-size: 50px;
   line-height: 1.06;
+  /* text-transform: uppercase; */
   color: #fff;
   font-family: 'myfontExtraBold';
   text-align: center;
@@ -193,7 +195,7 @@
   font-size: 24px;
   line-height: 1.16;
   letter-spacing: -0.02em;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: #fff;
   font-family: 'myfontExtraBold';
   margin-bottom: 9px;

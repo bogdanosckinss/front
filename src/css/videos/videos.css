@@ -9,6 +9,8 @@
 }
 .videos-body {
   background-color: var(--darkBlue);
+  margin: 0;
+  padding: 0;
 }
 .videos-not-found {
   margin-top: 12px;
@@ -49,4 +51,24 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+@media screen and (max-width: 650px) {
+  .videos-not-found__container {
+    max-width: 371px;
+  }
+  .videos-not-found__block {
+    width: 100%;
+    padding: 15px 50px;
+  }
+  .videos-not-found__text {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+@media screen and (max-width: 550px) {
+}
+@media screen and (max-width: 370px) {
+  .videos-not-found__block {
+    padding: 14px 17px;
+  }
 }

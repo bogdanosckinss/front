@@ -120,6 +120,9 @@
   text-align: center;
   color: #fff;
 }
+.videos-result__song {
+  width: 106px;
+}
 .videos-result__song-info {
   display: flex;
   align-items: center;
@@ -137,6 +140,9 @@
   line-height: 1;
   color: #fff;
   font-family: 'myfontExtraBold';
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .videos-result__song-name {
   font-weight: 400;
@@ -144,6 +150,9 @@
   line-height: 1;
   color: #fff;
   font-family: 'myfontLight';
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .videos-result__play {
@@ -172,4 +181,81 @@
   height: 32px;
   position: relative;
   z-index: 3;
+}
+@media screen and (max-width: 1200px) {
+  .videos-result__list {
+    gap: 20px;
+    justify-content: space-around;
+  }
+  .videos-result__item {
+    width: 245px;
+    height: 438px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .videos-result__container {
+    margin-top: 21px;
+  }
+  .videos-result__item {
+    width: 159px;
+    height: 285px;
+  }
+  .videos-result__author-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+  .videos-result__author-nickname {
+    font-size: 10px;
+    line-height: 1.25;
+  }
+  .videos-result__author-city {
+    font-size: 8px;
+    line-height: 1.25;
+  }
+  .videos-result__play {
+    width: 43px;
+    height: 43px;
+    background-size: cover;
+  }
+  .videos-result__play a {
+    padding: 13px 7px 9px 15px;
+  }
+  .videos-result__play img {
+    width: 17px;
+    height: 19px;
+  }
+  .videos-result__song-img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+  .videos-result__item {
+    width: 240px;
+    height: 390px;
+    border-radius: 10px;
+  }
+  .videos-result__info {
+    padding: 0 9px 7px 8px;
+    bottom: 0;
+  }
+  .videos-result__song {
+    width: 69px;
+  }
+  .videos-result__song-singer {
+    font-size: 9px;
+    line-height: 1;
+  }
+  .videos-result__song-name {
+    font-size: 9px;
+    line-height: 1;
+  }
+  .videos-result__likes img {
+    width: 12px;
+    height: 11px;
+  }
+  .videos-result__likes span:nth-child(2) {
+    font-size: 8px;
+    line-height: 1;
+  }
 }

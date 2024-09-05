@@ -10,3 +10,12 @@
 .video-header.account-header {
   top: 33px;
 }
+.video-header .header__button-block {
+  text-transform: none;
+}
+@media (max-width: 550px) {
+  .video-header .header__block {
+    height: 68px;
+    padding: 8px 8px 8px 13px;
+  }
+}

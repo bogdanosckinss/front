@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import AccountHeader from "../components/Header/AccountHeader";
 import AccountInfo from "../components/AccountInfo/AccountInfo";
+import Footer from "../components/Footer/Footer";
 
 export default function Account() {
     useEffect(() => {
@@ -9,9 +10,12 @@ export default function Account() {
     }, [])
 
     return (
-        <main className="videos-main-block-cover">
-            <AccountHeader />
-            <AccountInfo />
-        </main>
+        <>
+            <main className="videos-main-block-cover">
+                <AccountHeader/>
+                <AccountInfo/>
+            </main>
+            <Footer />
+        </>
     )
 }

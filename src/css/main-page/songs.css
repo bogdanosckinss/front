@@ -3,6 +3,7 @@
 .songs__title {
   font-size: 50px;
   line-height: 1.12;
+  /* text-transform: uppercase; */
   text-align: center;
   color: #fff;
   font-family: 'myfontExtraBold';
@@ -81,9 +82,9 @@
   width: 228px;
   height: 54px;
   padding: 18px 26px;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   text-align: center;
   color: #fff;
 }
@@ -91,17 +92,17 @@
   fill: #0073e6;
 }
 .songs__item-download:hover {
-  color: var(--darkBlue);
+  /* color: var(--darkBlue); */
 }
 .songs__item-download:hover svg {
-  fill: white;
+  fill: #005cb8;
 }
 .songs-show-more__button {
   z-index: 3;
   font-family: 'myfontExtraBold';
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   text-align: center;
   color: #0073e6;
   margin: 0 auto 0;

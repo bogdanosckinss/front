@@ -18,8 +18,8 @@
 .faq__item {
   border-radius: 24px;
   padding: 23px 41px 36px 39px;
-  margin-top: 0;
-  border: none;
+  margin-top: 0 !important;
+  border: none !important;
   height: 80px;
 }
 .faq__item.is-active {
@@ -46,18 +46,18 @@
   width: 35px !important;
   height: 35px !important;
   right: -1px !important;
-  background-image: url(../../img/faq-plus.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
+  background-image: url(../../img/faq-plus.svg) !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
 }
 .ac.is-active > .ac-header .ac-trigger::after {
-  background-image: url(../../img/faq-open.svg);
+  background-image: url(../../img/faq-open.svg) !important;
   content: '' !important;
   width: 44px !important;
   height: 45px !important;
 }
 .ac .ac-trigger:focus {
-  color: var(--pink);
+  color: var(--pink) !important;
 }
 @media (max-width: 1200px) {
   .ac .ac-trigger {
@@ -72,8 +72,8 @@
 }
 @media (max-width: 991px) {
   .ac .ac-trigger {
-    font-size: 22px;
-    padding-right: 60px;
+    font-size: 22px !important;
+    padding-right: 60px !important;
   }
   .faq__item {
     height: auto;
@@ -112,18 +112,18 @@
     padding: 11px 40px 12px 18px;
   }
   .ac .ac-trigger {
-    font-size: 16px;
-    padding-right: 0;
+    font-size: 16px !important;
+    padding-right: 0 !important;
   }
   .ac .ac-trigger::after {
-    right: -23.5px;
-    width: 21px;
-    height: 21px;
-    top: 8px;
+    right: -23.5px !important;
+    width: 21px !important;
+    height: 21px !important;
+    top: 8px !important;
   }
   .ac .ac-panel .ac-text {
-    font-size: 14px;
-    line-height: 1.32;
+    font-size: 14px !important;
+    line-height: 1.32 !important;
   }
   .ac.is-active > .ac-header .ac-trigger::after {
     width: 34px;

@@ -35,8 +35,8 @@ body.hidden {
 }
 @media screen and (max-width: 991px) {
   .footer {
-    position: static;
-    height: max-content;
+    position: static !important;
+    height: max-content !important;
   }
   .footer__block {
     width: 100%;
@@ -45,7 +45,7 @@ body.hidden {
     justify-content: center;
   }
   .footer__s {
-    margin-right: 0;
+    margin-right: 0 !important;
     width: 100%;
     justify-content: space-around;
   }
@@ -54,7 +54,7 @@ body.hidden {
   }
   .footer__polits {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
   }
   .footer__wrapper {
     padding: 20px 0;
@@ -63,13 +63,13 @@ body.hidden {
 @media (max-width: 768px) {
   .footer__s {
     flex-direction: column;
-    align-items: center;
+    align-items: center !important;
     gap: 20px;
   }
   .footer__temp {
-    margin-right: 0;
+    margin-right: 0 !important;
   }
   .footer__left {
-    margin-right: 0;
+    margin-right: 0 !important;
   }
 }
