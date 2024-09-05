@@ -16,7 +16,12 @@ export default function UploadSong() {
 
     async function getSongs() {
         try {
-            const response = await privateAxios.get('content/songs')
+            const response = await privateAxios.get('content/songs', {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            })
             setSongs(response.data)
         }catch (e) {
             console.log(e)
