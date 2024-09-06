@@ -72,7 +72,8 @@ export default function Rules() {
                             </li>
                             <li className="roules__item">
                                 <div className="roules__absolute-block">
-                                    Заявки и голоса принимаются с 9.09.2024 по 29.09.2024
+                                    Заявки и голоса принимаются <br />
+                                    с 9.09.2024 по 29.09.2024
                                 </div>
                                 <div className="roules__img">
                                     <picture>

@@ -211,6 +211,9 @@
   }
 }
 @media (max-width: 550px) {
+  .songs__item-title {
+    width: 100%;
+  }
   .songs__title {
     font-size: 34px;
     line-height: 0.92;

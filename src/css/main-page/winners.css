@@ -198,10 +198,10 @@
   position: absolute;
 }
 .prizes__right-block:first-child .prizes__right-img {
-  width: 270px;
-  height: 188px;
-  left: 23px;
-  top: 12px;
+  width: 292px;
+  height: 199px;
+  left: 5px;
+  top: -1px;
 }
 .prizes__right-block:nth-child(2) .prizes__right-img {
   width: 219px;
@@ -613,10 +613,10 @@
     gap: 17px;
   }
   .prizes__right-block:first-child .prizes__right-img {
-    width: 312px;
-    height: 257px;
-    left: 73px;
-    top: 0px;
+    width: 341px;
+    height: 268px;
+    left: 42px;
+    top: -14px;
   }
   .prizes__right-block:nth-child(2) .prizes__right-img {
     top: 11px;
@@ -639,6 +639,10 @@
   }
 }
 @media (max-width: 370px) {
+  .prizes__right-block:nth-child(2) .prizes__right-img {
+    top: -2px;
+    left: 23px;
+  }
   .winners__block-number {
     font-size: 70px;
   }
