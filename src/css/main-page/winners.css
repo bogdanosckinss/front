@@ -15,7 +15,6 @@
   width: 206px;
   height: 71px;
   display: inline-block;
-  font-weight: 800;
   font-size: 42px;
   line-height: 1.06;
   text-transform: uppercase;
@@ -489,11 +488,14 @@
 }
 @media (max-width: 550px) {
   .winners__title {
-    font-size: 32px;
+    font-size: 3px;
     margin-left: -15px;
   }
   .winners {
     padding: 69px 0 0;
+  }
+  .prizes {
+    margin-bottom: 71px;
   }
   .winners__title-span {
     margin-left: -10px;
@@ -562,10 +564,11 @@
     flex-wrap: wrap;
   }
   .prizes__title {
-    font-size: 32px;
-    line-height: 1.12;
-    margin: 72px auto 0;
-    padding-right: 15px;
+    font-size: 34px;
+    line-height: 1.06;
+
+    margin: 70px auto 0;
+    /* padding-right: 15px; */
   }
   .prizes__img {
     left: 49%;
@@ -593,11 +596,36 @@
   }
   .prizes__flex {
     gap: 20px;
-    padding-top: 44px;
+    padding-top: 28px;
     overflow: hidden;
   }
   .prizes__right {
     gap: 17px;
+  }
+  .prizes__right-block:first-child .prizes__right-img {
+    width: 312px;
+    height: 257px;
+    left: 73px;
+    top: 0px;
+  }
+  .prizes__right-block:nth-child(2) .prizes__right-img {
+    top: 11px;
+  }
+
+  .prizes__subtitle {
+    font-size: 22px;
+    line-height: 1.24;
+  }
+  .prizes__left-text p {
+    font-size: 14px;
+    line-height: 1.28;
+  }
+  .prizes__right-block {
+    height: 370px;
+    padding: 26px 31px;
+  }
+  .prizes__right-block:last-child {
+    height: 346px;
   }
 }
 @media (max-width: 370px) {
