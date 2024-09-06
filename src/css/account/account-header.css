@@ -5,7 +5,7 @@
   fill: rgba(225, 225, 225, 0.3);
 }
 .header.account-header .header__button-block:hover svg {
-  fill: rgba(225, 225, 225, 0.1);
+  fill: rgba(225, 225, 225, 0.5);
 }
 .video-header.account-header {
   top: 33px;

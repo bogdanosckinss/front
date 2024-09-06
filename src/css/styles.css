@@ -19,7 +19,10 @@
 @import url('./account/account.css');
 @import url('./main-page/main-page.css');
 @import url('./main-page/winners.css');
-
+.body-rules {
+    padding: 0;
+    margin: 0;
+}
 .plyr__controls {
     bottom: 40px !important;
 }
@@ -27,4 +30,84 @@
 .plyr__progress__container {
     width: 100%;
     display: contents;
+}
+
+.footer-rules-page {
+    position: static !important;
+}
+.footer-rules-page .footer__container {
+    margin-top: 0;
+}
+.footer-rules-page .footer__wrapper {
+    padding-top: 33px;
+}
+.header-rules-page .header__wrapper {
+    background: #0647c7;
+    backdrop-filter: blur(40px);
+}
+.rules__wrapper {
+    padding: 156px 0 122px;
+}
+.rules__container {
+    width: 100%;
+    max-width: 1168px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+.rules__title {
+    font-size: 36px;
+    line-height: 1.06;
+    color: #000;
+    font-family: 'myfontExtraBold';
+    margin-bottom: 32px;
+}
+.rules__main-list li {
+    font-size: 24px;
+    color: #000;
+    font-family: 'myfontBold';
+    margin-bottom: 24px;
+}
+.rules__main-list li ul {
+    margin-top: 10px;
+}
+.rules__main-list li ul li {
+    font-family: 'myfontRegular';
+    margin-bottom: 7px;
+    font-size: 18px;
+    color: #000;
+}
+
+.rules-page__sublist li {
+    position: relative;
+    padding-left: 25px;
+}
+.rules-page__sublist li:before {
+    display: block;
+    content: '';
+    width: 3px;
+    height: 3px;
+    left: 0;
+    top: 10px;
+    border-radius: 50%;
+    background-color: #000;
+    position: absolute;
+}
+@media (max-width: 650px) {
+    .rules__wrapper {
+        padding: 104px 0 178px;
+    }
+    .rules__title {
+        font-size: 24px;
+        line-height: 1.06;
+        margin-bottom: 20px;
+    }
+    .rules__main-list li {
+        font-size: 20px;
+        line-height: 1.2;
+        margin-bottom: 10px;
+    }
+    .rules__main-list li ul li {
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
 }

@@ -424,10 +424,10 @@
     /* overflow: visible !important; */
   }
   .roules__item:nth-child(1) .roules__img {
-    width: 319px;
-    height: 331px;
+    width: 336px;
+    height: 328px;
     left: -18px;
-    bottom: -36px;
+    bottom: -43px;
   }
   .roules__item:nth-child(2) .roules__img {
     left: -3px;

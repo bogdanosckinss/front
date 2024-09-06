@@ -16,6 +16,7 @@ export default function TopDownVideo({video, userInteracts}) {
     const postRef = useRef()
     const copyBtnRef = useRef(null)
     const playerRef = useRef()
+    const inputREF = useRef()
     const { ref, inView } = useInView({
         threshold: 0.5,
         rootMargin: '0px',
@@ -104,6 +105,9 @@ export default function TopDownVideo({video, userInteracts}) {
     function copyLink(e) {
         e.preventDefault()
         navigator.clipboard.writeText(videoLink())
+
+        inputREF.current.select()
+        inputREF.current.setSelectionRange(0, 99999);
 
         const tooltip = document.querySelector('.tooltiptext');
         tooltip.textContent = 'Скопировано: ' + videoLink();
@@ -353,6 +357,7 @@ export default function TopDownVideo({video, userInteracts}) {
                             type="text"
                             value={videoLink()}
                             id="myInput"
+                            ref={inputREF}
                         />
                         <div className="tooltip">
                             <button onClick={copyLink} className="js-copy-btn">

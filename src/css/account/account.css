@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 360px;
+  margin-bottom: 152px;
 }
 
 .account__image {
@@ -341,6 +341,7 @@
 }
 .account-form__check-input:checked ~ p a {
   text-decoration: underline;
+  text-decoration-skip-ink: none;
   color: white;
 }
 .account-form__label-check p {
@@ -978,10 +979,14 @@
 }
 .support-bg-svg svg {
   fill: white;
+  stroke: white;
 }
-.support__block .active .support-bg-svg svg {
-  fill: rgba(6, 71, 199, 0.1);
+.support__block.active .support-bg-svg svg {
+  fill: #e7edfa;
+
+  stroke: #e7edfa;
 }
+
 .support-hint {
   position: absolute;
   bottom: -30px;
@@ -1007,7 +1012,8 @@
   display: none;
   position: absolute;
   top: -54px;
-  left: 0;
+  left: auto;
+  right: 4px;
   border-radius: 100%;
   background-color: #00b0f2;
   width: 55px;
@@ -1060,13 +1066,50 @@
     border-color: var(--pink) transparent transparent transparent;
   }
 }
+.footer-account-page {
+  position: static !important;
+}
+.footer-account-page .footer__container {
+  margin-top: 0;
+}
+.footer-account-page .footer__wrapper {
+  padding-top: 33px;
+}
+.account-error-video-position {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  border-radius: 12px;
+  height: 70px;
+  padding: 10px 5px 7px 11px;
+  z-index: 10;
+  display: flex;
+}
+.account-error-video {
+  background: rgba(255, 79, 62, 0.3);
+}
+.account-error-video__icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+}
+.account-error-video__text {
+  font-size: 12px;
+  line-height: 1.24;
+  color: #fff;
+}
+.account-error-video-gb {
+  background: rgba(250, 188, 34, 0.3);
+}
 
 @media (max-width: 991px) {
   .support {
-    right: 26px;
+    position: static;
+    margin: 50px 0 50px auto;
   }
   .account-info {
-    margin-bottom: 120px;
+    margin-bottom: 0;
   }
 }
 @media (max-width: 768px) {
@@ -1096,8 +1139,19 @@
   .account-container {
     padding: 0 15px;
   }
+  .loading {
+    top: 46.5%;
+    left: 43.5%;
+  }
 }
 @media (max-width: 650px) {
+  .account-error-video__text {
+    font-size: 14px;
+  }
+  .account-error-video-position {
+    height: 74px;
+    padding: 11px 30px 11px 14px;
+  }
   .account-share-block {
     flex-direction: column;
     gap: 15px;
@@ -1193,6 +1247,17 @@
   }
 }
 @media (max-width: 370px) {
+  .loading {
+    top: 45.5%;
+    left: 42.5%;
+  }
+  .account-error-video__text {
+    font-size: 12px;
+  }
+  .account-error-video-position {
+    height: 74px;
+    padding: 11px 20px 11px 13px;
+  }
   .account__upload-video {
     width: 290px;
     height: 513px;

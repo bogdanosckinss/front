@@ -18,6 +18,8 @@ import UnderReview from "./UnderReview";
 import ShareWithFriends from "./ShareWithFriends";
 import UnderReviewMob from "./UnderReviewMob";
 import TryAgain from "./TryAgain";
+import NetworkError from "./Errors/NetworkError";
+import MemoryLimitation from "./Errors/MemoryLimitation";
 
 export default function AccountInfo() {
     const privateAxios = useAxiosPrivate()
@@ -26,6 +28,7 @@ export default function AccountInfo() {
     const { loading: authLoading } = useSelector((state) => state.auth)
     const [canUpload, setCanUpload] = useState(false)
     const [video, setVideo] = useState('')
+    const [videoId, setVideoId] = useState('')
     const [image, setImage] = useState('')
     const [name, setName] = useState('')
     const [lastname, setLastname] = useState('')
@@ -45,6 +48,8 @@ export default function AccountInfo() {
     const [uploadingVideo, setUploadingVideo] = useState(false)
     const [uploadingImage, setUploadingImage] = useState(false)
     const [showInputs, setShowInputs] = useState(false)
+    const [memoryLimitError, setMemoryLimitError] = useState(false)
+    const [networkError, setNetworkError] = useState(false)
     const uploadFileService = new UploadFileService()
     const ref = useRef()
     const dropdownRef = useRef()
@@ -122,6 +127,7 @@ export default function AccountInfo() {
                 setAllowed(response.data.videos[videosCount - 1].allowed)
                 setUnderModeration(response.data.videos[videosCount - 1].under_moderation)
                 setVideo(response.data.videos[videosCount - 1].link)
+                setVideoId(response.data.videos[videosCount - 1].id)
                 setAlreadyUploaded(true)
                 setSelectedSong(response.data.videos[videosCount - 1].song)
             }
@@ -161,9 +167,14 @@ export default function AccountInfo() {
             setAlreadyUploaded(true)
             setUnderModeration(true)
         } catch (e) {
+            setNetworkError(true)
             setErrorDuringLoading(true)
             setAlreadyUploaded(false)
         }
+    }
+
+    function videoLink() {
+        return window.location.origin + '/video/' + videoId
     }
 
     async function uploadImage(image) {
@@ -310,6 +321,10 @@ export default function AccountInfo() {
                                     <div className="account__form-cover">
                                         <div className="account__upload-video">
                                             <label className="account__upload-video-label">
+
+                                                { networkError ? <NetworkError /> : '' }
+                                                { memoryLimitError ?  <MemoryLimitation /> : '' }
+
                                                 <div className="videos-result__info" style={{display: 'none'}}>
                                                     <div className="videos-result__song-info">
                                                         <div className="videos-result__song-img">
@@ -355,7 +370,7 @@ export default function AccountInfo() {
                                                 {
                                                     video ?
                                                         <>
-                                                            <span>
+                                                            <span style={{height: '100%', width: '100%'}}>
                                                                 {renderVideo}
                                                             </span>
                                                         </>
@@ -383,6 +398,12 @@ export default function AccountInfo() {
                                                                     if (e.target.files.length == 0 || video) {
                                                                         return
                                                                     }
+
+                                                                    if (((Math.round(e.target.files[0].size / 1024)) / 1000) > 50) {
+                                                                        setMemoryLimitError(true)
+                                                                        return
+                                                                    }
+
                                                                     await uploadVideo(e.target.files[0])
                                                                 }}
                                                                 type="file"
@@ -685,7 +706,7 @@ export default function AccountInfo() {
                                 {alreadyUploaded && underModeration && !allowed ? <UnderReview/> : ''}
 
                                 <div className="application-approved display-web">
-                                    {alreadyUploaded && !underModeration && allowed ? <Share/> : ''}
+                                    {alreadyUploaded && !underModeration && allowed ? <Share link={videoLink()}/> : ''}
                                     {alreadyUploaded && !underModeration && !allowed ? <TryAgain/> : ''}
                                 </div>
                             </>

@@ -672,6 +672,9 @@
   .prizes__left {
     padding: 247px 16px 30px 34px;
   }
+  .winners__title-span-first {
+    padding-left: 103px;
+  }
   .prizes__left-title {
     font-size: 18px;
   }

@@ -1,7 +1,21 @@
-import React from "react";
-import TryAgain from "./TryAgain";
+import React, {useEffect, useRef} from "react";
 
-export default function Share() {
+export default function Share({link}) {
+    const tooltip = useRef()
+    const input = useRef()
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (tooltip.current && !tooltip.current.contains(event.target)) {
+                tooltip.current.innerHTML = 'Копировать ссылку'
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [])
+
+
     return (
         <>
             <div className="application-approved__title">
@@ -10,18 +24,27 @@ export default function Share() {
             <div className="account-share-block">
                 <div className="account-share-block-left">
                     <input
+                        ref={input}
                         className="account-share-block-left__input"
                         type="text"
-                        value="https://like.detmir.ru/proto/cEJyKj3v2554ImChsZdTbb/My-website-portfolio%"
+                        value={link}
                         id="application-approved-myInput"
                     />
                     <div className="application-approved-tooltip">
-                        <button id="application-approved-button">
-                                                <span
-                                                    className="application-approved-tooltiptext"
-                                                    id="application-approved-myTooltip"
-                                                >Копировать ссылку</span
-                                                >
+                        <button onClick={(e) => {
+                            e.preventDefault()
+                            navigator.clipboard.writeText(link)
+
+                            input.current.select()
+                            input.current.setSelectionRange(0, 99999);
+
+                            tooltip.current.innerHTML = 'Скопировано: ' + link
+                        }} id="application-approved-button">
+                            <span
+                                ref={tooltip}
+                                className="application-approved-tooltiptext"
+                                id="application-approved-myTooltip"
+                            >Копировать ссылку</span>
                             <svg
                                 width="24"
                                 height="25"

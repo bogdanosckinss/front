@@ -66,7 +66,7 @@ export default function Join() {
                             </div>
                             <div className="join__img">
                                 <picture>
-                                    <source srcSet={join} media="(min-width: 550px)"/>
+                                    <source srcSet={join} media="(min-width: 551px)"/>
 
                                     <img src={joinMobile} alt="Описание изображения"/>
                                 </picture>
