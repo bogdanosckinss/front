@@ -64,7 +64,7 @@
     height: 40px;
   }
   .header__wrapper {
-    padding: 6px 7px;
+    padding: 6px 16px;
   }
 }
 @media (max-width: 370px) {

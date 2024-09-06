@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import headerLogo from '../../img/logo-main.svg'
 import headerLoading from '../../img/header-loading.svg'
 import headerClose from '../../img/header-close.svg'
@@ -19,10 +19,20 @@ export default function Header() {
     const [options, setOptions] = useState([]);
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const ref = useRef()
     const { loading } = useSelector((state) => state.posts)
 
     useEffect(() => {
         setInputValue(searchParams.get('query') ?? '')
+
+        const handleClickOutside = (event) => {
+            if (ref.current && !ref.current.contains(event.target)) {
+                ref.current.classList.remove('active')
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [])
 
     useEffect(() => {
@@ -98,6 +108,9 @@ export default function Header() {
                 //console.log(composedOptions) TODo: fix
                 setOptions(response.data);
                 dispatch(setSearchOptions(response.data))
+                if (response.data.length > 0) {
+                    ref.current.classList.add('active')
+                }
                 // dispatch(setPosts(response.data));
             } catch (err) {
                 console.log(err);
@@ -139,6 +152,11 @@ export default function Header() {
                                         className="header__search-input"
                                         placeholder="Поиск"
                                         value={inputValue}
+                                        onClick={() => {
+                                            if (options.length > 0) {
+                                                ref.current.classList.add('active')
+                                            }
+                                        }}
                                         onChange={handleInputChange}
                                     />
                                 </label>
@@ -152,8 +170,7 @@ export default function Header() {
                                              className="header__search-close" onClick={handleCloseClick}>
                                             <img src={headerClose} alt="close"/>
                                         </div>
-                                        <ul className="header-search__result-list"
-                                            style={options.length > 0 && showResults ? {display: 'block'} : {}}>
+                                        <ul ref={ref} className="header-search__result-list">
                                             {
                                                 options.map(option => {
                                                     return (

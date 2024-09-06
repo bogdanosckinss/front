@@ -212,8 +212,9 @@
 }
 @media (max-width: 550px) {
   .songs__title {
-    font-size: 32px;
-    line-height: 1.12;
+    font-size: 34px;
+    line-height: 0.92;
+    margin-bottom: 20px;
   }
   .songs__subtitle {
     font-size: 18px;
@@ -221,6 +222,14 @@
   }
   .songs-show-more {
     margin-top: -18px;
+  }
+  .songs__list {
+    margin-top: 35px;
+    gap: 20px;
+  }
+  .songs__item-download span {
+    font-size: 16px;
+    line-height: 1;
   }
 }
 @media (max-width: 370px) {

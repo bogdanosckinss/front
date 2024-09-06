@@ -439,6 +439,9 @@
   .roules__item:nth-child(4) .roules__img {
     bottom: -20px;
   }
+  .roules {
+    padding-bottom: 50px;
+  }
 }
 @media (max-width: 370px) {
   .roules__item {

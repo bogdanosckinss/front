@@ -458,6 +458,9 @@
   .winners {
     padding: 50px 0 0;
   }
+  .winners__title-span-first {
+    width: 100%;
+  }
   .winners__title-span-special {
     left: 30%;
   }
@@ -488,28 +491,34 @@
 }
 @media (max-width: 550px) {
   .winners__title {
-    font-size: 3px;
-    margin-left: -15px;
+    font-size: 34px;
+    line-height: 0.92;
   }
   .winners {
-    padding: 69px 0 0;
+    padding: 81px 0 0;
   }
   .prizes {
     margin-bottom: 71px;
   }
   .winners__title-span {
     margin-left: -10px;
+    font-size: 34px;
+    line-height: 0.92;
+  }
+  .winners__title-span-first {
+    text-align: center;
+    padding-left: 114px;
   }
   .winners__title-span-special {
-    left: 29%;
+    left: -124%;
     top: -6px;
     height: 40px;
     transform: rotate(-5deg) translateX(-50%);
   }
   .winners__block {
-    margin-top: 22px;
+    margin-top: 30px;
     margin-left: 5px;
-    padding: 8px 27px 79px;
+    padding: 8px 27px 61px;
   }
   .winners__block-number {
     font-size: 84px;
@@ -536,8 +545,9 @@
     left: 50px;
   }
   .winners__block--title {
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1.24;
+    margin-bottom: 1px;
   }
   .winners__block-info {
   }

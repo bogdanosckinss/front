@@ -50,6 +50,20 @@ export default function AccountInfo() {
     const dropdownRef = useRef()
 
     useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                dropdownRef.current.classList.remove('active')
+                ref.current.classList.remove('active')
+            }else {
+
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [])
+
+    useEffect(() => {
         if (authLoading) {
             return
         }
