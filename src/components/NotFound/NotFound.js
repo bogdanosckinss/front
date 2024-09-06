@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {setHideNotFoundNote} from "../../features/posts/postsSlice";
 
-export default function NotFound() {
+export default function NotFound({query}) {
     const dispatch = useDispatch()
 
     function hideNote(e) {
@@ -28,7 +28,7 @@ export default function NotFound() {
                     </button>
 
                     <p className="videos-not-found__text">
-                        По вашему запросу «Елизавета» ничего не найдено
+                        По вашему запросу «{query}» ничего не найдено
                     </p>
                 </div>
             </div>

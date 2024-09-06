@@ -1,6 +1,18 @@
 import React from "react";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-export default function TryAgain() {
+export default function TryAgain({removeVideo}) {
+    const privateAxios = useAxiosPrivate()
+
+    async function tryAgain(){
+        try {
+            await privateAxios.delete('/content/video')
+            removeVideo()
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return (
         <div className="try-again display-web">
             <div className="try-again__left">
@@ -13,7 +25,7 @@ export default function TryAgain() {
                     обратиться в службу поддержки
                 </div>
             </div>
-            <button className="try-again__btn button-special">
+            <button onClick={tryAgain} className="try-again__btn button-special">
                 <span>Попробовать снова</span>
                 <svg
                     width="260"

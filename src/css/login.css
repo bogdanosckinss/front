@@ -64,8 +64,8 @@
 }
 .checkmark {
   position: relative;
-  height: 12px;
-  width: 12px;
+  height: 16px;
+  width: 16px;
   background-color: transparent;
   border: 1px solid rgba(0, 0, 0, 0.6);
   border-radius: 3px;
@@ -103,7 +103,7 @@
   width: 560px;
   height: min-content;
   min-height: 270px;
-  padding: 52px 100px 63px;
+  padding: 52px 88px 63px;
   border-radius: 14px;
   background-color: var(--blue);
 }
@@ -112,21 +112,17 @@
 }
 .login__agree p {
   font-family: 'myfontRegular';
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.6);
   text-align: initial;
-  width: 274px;
+  width: 364px;
   margin-left: 7px;
   display: inline-block;
 }
 .login__agree p a {
   text-decoration: underline !important;
   text-decoration-skip-ink: none;
-  font-family: 'myfontRegular';
-
-  font-size: 12px;
-  line-height: 1.5;
   color: rgba(0, 0, 0, 0.6);
 }
 .login__label-check {

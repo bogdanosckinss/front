@@ -15,7 +15,7 @@ export default function Header() {
     const [inputValue, setInputValue] = useState('');
     const [showLoading, setShowLoading] = useState(false);
     const [showResults, setShowResults] = useState(false);
-    const [selectedUserId, setSelectedUserId] = useState(null);
+    const [selectedOption, setSelectedOption] = useState(null);
     const [options, setOptions] = useState([]);
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -55,16 +55,15 @@ export default function Header() {
     }, [inputValue]);
 
     useEffect(() => {
-        if (selectedUserId) {
-            setSearchParams({query: selectedUserId})
+        if (selectedOption) {
+            setSearchParams({query: selectedOption.value})
             getVideosBySelectedUsername()
         }
-    }, [selectedUserId])
+    }, [selectedOption])
 
     async function getVideosBySelectedUsername() {
         try {
-            const response = await privateAxios.get(`content/search/videos?query=${selectedUserId}`);
-            setOptions(response.data);
+            const response = await privateAxios.get(`content/search/videos?query=${selectedOption.value}`);
             dispatch(setPosts(response.data));
         } catch (err) {
             console.log(err);
@@ -79,10 +78,19 @@ export default function Header() {
         debouncedGetResults(e.target.value)
     };
 
-    const handleCloseClick = () => {
+    const handleCloseClick = async () => {
         setInputValue('');
         setShowLoading(false);
         setShowResults(false);
+
+        try {
+            const response = await privateAxios.get(`content/search/videos?query=`);
+            dispatch(setPosts(response.data));
+        } catch (err) {
+            console.log(err);
+        } finally {
+            dispatch(setLoading(false))
+        }
     };
 
     const debouncedGetResults = useCallback(
@@ -91,27 +99,41 @@ export default function Header() {
             try {
                 const response = await privateAxios.get(`content/search/videos?query=${query}`);
                 const composedOptions = response.data.map(video => {
-                    if (video.song.title.toLowerCase().includes(query.toLowerCase())) {
-                        return video.song.title + ' ' + video.song.author_name
-                    }
-
-                    if (video.song.author_name.toLowerCase().includes(query.toLowerCase())) {
-                        return video.song.author_name
-                    }
-
                     const composedLastname = video.users.lastname + ' ' + video.users.name
                     const composedLastnameReversed = video.users.name + ' ' + video.users.lastname
                     if (composedLastname.toLowerCase().includes(query.toLowerCase()) || composedLastnameReversed.toLowerCase().includes(query.toLowerCase())) {
-                        return composedLastname
+                        return {
+                            value: composedLastname,
+                            category: 'name'
+                        }
+                    }
+
+                    if (video.song.title.toLowerCase().includes(query.toLowerCase())) {
+                        return {
+                            value: video.song.title,
+                            category: 'song'
+                        }
                     }
                 })
-                //console.log(composedOptions) TODo: fix
-                setOptions(response.data);
-                dispatch(setSearchOptions(response.data))
-                if (response.data.length > 0) {
+
+
+                const optionsWithoutDuplicates = [...new Set(composedOptions)]
+                const uniqueSet = new Set();
+                const uniqueArray = optionsWithoutDuplicates.filter(item => {
+                    const key = `${item.value}|${item.category}`;
+                    if (uniqueSet.has(key)) {
+                        return false;
+                    } else {
+                        uniqueSet.add(key);
+                        return true;
+                    }
+                })
+
+                setOptions(uniqueArray);
+                dispatch(setSearchOptions(uniqueArray))
+                if (uniqueArray.length > 0) {
                     ref.current.classList.add('active')
                 }
-                // dispatch(setPosts(response.data));
             } catch (err) {
                 console.log(err);
             } finally {
@@ -166,15 +188,19 @@ export default function Header() {
 
                                 {options && (
                                     <>
-                                        <div style={options.length > 0 && showResults ? {display: 'block'} : {}}
+                                        <div style={inputValue != '' && !loading ? {display: 'block'} : {}}
                                              className="header__search-close" onClick={handleCloseClick}>
                                             <img src={headerClose} alt="close"/>
                                         </div>
                                         <ul ref={ref} className="header-search__result-list">
                                             {
-                                                options.map(option => {
+                                                options.map((option, key) => {
                                                     return (
-                                                        <li onClick={() => setSelectedUserId(option?.users?.name)}
+                                                        <li key={'option-' + key} onClick={() => {
+                                                            setSelectedOption(option)
+                                                            setInputValue(option.value)
+                                                            ref.current.classList.remove('active')
+                                                        }}
                                                             className="header-search__result-item">
                                                             <a href="#">
                         <span className="header-search__result-loop">
@@ -184,7 +210,7 @@ export default function Header() {
                           </svg>
                         </span>
                                                                 <span className="header-search__result-text">
-                          {option?.users?.name}
+                          {option?.value}
                         </span>
                                                                 <span className="header-search__result-link">
                           <img src={searchArrow} alt="arrow"/>

@@ -4,9 +4,7 @@ import {UploadFileService} from "../../services/uploadFileService";
 import uploadIcon from '../../img/account__upload-video-icon.svg'
 import photo from '../../img/photo.jpg'
 import heart from '../../img/heart.svg'
-import appChecking from '../../img/application-checking.svg'
 import applicationSent from '../../img/application-sent.svg'
-import tesVideo from '../../img/video2.mp4'
 import Plyr from "plyr-react"
 import "plyr-react/plyr.css"
 import {useDispatch, useSelector} from "react-redux";
@@ -32,9 +30,9 @@ export default function AccountInfo() {
     const [image, setImage] = useState('')
     const [name, setName] = useState('')
     const [lastname, setLastname] = useState('')
-    const [phone, setPhone] = useState('')
+    const [phone, setPhone] = useState(null)
     const [age, setAge] = useState(0)
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState(null)
     const [city, setCity] = useState('')
     const [socialMediaLink, setSocialMediaLink] = useState('')
     const [songs, setSongs] = useState([])
@@ -108,6 +106,57 @@ export default function AccountInfo() {
         setCanUpload(false)
     }, [errorDuringLoading, alreadyUploaded, video, image, selectedSong, name, lastname, age, phone, city, email, acceptRules, acceptPrivacyPolicy])
 
+    function removeVideo() {
+        setVideo('')
+        setVideoId('')
+        setAlreadyUploaded(false)
+        setAllowed(false)
+    }
+
+    function cleanedNumber(value) {
+        return ('' + value).replace(/\D/g, '')
+    }
+
+    function handleNumberInput(phone) {
+        const cleaned = cleanedNumber(phone)
+        let value = ''
+
+        if (cleaned.length == 1 && cleaned != '7') {
+            value = '+ 7 (' + cleaned.slice(0, 4)
+        }else {
+            value = '+ 7 (' + cleaned.slice(1, 4)
+        }
+
+        if (cleaned.length > 4) {
+            value += ') ' + cleaned.slice(4, 7)
+        }
+
+        if (cleaned.length > 7) {
+            value += '-' + cleaned.slice(7, 9)
+        }
+
+        if (cleaned.length > 9) {
+            value += '-' + cleaned.slice(9, 11)
+        }
+
+        setPhone(value)
+    }
+
+    function isEmailValid() {
+        if (email == null) {
+            return true
+        }
+        return email?.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+    }
+
+    function isPhoneValid() {
+        if (phone == null) {
+            return true
+        }
+
+        return ('+' + cleanedNumber(phone))?.match(/^\+\d{11,15}$/)
+    }
+
     async function getProfile() {
         try {
             const response = await privateAxios.get('users')
@@ -131,7 +180,7 @@ export default function AccountInfo() {
                 setAlreadyUploaded(true)
                 setSelectedSong(response.data.videos[videosCount - 1].song)
             }
-
+            handleNumberInput(response.data.phone_number)
             dispatch(setLoading(false))
         }catch (e) {
             console.log(e)
@@ -210,9 +259,28 @@ export default function AccountInfo() {
 
     function formatPhoneNumber(number) {
         const cleaned = ('' + number).replace(/\D/g, '');
-        const formatted = '+ 7 (' + cleaned.slice(1, 4) + ') ' + cleaned.slice(4, 7) + '-' + cleaned.slice(7, 9) + '-' + cleaned.slice(9, 11);
+        let value = '+ 7 (' + cleaned.slice(1, 4)
 
-        return formatted;
+        if (cleaned.length > 2) {
+            value += ') ' + cleaned.slice(4, 7)
+        }
+
+        if (cleaned.length > 6) {
+            value += '-' + cleaned.slice(7, 9)
+        }
+
+        if (cleaned.length > 8) {
+            value += '-' + cleaned.slice(9, 11)
+        }
+
+
+        if (value == '+ 7 (') {
+            return ''
+        }
+
+
+
+        return value
     }
 
     const renderVideo = useMemo(() => (
@@ -403,6 +471,7 @@ export default function AccountInfo() {
                                                                         setMemoryLimitError(true)
                                                                         return
                                                                     }
+                                                                    setMemoryLimitError(false)
 
                                                                     await uploadVideo(e.target.files[0])
                                                                 }}
@@ -427,7 +496,7 @@ export default function AccountInfo() {
                                                         value={name}
                                                         onChange={(e) => setName(e.target.value)}
                                                         type="text"
-                                                        className="account__form-input"
+                                                        className={'account__form-input ' + (name ? 'active' : '')}
                                                         placeholder="Имя участника"
                                                     />
                                                 </label>
@@ -436,7 +505,7 @@ export default function AccountInfo() {
                                                         value={lastname}
                                                         onChange={(e) => setLastname(e.target.value)}
                                                         type="text"
-                                                        className="account__form-input"
+                                                        className={'account__form-input ' + (lastname ? 'active' : '')}
                                                         placeholder="Фамилия участника"
                                                     />
                                                 </label>
@@ -445,7 +514,7 @@ export default function AccountInfo() {
                                                         value={age}
                                                         onChange={(e) => setAge(e.target.value)}
                                                         type="number"
-                                                        className="account__form-input"
+                                                        className={'account__form-input ' + (age ? 'active' : '')}
                                                         placeholder="Возраст"
                                                     />
                                                 </label>
@@ -455,27 +524,35 @@ export default function AccountInfo() {
                                                 >
                                                     <input
                                                         value={phone}
-                                                        onChange={(e) => setPhone(e.target.value)}
+                                                        onChange={(e) => handleNumberInput(e.target.value)}
+                                                        onFocus={(e) => handleNumberInput(e.target.value)}
                                                         type="phone"
-                                                        className="account__form-input js-account__form-input"
+                                                        className={'account__form-input js-account__form-input ' + (phone ? 'active' : '')}
                                                         placeholder="+ 7 (___) ___-__-__"
+                                                        readOnly={true}
                                                     />
                                                 </label>
+                                                {isPhoneValid() ? '' : <div className="account-typing-error">
+                                                    Номер указан неверно. Пожалуйста, попробуйте ещё.
+                                                </div>}
                                                 <label className="account__form-labels" htmlFor="">
                                                     <input
                                                         value={email}
                                                         onChange={(e) => setEmail(e.target.value)}
                                                         type="email"
-                                                        className="account__form-input"
+                                                        className={'account__form-input ' + (email ? 'active' : '')}
                                                         placeholder="Почта участника/родителя"
                                                     />
                                                 </label>
+                                                {isEmailValid() ? '' : <div className="account-typing-error">
+                                                    Почта указана неверно. Пожалуйста, попробуйте ещё.
+                                                </div>}
                                                 <label className="account__form-labels" htmlFor="">
                                                     <input
                                                         value={city}
                                                         onChange={(e) => setCity(e.target.value)}
                                                         type="text"
-                                                        className="account__form-input"
+                                                        className={'account__form-input ' + (city ? 'active' : '')}
                                                         placeholder="Город участника"
                                                     />
                                                 </label>
@@ -484,14 +561,15 @@ export default function AccountInfo() {
                                                         value={socialMediaLink}
                                                         onChange={(e) => setSocialMediaLink(e.target.value)}
                                                         type="text"
-                                                        className="account__form-input"
+                                                        className={'account__form-input ' + (socialMediaLink ? 'active' : '')}
                                                         placeholder="Ссылка на соцсеть участника/родителя"
                                                     />
                                                 </label>
                                             </>
 
 
-                                            <div className="custom-select" style={alreadyUploaded ? {marginBottom: 0} : {}}>
+                                            <div className="custom-select"
+                                                 style={alreadyUploaded ? {marginBottom: 0} : {}}>
                                                 <button
                                                     ref={ref}
                                                     onClick={onDropDownClick}
@@ -707,7 +785,7 @@ export default function AccountInfo() {
 
                                 <div className="application-approved display-web">
                                     {alreadyUploaded && !underModeration && allowed ? <Share link={videoLink()}/> : ''}
-                                    {alreadyUploaded && !underModeration && !allowed ? <TryAgain/> : ''}
+                                    {alreadyUploaded && !underModeration && !allowed ? <TryAgain removeVideo={removeVideo} /> : ''}
                                 </div>
                             </>
                             }

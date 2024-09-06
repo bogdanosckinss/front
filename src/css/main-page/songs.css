@@ -186,8 +186,9 @@
   .songs__item-title::before {
     width: 14px;
     height: 12px;
-    background-size: contain;
-    background-image: url(../../img/songs-icon-mob.svg);
+    left: 8px;
+    /*background-size: contain;*/
+    /*background-image: url(../../img/songs-icon-mob.svg);*/
   }
   .songs__item-singer {
     font-size: 12px;

@@ -8,7 +8,7 @@
 .container {
   margin: 0 auto;
   width: 100%;
-  max-width: 1198px;
+  max-width: 1190px;
   padding: 0 15px;
 }
 @media (max-width: 370px) {

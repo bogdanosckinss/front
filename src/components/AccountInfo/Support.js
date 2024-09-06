@@ -1,12 +1,26 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import supportHeart from '../../img/support-heart.svg'
 import supportTelegram from '../../img/support-telegram.svg'
 
 export default function Support() {
+    const ref = useRef()
+    const tgTef = useRef()
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (tgTef.current && !tgTef.current.contains(event.target) && !ref.current.contains(event.target)) {
+                tgTef.current.classList.remove('active')
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [])
+
     return (
         <div className="support">
             <div className="support__wrapper">
-                <div className="support__block">
+                <div ref={ref} onClick={() => tgTef.current.classList.toggle('active')} className="support__block">
                     <span className="support-bg-svg">
                                     <svg
                                         width="65"
@@ -28,9 +42,9 @@ export default function Support() {
                     </span>
                     <div className="support-hint">Служба поддержки</div>
                 </div>
-                <a href="" className="support__telegram">
+                <a ref={tgTef} href="https://t.me/kidsprojecttop" className="support__telegram">
                     <div className="support__telegram-icon">
-                        <img src={supportTelegram} alt=""/>
+                        <img src={supportTelegram} alt="@kidsprojecttop"/>
                     </div>
                 </a>
             </div>

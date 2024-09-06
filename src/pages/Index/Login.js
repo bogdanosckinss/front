@@ -11,7 +11,7 @@ export default function Login() {
     const [isChecked, setIsChecked] = useState(false);
     const privateAxios = useAxiosPrivate()
     const [name, setName] = useState('')
-    const [phone, setPhone] = useState('+7 (___) ___-__-__')
+    const [phone, setPhone] = useState('')
     const [code, setCode] = useState('')
     const [token, setToken] = useState('')
     const [restart, setRestart] = useState(false)
@@ -20,7 +20,8 @@ export default function Login() {
     const [error, setError] = useState(false);
     const [support, setSupport] = useState(false);
     const [hideConfirmation, setHideConfirmation] = useState(false);
-    const [isMasked, setIsMasked] = useState(false);
+    const [isMasked, setIsMasked] = useState(false)
+    const phoneRef = useRef(null)
 
     const handleCheckboxChange = (e) => {
         setIsChecked(e.target.checked)
@@ -29,7 +30,7 @@ export default function Login() {
     async function sendCodeViaSms(event) {
         event.preventDefault()
 
-        const formattedPhone = phone.replaceAll('(', '').replaceAll(')', '').replaceAll('-', '').replaceAll(' ', '')
+        const formattedPhone = unmaskedPhone()
 
         let response = {}
         try {
@@ -49,8 +50,17 @@ export default function Login() {
         }
     }
 
+    function unmaskedPhone() {
+        return phone.replaceAll('(', '').replaceAll(')', '').replaceAll('-', '').replaceAll(' ', '')
+    }
+
     function handleNumberInput(event) {
         const value = event.target.value
+
+        if (value == '') {
+            setPhone('+7 (___) ___-__-__');
+            return
+        }
 
         let input = value.replace(/\D/g, '');
 
@@ -66,7 +76,7 @@ export default function Login() {
             setPhone('+7 (___) ___-__-__');
             setIsMasked(true);
         }
-    };
+    }
 
 
     function hideModal() {
@@ -162,7 +172,21 @@ export default function Login() {
         updateButtonState(); // Initial check
 
         return () => observer.disconnect(); // Cleanup observer on component unmount
-    }, []);
+    }, [])
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (phoneRef.current && !phoneRef.current.contains(event.target)) {
+                if (phone == '+7 (___) ___-__-__') {
+                    setPhone('')
+                    setIsMasked(false)
+                }
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [phone])
 
     return (
         <div className="login">
@@ -193,7 +217,7 @@ export default function Login() {
                         ><input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Ваше имя"
                         /></label>
                         <label className="login__label"
-                        ><input value={phone} onFocus={handleInputFocus} className="js-phone-input" onChange={handleNumberInput} type="text" placeholder="Ваш номер телефона"
+                        ><input ref={phoneRef} value={phone} onFocus={handleInputFocus} className="js-phone-input" onChange={handleNumberInput} type="text" placeholder="Ваш номер телефона"
                         /></label>
                         <div className="login__agree">
                             <label className="login__label-check">

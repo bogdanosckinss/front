@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import Plyr from "plyr-react";
 import { useInView } from 'react-intersection-observer'
 
-export default function TopDownVideo({video, userInteracts}) {
+export default function TopDownVideo({video, userInteracts, isLastLine, findMoreAsync}) {
     const privateAxios = useAxiosPrivate()
     const profile = useFetchProfile()
     const dispatch = useDispatch()
@@ -41,6 +41,10 @@ export default function TopDownVideo({video, userInteracts}) {
         if (firstRender) {
             setFirstRender(value => !value)
             return
+        }
+
+        if (isLastLine) {
+            findMoreAsync()
         }
         // try {
         //     if (inView == true) {

@@ -67,6 +67,9 @@
     font-family: 'myfontBold';
     margin-bottom: 24px;
 }
+.rules__main-list li a {
+    color: #0073e6;
+}
 .rules__main-list li ul {
     margin-top: 10px;
 }
@@ -91,6 +94,14 @@
     border-radius: 50%;
     background-color: #000;
     position: absolute;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
 }
 @media (max-width: 650px) {
     .rules__wrapper {

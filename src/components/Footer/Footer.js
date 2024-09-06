@@ -17,7 +17,7 @@ export default function Footer() {
                                             <picture>
                                                 <source
                                                     srcSet={footerLogo}
-                                                    media="(min-width: 550px)"
+                                                    media="(min-width: 551px)"
                                                 />
 
                                                 <img
@@ -35,7 +35,7 @@ export default function Footer() {
                                     </div>
                                 </div>
                                 <div className="footer__end">
-                                    <div className="footer__date">1 октября 2024 года</div>
+                                    <div className="footer__date">3 октября 2024 года</div>
                                     <div className="footer__apply">Объявление результатов</div>
                                 </div>
                             </div>

@@ -1,8 +1,10 @@
 import React from "react";
 import supportOthers from '../../img/support-others.svg'
 import supportOthersMob from '../../img/support-others-mob.svg'
+import {useNavigate} from "react-router-dom";
 
 export default function SupportOthers() {
+    const navigate = useNavigate()
     return (
         <div className="support-others">
             <div className="support-others__left">
@@ -11,8 +13,10 @@ export default function SupportOthers() {
                     Голосуй за других учатсников и находи новых творческих друзей на
                     конкурсе
                 </div>
-                <button className="support-others__btn button-special">
-                    <span>Голосовать</span>
+                <button onClick={() => navigate('/videos')} className="support-others__btn button-special">
+                    <span>
+                        <a href='/videos'>Голосовать</a>
+                    </span>
                     <svg
                         width="226"
                         height="43"

@@ -20,7 +20,7 @@ export default function Rules() {
                                     <picture>
                                         <source
                                             srcSet={rule1}
-                                            media="(min-width: 768px)"
+                                            media="(min-width: 651px)"
                                         />
 
                                         <img src={rule1Mobile} alt="Описание изображения"/>
@@ -39,7 +39,7 @@ export default function Rules() {
                                     <picture>
                                         <source
                                             srcSet={rule2}
-                                            media="(min-width: 768px)"
+                                            media="(min-width: 651px)"
                                         />
                                         <img src={rule2Mobile} alt="Описание изображения"/>
                                     </picture>
@@ -57,7 +57,7 @@ export default function Rules() {
                                     <picture>
                                         <source
                                             srcSet={rule3}
-                                            media="(min-width: 768px)"
+                                            media="(min-width: 651px)"
                                         />
 
                                         <img src={rule3Mobile} alt="Описание изображения"/>
@@ -79,7 +79,7 @@ export default function Rules() {
                                     <picture>
                                         <source
                                             srcSet={rule4}
-                                            media="(min-width: 768px)"
+                                            media="(min-width: 651px)"
                                         />
 
                                         <img src={rule4Mobile} alt="Описание изображения"/>

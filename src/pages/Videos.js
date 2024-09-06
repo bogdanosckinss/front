@@ -20,7 +20,7 @@ export default function Videos() {
             <main className="videos-main-block-cover">
                 <Header/>
                 <div className='videos-cover-main'>
-                    { searchOptions.length == 0 && query != '' && !loading && !hideNotFoundNote ? <NotFound/> : '' }
+                    { searchOptions.length == 0 && query != '' && !loading && !hideNotFoundNote ? <NotFound query={query}/> : '' }
                     <VideosResult/>
                 </div>
             </main>
