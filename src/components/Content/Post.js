@@ -50,8 +50,8 @@ export default function Post({post, isLastLine, findMoreAsync}) {
 
     return (
         <li ref={ref} className="videos-result__item" onClick={selectVideoIndex}>
-            <video className="videos-result__video" autoPlay muted loop>
-                {/*{fetchedPost?.link ? <source type="video/mp4" src={fetchedPost?.link}/> : '' }*/}
+            <video className="videos-result__video" loop>
+                {fetchedPost?.link ? <source type="video/mp4" src={fetchedPost?.link}/> : '' }
             </video>
             <div className="videos-result__play">
                 <a href=""> <img src={playImage} alt="img"/> </a>

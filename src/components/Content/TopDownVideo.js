@@ -1,10 +1,9 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import videoHeartBtn from "../../img/video-heart-btn.svg";
 import {addLike, removeLike} from "../../features/posts/postsSlice";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useFetchProfile from "../../hooks/useFetchProfile";
 import {useDispatch} from "react-redux";
-import {Helmet} from "react-helmet";
 import Plyr from "plyr-react";
 import { useInView } from 'react-intersection-observer'
 
@@ -15,6 +14,7 @@ export default function TopDownVideo({video, userInteracts}) {
     const [share, setShare] = useState(false)
     const [firstRender, setFirstRender] = useState(true)
     const postRef = useRef()
+    const copyBtnRef = useRef(null)
     const playerRef = useRef()
     const { ref, inView } = useInView({
         threshold: 0.5,
@@ -24,25 +24,38 @@ export default function TopDownVideo({video, userInteracts}) {
     })
 
     useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (copyBtnRef.current && !copyBtnRef.current.contains(event.target)) {
+                copyBtnRef.current.classList.remove('active');
+            }else {
+
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [])
+
+    useEffect(() => {
         if (firstRender) {
             setFirstRender(value => !value)
             return
         }
-        try {
-            if (inView == true) {
-                const promise = playerRef.current.plyr.play()
-                if(promise !== undefined){
-                    promise.then(() => {}).catch(error => {
-                        playerRef.current.plyr.config.muted = true;
-                        playerRef.current.plyr.play()
-                    });
-                }
-                return
-            }
-            playerRef.current.plyr.pause()
-        } catch (e) {
-            console.log(e)
-        }
+        // try {
+        //     if (inView == true) {
+        //         const promise = playerRef.current.plyr.play()
+        //         if(promise !== undefined){
+        //             promise.then(() => {}).catch(error => {
+        //                 playerRef.current.plyr.config.muted = true;
+        //                 playerRef.current.plyr.play()
+        //             });
+        //         }
+        //         return
+        //     }
+        //     playerRef.current.plyr.pause()
+        // } catch (e) {
+        //     console.log(e)
+        // }
     }, [inView])
 
     function runHeartsAnimation() {
@@ -81,6 +94,7 @@ export default function TopDownVideo({video, userInteracts}) {
     function toggleShare(e) {
         e.preventDefault()
         setShare(share => !share)
+        copyBtnRef.current.classList.add('active')
     }
 
     function videoLink() {
@@ -90,6 +104,10 @@ export default function TopDownVideo({video, userInteracts}) {
     function copyLink(e) {
         e.preventDefault()
         navigator.clipboard.writeText(videoLink())
+
+        const tooltip = document.querySelector('.tooltiptext');
+        tooltip.textContent = 'Скопировано: ' + videoLink();
+        tooltip.classList.add('active');
     }
 
     function getLikes() {
@@ -128,6 +146,21 @@ export default function TopDownVideo({video, userInteracts}) {
         }
     }
 
+    const renderVideo = useMemo(() => (
+        <Plyr
+            muted={true}
+            ref={playerRef}
+            options={{controls: ['progress', 'play-large', 'play', 'current-time', 'fullscreen']}}
+            source={{
+                type: 'video', title: 'Video', sources: [
+                    {
+                        src: video?.link,
+                        size: 720
+                    }
+                ]
+            }}/>
+    ), [video])
+
     return (
         <>
             {/*<Helmet>*/}
@@ -147,19 +180,9 @@ export default function TopDownVideo({video, userInteracts}) {
 
             <li ref={postRef} className={'video-main__item ' + (isLiked() ? 'liked' : '')}>
                 <div ref={ref} className="video-main__item-cover">
-                    <Plyr
-                        muted={true}
-                        autoPlay={true}
-                        ref={playerRef}
-                        options={{controls: ['progress', 'play-large', 'play', 'current-time', 'fullscreen']}}
-                        source={{
-                            type: 'video', title: 'Video', sources: [
-                                {
-                                    src: video?.link,
-                                    size: 720
-                                }
-                            ]
-                        }}/>
+                    <span>
+                        {renderVideo}
+                    </span>
 
                     <div className="video__author-info">
                         <div className="video__author-img">
@@ -270,7 +293,7 @@ export default function TopDownVideo({video, userInteracts}) {
                     </a>
                 </div>
 
-                <div className={'share-popup js-share-popup ' + (share ? 'active' : '')}>
+                <div ref={copyBtnRef} className={'share-popup js-share-popup'}>
                     <ul className="account-share-socials">
                         <li className="account-share-social">
                             <a href="">
