@@ -15,7 +15,7 @@
 }
 
 .account__sent-btn.not-allowed {
-  cursor: revert;
+  cursor: not-allowed;
   opacity: 0.8;
 }
 .account__sent-btn.not-allowed:hover svg {
@@ -1043,42 +1043,25 @@
 }
 .loading {
   position: absolute;
-  top: 45%;
-  left: 41%;
+  top: 49.9%;
+  left: 49.9%;
   transform: translate(-50%, -50%);
   width: 45px;
   height: 45px;
-  border: 2px solid transparent;
-  border-top-color: var(--pink); /* Цвет верхней части полукруга */
+  /* border: 2px solid transparent;
+  border-top-color: var(--pink);  */
   border-radius: 50%;
-  animation: spin 3s linear infinite;
   box-sizing: border-box;
+  background: radial-gradient(farthest-side, var(--pink) 94%, #0000) top/2px 2px
+  no-repeat,
+  conic-gradient(#0000 30%, var(--pink));
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 2px), #000 0);
+  animation: l13 1s infinite linear;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-    border-color: transparent transparent transparent var(--pink);
-  }
-  25% {
-    transform: rotate(90deg);
-    border-color: transparent transparent transparent var(--pink);
-  }
-  50% {
-    transform: rotate(180deg);
-    border-color: transparent transparent var(--pink) var(--pink);
-  }
-  75% {
-    transform: rotate(270deg);
-    border-color: transparent var(--pink) var(--pink) var(--pink);
-  }
-  95% {
-    transform: rotate(360deg);
-    border-color: var(--pink) var(--pink) var(--pink) var(--pink);
-  }
+@keyframes l13 {
   100% {
-    transform: rotate(360deg);
-    border-color: var(--pink) transparent transparent transparent;
+    transform: translate(-50%, -50%) rotate(1turn);
   }
 }
 .footer-account-page {
@@ -1166,8 +1149,8 @@
     padding: 0 15px;
   }
   .loading {
-    top: 46.5%;
-    left: 43.5%;
+    top: 50%;
+    left: 50%;
   }
 }
 @media (max-width: 650px) {
@@ -1276,10 +1259,6 @@
   }
 }
 @media (max-width: 370px) {
-  .loading {
-    top: 45.5%;
-    left: 42.5%;
-  }
   .account-error-video__text {
     font-size: 12px;
   }
