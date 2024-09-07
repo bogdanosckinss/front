@@ -63,9 +63,9 @@ export default function Rules() {
                             </div>
                             <nav className="header__nav">
                                 <ul className="header__list">
-                                    <li><a href="#rules">Правила конкурса</a></li>
-                                    <li><a href="#prizes">Призы</a></li>
-                                    <li><a href="#voting">Как проголосовать</a></li>
+                                    <li><a href="/#rules">Правила конкурса</a></li>
+                                    <li><a href="/#prizes">Призы</a></li>
+                                    <li><a href="/#voting">Как проголосовать</a></li>
                                 </ul>
                                 <button
                                     onClick={(e) => toggleAuth(e)}
@@ -107,14 +107,14 @@ export default function Rules() {
                     </div>
                     <ul>
                         <li>
-                            <a href="#rules">Правила конкурса</a>
+                            <a href="/#rules">Правила конкурса</a>
                         </li>
 
                         <li>
-                            <a href="#prizes">Как проголосовать</a>
+                            <a href="/#prizes">Как проголосовать</a>
                         </li>
                         <li>
-                            <a href="#voting"> Призы</a>
+                            <a href="/#voting"> Призы</a>
                         </li>
                     </ul>
                     <button
