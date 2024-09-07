@@ -94,7 +94,6 @@ export default function Index() {
             </main>
 
             <Footer/>
-            <script src="https://unpkg.com/accordion-js@3.3.4/dist/accordion.min.js"></script>
         </>
     )
 }

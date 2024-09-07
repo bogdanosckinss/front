@@ -1,8 +1,6 @@
 import React, {useEffect} from "react";
 import {Routes, Route, BrowserRouter as Router} from 'react-router-dom';
 import useRefreshToken from "./hooks/useRefreshToken";
-import Login from "./pages/Login";
-import CodeConfirmation from "./pages/CodeConfirmation";
 import Videos from "./pages/Videos";
 import UploadSong from "./pages/Moderation/UploadSong";
 import VideoModeration from "./pages/Moderation/VideoModeration";
@@ -46,8 +44,6 @@ function App() {
                     <Route path="/video-moderation" element={<VideoModeration />} />
                     <Route path="/song" element={<UploadSong />} />
 
-                    <Route path="/code-confirmation" element={<CodeConfirmation />} />
-                    <Route path="/login" element={<Login />} />
                     <Route path="/rules" element={<Rules />} />
 
                     <Route path="/video/:id" element={

@@ -4,7 +4,7 @@ import {
     AccordionItem,
     AccordionItemButton,
     AccordionItemHeading,
-    AccordionItemPanel
+    AccordionItemPanel,
 } from "react-accessible-accordion";
 
 export default function FAQ() {
