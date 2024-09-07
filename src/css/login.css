@@ -80,7 +80,7 @@
   transform: translate(-50%, -50%);
   width: 9px;
   height: 8px;
-  background-image: url(../img/login-vector.svg);
+  background-image: url(../img/loginVector.svg);
   background-repeat: no-repeat;
   background-size: cover;
   transition: opacity 0.25s ease-in-out;

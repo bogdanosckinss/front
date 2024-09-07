@@ -14,6 +14,17 @@
   margin-bottom: 152px;
 }
 
+.account__sent-btn.not-allowed {
+  cursor: revert;
+  opacity: 0.8;
+}
+.account__sent-btn.not-allowed:hover svg {
+  fill: white;
+}
+.account__sent-btn.not-allowed:hover span {
+  color: var(--pink);
+}
+
 .account__image {
   display: flex;
   align-items: center;
@@ -421,6 +432,7 @@
   background: rgba(0, 0, 0, 0.25);
   padding: 0 0 0;
   height: 40px;
+  z-index: 6;
 }
 .plyr__controls {
   flex-wrap: wrap;
@@ -643,10 +655,13 @@
   font-family: 'myfontRegular';
   white-space: nowrap;
   bottom: -26px;
-  left: 50%;
-  margin-left: -75px;
+  right: -31px;
   opacity: 0;
   transition: opacity 0.3s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 300px;
 }
 
 .application-approved-tooltip:hover .application-approved-tooltiptext {

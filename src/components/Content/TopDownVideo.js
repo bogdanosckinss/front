@@ -114,7 +114,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
         inputREF.current.setSelectionRange(0, 99999);
 
         const tooltip = document.querySelector('.tooltiptext');
-        tooltip.textContent = 'Скопировано: ' + videoLink();
+        tooltip.textContent = 'скопировано: ' + videoLink();
         tooltip.classList.add('active');
     }
 
@@ -254,7 +254,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
                       />
                     </svg>
                   </span>
-                            <span className="video__btn-span-text">{isLiked() ? 'Голос Принят' : 'голосовать'}</span>
+                            <span className="video__btn-span-text">{isLiked() ? 'Голос Принят' : 'Голосовать'}</span>
                         </button>
                         <div className="video__song-info">
                   <span className="video__song-icon">

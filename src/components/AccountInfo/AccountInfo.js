@@ -762,7 +762,7 @@ export default function AccountInfo() {
 
                                     {alreadyUploaded ? '' :
                                         <button onClick={sendVideoRequest} disabled={!canUpload}
-                                                className="account__sent-btn">
+                                                className={'account__sent-btn ' + (canUpload ? '' : 'not-allowed')}>
                                             <span>Участвовать в конкурсе</span>
                                             <svg
                                                 width="296"

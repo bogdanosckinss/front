@@ -38,7 +38,7 @@ export default function Share({link}) {
                             input.current.select()
                             input.current.setSelectionRange(0, 99999);
 
-                            tooltip.current.innerHTML = 'Скопировано: ' + link
+                            tooltip.current.innerHTML = 'скопировано: ' + link
                         }} id="application-approved-button">
                             <span
                                 ref={tooltip}
