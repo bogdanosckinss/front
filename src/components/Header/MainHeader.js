@@ -103,14 +103,14 @@ export default function MainHeader() {
                     </div>
                     <ul>
                         <li>
-                            <a href="#">Правила конкурса</a>
+                            <a href="#rules">Правила конкурса</a>
                         </li>
 
                         <li>
-                            <a href="#">Как проголосовать</a>
+                            <a href="#voting">Как проголосовать</a>
                         </li>
                         <li>
-                            <a href="#"> Призы</a>
+                            <a href="#prizes"> Призы</a>
                         </li>
                     </ul>
                     <button

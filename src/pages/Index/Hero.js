@@ -26,7 +26,7 @@ export default function Hero() {
                         <p className="hero-text">Онлайн-конкурс <span>детских</span> талантов</p>
                         <div className="hero__image">
                             <picture>
-                                <source srcSet={heroImg} media="(min-width: 550px)"/>
+                                <source srcSet={heroImg} media="(min-width: 551px)"/>
 
                                 <img src={heroImgMobile} alt="Dema"/>
                             </picture>

@@ -130,8 +130,8 @@
     line-height: 1.32 !important;
   }
   .ac.is-active > .ac-header .ac-trigger::after {
-    width: 21px;
-    height: 11px;
-    right: -23px;
+    width: 21px !important;
+    height: 11px !important;
+    right: -23px !important;
   }
 }

@@ -185,7 +185,6 @@
 @media screen and (max-width: 1200px) {
   .videos-result__list {
     gap: 20px;
-    justify-content: space-around;
   }
   .videos-result__item {
     width: 245px;
@@ -193,6 +192,9 @@
   }
 }
 @media screen and (max-width: 650px) {
+  .videos-result__list {
+    justify-content: space-around;
+  }
   .videos-result__container {
     margin-top: 21px;
   }
