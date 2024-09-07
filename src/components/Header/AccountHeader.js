@@ -2,9 +2,11 @@ import React from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import {useDispatch} from "react-redux";
 import {setIsAuthenticated, setUserInfo} from "../../features/auth/authSlice";
+import {useNavigate} from "react-router-dom";
 
 export default function AccountHeader() {
     const privateAxios = useAxiosPrivate()
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     async function logout(e) {
@@ -15,6 +17,7 @@ export default function AccountHeader() {
             localStorage.clear()
             dispatch(setIsAuthenticated(false))
             dispatch(setUserInfo({}))
+            navigate('/')
         } catch (e) {
             console.log(e)
         }

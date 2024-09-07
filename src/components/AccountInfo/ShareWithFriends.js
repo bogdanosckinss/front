@@ -1,29 +1,32 @@
-import React from "react";
+import React, {useRef} from "react";
 import CopyLink from "./CopyLink";
 import ShareInSocials from "./ShareInSocials";
 import TryUploadingAgain from "./TryUploadingAgain";
 
-export default function ShareWithFriends() {
+export default function ShareWithFriends({link, tryAgain, canShare, removeVideo}) {
+    const input = useRef()
+
     return (
-        <div className="application-approved display-mob">
-            <div className="application-approved__title">
+        <div className="application-approved display-mob" style={canShare || tryAgain ? {} : {display: 'none'}}>
+            <div className="application-approved__title" style={canShare ? {} : {display: 'none'}}>
                 Поделись ссылкой с друзьями, чтобы собрать больше голосов
             </div>
-            <div className="account-share-block">
+            <div className="account-share-block" style={canShare ? {} : {display: 'none'}}>
                 <div className="account-share-block-left">
                     <input
+                        ref={input}
                         className="account-share-block-left__input"
                         type="text"
-                        value="https://like.detmir.ru/proto/cEJyKj3v2554ImChsZdTbb/My-website-portfolio%"
+                        value={link}
                         id="application-approved-myInput"
                     />
-                    <CopyLink/>
+                    <CopyLink input={input} link={link}/>
                 </div>
 
                 <ShareInSocials/>
             </div>
 
-            <TryUploadingAgain/>
+            {tryAgain ?  <TryUploadingAgain removeVideo={removeVideo}/> : '' }
         </div>
     )
 }

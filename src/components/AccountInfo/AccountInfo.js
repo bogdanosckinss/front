@@ -98,7 +98,7 @@ export default function AccountInfo() {
     useEffect(() => {
         const fieldsToValidate = [video, image, name, lastname, age, phone, city, email]
 
-        if (!errorDuringLoading && !alreadyUploaded && !fieldsToValidate.some(field => field == '') && selectedSong && acceptRules && acceptPrivacyPolicy) {
+        if (image && !errorDuringLoading && !alreadyUploaded && !fieldsToValidate.some(field => field == '' && field != null) && selectedSong && acceptRules && acceptPrivacyPolicy) {
             setCanUpload(true)
             return
         }
@@ -330,6 +330,7 @@ export default function AccountInfo() {
                                 </label>
 
                                 <svg
+                                    style={{pointerEvents: 'none'}}
                                     width="36"
                                     height="29"
                                     viewBox="0 0 36 29"
@@ -487,8 +488,8 @@ export default function AccountInfo() {
 
 
                                         <div className="account__form-info">
-                                            <UnderReviewMob/>
-                                            <ShareWithFriends/>
+                                            {alreadyUploaded && underModeration && !allowed ? <UnderReviewMob /> : ''}
+                                            {alreadyUploaded ? <ShareWithFriends removeVideo={removeVideo} canShare={!underModeration && allowed} tryAgain={alreadyUploaded && !underModeration && !allowed} link={videoLink()}/> : ''}
 
                                             <>
                                                 <label className="account__form-labels" htmlFor="">
@@ -496,7 +497,7 @@ export default function AccountInfo() {
                                                         value={name}
                                                         onChange={(e) => setName(e.target.value)}
                                                         type="text"
-                                                        className={'account__form-input ' + (name ? 'active' : '')}
+                                                        className={'account__form-input ' + (name && !alreadyUploaded ? 'active' : '')}
                                                         placeholder="Имя участника"
                                                     />
                                                 </label>
@@ -505,7 +506,7 @@ export default function AccountInfo() {
                                                         value={lastname}
                                                         onChange={(e) => setLastname(e.target.value)}
                                                         type="text"
-                                                        className={'account__form-input ' + (lastname ? 'active' : '')}
+                                                        className={'account__form-input ' + (lastname && !alreadyUploaded ? 'active' : '')}
                                                         placeholder="Фамилия участника"
                                                     />
                                                 </label>
@@ -514,7 +515,7 @@ export default function AccountInfo() {
                                                         value={age}
                                                         onChange={(e) => setAge(e.target.value)}
                                                         type="number"
-                                                        className={'account__form-input ' + (age ? 'active' : '')}
+                                                        className={'account__form-input ' + (age && !alreadyUploaded ? 'active' : '')}
                                                         placeholder="Возраст"
                                                     />
                                                 </label>
@@ -527,7 +528,7 @@ export default function AccountInfo() {
                                                         onChange={(e) => handleNumberInput(e.target.value)}
                                                         onFocus={(e) => handleNumberInput(e.target.value)}
                                                         type="phone"
-                                                        className={'account__form-input js-account__form-input ' + (phone ? 'active' : '')}
+                                                        className={'account__form-input js-account__form-input ' + (phone && !alreadyUploaded ? 'active' : '')}
                                                         placeholder="+ 7 (___) ___-__-__"
                                                         readOnly={true}
                                                     />
@@ -540,7 +541,7 @@ export default function AccountInfo() {
                                                         value={email}
                                                         onChange={(e) => setEmail(e.target.value)}
                                                         type="email"
-                                                        className={'account__form-input ' + (email ? 'active' : '')}
+                                                        className={'account__form-input ' + (email && !alreadyUploaded ? 'active' : '')}
                                                         placeholder="Почта участника/родителя"
                                                     />
                                                 </label>
@@ -552,7 +553,7 @@ export default function AccountInfo() {
                                                         value={city}
                                                         onChange={(e) => setCity(e.target.value)}
                                                         type="text"
-                                                        className={'account__form-input ' + (city ? 'active' : '')}
+                                                        className={'account__form-input ' + (city && !alreadyUploaded ? 'active' : '')}
                                                         placeholder="Город участника"
                                                     />
                                                 </label>
@@ -561,7 +562,7 @@ export default function AccountInfo() {
                                                         value={socialMediaLink}
                                                         onChange={(e) => setSocialMediaLink(e.target.value)}
                                                         type="text"
-                                                        className={'account__form-input ' + (socialMediaLink ? 'active' : '')}
+                                                        className={'account__form-input ' + (socialMediaLink && !alreadyUploaded ? 'active' : '')}
                                                         placeholder="Ссылка на соцсеть участника/родителя"
                                                     />
                                                 </label>

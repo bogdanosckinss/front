@@ -4,8 +4,10 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import {setIsAuthenticated, setShowAuth} from "../../features/auth/authSlice";
 import Timer from "../../components/Timer/Timer";
 import Support from "../../components/Support/Support";
+import {useNavigate} from "react-router-dom";
 
 export default function Login() {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const { showAuth } = useSelector((state) => state.auth)
     const [isChecked, setIsChecked] = useState(false);
@@ -151,6 +153,7 @@ export default function Login() {
                 })
             dispatch(setIsAuthenticated(true))
             hideModal()
+            navigate('/videos')
         } catch (err) {
             console.log(err)
             dispatch(setIsAuthenticated(false))

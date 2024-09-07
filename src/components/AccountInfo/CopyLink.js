@@ -1,10 +1,20 @@
-import React from "react";
+import React, {useRef} from "react";
 
-export default function CopyLink() {
+export default function CopyLink({input, link}) {
+    const tooltip = useRef()
     return (
         <div className="application-approved-tooltip">
-            <button id="application-approved-button">
+            <button onClick={(e) => {
+                e.preventDefault()
+                navigator.clipboard.writeText(link)
+
+                input.current.select()
+                input.current.setSelectionRange(0, 99999);
+
+                tooltip.current.innerHTML = 'Скопировано: ' + link
+            }} id="application-approved-button">
                 <span
+                    ref={tooltip}
                     className="application-approved-tooltiptext"
                     id="application-approved-myTooltip"
                 >Копировать ссылку</span>

@@ -1196,6 +1196,7 @@
   .video-posted {
     order: -5;
     margin: 11px 0 14px;
+    margin-bottom: 0;
   }
   .application-sent {
     order: -3;
@@ -1211,9 +1212,11 @@
   .display-mob {
     display: flex;
     flex-direction: column;
+    margin-top: 0 !important;
+    margin-bottom: 22px;
   }
   .try-again {
-    margin-bottom: 29px;
+    margin-bottom: 0px;
   }
 }
 @media (max-width: 550px) {

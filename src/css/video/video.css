@@ -1,5 +1,13 @@
 @import url('./video-header.css');
 
+.plyr__volume > input {
+  visibility: hidden;
+}
+
+.plyr__volume:hover > input {
+  visibility: visible !important;
+}
+
 .plyr__volume {
   display: flex;
   flex-direction: row-reverse;
