@@ -13,6 +13,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
     const dispatch = useDispatch()
     const [share, setShare] = useState(false)
     const [firstRender, setFirstRender] = useState(true)
+    const [likes, setLikes] = useState(0)
     const postRef = useRef()
     const copyBtnRef = useRef(null)
     const playerRef = useRef()
@@ -25,6 +26,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
     })
 
     useEffect(() => {
+        setLikes(video.videoLikes)
         const handleClickOutside = (event) => {
             if (copyBtnRef.current && !copyBtnRef.current.contains(event.target)) {
                 copyBtnRef.current.classList.remove('active');
@@ -119,11 +121,11 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
     }
 
     function getLikes() {
-        return video?.videoLikes?.length ?? 0
+        return likes
     }
 
     function isLiked() {
-        return video?.videoLikes?.filter(video => video.user.id == profile.id)?.length > 0
+        return video?.is_liked_by_me ?? false
     }
 
     async function toggleLike() {
@@ -137,10 +139,12 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
         }
 
         if (isLiked()) {
+            setLikes(val => val - 1)
             dispatch(removeLike({postId: video.id, userId: profile.id}))
             return
         }
 
+        setLikes(val => val + 1)
         dispatch(addLike({postId: video.id, userId: profile.id}))
     }
 

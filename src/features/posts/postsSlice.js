@@ -25,7 +25,7 @@ export const postsSlice = createSlice({
 
                 return {
                     ...post,
-                    videoLikes: post?.videoLikes?.filter(video => video.user.id != action.payload.userId)
+                    is_liked_by_me: false
                 }
             })
         },
@@ -37,7 +37,7 @@ export const postsSlice = createSlice({
 
                 return {
                     ...post,
-                    videoLikes: [...post?.videoLikes, {user: {id: action.payload.userId}, video_id: post.id}]
+                    is_liked_by_me: true
                 }
             })
         },

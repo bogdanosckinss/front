@@ -367,7 +367,7 @@ export default function AccountInfo() {
                                 </svg>
                                 <div className="account__img">
                                     {uploadingImage ?
-                                        <div style={{left: '30%', top: '30%'}} className="loading"></div> : renderImage}
+                                        <div style={{left: '50%', top: '50%'}} className="loading"></div> : renderImage}
                                 </div>
                             </div>
                         </div>
