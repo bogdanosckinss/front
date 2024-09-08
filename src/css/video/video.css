@@ -8,6 +8,11 @@
   visibility: visible !important;
 }
 
+.plyr__progress input[type=range], .plyr__progress__buffer {
+  width: calc(100% + var(--plyr-range-thumb-height, 21px)) !important;
+  margin-left: calc(var(--plyr-range-thumb-height, 20px)*-.5) !important;
+}
+
 .plyr__volume {
   display: flex;
   flex-direction: row-reverse;
@@ -88,6 +93,7 @@
 }
 .video-main__item .plyr__controls .plyr__controls__item:first-child {
   z-index: 6;
+  margin: 0 5px;
 }
 .video__author-info {
   position: absolute;
@@ -328,6 +334,7 @@
 }
 .share-popup .account-share-socials {
   height: 52px !important;
+  border-radius: 10px 10px 0 0;
 }
 .share-popup .account-share-social svg {
   margin-top: -14px;
@@ -344,12 +351,13 @@
 }
 .share-popup-input {
   padding: 12px 15px;
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   width: 208px;
   color: #0647c7;
+  background: #e1f0ff;
 }
 .share-popup-input::placeholder {
   font-size: 16px;
@@ -398,17 +406,28 @@
 }
 .share-popup {
 }
-@media screen and (max-width: 650px) {
-  .video-main {
-    margin-top: 135px;
-  }
+.plyr__time + .plyr__time {
+  display: block !important;
 }
-@media screen and (max-width: 550px) {
+.video-body .plyr__controls .plyr__control {
+  margin: 0 10px 0 15px;
+  margin-right: 0;
+}
+.video-body .plyr__controls {
+  height: 55px !important;
+}
+@media screen and (max-width: 1100px) {
   .plyr__controls::after {
     height: 200px;
   }
+}
+@media screen and (max-width: 650px) {
   .video-main {
-    margin-top: 135px;
+    margin-top: 108px;
+  }
+}
+@media screen and (max-width: 550px) {
+  .video-main {
   }
   .video-main__container {
     max-width: 345px;

@@ -18,7 +18,7 @@
 }
 
 .body-account .header__block {
-  padding-right: 12px;
+  padding-right: 8px;
 }
 @media (max-width: 550px) {
   /*.body-account .header {*/

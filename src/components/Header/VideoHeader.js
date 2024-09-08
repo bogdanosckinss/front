@@ -19,6 +19,7 @@ export default function VideoHeader() {
     const [options, setOptions] = useState([]);
     const dispatch = useDispatch()
     const ref = useRef()
+    const formRef = useRef()
     const { loading } = useSelector((state) => state.posts)
 
     useEffect(() => {
@@ -27,6 +28,10 @@ export default function VideoHeader() {
         const handleClickOutside = (event) => {
             if (ref.current && !ref.current.contains(event.target)) {
                 ref.current.classList.remove('active')
+            }
+
+            if (formRef.current && !formRef.current.contains(event.target)) {
+                formRef.current.classList.remove('ouvert')
             }
         }
 
@@ -166,7 +171,10 @@ export default function VideoHeader() {
                                 </svg>
                             </a>
                         </div>
-                        <form action="" className="header__form">
+                        <form action="" ref={formRef} onClick={(e) => {
+                            e.preventDefault()
+                            formRef.current.classList.add('ouvert')
+                        }} className="header__form">
                             <div className="header__search-icon">
                                 <svg
                                     width="16"

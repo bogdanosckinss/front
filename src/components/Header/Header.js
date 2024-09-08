@@ -21,6 +21,7 @@ export default function Header() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const ref = useRef()
+    const formRef = useRef()
     const { loading } = useSelector((state) => state.posts)
 
     useEffect(() => {
@@ -29,6 +30,10 @@ export default function Header() {
         const handleClickOutside = (event) => {
             if (ref.current && !ref.current.contains(event.target)) {
                 ref.current.classList.remove('active')
+            }
+
+            if (formRef.current && !formRef.current.contains(event.target)) {
+                formRef.current.classList.remove('ouvert')
             }
         }
 
@@ -182,7 +187,10 @@ export default function Header() {
                                     </svg>
                                 </a>
                             </div>
-                            <form action="" className="header__form" onSubmit={(e) => e.preventDefault()}>
+                            <form action="" ref={formRef} onClick={(e) => {
+                                e.preventDefault()
+                                formRef.current.classList.add('ouvert')
+                            }} className="header__form" onSubmit={(e) => e.preventDefault()}>
                                 <div className="header__search-icon">
                                     <svg
                                         width="16"

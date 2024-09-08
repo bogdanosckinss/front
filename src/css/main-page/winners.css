@@ -323,6 +323,7 @@
     font-size: 30px;
     left: -80px;
     top: -1px;
+    padding: 10px 7px;
   }
   .prizes__right-block {
     width: 630px;
@@ -372,6 +373,7 @@
   .winners__block-info {
     width: 100%;
     margin: 0;
+    max-width: 340px;
   }
   .winners__block-info-f {
     margin-bottom: 15px;
@@ -381,7 +383,10 @@
   }
   .winners__block-bear {
     top: auto;
-    bottom: -15px;
+    bottom: -22px;
+    right: 21px;
+    width: 221px;
+    height: 203px;
   }
   .prizes__left {
     width: 100%;
@@ -396,6 +401,16 @@
   }
 }
 @media (max-width: 768px) {
+  .winners__block-bear {
+    top: auto;
+    bottom: -16px;
+    right: 29px;
+    width: 158px;
+    height: 146px;
+  }
+  .winners__block-info {
+    max-width: none;
+  }
   .prizes__left-block::after {
     display: none;
   }
@@ -414,6 +429,7 @@
     height: 48px;
     left: -59px;
     top: -9px;
+    padding: 13px 7px;
   }
   .winners__block-info {
     width: 100%;
@@ -518,6 +534,7 @@
     top: -6px;
     height: 40px;
     transform: rotate(-5deg) translateX(-50%);
+    padding: 9px 7px;
   }
   .winners__block {
     margin-top: 30px;

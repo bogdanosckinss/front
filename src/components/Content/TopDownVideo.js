@@ -48,6 +48,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
         if (isLastLine) {
             findMoreAsync()
         }
+
         // try {
         //     if (inView == true) {
         //         const promise = playerRef.current.plyr.play()
@@ -162,7 +163,39 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
         <Plyr
             muted={false}
             ref={playerRef}
-            options={{controls: ['progress', 'play-large', 'play', 'current-time',  'volume', 'mute', 'fullscreen'], invertTime: false}}
+            options={{
+                controls: ['progress', 'play-large', 'play', 'current-time', 'duration'],
+                invertTime: false,
+                i18n: {
+                    restart: "Restart",
+                    rewind: "Rewind {seektime}s",
+                    play: "Play",
+                    pause: "Pause",
+                    fastForward: "Forward {seektime}s",
+                    seek: "Seek",
+                    seekLabel: "{currentTime} of {duration}",
+                    played: "Played",
+                    buffered: "Buffered",
+                    currentTime: "Current time",
+                    duration: "Duration",
+                    volume: "Volume",
+                    mute: "Mute",
+                    unmute: "Unmute",
+                    enableCaptions: "Enable captions",
+                    disableCaptions: "Disable captions",
+                    download: "Download",
+                    enterFullscreen: "Enter fullscreen",
+                    exitFullscreen: "Exit fullscreen",
+                    frameTitle: "Player for {title}",
+                    captions: "Captions",
+                    settings: "Settings",
+                    menuBack: "Go back to previous menu",
+                    speed: "Speed",
+                    normal: "Normal",
+                    quality: "Quality",
+                    loop: "Loop"
+                }
+            }}
             source={{
                 type: 'video', title: 'Video', sources: [
                     {

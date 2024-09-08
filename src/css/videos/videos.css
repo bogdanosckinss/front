@@ -66,6 +66,9 @@
     font-size: 16px;
     line-height: 1.25;
   }
+  .videos-cover-main {
+    margin-top: 107px;
+  }
 }
 @media screen and (max-width: 550px) {
 }

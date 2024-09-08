@@ -168,7 +168,6 @@
   }
   .songs__subtitle {
     font-size: 20px;
-    max-width: 100%;
   }
   .songs__list {
     margin-top: 30px;
@@ -194,8 +193,8 @@
     width: 14px;
     height: 12px;
     left: 8px;
-    /*background-size: contain;*/
-    /*background-image: url(../../img/songs-icon-mob.svg);*/
+    /* background-size: contain;
+    background-image: url(../../img/songs-icon-mob.svg); */
   }
   .songs__item-singer {
     font-size: 12px;
@@ -230,6 +229,7 @@
   .songs__subtitle {
     font-size: 18px;
     padding: 0 20px;
+    max-width: 100%;
   }
   .songs-show-more {
     margin-top: -18px;

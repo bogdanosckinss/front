@@ -436,6 +436,9 @@
   .roules {
     padding-bottom: 50px;
   }
+  .roules__roulet__item-flex {
+    width: 212px;
+  }
 }
 @media (max-width: 370px) {
   .roules__item {
@@ -473,5 +476,8 @@
   .roules-apply__text {
     font-size: 17px;
     width: 100%;
+  }
+  .roules__item {
+    padding-left: 110px;
   }
 }
