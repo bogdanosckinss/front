@@ -156,9 +156,9 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
 
     const renderVideo = useMemo(() => (
         <Plyr
-            muted={true}
+            muted={false}
             ref={playerRef}
-            options={{controls: ['progress', 'play-large', 'play', 'current-time', 'fullscreen']}}
+            options={{controls: ['progress', 'play-large', 'play', 'current-time',  'volume', 'mute', 'fullscreen'], invertTime: false}}
             source={{
                 type: 'video', title: 'Video', sources: [
                     {

@@ -18,9 +18,6 @@ import UnderReviewMob from "./UnderReviewMob.js";
 import TryAgain from "./TryAgain.js";
 import NetworkError from "./Errors/NetworkError.js";
 import MemoryLimitation from "./Errors/MemoryLimitation.js";
-import axios from "axios";
-import { v4 as uuidv4 } from 'uuid';
-import * as AWS from 'aws-sdk';
 
 export default function AccountInfo() {
     const privateAxios = useAxiosPrivate()
@@ -547,7 +544,6 @@ export default function AccountInfo() {
                                                             type="phone"
                                                             className={'account__form-input js-account__form-input ' + (phone && !alreadyUploaded ? 'active' : '')}
                                                             placeholder="+ 7 (___) ___-__-__"
-                                                            readOnly={true}
                                                         />
                                                     </label>
                                                     {isPhoneValid() ? '' : <div className="account-typing-error">
@@ -560,6 +556,7 @@ export default function AccountInfo() {
                                                             type="email"
                                                             className={'account__form-input ' + (email && !alreadyUploaded ? 'active' : '')}
                                                             placeholder="Почта участника/родителя"
+                                                            readOnly={true}
                                                         />
                                                     </label>
                                                     {!isEmailValid() && isPhoneValid() ?
