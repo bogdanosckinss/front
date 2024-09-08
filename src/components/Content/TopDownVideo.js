@@ -76,7 +76,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
         if (post.classList.contains('liked')) {
             post.classList.remove('liked');
             likesContainer.classList.remove('active');
-            likeText.textContent = 'голосовать';
+            likeText.textContent = 'Голосовать';
 
             hearts.forEach(heart => {
                 heart.style.animation = 'none';
@@ -86,7 +86,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
         } else {
             post.classList.add('liked');
             likesContainer.classList.add('active');
-            likeText.textContent = 'ГОЛОС ПРИНЯТ';
+            likeText.textContent = 'Голос Принят';
 
             heartsContainer.style.display = 'flex';
             hearts.forEach((heart, index) => {
@@ -140,12 +140,12 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
 
         if (isLiked()) {
             setLikes(val => val - 1)
-            dispatch(removeLike({postId: video.id, userId: profile.id}))
+            //dispatch(removeLike({postId: video.id, userId: profile.id}))
             return
         }
 
         setLikes(val => val + 1)
-        dispatch(addLike({postId: video.id, userId: profile.id}))
+        //dispatch(addLike({postId: video.id, userId: profile.id}))
     }
 
     async function vote() {
