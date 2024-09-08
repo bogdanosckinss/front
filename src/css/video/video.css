@@ -412,6 +412,7 @@
 .video-body .plyr__controls .plyr__control {
   margin: 0 10px 0 15px;
   margin-right: 0;
+  margin-left: 4px;
 }
 .video-body .plyr__controls {
   height: 55px !important;
