@@ -91,15 +91,18 @@ export default function UploadSong() {
     }
 
     async function uploadImage(image) {
-        await uploadFileService.upload(image, 'images')
+        const imageLink = await uploadFileService.upload(image, 'images')
+        setImageLink(imageLink)
     }
 
     async function uploadSong(song) {
-        await uploadFileService.upload(song, 'songs')
+        const songLink = await uploadFileService.upload(song, 'songs')
+        setPlusLink(songLink)
     }
 
     async function uploadSongMinus(song) {
-        await uploadFileService.upload(song, 'songs')
+        const minusLink = await uploadFileService.upload(song, 'songs')
+        setMinusLink(minusLink)
     }
 
     return (
