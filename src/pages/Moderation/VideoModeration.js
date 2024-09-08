@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import debounce from "lodash/debounce";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import debounce from "lodash/debounce.js";
 
 export default function VideoModeration() {
     const privateAxios = useAxiosPrivate()

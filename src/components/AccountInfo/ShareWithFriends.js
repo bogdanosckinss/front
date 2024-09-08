@@ -1,7 +1,7 @@
 import React, {useRef} from "react";
-import CopyLink from "./CopyLink";
-import ShareInSocials from "./ShareInSocials";
-import TryUploadingAgain from "./TryUploadingAgain";
+import CopyLink from "./CopyLink.js";
+import ShareInSocials from "./ShareInSocials.js";
+import TryUploadingAgain from "./TryUploadingAgain.js";
 
 export default function ShareWithFriends({link, tryAgain, canShare, removeVideo}) {
     const input = useRef()

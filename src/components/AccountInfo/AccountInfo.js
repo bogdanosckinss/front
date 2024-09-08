@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useRef, useState} from "react";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import {UploadFileService} from "../../services/uploadFileService";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import {UploadFileService} from "../../services/uploadFileService.js";
 import uploadIcon from '../../img/account__upload-video-icon.svg'
 import photo from '../../img/photo.jpg'
 import heart from '../../img/heart.svg'
@@ -8,17 +8,19 @@ import applicationSent from '../../img/application-sent.svg'
 import Plyr from "plyr-react"
 import "plyr-react/plyr.css"
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "../../features/posts/postsSlice";
-import SupportOthers from "./SupportOthers";
-import Support from "./Support";
-import Share from "./Share";
-import UnderReview from "./UnderReview";
-import ShareWithFriends from "./ShareWithFriends";
-import UnderReviewMob from "./UnderReviewMob";
-import TryAgain from "./TryAgain";
-import NetworkError from "./Errors/NetworkError";
-import MemoryLimitation from "./Errors/MemoryLimitation";
+import {setLoading} from "../../features/posts/postsSlice.js";
+import SupportOthers from "./SupportOthers.js";
+import Support from "./Support.js";
+import Share from "./Share.js";
+import UnderReview from "./UnderReview.js";
+import ShareWithFriends from "./ShareWithFriends.js";
+import UnderReviewMob from "./UnderReviewMob.js";
+import TryAgain from "./TryAgain.js";
+import NetworkError from "./Errors/NetworkError.js";
+import MemoryLimitation from "./Errors/MemoryLimitation.js";
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
+import * as AWS from 'aws-sdk';
 
 export default function AccountInfo() {
     const privateAxios = useAxiosPrivate()
@@ -228,24 +230,17 @@ export default function AccountInfo() {
     }
 
     async function uploadImage(image) {
-        // setUploadingImage(true)
-        // const formData = new FormData();
-        // formData.append('file', image);
-        // const response = await axios.post('http://localhost:3000/content/upload/file', formData)
-        // setImage(response.data.link)
-        // setUploadingImage(false)
-
-        await uploadFileService.upload(image, setImage, setUploadingImage)
+        setUploadingImage(true)
+        const link = await uploadFileService.upload(image, 'images')
+        setImage(link)
+        setUploadingImage(false)
     }
 
     async function uploadVideo(video) {
-        // setUploadingVideo(true)
-        // const formData = new FormData();
-        // formData.append('file', video);
-        // const response = await axios.post('http://localhost:3000/content/upload/file', formData)
-        // setVideo(response.data.link)
-        // setUploadingVideo(false)
-        await uploadFileService.upload(video, setVideo, setUploadingVideo)
+        setUploadingVideo(true)
+        const link = await uploadFileService.upload(video, 'videos')
+        setVideo(link)
+        setUploadingVideo(false)
     }
 
     function onDropDownClick(event) {
@@ -321,7 +316,8 @@ export default function AccountInfo() {
                 <div className="account-container">
                     <div className="account-info">
                         <div className="account__image">
-                            {uploadingImage ? '' : <div className="account__letter">{name.split('')[0]?.toUpperCase()}</div>}
+                            {uploadingImage ? '' :
+                                <div className="account__letter">{name.split('')[0]?.toUpperCase()}</div>}
                             <div className="account__image-icon">
                                 <label className="account__upload-label">
                                     <input
@@ -333,9 +329,6 @@ export default function AccountInfo() {
                                             if (e.target.files.length == 0) {
                                                 return
                                             }
-
-                                            // await axios.post('http://localhost:3000/content/upload/file', formData)
-                                            // return
 
                                             await uploadImage(e.target.files[0])
                                         }}
@@ -387,225 +380,232 @@ export default function AccountInfo() {
                         <div className="account__phone">{formatPhoneNumber(phone)}</div>
                         <div className="account-data">
                             <h1 className="account__title">Видео-заявка участника</h1>
-                            {!showInputs ?<button onClick={() => setShowInputs(true)} className="account__add-video-btn">
-                                <span>Загрузить видео</span>
-                                <svg
-                                    width="240"
-                                    height="50"
-                                    viewBox="0 0 240 50"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M116.181 0.326681C152.459 0.249083 210.771 -0.483012 226.784 5.55201C242.797 11.587 243.645 35.0688 232.636 43.0003C224.384 48.9448 216.599 50.3027 108.215 49.9476C33.741 49.7043 23.1648 48.7023 10.552 43.2905C-2.06085 37.8786 -4.68483 15.365 9.96692 7.8744C30.3252 -2.53081 81.9468 0.399956 116.181 0.326681Z"
-                                    />
-                                </svg>
-                            </button>
+                            {!showInputs ?
+                                <button onClick={() => setShowInputs(true)} className="account__add-video-btn">
+                                    <span>Загрузить видео</span>
+                                    <svg
+                                        width="240"
+                                        height="50"
+                                        viewBox="0 0 240 50"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M116.181 0.326681C152.459 0.249083 210.771 -0.483012 226.784 5.55201C242.797 11.587 243.645 35.0688 232.636 43.0003C224.384 48.9448 216.599 50.3027 108.215 49.9476C33.741 49.7043 23.1648 48.7023 10.552 43.2905C-2.06085 37.8786 -4.68483 15.365 9.96692 7.8744C30.3252 -2.53081 81.9468 0.399956 116.181 0.326681Z"
+                                        />
+                                    </svg>
+                                </button>
                                 :
 
-                            <>
-                                <form action="" className="account__form">
-                                    <div className="account__form-cover">
-                                        <div className="account__upload-video">
-                                            <label className="account__upload-video-label">
+                                <>
+                                    <form action="" className="account__form">
+                                        <div className="account__form-cover">
+                                            <div className="account__upload-video">
+                                                <label className="account__upload-video-label">
 
-                                                { networkError ? <NetworkError /> : '' }
-                                                { memoryLimitError ?  <MemoryLimitation /> : '' }
+                                                    {networkError ? <NetworkError/> : ''}
+                                                    {memoryLimitError ? <MemoryLimitation/> : ''}
 
-                                                <div className="videos-result__info" style={{display: 'none'}}>
-                                                    <div className="videos-result__song-info">
-                                                        <div className="videos-result__song-img">
-                                                            <img src={photo} alt="iocn"/>
+                                                    <div className="videos-result__info" style={{display: 'none'}}>
+                                                        <div className="videos-result__song-info">
+                                                            <div className="videos-result__song-img">
+                                                                <img src={photo} alt="iocn"/>
+                                                            </div>
+                                                            <div className="videos-result__song">
+                                                                <div className="videos-result__song-singer">
+                                                                    Марьяна Локель
+                                                                </div>
+                                                                <div className="videos-result__song-name">
+                                                                    Нано краска топ!
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div className="videos-result__song">
-                                                            <div className="videos-result__song-singer">
-                                                                Марьяна Локель
-                                                            </div>
-                                                            <div className="videos-result__song-name">
-                                                                Нано краска топ!
-                                                            </div>
+                                                        <div className="videos-result__likes">
+                                                            <span><img src={heart} alt="icon"/></span>
+                                                            <span>1203</span>
                                                         </div>
                                                     </div>
-                                                    <div className="videos-result__likes">
-                                                        <span><img src={heart} alt="icon"/></span>
-                                                        <span>1203</span>
-                                                    </div>
-                                                </div>
-                                                {
-                                                    (alreadyUploaded && underModeration) || (alreadyUploaded && !underModeration && !allowed) ?
-                                                        <div
-                                                            className="account__video-nor-posted-icon"
-                                                        >
-                                                            <svg
-                                                                width="33"
-                                                                height="32"
-                                                                viewBox="0 0 33 32"
-                                                                fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg"
+                                                    {
+                                                        (alreadyUploaded && underModeration) || (alreadyUploaded && !underModeration && !allowed) ?
+                                                            <div
+                                                                className="account__video-nor-posted-icon"
                                                             >
-                                                                <path
-                                                                    d="M16.0964 19.3334V22M9.42969 13.3717C10.0582 13.3334 10.8331 13.3334 11.8297 13.3334H20.363C21.3596 13.3334 22.1345 13.3334 22.763 13.3717M9.42969 13.3717C8.64526 13.4196 8.08874 13.5273 7.61373 13.7693C6.86108 14.1528 6.24915 14.7648 5.86566 15.5174C5.42969 16.373 5.42969 17.4932 5.42969 19.7334V21.6C5.42969 23.8402 5.42969 24.9603 5.86566 25.816C6.24915 26.5686 6.86108 27.1806 7.61373 27.5641C8.46937 28 9.58948 28 11.8297 28H20.363C22.6032 28 23.7233 28 24.579 27.5641C25.3316 27.1806 25.9436 26.5686 26.327 25.816C26.763 24.9603 26.763 23.8402 26.763 21.6V19.7334C26.763 17.4932 26.763 16.373 26.327 15.5174C25.9436 14.7648 25.3316 14.1528 24.579 13.7693C24.104 13.5273 23.5474 13.4196 22.763 13.3717M9.42969 13.3717V10.6667C9.42969 6.9848 12.4145 4.00003 16.0964 4.00003C19.7783 4.00003 22.763 6.9848 22.763 10.6667V13.3717"
-                                                                    stroke="white"
-                                                                    stroke-width="2.6"
-                                                                    stroke-linecap="round"
-                                                                    stroke-linejoin="round"
-                                                                />
-                                                            </svg>
-                                                        </div> : ''
-                                                }
+                                                                <svg
+                                                                    width="33"
+                                                                    height="32"
+                                                                    viewBox="0 0 33 32"
+                                                                    fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                >
+                                                                    <path
+                                                                        d="M16.0964 19.3334V22M9.42969 13.3717C10.0582 13.3334 10.8331 13.3334 11.8297 13.3334H20.363C21.3596 13.3334 22.1345 13.3334 22.763 13.3717M9.42969 13.3717C8.64526 13.4196 8.08874 13.5273 7.61373 13.7693C6.86108 14.1528 6.24915 14.7648 5.86566 15.5174C5.42969 16.373 5.42969 17.4932 5.42969 19.7334V21.6C5.42969 23.8402 5.42969 24.9603 5.86566 25.816C6.24915 26.5686 6.86108 27.1806 7.61373 27.5641C8.46937 28 9.58948 28 11.8297 28H20.363C22.6032 28 23.7233 28 24.579 27.5641C25.3316 27.1806 25.9436 26.5686 26.327 25.816C26.763 24.9603 26.763 23.8402 26.763 21.6V19.7334C26.763 17.4932 26.763 16.373 26.327 15.5174C25.9436 14.7648 25.3316 14.1528 24.579 13.7693C24.104 13.5273 23.5474 13.4196 22.763 13.3717M9.42969 13.3717V10.6667C9.42969 6.9848 12.4145 4.00003 16.0964 4.00003C19.7783 4.00003 22.763 6.9848 22.763 10.6667V13.3717"
+                                                                        stroke="white"
+                                                                        stroke-width="2.6"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round"
+                                                                    />
+                                                                </svg>
+                                                            </div> : ''
+                                                    }
 
-                                                {
-                                                    video ?
-                                                        <>
+                                                    {
+                                                        video ?
+                                                            <>
                                                             <span style={{height: '100%', width: '100%'}}>
                                                                 {renderVideo}
                                                             </span>
-                                                        </>
-                                                        :
-                                                        <>
-                                                            {uploadingVideo ? <div className="loading"></div>
-                                                                :
-                                                                <div className="account__for-upload">
-                                                                    <div className="account__upload-video-icon">
-                                                                        <img
-                                                                            src={uploadIcon}
-                                                                            alt="plus"
-                                                                        />
+                                                            </>
+                                                            :
+                                                            <>
+                                                                {uploadingVideo ? <div className="loading"></div>
+                                                                    :
+                                                                    <div className="account__for-upload">
+                                                                        <div className="account__upload-video-icon">
+                                                                            <img
+                                                                                src={uploadIcon}
+                                                                                alt="plus"
+                                                                            />
+                                                                        </div>
+                                                                        <div className="account__upload-video-title">
+                                                                            Загрузите видео длительностью 30-60 сек
+                                                                        </div>
+                                                                        <p className="account__upload-video-p">
+                                                                            Видео .mp4, .mov, .avi не более 150 Мб
+                                                                        </p>
                                                                     </div>
-                                                                    <div className="account__upload-video-title">
-                                                                        Загрузите видео длительностью 30-60 сек
-                                                                    </div>
-                                                                    <p className="account__upload-video-p">
-                                                                        Видео .mp4, .mov, .avi не более 150 Мб
-                                                                    </p>
-                                                                </div>
-                                                            }
-                                                            <input
-                                                                onChange={async (e) => {
-                                                                    if (e.target.files.length == 0 || video) {
-                                                                        return
-                                                                    }
+                                                                }
+                                                                <input
+                                                                    onChange={async (e) => {
+                                                                        if (e.target.files.length == 0 || video) {
+                                                                            return
+                                                                        }
 
-                                                                    if (((Math.round(e.target.files[0].size / 1024)) / 1000) > 150) {
-                                                                        setMemoryLimitError(true)
-                                                                        return
-                                                                    }
-                                                                    setMemoryLimitError(false)
+                                                                        if (((Math.round(e.target.files[0].size / 1024)) / 1000) > 150) {
+                                                                            setMemoryLimitError(true)
+                                                                            return
+                                                                        }
+                                                                        setMemoryLimitError(false)
 
-                                                                    await uploadVideo(e.target.files[0])
-                                                                }}
-                                                                type="file"
-                                                                accept='video/*'
-                                                                className="account__upload-video-input"
-                                                                name="filename"
-                                                                hidden
-                                                            />
-                                                        </>
-                                                }
-                                            </label>
-                                        </div>
+                                                                        await uploadVideo(e.target.files[0])
+                                                                    }}
+                                                                    type="file"
+                                                                    accept='video/*'
+                                                                    className="account__upload-video-input"
+                                                                    name="filename"
+                                                                    hidden
+                                                                />
+                                                            </>
+                                                    }
+                                                </label>
+                                            </div>
 
 
-                                        <div className="account__form-info">
-                                            {alreadyUploaded && underModeration && !allowed ? <UnderReviewMob /> : ''}
-                                            {alreadyUploaded ? <ShareWithFriends removeVideo={removeVideo} canShare={!underModeration && allowed} tryAgain={alreadyUploaded && !underModeration && !allowed} link={videoLink()}/> : ''}
+                                            <div className="account__form-info">
+                                                {alreadyUploaded && underModeration && !allowed ?
+                                                    <UnderReviewMob/> : ''}
+                                                {alreadyUploaded ? <ShareWithFriends removeVideo={removeVideo}
+                                                                                     canShare={!underModeration && allowed}
+                                                                                     tryAgain={alreadyUploaded && !underModeration && !allowed}
+                                                                                     link={videoLink()}/> : ''}
 
-                                            <>
-                                                <label className="account__form-labels" htmlFor="">
-                                                    <input
-                                                        value={name}
-                                                        onChange={(e) => setName(e.target.value)}
-                                                        type="text"
-                                                        className={'account__form-input ' + (name && !alreadyUploaded ? 'active' : '')}
-                                                        placeholder="Имя участника"
-                                                    />
-                                                </label>
-                                                <label className="account__form-labels" htmlFor="">
-                                                    <input
-                                                        value={lastname}
-                                                        onChange={(e) => setLastname(e.target.value)}
-                                                        type="text"
-                                                        className={'account__form-input ' + (lastname && !alreadyUploaded ? 'active' : '')}
-                                                        placeholder="Фамилия участника"
-                                                    />
-                                                </label>
-                                                <label className="account__form-labels" htmlFor="">
-                                                    <input
-                                                        value={age}
-                                                        onChange={(e) => setAge(e.target.value)}
-                                                        type="number"
-                                                        className={'account__form-input ' + (age && !alreadyUploaded ? 'active' : '')}
-                                                        placeholder="Возраст"
-                                                    />
-                                                </label>
-                                                <label
-                                                    className="account__form-labels ja-mask-account__form-labels"
-                                                    htmlFor=""
-                                                >
-                                                    <input
-                                                        value={phone}
-                                                        onChange={(e) => handleNumberInput(e.target.value)}
-                                                        onFocus={(e) => handleNumberInput(e.target.value)}
-                                                        type="phone"
-                                                        className={'account__form-input js-account__form-input ' + (phone && !alreadyUploaded ? 'active' : '')}
-                                                        placeholder="+ 7 (___) ___-__-__"
-                                                        readOnly={true}
-                                                    />
-                                                </label>
-                                                {isPhoneValid() ? '' : <div className="account-typing-error">
-                                                    Номер указан неверно. Пожалуйста, попробуйте ещё.
-                                                </div>}
-                                                <label className="account__form-labels" htmlFor="">
-                                                <input
-                                                        value={email}
-                                                        onChange={(e) => setEmail(e.target.value)}
-                                                        type="email"
-                                                        className={'account__form-input ' + (email && !alreadyUploaded ? 'active' : '')}
-                                                        placeholder="Почта участника/родителя"
-                                                    />
-                                                </label>
-                                                {!isEmailValid() && isPhoneValid() ?  <div className="account-typing-error">
-                                                    Почта указана неверно. Пожалуйста, попробуйте ещё.
-                                                </div> : ''}
-                                                {
-                                                    !isEmailValid() && !isPhoneValid() ?
+                                                <>
+                                                    <label className="account__form-labels" htmlFor="">
+                                                        <input
+                                                            value={name}
+                                                            onChange={(e) => setName(e.target.value)}
+                                                            type="text"
+                                                            className={'account__form-input ' + (name && !alreadyUploaded ? 'active' : '')}
+                                                            placeholder="Имя участника"
+                                                        />
+                                                    </label>
+                                                    <label className="account__form-labels" htmlFor="">
+                                                        <input
+                                                            value={lastname}
+                                                            onChange={(e) => setLastname(e.target.value)}
+                                                            type="text"
+                                                            className={'account__form-input ' + (lastname && !alreadyUploaded ? 'active' : '')}
+                                                            placeholder="Фамилия участника"
+                                                        />
+                                                    </label>
+                                                    <label className="account__form-labels" htmlFor="">
+                                                        <input
+                                                            value={age}
+                                                            onChange={(e) => setAge(e.target.value)}
+                                                            type="number"
+                                                            className={'account__form-input ' + (age && !alreadyUploaded ? 'active' : '')}
+                                                            placeholder="Возраст"
+                                                        />
+                                                    </label>
+                                                    <label
+                                                        className="account__form-labels ja-mask-account__form-labels"
+                                                        htmlFor=""
+                                                    >
+                                                        <input
+                                                            value={phone}
+                                                            onChange={(e) => handleNumberInput(e.target.value)}
+                                                            onFocus={(e) => handleNumberInput(e.target.value)}
+                                                            type="phone"
+                                                            className={'account__form-input js-account__form-input ' + (phone && !alreadyUploaded ? 'active' : '')}
+                                                            placeholder="+ 7 (___) ___-__-__"
+                                                            readOnly={true}
+                                                        />
+                                                    </label>
+                                                    {isPhoneValid() ? '' : <div className="account-typing-error">
+                                                        Номер указан неверно. Пожалуйста, попробуйте ещё.
+                                                    </div>}
+                                                    <label className="account__form-labels" htmlFor="">
+                                                        <input
+                                                            value={email}
+                                                            onChange={(e) => setEmail(e.target.value)}
+                                                            type="email"
+                                                            className={'account__form-input ' + (email && !alreadyUploaded ? 'active' : '')}
+                                                            placeholder="Почта участника/родителя"
+                                                        />
+                                                    </label>
+                                                    {!isEmailValid() && isPhoneValid() ?
                                                         <div className="account-typing-error">
-                                                            Номер и почта указаны неверно. Пожалуйста, попробуйте ещё.
-                                                        </div> : ''
-                                                }
-                                                <label className="account__form-labels" htmlFor="">
-                                                    <input
-                                                        value={city}
-                                                        onChange={(e) => setCity(e.target.value)}
-                                                        type="text"
-                                                        className={'account__form-input ' + (city && !alreadyUploaded ? 'active' : '')}
-                                                        placeholder="Город участника"
-                                                    />
-                                                </label>
-                                                <label className="account__form-labels" htmlFor="">
-                                                    <input
-                                                        value={socialMediaLink}
-                                                        onChange={(e) => setSocialMediaLink(e.target.value)}
-                                                        type="text"
-                                                        className={'account__form-input ' + (socialMediaLink && !alreadyUploaded ? 'active' : '')}
-                                                        placeholder="Ссылка на соцсеть участника/родителя"
-                                                    />
-                                                </label>
-                                            </>
+                                                            Почта указана неверно. Пожалуйста, попробуйте ещё.
+                                                        </div> : ''}
+                                                    {
+                                                        !isEmailValid() && !isPhoneValid() ?
+                                                            <div className="account-typing-error">
+                                                                Номер и почта указаны неверно. Пожалуйста, попробуйте
+                                                                ещё.
+                                                            </div> : ''
+                                                    }
+                                                    <label className="account__form-labels" htmlFor="">
+                                                        <input
+                                                            value={city}
+                                                            onChange={(e) => setCity(e.target.value)}
+                                                            type="text"
+                                                            className={'account__form-input ' + (city && !alreadyUploaded ? 'active' : '')}
+                                                            placeholder="Город участника"
+                                                        />
+                                                    </label>
+                                                    <label className="account__form-labels" htmlFor="">
+                                                        <input
+                                                            value={socialMediaLink}
+                                                            onChange={(e) => setSocialMediaLink(e.target.value)}
+                                                            type="text"
+                                                            className={'account__form-input ' + (socialMediaLink && !alreadyUploaded ? 'active' : '')}
+                                                            placeholder="Ссылка на соцсеть участника/родителя"
+                                                        />
+                                                    </label>
+                                                </>
 
 
-                                            <div className="custom-select"
-                                                 style={alreadyUploaded ? {marginBottom: 0} : {}}>
-                                                <button
-                                                    ref={ref}
-                                                    onClick={onDropDownClick}
-                                                    className="select-button"
-                                                    role="combobox"
-                                                    aria-label="select button"
-                                                    aria-haspopup="listbox"
-                                                    aria-expanded="false"
-                                                    aria-controls="select-dropdown"
-                                                >
+                                                <div className="custom-select"
+                                                     style={alreadyUploaded ? {marginBottom: 0} : {}}>
+                                                    <button
+                                                        ref={ref}
+                                                        onClick={onDropDownClick}
+                                                        className="select-button"
+                                                        role="combobox"
+                                                        aria-label="select button"
+                                                        aria-haspopup="listbox"
+                                                        aria-expanded="false"
+                                                        aria-controls="select-dropdown"
+                                                    >
                                                 <span className="selected-value">
                                                     {selectedSong ?
                                                         <span className="account__select-content">
@@ -626,7 +626,7 @@ export default function AccountInfo() {
                                                     </span>
                                                         : 'Выбрать песню'}
                                                 </span>
-                                                    <span className="account__select-arrow">
+                                                        <span className="account__select-arrow">
                                                   <svg
                                                       width="24"
                                                       height="24"
@@ -642,21 +642,21 @@ export default function AccountInfo() {
                                                     />
                                                   </svg>
                                                 </span>
-                                                </button>
-                                                <ul
-                                                    ref={dropdownRef}
-                                                    className="select-dropdown"
-                                                    role="listbox"
-                                                    id="select-dropdown"
-                                                >
-                                                    {
-                                                        songs.map((song, key) => {
-                                                            return (
-                                                                <li key={key} onClick={(e) => {
-                                                                    e.preventDefault()
-                                                                    selectOption(song)
-                                                                }} role="option">
-                                                                    <label htmlFor="song1">
+                                                    </button>
+                                                    <ul
+                                                        ref={dropdownRef}
+                                                        className="select-dropdown"
+                                                        role="listbox"
+                                                        id="select-dropdown"
+                                                    >
+                                                        {
+                                                            songs.map((song, key) => {
+                                                                return (
+                                                                    <li key={key} onClick={(e) => {
+                                                                        e.preventDefault()
+                                                                        selectOption(song)
+                                                                    }} role="option">
+                                                                        <label htmlFor="song1">
                                                                     <span className="account__select-content">
                                                                         {song.image_link ?
                                                                             <img
@@ -675,57 +675,59 @@ export default function AccountInfo() {
                                                                           </span>
                                                                       </span>
                                                                     </span>
-                                                                    </label>
-                                                                </li>
-                                                            )
-                                                        })
-                                                    }
-                                                </ul>
-                                            </div>
+                                                                        </label>
+                                                                    </li>
+                                                                )
+                                                            })
+                                                        }
+                                                    </ul>
+                                                </div>
 
-                                            {alreadyUploaded ? '' :
-                                            <div className="account-form__radios">
-                                                <label className="account-form__label-check">
-                                                    <input value={acceptRules}
-                                                           onChange={(e) => setAcceptRules(e.target.value)}
-                                                           className="account-form__check-input" type="checkbox"/>
-                                                    <span className="account-form__checkmark"></span>
-                                                    <p>
-                                                        С
-                                                        <a href="https://www.eapteka.ru/company/policy/"
-                                                        > правилами конкурса </a
-                                                        >ознакомлен и согласен
-                                                    </p>
-                                                </label>
-                                                <label className="account-form__label-check">
-                                                    <input value={acceptPrivacyPolicy}
-                                                           onChange={(e) => setAcceptPrivacyPolicy(e.target.value)}
-                                                           className="account-form__check-input" type="checkbox"/>
-                                                    <span className="account-form__checkmark"></span>
-                                                    <p>
-                                                        Выражаю свое согласие на
-                                                        <a href="https://www.eapteka.ru/company/policy/"
-                                                        > обработку персональных данных
-                                                        </a>
-                                                    </p>
-                                                </label>
-                                            </div>
-                                            }
+                                                {alreadyUploaded ? '' :
+                                                    <div className="account-form__radios">
+                                                        <label className="account-form__label-check">
+                                                            <input value={acceptRules}
+                                                                   onChange={(e) => setAcceptRules(e.target.value)}
+                                                                   className="account-form__check-input"
+                                                                   type="checkbox"/>
+                                                            <span className="account-form__checkmark"></span>
+                                                            <p>
+                                                                С
+                                                                <a href="https://www.eapteka.ru/company/policy/"
+                                                                > правилами конкурса </a
+                                                                >ознакомлен и согласен
+                                                            </p>
+                                                        </label>
+                                                        <label className="account-form__label-check">
+                                                            <input value={acceptPrivacyPolicy}
+                                                                   onChange={(e) => setAcceptPrivacyPolicy(e.target.value)}
+                                                                   className="account-form__check-input"
+                                                                   type="checkbox"/>
+                                                            <span className="account-form__checkmark"></span>
+                                                            <p>
+                                                                Выражаю свое согласие на
+                                                                <a href="https://www.eapteka.ru/company/policy/"
+                                                                > обработку персональных данных
+                                                                </a>
+                                                            </p>
+                                                        </label>
+                                                    </div>
+                                                }
 
-                                            {
-                                                alreadyUploaded && underModeration && !allowed ?
-                                                    <div className="application-sent">
+                                                {
+                                                    alreadyUploaded && underModeration && !allowed ?
+                                                        <div className="application-sent">
                                           <span className="application-sent-span"
                                           ><img src={applicationSent} alt="icon"/></span
                                           ><span className="application-sent__text"
-                                                    >Заявка отправлена
+                                                        >Заявка отправлена
                                           </span>
-                                                    </div> : ''
-                                            }
+                                                        </div> : ''
+                                                }
 
-                                            {
-                                                alreadyUploaded && !underModeration && allowed ?
-                                                    <div className="video-posted">
+                                                {
+                                                    alreadyUploaded && !underModeration && allowed ?
+                                                        <div className="video-posted">
                                               <span className="video-posted__icon">
                                                 <svg
                                                     width="24"
@@ -747,13 +749,14 @@ export default function AccountInfo() {
                                                   />
                                                 </svg>
                                               </span>
-                                                        <span className="video-posted__text">Видео опубликовано</span>
-                                                    </div> : ''
-                                            }
+                                                            <span
+                                                                className="video-posted__text">Видео опубликовано</span>
+                                                        </div> : ''
+                                                }
 
-                                            {
-                                                alreadyUploaded && !underModeration && !allowed ?
-                                                    <div className="video-not-posted">
+                                                {
+                                                    alreadyUploaded && !underModeration && !allowed ?
+                                                        <div className="video-not-posted">
                                               <span className="video-posted__icon">
                                                 <svg
                                                     width="24"
@@ -778,42 +781,44 @@ export default function AccountInfo() {
                                                   />
                                                 </svg>
                                               </span>
-                                                        <span
-                                                            className="video-posted__text">Видео не опубликовано</span>
-                                                    </div> : ''
-                                            }
+                                                            <span
+                                                                className="video-posted__text">Видео не опубликовано</span>
+                                                        </div> : ''
+                                                }
+                                            </div>
                                         </div>
+
+                                        {alreadyUploaded ? '' :
+                                            <button onClick={sendVideoRequest} disabled={!canUpload}
+                                                    className={'account__sent-btn ' + (canUpload ? '' : 'not-allowed')}>
+                                                <span>Участвовать в конкурсе</span>
+                                                <svg
+                                                    width="296"
+                                                    height="50"
+                                                    viewBox="0 0 296 50"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path
+                                                        d="M143.29 0.326681C188.033 0.249083 259.951 -0.483012 279.701 5.55201C299.45 11.587 300.496 35.0688 286.918 43.0003C276.74 48.9448 267.139 50.3027 133.465 49.9476C41.614 49.7043 28.5699 48.7023 13.0141 43.2905C-2.54172 37.8786 -5.77796 15.365 12.2925 7.8744C37.4011 -2.53081 101.068 0.399956 143.29 0.326681Z"
+                                                    />
+                                                </svg>
+                                            </button>
+                                        }
+                                    </form>
+                                    {alreadyUploaded ? '' : <div className="account__sent-information">
+                                        Информация о ФИО, возрасте и городе учассника является публичной
+                                        информацией после публикации
+                                    </div>}
+                                    {alreadyUploaded && underModeration && !allowed ? <UnderReview/> : ''}
+
+                                    <div className="application-approved display-web">
+                                        {alreadyUploaded && !underModeration && allowed ?
+                                            <Share link={videoLink()}/> : ''}
+                                        {alreadyUploaded && !underModeration && !allowed ?
+                                            <TryAgain removeVideo={removeVideo}/> : ''}
                                     </div>
-
-                                    {alreadyUploaded ? '' :
-                                        <button onClick={sendVideoRequest} disabled={!canUpload}
-                                                className={'account__sent-btn ' + (canUpload ? '' : 'not-allowed')}>
-                                            <span>Участвовать в конкурсе</span>
-                                            <svg
-                                                width="296"
-                                                height="50"
-                                                viewBox="0 0 296 50"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    d="M143.29 0.326681C188.033 0.249083 259.951 -0.483012 279.701 5.55201C299.45 11.587 300.496 35.0688 286.918 43.0003C276.74 48.9448 267.139 50.3027 133.465 49.9476C41.614 49.7043 28.5699 48.7023 13.0141 43.2905C-2.54172 37.8786 -5.77796 15.365 12.2925 7.8744C37.4011 -2.53081 101.068 0.399956 143.29 0.326681Z"
-                                                />
-                                            </svg>
-                                        </button>
-                                    }
-                                </form>
-                                {alreadyUploaded ? '' : <div className="account__sent-information">
-                                    Информация о ФИО, возрасте и городе учассника является публичной
-                                    информацией после публикации
-                                </div>}
-                                {alreadyUploaded && underModeration && !allowed ? <UnderReview/> : ''}
-
-                                <div className="application-approved display-web">
-                                    {alreadyUploaded && !underModeration && allowed ? <Share link={videoLink()}/> : ''}
-                                    {alreadyUploaded && !underModeration && !allowed ? <TryAgain removeVideo={removeVideo} /> : ''}
-                                </div>
-                            </>
+                                </>
                             }
                         </div>
                         {alreadyUploaded ?

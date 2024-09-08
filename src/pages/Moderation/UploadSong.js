@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import {UploadFileService} from "../../services/uploadFileService";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import {UploadFileService} from "../../services/uploadFileService.js";
 import axios from "axios";
 
 export default function UploadSong() {
@@ -91,15 +91,15 @@ export default function UploadSong() {
     }
 
     async function uploadImage(image) {
-        await uploadFileService.upload(image, setImageLink)
+        await uploadFileService.upload(image, 'images')
     }
 
     async function uploadSong(song) {
-        await uploadFileService.upload(song, setPlusLink)
+        await uploadFileService.upload(song, 'songs')
     }
 
     async function uploadSongMinus(song) {
-        await uploadFileService.upload(song, setMinusLink)
+        await uploadFileService.upload(song, 'songs')
     }
 
     return (

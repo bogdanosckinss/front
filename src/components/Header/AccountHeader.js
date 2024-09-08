@@ -1,7 +1,7 @@
 import React from "react";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import {useDispatch} from "react-redux";
-import {setIsAuthenticated, setUserInfo} from "../../features/auth/authSlice";
+import {setIsAuthenticated, setUserInfo} from "../../features/auth/authSlice.js";
 import {useNavigate} from "react-router-dom";
 
 export default function AccountHeader() {

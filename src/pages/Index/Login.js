@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import {setIsAuthenticated, setShowAuth} from "../../features/auth/authSlice";
-import Timer from "../../components/Timer/Timer";
-import Support from "../../components/Support/Support";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import {setIsAuthenticated, setShowAuth} from "../../features/auth/authSlice.js";
+import Timer from "../../components/Timer/Timer.js";
+import Support from "../../components/Support/Support.js";
 import {useNavigate} from "react-router-dom";
 
 export default function Login() {

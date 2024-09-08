@@ -1,8 +1,8 @@
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import videoHeartBtn from "../../img/video-heart-btn.svg";
-import {addLike, removeLike} from "../../features/posts/postsSlice";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useFetchProfile from "../../hooks/useFetchProfile";
+import {addLike, removeLike} from "../../features/posts/postsSlice.js";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import useFetchProfile from "../../hooks/useFetchProfile.js";
 import {useDispatch} from "react-redux";
 import Plyr from "plyr-react";
 import { useInView } from 'react-intersection-observer'

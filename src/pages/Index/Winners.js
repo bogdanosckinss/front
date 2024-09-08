@@ -1,8 +1,5 @@
 import React from "react";
 import bear from '../../img/winners-bear.svg'
-import prizes from '../../img/prizes.svg'
-import prizesSmall1 from '../../img/prizes-small-1.svg'
-import prizesSmall2 from '../../img/prizes-small-2.svg'
 
 export default function Winners() {
     return (

@@ -3,7 +3,7 @@ import join from '../../img/join-bear.svg'
 import joinMobile from '../../img/join-bear-mob.svg'
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {setShowAuth} from "../../features/auth/authSlice";
+import {setShowAuth} from "../../features/auth/authSlice.js";
 
 export default function Join() {
     const dispatch = useDispatch()

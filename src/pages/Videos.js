@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
 import '../css/styles.css'
 import '../css/videos/videos.css'
-import Header from "../components/Header/Header";
-import NotFound from "../components/NotFound/NotFound";
-import VideosResult from "../components/VideosResult/VideosResult";
-import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header.js";
+import NotFound from "../components/NotFound/NotFound.js";
+import VideosResult from "../components/VideosResult/VideosResult.js";
+import Footer from "../components/Footer/Footer.js";
 import {useSelector} from "react-redux";
 
 export default function Videos() {

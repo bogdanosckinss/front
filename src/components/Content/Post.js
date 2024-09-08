@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setSelectedVideoIndex} from "../../features/posts/postsSlice";
+import {setSelectedVideoIndex} from "../../features/posts/postsSlice.js";
 import playImage from "../../img/play.svg";
 import heart from "../../img/heart.svg";
 import {createSearchParams, useNavigate} from "react-router-dom";

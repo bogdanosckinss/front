@@ -3,15 +3,15 @@ import '../css/login.css'
 import '../css/styles.css'
 import smallPrize from '../img/prizes-small-1.svg'
 import smallPrize2 from '../img/prizes-small-2.svg'
-import MainHeader from "../components/Header/MainHeader";
-import Hero from "./Index/Hero";
-import Rules from "./Index/Rules";
-import Songs from "./Index/Songs";
-import Winners from "./Index/Winners";
-import FAQ from "./Index/FAQ";
-import Join from "./Index/Join";
-import Login from "./Index/Login";
-import Footer from "../components/Footer/Footer";
+import MainHeader from "../components/Header/MainHeader.js";
+import Hero from "./Index/Hero.js";
+import Rules from "./Index/Rules.js";
+import Songs from "./Index/Songs.js";
+import Winners from "./Index/Winners.js";
+import FAQ from "./Index/FAQ.js";
+import Join from "./Index/Join.js";
+import Login from "./Index/Login.js";
+import Footer from "../components/Footer/Footer.js";
 import {Helmet} from "react-helmet";
 export default function Index() {
     useEffect(() => {

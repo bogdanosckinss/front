@@ -2,10 +2,10 @@ import React, {useEffect, useRef} from "react";
 import headerLogo from '../img/logo-main.svg'
 import footerLogo from '../img/footer_logo.svg'
 import footerLogoMob from '../img/footer_logo-mob.svg'
-import {setIsAuthenticated, setShowAuth, setUserInfo} from "../features/auth/authSlice";
+import {setIsAuthenticated, setShowAuth, setUserInfo} from "../features/auth/authSlice.js";
 import {useDispatch, useSelector} from "react-redux";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import Login from "./Index/Login";
+import useAxiosPrivate from "../hooks/useAxiosPrivate.js";
+import Login from "./Index/Login.js";
 
 export default function Rules() {
     const dispatch = useDispatch()

@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {setHideNotFoundNote} from "../../features/posts/postsSlice";
+import {setHideNotFoundNote} from "../../features/posts/postsSlice.js";
 
 export default function NotFound({query}) {
     const dispatch = useDispatch()

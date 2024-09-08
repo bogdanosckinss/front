@@ -1,8 +1,7 @@
 import { useDispatch } from 'react-redux'
-import { setIsAuthenticated, setUserInfo } from '../features/auth/authSlice'
+import { setIsAuthenticated, setUserInfo } from '../features/auth/authSlice.js'
 import { setLoadingState } from '../features/loading/loadingSlice.js'
-import parseJWT from "../utils/parseJWT.js"
-import fetcher from "../services/axios";
+import fetcher from "../services/axios.js";
 
 const useRefreshToken = () => {
   const dispatch = useDispatch()

@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import Post from "../Content/Post";
-import {setPosts} from "../../features/posts/postsSlice";
+import Post from "../Content/Post.js";
+import {setPosts} from "../../features/posts/postsSlice.js";
 import {useSearchParams} from "react-router-dom";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import debounce from "lodash/debounce";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import debounce from "lodash/debounce.js";
 
 export default function VideosResult() {
     const [searchParams, setSearchParams] = useSearchParams()

@@ -1,26 +1,26 @@
-import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
-import {storage} from "../utils/firebase";
+import * as AWS from "aws-sdk";
+import {v4 as uuidv4} from "uuid";
 
 export class UploadFileService {
-    async upload(file, setFileUrl, setLoading = null){
-        const fileRef = ref(storage, `images/${new Date().getTime()}`)
-        const uploadTask =  uploadBytesResumable(fileRef, file)
+    async upload(file, folder){
+        const s3 = new AWS.S3({
+            endpoint: new AWS.Endpoint('https://storage.yandexcloud.net'),
+            accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
+            secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
+        })
 
-        uploadTask.on('state_changed', snapshot => {
-                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                if (setLoading) {
-                    setLoading(true)
-                }
-            }, error => {
-                console.error(error)
-            },
-            () => {
-                if (setLoading) {
-                    setLoading(false)
-                }
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadedURL) => {
-                    setFileUrl(downloadedURL)
-                })
+        const prom = await new Promise((resolve, reject) => {
+            s3.upload({
+                Bucket: 'like2024',
+                Key: folder + '/' + uuidv4() + '.' + file.type.split('/')[1],
+                Body: file,
+                ContentType: file.type
+            }, (err, data) => {
+                if (err) return reject(err);
+                return resolve(data);
             })
+        })
+
+        return prom.Location
     }
 }

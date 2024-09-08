@@ -1,16 +1,16 @@
 import React, {useEffect} from "react";
 import {Routes, Route, BrowserRouter as Router} from 'react-router-dom';
-import useRefreshToken from "./hooks/useRefreshToken";
-import Videos from "./pages/Videos";
-import UploadSong from "./pages/Moderation/UploadSong";
-import VideoModeration from "./pages/Moderation/VideoModeration";
-import TopDownVideos from "./pages/TopDownVideos";
-import Account from "./pages/Account";
+import useRefreshToken from "./hooks/useRefreshToken.js";
+import Videos from "./pages/Videos.js";
+import UploadSong from "./pages/Moderation/UploadSong.js";
+import VideoModeration from "./pages/Moderation/VideoModeration.js";
+import TopDownVideos from "./pages/TopDownVideos.js";
+import Account from "./pages/Account.js";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "./features/auth/authSlice";
-import Middleware from "./middleware/Middleware";
-import Index from "./pages/Index";
-import Rules from "./pages/Rules";
+import {setLoading} from "./features/auth/authSlice.js";
+import Middleware from "./middleware/Middleware.js";
+import Index from "./pages/Index.js";
+import Rules from "./pages/Rules.js";
 
 function App() {
     const refresh = useRefreshToken()

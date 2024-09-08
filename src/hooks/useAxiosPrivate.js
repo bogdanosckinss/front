@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import fetcher, { axiosPrivate } from '../services/axios'
-import useRefreshToken from './useRefreshToken'
+import fetcher, { axiosPrivate } from '../services/axios.js'
+import useRefreshToken from './useRefreshToken.js'
 import {useSelector} from "react-redux";
 
 const useAxiosPrivate = () => {

@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import axios from "axios";
 
 export default function Songs() {

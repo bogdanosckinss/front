@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from "react";
 import '../../css/login.css'
 import '../../css/styles.css'
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import {useDispatch} from "react-redux";
-import {setIsAuthenticated} from "../../features/auth/authSlice";
-import Timer from "../Timer/Timer";
+import {setIsAuthenticated} from "../../features/auth/authSlice.js";
+import Timer from "../Timer/Timer.js";
 
 export default function CodeInput({phone}) {
     const privateAxios = useAxiosPrivate()

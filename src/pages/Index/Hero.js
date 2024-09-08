@@ -2,7 +2,7 @@ import React from "react";
 import heroImg from '../../img/hero-img.svg'
 import heroImgMobile from '../../img/hero-img-mob.svg'
 import {useDispatch, useSelector} from "react-redux";
-import {setShowAuth} from "../../features/auth/authSlice";
+import {setShowAuth} from "../../features/auth/authSlice.js";
 import {useNavigate} from "react-router-dom";
 
 export default function Hero() {

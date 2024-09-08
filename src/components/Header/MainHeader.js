@@ -1,8 +1,8 @@
 import React, {useRef} from "react";
 import logo from '../../img/logo-main.svg'
 import {useDispatch, useSelector} from "react-redux";
-import {setIsAuthenticated, setShowAuth, setUserInfo} from "../../features/auth/authSlice";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import {setIsAuthenticated, setShowAuth, setUserInfo} from "../../features/auth/authSlice.js";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 
 export default function MainHeader() {
     const dispatch = useDispatch()

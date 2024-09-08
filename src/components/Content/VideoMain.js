@@ -1,10 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
-import TopDownVideo from "./TopDownVideo";
+import TopDownVideo from "./TopDownVideo.js";
 import {useSearchParams} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
-import debounce from "lodash/debounce";
-import {setPosts} from "../../features/posts/postsSlice";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import debounce from "lodash/debounce.js";
+import {setPosts} from "../../features/posts/postsSlice.js";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 
 export default function VideoMain() {
     const [skipVideosCount, setSkipVideosCount] = useState(0)

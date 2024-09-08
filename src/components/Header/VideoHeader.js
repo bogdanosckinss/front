@@ -1,9 +1,9 @@
 import {useNavigate, useSearchParams} from "react-router-dom";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setHideNotFoundNote, setLoading, setPosts, setQuery, setSearchOptions} from "../../features/posts/postsSlice";
-import debounce from "lodash/debounce";
+import {setHideNotFoundNote, setLoading, setPosts, setQuery, setSearchOptions} from "../../features/posts/postsSlice.js";
+import debounce from "lodash/debounce.js";
 import headerLoading from "../../img/header-loading.svg";
 import headerClose from "../../img/header-close.svg";
 import searchArrow from "../../img/search-arrow.svg";

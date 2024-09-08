@@ -3,10 +3,10 @@ import headerLogo from '../../img/logo-main.svg'
 import headerLoading from '../../img/header-loading.svg'
 import headerClose from '../../img/header-close.svg'
 import searchArrow from '../../img/search-arrow.svg'
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import {useDispatch, useSelector} from "react-redux";
-import {setHideNotFoundNote, setLoading, setPosts, setQuery, setSearchOptions} from "../../features/posts/postsSlice";
-import debounce from 'lodash/debounce';
+import {setHideNotFoundNote, setLoading, setPosts, setQuery, setSearchOptions} from "../../features/posts/postsSlice.js";
+import debounce from 'lodash/debounce.js';
 import {useNavigate, useSearchParams} from "react-router-dom";
 
 export default function Header() {

@@ -1,5 +1,5 @@
 import React from "react";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 
 export default function TryAgain({removeVideo}) {
     const privateAxios = useAxiosPrivate()

@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
-import AccountHeader from "../components/Header/AccountHeader";
-import AccountInfo from "../components/AccountInfo/AccountInfo";
+import AccountHeader from "../components/Header/AccountHeader.js";
+import AccountInfo from "../components/AccountInfo/AccountInfo.js";
 import footerLogo from '../img/footer_logo.svg'
 import footerLogoMobile from '../img/footer_logo-mob.svg'
 
