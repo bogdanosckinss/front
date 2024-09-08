@@ -2,7 +2,7 @@
 .mobile__menu {
   position: fixed;
   z-index: 8;
-  top: 50px;
+  top: 53px;
   left: auto;
   right: 38px;
   display: none;
@@ -81,7 +81,7 @@
   background: #0647c7;
   display: block;
   width: 67vw;
-  height: 386px;
+  height: 430px;
   z-index: 7;
   padding: 70px 55px 25px;
   transition: all 0.2s linear;
@@ -158,13 +158,23 @@
 }
 @media (max-width: 550px) {
   .mobile__menu {
-    top: 36px;
+    top: 45px;
+    right: 32px;
   }
   .top__hamburger {
     padding: 49px 31px 30px;
   }
-  .top__hamburger ul {
-    /* margin: 21px 0 36px; */
+  .top__hamburger {
+    height: 386px;
+  }
+  .header-hamb-btn {
+    background-image: none;
+  }
+  .header-hamb-btn svg {
+    display: block;
+  }
+  .top__hamburger ul li a {
+    line-height: 1;
   }
 }
 @media (max-width: 370px) {

@@ -155,6 +155,12 @@
     max-width: 653px;
   }
 }
+@media (max-width: 991px) {
+  .songs__subtitle {
+    max-width: 88%;
+    margin: 0 auto;
+  }
+}
 @media (max-width: 650px) {
   .songs__title {
     font-size: 36px;
@@ -162,6 +168,7 @@
   }
   .songs__subtitle {
     font-size: 20px;
+    max-width: 100%;
   }
   .songs__list {
     margin-top: 30px;

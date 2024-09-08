@@ -81,11 +81,14 @@
     color: #0073e6;
   }
   .faq__item {
-    height: auto;
+    height: min-content;
+    padding: 23px 41px 23px 39px;
   }
   .ac .ac-trigger::after {
     width: 30px;
     height: 30px;
+    top: 50%;
+    transform: translate(0, -50%);
   }
   .ac.is-active > .ac-header .ac-trigger::after {
     right: 1px;
@@ -123,7 +126,6 @@
     right: -23.5px !important;
     width: 21px !important;
     height: 21px !important;
-    top: 8px !important;
   }
   .ac .ac-panel .ac-text {
     font-size: 14px !important;
@@ -133,5 +135,7 @@
     width: 21px !important;
     height: 11px !important;
     right: -23px !important;
+    top: 8px !important;
+    transform: translate(0, -50%) !important;
   }
 }

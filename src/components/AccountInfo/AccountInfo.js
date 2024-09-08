@@ -18,6 +18,7 @@ import UnderReviewMob from "./UnderReviewMob";
 import TryAgain from "./TryAgain";
 import NetworkError from "./Errors/NetworkError";
 import MemoryLimitation from "./Errors/MemoryLimitation";
+import axios from "axios";
 
 export default function AccountInfo() {
     const privateAxios = useAxiosPrivate()
@@ -96,15 +97,15 @@ export default function AccountInfo() {
     }, [authLoading])
 
     useEffect(() => {
-        const fieldsToValidate = [video, image, name, lastname, age, phone, city, email]
+        const fieldsToValidate = [video, name, lastname, age, phone, city, email]
 
-        if (image && !errorDuringLoading && !alreadyUploaded && !fieldsToValidate.some(field => field == '' && field != null) && selectedSong && acceptRules && acceptPrivacyPolicy) {
+        if (!errorDuringLoading && !alreadyUploaded && !fieldsToValidate.some(field => field == '' && field != null) && selectedSong && acceptRules && acceptPrivacyPolicy) {
             setCanUpload(true)
             return
         }
 
         setCanUpload(false)
-    }, [errorDuringLoading, alreadyUploaded, video, image, selectedSong, name, lastname, age, phone, city, email, acceptRules, acceptPrivacyPolicy])
+    }, [errorDuringLoading, alreadyUploaded, video, selectedSong, name, lastname, age, phone, city, email, acceptRules, acceptPrivacyPolicy])
 
     function removeVideo() {
         setVideo('')
@@ -227,10 +228,23 @@ export default function AccountInfo() {
     }
 
     async function uploadImage(image) {
+        // setUploadingImage(true)
+        // const formData = new FormData();
+        // formData.append('file', image);
+        // const response = await axios.post('http://localhost:3000/content/upload/file', formData)
+        // setImage(response.data.link)
+        // setUploadingImage(false)
+
         await uploadFileService.upload(image, setImage, setUploadingImage)
     }
 
     async function uploadVideo(video) {
+        // setUploadingVideo(true)
+        // const formData = new FormData();
+        // formData.append('file', video);
+        // const response = await axios.post('http://localhost:3000/content/upload/file', formData)
+        // setVideo(response.data.link)
+        // setUploadingVideo(false)
         await uploadFileService.upload(video, setVideo, setUploadingVideo)
     }
 
@@ -319,6 +333,10 @@ export default function AccountInfo() {
                                             if (e.target.files.length == 0) {
                                                 return
                                             }
+
+                                            // await axios.post('http://localhost:3000/content/upload/file', formData)
+                                            // return
+
                                             await uploadImage(e.target.files[0])
                                         }}
                                         accept='image/*'
@@ -458,7 +476,7 @@ export default function AccountInfo() {
                                                                         Загрузите видео длительностью 30-60 сек
                                                                     </div>
                                                                     <p className="account__upload-video-p">
-                                                                        Видео .mp4, .mov, .avi не более 50 Мб
+                                                                        Видео .mp4, .mov, .avi не более 150 Мб
                                                                     </p>
                                                                 </div>
                                                             }
@@ -468,7 +486,7 @@ export default function AccountInfo() {
                                                                         return
                                                                     }
 
-                                                                    if (((Math.round(e.target.files[0].size / 1024)) / 1000) > 50) {
+                                                                    if (((Math.round(e.target.files[0].size / 1024)) / 1000) > 150) {
                                                                         setMemoryLimitError(true)
                                                                         return
                                                                     }
@@ -477,6 +495,7 @@ export default function AccountInfo() {
                                                                     await uploadVideo(e.target.files[0])
                                                                 }}
                                                                 type="file"
+                                                                accept='video/*'
                                                                 className="account__upload-video-input"
                                                                 name="filename"
                                                                 hidden
@@ -534,10 +553,10 @@ export default function AccountInfo() {
                                                     />
                                                 </label>
                                                 {isPhoneValid() ? '' : <div className="account-typing-error">
-                                                    Номер указан неверно. Пожалуйста, попробуйте ещё.
+                                                    Номер указан неверно. Пожалуйста, попробуйте ещё.
                                                 </div>}
                                                 <label className="account__form-labels" htmlFor="">
-                                                    <input
+                                                <input
                                                         value={email}
                                                         onChange={(e) => setEmail(e.target.value)}
                                                         type="email"
@@ -545,9 +564,15 @@ export default function AccountInfo() {
                                                         placeholder="Почта участника/родителя"
                                                     />
                                                 </label>
-                                                {isEmailValid() ? '' : <div className="account-typing-error">
+                                                {!isEmailValid() && isPhoneValid() ?  <div className="account-typing-error">
                                                     Почта указана неверно. Пожалуйста, попробуйте ещё.
-                                                </div>}
+                                                </div> : ''}
+                                                {
+                                                    !isEmailValid() && !isPhoneValid() ?
+                                                        <div className="account-typing-error">
+                                                            Номер и почта указаны неверно. Пожалуйста, попробуйте ещё.
+                                                        </div> : ''
+                                                }
                                                 <label className="account__form-labels" htmlFor="">
                                                     <input
                                                         value={city}

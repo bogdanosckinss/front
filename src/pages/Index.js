@@ -28,8 +28,11 @@ export default function Index() {
                 const targetElement = document.getElementById(targetId);
 
                 if (targetElement) {
+                    const targetPosition =
+                        targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = targetPosition - window.innerHeight / 3.5;
                     window.scrollTo({
-                        top: targetElement.offsetTop,
+                        top: offsetPosition,
                         behavior: 'smooth',
                     });
                 }
@@ -61,7 +64,7 @@ export default function Index() {
                                 </div>
                                 <div className="prizes__left-text">
                                     <div className="prizes__subtitle">
-                                        Вытупление на премии «СуперЛайкШоу-2024»
+                                        Выступление на премии «СуперЛайкШоу-2024»
                                     </div>
                                     <p>
                                         Победители исполнят трек детского мира и выступят

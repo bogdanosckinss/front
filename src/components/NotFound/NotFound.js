@@ -8,6 +8,7 @@ export default function NotFound({query}) {
     function hideNote(e) {
         e.preventDefault()
         dispatch(setHideNotFoundNote(true))
+        document.body.classList.remove('hidden')
     }
 
     return (

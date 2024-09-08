@@ -58,7 +58,7 @@ export default function Post({post, isLastLine, findMoreAsync}) {
             </div>
             <div className="videos-result__author">
                 <div className="videos-result__author-icon">
-                    {fetchedPost?.users?.image ? <img src={fetchedPost?.users?.image} alt="img"/> : ''}
+                    {fetchedPost?.users?.image ? <img src={fetchedPost?.users?.image} alt="img"/> : fetchedPost?.users?.name.split('')[0]?.toUpperCase()}
                 </div>
                 <div className="videos-result__author-info">
               <span className="videos-result__author-nickname"

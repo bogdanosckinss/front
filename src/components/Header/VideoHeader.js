@@ -240,8 +240,8 @@ export default function VideoHeader() {
                             navigate({
                                 pathname: '/account',
                             }, {replace: false})
-                        }} style={{cursor: 'pointer'}} role='button' className="header__button-block">
-                            <span>участвовать</span>
+                        }} style={{cursor: 'pointer'}} role='button' className="header__button-block header__button-block-new">
+                            <span>Участвовать</span>
                             <svg
                                 width="149"
                                 height="44"

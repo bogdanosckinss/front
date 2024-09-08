@@ -2,6 +2,20 @@
 .account {
   padding: 143px 0 0;
 }
+.body-account {
+  height: 100%;
+}
+.account-wrapper100vh {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.account-main {
+  flex-grow: 1;
+}
+.body-account .footer {
+  margin-top: auto;
+}
 .account-container {
   margin: 0 auto;
   width: 100%;
@@ -13,7 +27,6 @@
   align-items: center;
   margin-bottom: 152px;
 }
-
 .account__sent-btn.not-allowed {
   cursor: not-allowed;
   opacity: 0.8;
@@ -116,7 +129,7 @@
 .account__add-video-btn {
   width: 240px;
   height: 50px;
-  padding: 18px 43px;
+  padding: 15px 43px;
   position: relative;
   margin: 0 auto;
   display: block;
@@ -125,7 +138,7 @@
 .account__add-video-btn span {
   position: relative;
   z-index: 1;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1;
   /* text-transform: uppercase; */
   text-align: center;
@@ -277,6 +290,8 @@
   width: 100%;
   display: block;
 }
+.account__form-labels input.error {
+}
 .account__form-labels input {
   height: 42px;
   width: 100%;
@@ -425,21 +440,30 @@
   width: 100%;
   height: 100%;
 }
+.account-btn-play-small {
+  margin-left: 5px !important;
+}
 .plyr__control[data-plyr='settings'] {
   display: none;
 }
+.plyr__time {
+  font-family: 'myfontRegular';
+}
 .plyr--video .plyr__controls {
   background: rgba(0, 0, 0, 0.25);
-  padding: 0 0 0;
+  padding: 0;
   height: 40px;
   z-index: 6;
+}
+.plyr--fullscreen-enabled [data-plyr='fullscreen'] {
+  margin-right: 5px;
 }
 .plyr__controls {
   flex-wrap: wrap;
   justify-content: space-between;
 }
 .plyr button {
-  margin-left: 13px;
+  margin-left: 0;
 }
 .plyr__controls .plyr__progress__container {
   width: 100%;
@@ -717,6 +741,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   margin-left: 0;
+  z-index: 10;
 }
 .plyr__control.plyr__control--overlaid:hover {
   background-color: #fff !important;
@@ -1120,6 +1145,13 @@
   .account-info {
     margin-bottom: 0;
   }
+  .support-hint {
+    left: -43px;
+  }
+  .account-container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
 }
 @media (max-width: 768px) {
   .account {
@@ -1218,6 +1250,9 @@
   }
 }
 @media (max-width: 550px) {
+  .application-approved-tooltip .application-approved-tooltiptext {
+    right: 0;
+  }
   .header.account-header {
     height: 53px;
   }
@@ -1239,7 +1274,7 @@
     padding: 0;
   }
   .account-data {
-    padding: 34px 17px 26px;
+    padding: 34px 15px 26px;
   }
   .support-others {
     margin: 40px 17px 0 !important;
@@ -1257,8 +1292,53 @@
     position: static;
     margin: 50px 10px 50px auto;
   }
+  .account__form-labels input {
+    height: 60px;
+  }
+  .account__form-labels input::placeholder {
+    font-size: 20px;
+  }
+  .account__form-labels input {
+    font-size: 20px;
+  }
+  .select-button {
+    height: 60px;
+  }
+  .selected-value {
+    font-size: 20px;
+  }
+  .account__select-img {
+    width: 40px;
+    height: 40px;
+  }
+  .account__select-song-info-singer {
+    font-size: 16px;
+  }
+  .account__select-song {
+    font-size: 16px;
+  }
+  .account-typing-error {
+  }
+  .try-again__btn span {
+    font-size: 20px;
+  }
+  .try-again__btn {
+    width: 338px;
+    height: 50px;
+    background-image: url(../../img/try-again-svg-mob.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .try-again__btn svg {
+    display: none;
+  }
+  .button-special {
+  }
 }
 @media (max-width: 370px) {
+  .account-data {
+    padding: 34px 10px 26px;
+  }
   .account-error-video__text {
     font-size: 12px;
   }
@@ -1267,7 +1347,7 @@
     padding: 11px 20px 11px 13px;
   }
   .account__upload-video {
-    width: 290px;
+    width: 300px;
     height: 513px;
   }
   .account__sent-information {
@@ -1284,5 +1364,9 @@
     height: 206px;
     right: -6px;
     bottom: -6px;
+  }
+  .try-again__btn {
+    width: 100%;
+    height: 43px;
   }
 }

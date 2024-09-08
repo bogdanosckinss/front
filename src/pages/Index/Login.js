@@ -13,7 +13,7 @@ export default function Login() {
     const [isChecked, setIsChecked] = useState(false);
     const privateAxios = useAxiosPrivate()
     const [name, setName] = useState('')
-    const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
     const [code, setCode] = useState('')
     const [token, setToken] = useState('')
     const [restart, setRestart] = useState(false)
@@ -24,6 +24,13 @@ export default function Login() {
     const [hideConfirmation, setHideConfirmation] = useState(false);
     const [isMasked, setIsMasked] = useState(false)
     const phoneRef = useRef(null)
+
+    function isEmailValid() {
+        if (email == null) {
+            return true
+        }
+        return email?.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+    }
 
     const handleCheckboxChange = (e) => {
         setIsChecked(e.target.checked)
@@ -37,7 +44,7 @@ export default function Login() {
         let response = {}
         try {
             response = await privateAxios.post('auth/create', {
-                phone_number: formattedPhone,
+                email: email,
                 name: name
             },{
                 withCredentials: true
@@ -53,14 +60,14 @@ export default function Login() {
     }
 
     function unmaskedPhone() {
-        return phone.replaceAll('(', '').replaceAll(')', '').replaceAll('-', '').replaceAll(' ', '')
+        return email.replaceAll('(', '').replaceAll(')', '').replaceAll('-', '').replaceAll(' ', '')
     }
 
     function handleNumberInput(event) {
         const value = event.target.value
 
         if (value == '') {
-            setPhone('+7 (___) ___-__-__');
+            setEmail('+7 (___) ___-__-__');
             return
         }
 
@@ -70,12 +77,12 @@ export default function Login() {
             input = `+7 (${input.substring(1, 4)}) ${input.substring(4, 7)}-${input.substring(7, 9)}-${input.substring(9, 11)}`;
         }
 
-        setPhone(input)
+        setEmail(input)
     }
 
     const handleInputFocus = () => {
         if (!isMasked) {
-            setPhone('+7 (___) ___-__-__');
+            setEmail('+7 (___) ___-__-__');
             setIsMasked(true);
         }
     }
@@ -180,8 +187,8 @@ export default function Login() {
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (phoneRef.current && !phoneRef.current.contains(event.target)) {
-                if (phone == '+7 (___) ___-__-__') {
-                    setPhone('')
+                if (email == '+7 (___) ___-__-__') {
+                    setEmail('')
                     setIsMasked(false)
                 }
             }
@@ -189,7 +196,7 @@ export default function Login() {
 
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, [phone])
+    }, [email])
 
     return (
         <div className="login">
@@ -220,7 +227,7 @@ export default function Login() {
                         ><input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Ваше имя"
                         /></label>
                         <label className="login__label"
-                        ><input ref={phoneRef} value={phone} onFocus={handleInputFocus} className="js-phone-input" onChange={handleNumberInput} type="text" placeholder="Ваш номер телефона"
+                        ><input ref={phoneRef} value={email} className="js-phone-input" onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Почта участника/родителя"
                         /></label>
                         <div className="login__agree">
                             <label className="login__label-check">
@@ -244,9 +251,9 @@ export default function Login() {
                         </div>
                         <button
                             onClick={sendCodeViaSms}
-                            className={'login__button js-login__button ' + ((isChecked && phone.length == 18) ? 'active' : '')}
-                            disabled={!isChecked || phone.length < 18   }>
-                            <span>Получить код по СМС</span>
+                            className={'login__button js-login__button ' + ((isChecked && email && name) ? 'active' : '')}
+                            disabled={!isChecked || !email || !name }>
+                            <span>Получить код на EMAIL</span>
                             <svg
                                 width="361"
                                 height="55"
@@ -285,7 +292,7 @@ export default function Login() {
                     <form className="form">
                         <h1 className="login__title">Введите код из СМС</h1>
                         <p className="code__text">Код был отправлен на номер</p>
-                        <p className="code__text">{formatPhoneNumber(phone)}</p>
+                        <p className="code__text">{formatPhoneNumber(email)}</p>
                         <ul className={'code__list js-code__list ' + (error ? 'error' : '')} ref={codeListRef}>
                             {[...Array(6)].map((_, index) => (
                                 <li key={index}>

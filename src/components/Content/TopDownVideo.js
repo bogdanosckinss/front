@@ -194,7 +194,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
 
                     <div className="video__author-info">
                         <div className="video__author-img">
-                            {video?.users?.image ? <img src={video?.users?.image} alt="img"/> : ''}
+                            <div className="video__author-name">{video?.users?.name.split('')[0]?.toUpperCase()}</div>
                         </div>
                         <div className="video__author-data">
                             <div className="video__author-name">{video?.users?.name}</div>
@@ -304,7 +304,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
                 <div ref={copyBtnRef} className={'share-popup js-share-popup'}>
                     <ul className="account-share-socials">
                         <li className="account-share-social">
-                            <a href="">
+                            <a href={'https://vk.com/share.php?url=' + videoLink()}>
                                 <svg
                                     width="29"
                                     height="19"

@@ -37,6 +37,9 @@ body {
   padding: 0;
   margin: 0;
 }
+body .hidden {
+  overflow: hidden;
+}
 .button-special {
   position: relative;
   display: flex;

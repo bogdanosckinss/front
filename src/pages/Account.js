@@ -8,6 +8,7 @@ export default function Account() {
     useEffect(() => {
         document.body.classList.forEach(item => document.body.classList.remove(item))
         document.body.classList.add('videos-body')
+        document.body.classList.add('body-account')
 
         const appRoot = document.querySelector('html')
         appRoot.setAttribute('notranslate', true)
@@ -15,7 +16,8 @@ export default function Account() {
 
     return (
         <>
-            <main className="videos-main-block-cover">
+            <div className="account-wrapper100vh">
+            <main className="account-main videos-main-block-cover">
                 <AccountHeader/>
                 <AccountInfo/>
             </main>
@@ -77,6 +79,7 @@ export default function Account() {
                     </div>
                 </div>
             </footer>
+            </div>
         </>
     )
 }

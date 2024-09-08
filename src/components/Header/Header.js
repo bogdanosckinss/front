@@ -13,6 +13,7 @@ export default function Header() {
     const [searchParams, setSearchParams] = useSearchParams()
     const privateAxios = useAxiosPrivate()
     const [inputValue, setInputValue] = useState('');
+    const [isFirstRender, setIsFirstRender] = useState(true);
     const [showLoading, setShowLoading] = useState(false);
     const [showResults, setShowResults] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -36,6 +37,11 @@ export default function Header() {
     }, [])
 
     useEffect(() => {
+        if (isFirstRender) {
+            setIsFirstRender(false)
+            return
+        }
+
         dispatch(setHideNotFoundNote(true))
         dispatch(setQuery(inputValue))
         if (inputValue.length > 0) {
@@ -49,6 +55,7 @@ export default function Header() {
 
             return () => clearTimeout(timer); // Cleanup the timer on component unmount
         } else {
+            setSearchParams({query: ''})
             setShowLoading(false);
             setShowResults(false);
         }
@@ -131,7 +138,11 @@ export default function Header() {
 
                 setOptions(uniqueArray);
                 dispatch(setSearchOptions(uniqueArray))
+                if (uniqueArray.length == 0) {
+                    document.body.classList.add('hidden')
+                }
                 if (uniqueArray.length > 0) {
+                    document.body.classList.remove('hidden')
                     ref.current.classList.add('active')
                 }
             } catch (err) {
@@ -150,8 +161,25 @@ export default function Header() {
                     <div className="header__wrapper">
                         <div className="header__block">
                             <div className="header__logo">
-                                <a href="/public">
+                                <a href="/">
                                     <img src={headerLogo} alt="logo"/>
+                                </a>
+                            </div>
+                            <div className="video-header__back-display-mob video-header__back">
+                                <a href="/videos">
+                                    <svg
+                                        width="36"
+                                        height="36"
+                                        viewBox="0 0 36 36"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M21.0005 27.0002L13.5005 18.0002L21.0005 9.00024"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
                                 </a>
                             </div>
                             <form action="" className="header__form" onSubmit={(e) => e.preventDefault()}>
@@ -186,7 +214,7 @@ export default function Header() {
                                     <img src={headerLoading} alt="loading"/>
                                 </div>
 
-                                {options && (
+                                {options && showResults && (
                                     <>
                                         <div style={inputValue != '' && !loading ? {display: 'block'} : {}}
                                              className="header__search-close" onClick={handleCloseClick}>
@@ -225,14 +253,13 @@ export default function Header() {
                                 )}
 
 
-
                             </form>
                             <a role='button' onClick={() => {
                                 navigate({
                                     pathname: '/account',
                                 }, {replace: false})
-                            }} style={{cursor: 'pointer'}} className="header__button-block">
-                                <span>участвовать</span>
+                            }} style={{cursor: 'pointer'}} className="header__button-block header__button-block-new">
+                                <span>Участвовать</span>
                                 <svg
                                     width="149"
                                     height="44"
