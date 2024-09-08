@@ -290,9 +290,9 @@ export default function Login() {
                         </svg>
                     </button>
                     <form className="form">
-                        <h1 className="login__title">Введите код из СМС</h1>
-                        <p className="code__text">Код был отправлен на номер</p>
-                        <p className="code__text">{formatPhoneNumber(email)}</p>
+                        <h1 className="login__title">Введите код из Email</h1>
+                        <p className="code__text">Код был отправлен на Email</p>
+                        <p className="code__text">{email}</p>
                         <ul className={'code__list js-code__list ' + (error ? 'error' : '')} ref={codeListRef}>
                             {[...Array(6)].map((_, index) => (
                                 <li key={index}>
@@ -310,11 +310,11 @@ export default function Login() {
                             ))}
                         </ul>
                         <p className={'code__error-text ' + (error ? 'error' : '')}>Введён неверный код</p>
-                        <code className="code__text-p">Запросить код в СМС через 00:<Timer restart={restart} resetRestart={resetRestart} /></code>
+                        <code className="code__text-p">Запросить код в Email через 00:<Timer restart={restart} resetRestart={resetRestart} /></code>
                         <code className="code__text-p" style={{cursor: 'pointer'}} onClick={() => {
                             setSupport(true)
                             setHideConfirmation(true)
-                        }}>Не приходит СМС</code>
+                        }}>Не приходит Email</code>
                         <div className="code__agree"></div>
                         <button onClick={confirmPhone}
                                 className={'login__button js-code-login__button ' + (isCodeValid() ? 'accept active' : 'error')}
