@@ -609,6 +609,23 @@
 
   width: 50px;
 }
+.plyr__volume button {
+  transform: rotate(90deg);
+  position: relative;
+}
+
+.plyr__volume button::after {
+  position: absolute;
+  content: '';
+  display: block;
+  z-index: 5;
+  background-color: transparent;
+  width: 10px;
+  height: 6px;
+  left: 1px;
+  top: -5px;
+}
+
 .plyr__control:focus-visible,
 .plyr__control:hover,
 .plyr__control[aria-expanded='true'] {

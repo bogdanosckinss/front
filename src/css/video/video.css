@@ -31,6 +31,18 @@
 
 .plyr__volume button {
   transform: rotate(90deg);
+  position: relative;
+}
+
+.plyr__volume button::after {
+  display: block;
+  z-index: 5;
+  background-color: transparent;
+  width: 10px;
+  height: 6px;
+  content: '';
+  left: 1px;
+  top: -5px;
 }
 
 .video-body {
