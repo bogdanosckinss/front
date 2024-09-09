@@ -1,6 +1,8 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import debounce from "lodash/debounce.js";
+import Plyr from "plyr-react";
+import Video from "../../components/Moderation/Video.js";
 
 export default function VideoModeration() {
     const privateAxios = useAxiosPrivate()
@@ -33,38 +35,11 @@ export default function VideoModeration() {
         [privateAxios, skipVideosCount]
     )
 
-    function acceptVideo(videoId) {
-        try {
-            privateAxios.post('content/update-video-moderation/status', {
-                allowed: true,
-                videoId: videoId
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    function declineVideo(videoId) {
-        try {
-            privateAxios.post('content/update-video-moderation/status', {
-                allowed: false,
-                videoId: videoId
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
     return(
         <div>
             {videos.map(video => {
                 return(
-                    <article style={{border: 'solid green', marginBottom: 10}}>
-                        <p>Username: {video?.users?.name}</p>
-                        {video?.link ? <video src={video?.link} style={{width: 200}}></video> : ''}
-                        <button onClick={() => acceptVideo(video.id)} style={{background: 'green'}}>Accept</button>
-                        <button onClick={() => declineVideo(video.id)} style={{background: 'crimson', color: 'white'}}>Decline</button>
-                    </article>
+                   <Video video={video} />
                 )
             })}
 
