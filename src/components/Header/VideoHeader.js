@@ -15,6 +15,7 @@ export default function VideoHeader() {
     const [inputValue, setInputValue] = useState('');
     const [showLoading, setShowLoading] = useState(false);
     const [showResults, setShowResults] = useState(false);
+    const [isLittleScreen, setIsLittleScreen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
     const [options, setOptions] = useState([]);
     const dispatch = useDispatch()
@@ -23,6 +24,9 @@ export default function VideoHeader() {
     const { loading } = useSelector((state) => state.posts)
 
     useEffect(() => {
+        if (window.innerWidth < 991) {
+            setIsLittleScreen(true)
+        }
         setInputValue(searchParams.get('query') ?? '')
 
         const handleClickOutside = (event) => {
@@ -32,6 +36,9 @@ export default function VideoHeader() {
 
             if (formRef.current && !formRef.current.contains(event.target)) {
                 formRef.current.classList.remove('ouvert')
+                if (window.innerWidth < 991) {
+                    setIsLittleScreen(true)
+                }
             }
         }
 
@@ -174,6 +181,7 @@ export default function VideoHeader() {
                         <form action="" ref={formRef} onClick={(e) => {
                             e.preventDefault()
                             formRef.current.classList.add('ouvert')
+                            setIsLittleScreen(false)
                         }} className="header__form">
                             <div className="header__search-icon">
                                 <svg
@@ -208,7 +216,7 @@ export default function VideoHeader() {
 
                             {options && (
                                 <>
-                                    <div style={inputValue != '' && !loading ? {display: 'block'} : {}}
+                                    <div style={inputValue != '' && !loading && (!isLittleScreen) ? {display: 'block'} : {}}
                                          className="header__search-close" onClick={handleCloseClick}>
                                         <img src={headerClose} alt="close"/>
                                     </div>

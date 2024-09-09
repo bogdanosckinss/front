@@ -45,6 +45,7 @@
   align-items: center;
   z-index: 2;
   width: 100%;
+  bottom: 0;
 }
 .videos-result__author {
   display: flex;

@@ -241,11 +241,13 @@
   color: #fff;
   font-family: 'myfontExtraBold';
   margin-bottom: 3px;
+  text-align: left;
 }
 .account__select-song {
   font-size: 14px;
   line-height: 1;
   color: #fff;
+  text-align: left;
 }
 .select-button {
   display: flex;
