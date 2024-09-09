@@ -190,7 +190,7 @@ export default function Header() {
                                 </a>
                             </div>
                             <div className="video-header__back-display-mob video-header__back">
-                                <a href="/videos">
+                                <a href="/">
                                     <svg
                                         width="36"
                                         height="36"
