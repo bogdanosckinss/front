@@ -175,7 +175,7 @@ export default function VideoHeader() {
                 <div className="header__wrapper">
                     <div className="header__block">
                         <div className="video-header__back">
-                            <a href="/">
+                            <a href="/videos">
                                 <svg
                                     width="36"
                                     height="36"

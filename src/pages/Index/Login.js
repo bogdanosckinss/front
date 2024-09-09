@@ -254,7 +254,7 @@ export default function Login() {
                             onClick={sendCodeViaSms}
                             className={'login__button js-login__button ' + ((isChecked && email && name) ? 'active' : '')}
                             disabled={!isChecked || !email || !name }>
-                            <span>Получить код на EMAIL</span>
+                            <span>Получить код</span>
                             <svg
                                 width="361"
                                 height="55"
@@ -311,7 +311,7 @@ export default function Login() {
                             ))}
                         </ul>
                         <p className={'code__error-text ' + (error ? 'error' : '')}>Введён неверный код</p>
-                        <code className="code__text-p">Запросить код в Email через 00:<Timer restart={restart} resetRestart={resetRestart} /></code>
+                        <code className="code__text-p">Запросить код через 00:<Timer restart={restart} resetRestart={resetRestart} /></code>
                         <code className="code__text-p" style={{cursor: 'pointer'}} onClick={() => {
                             setSupport(true)
                             setHideConfirmation(true)
