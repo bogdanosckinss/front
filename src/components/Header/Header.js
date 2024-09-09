@@ -36,7 +36,7 @@ export default function Header() {
             if (formRef.current && !formRef.current.contains(event.target)) {
                 formRef.current.classList.remove('ouvert')
                 if (window.innerWidth < 991) {
-                    setIsLittleScreen(true)
+                    setIsLittleScreen(false)
                 }
             }
         }
@@ -209,7 +209,9 @@ export default function Header() {
                             <form action="" ref={formRef} onClick={(e) => {
                                 e.preventDefault()
                                 formRef.current.classList.add('ouvert')
-                                setIsLittleScreen(false)
+                                if (window.innerWidth < 991) {
+                                    setIsLittleScreen(true)
+                                }
                             }} className="header__form" onSubmit={(e) => e.preventDefault()}>
                                 <div className="header__search-icon">
                                     <svg
@@ -247,9 +249,9 @@ export default function Header() {
                                     <img src={headerLoading} alt="loading"/>
                                 </div>
 
-                                {options && showResults && (
+                                {((options && showResults) || isLittleScreen) && (
                                     <>
-                                        <div style={inputValue != '' && !loading && !isLittleScreen ? {display: 'block'} : {}}
+                                        <div style={(inputValue != '' && !loading) || (isLittleScreen) ? {display: 'block'} : {}}
                                              className="header__search-close" onClick={handleCloseClick}>
                                             <img src={headerClose} alt="close"/>
                                         </div>

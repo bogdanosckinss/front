@@ -243,6 +243,19 @@
   margin-bottom: 3px;
   text-align: left;
 }
+.plyr__volume button {
+  position: relative;
+}
+.plyr__volume button::after {
+  display: block;
+  z-index: 5;
+  background-color: transparent;
+  width: 10px;
+  height: 6px;
+
+  left: 1px;
+  top: -5px;
+}
 .account__select-song {
   font-size: 14px;
   line-height: 1;

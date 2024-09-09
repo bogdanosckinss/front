@@ -387,7 +387,7 @@
     height: 40px;
   }
   .videos-body .header__wrapper {
-    padding-right: 10px;
+    padding: 8px 8px 8px 13px !important;
   }
 }
 @media screen and (max-width: 550px) {
@@ -400,9 +400,6 @@
   }
   .header-search__result-list {
     top: 56px;
-  }
-  .videos-body .header__wrapper {
-    padding: 6px 9px 6px 0;
   }
 }
 @media screen and (max-width: 370px) {

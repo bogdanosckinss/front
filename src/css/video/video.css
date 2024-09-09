@@ -491,4 +491,7 @@
   /*.video-main {*/
   /*  margin-top: 104px;*/
   /*}*/
+  .video-body .plyr__controls {
+    height: 43px !important;
+  }
 }

@@ -57,7 +57,7 @@
   }
   .video-header .header__block {
     height: 53px;
-    padding: 8px 8px 8px 13px;
+    padding: 8px 8px 8px 13px !important;
   }
 }
 @media (max-width: 550px) {

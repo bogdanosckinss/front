@@ -24,9 +24,6 @@ export default function VideoHeader() {
     const { loading } = useSelector((state) => state.posts)
 
     useEffect(() => {
-        if (window.innerWidth < 991) {
-            setIsLittleScreen(true)
-        }
         setInputValue(searchParams.get('query') ?? '')
 
         const handleClickOutside = (event) => {
@@ -37,7 +34,7 @@ export default function VideoHeader() {
             if (formRef.current && !formRef.current.contains(event.target)) {
                 formRef.current.classList.remove('ouvert')
                 if (window.innerWidth < 991) {
-                    setIsLittleScreen(true)
+                    setIsLittleScreen(false)
                 }
             }
         }
@@ -196,7 +193,9 @@ export default function VideoHeader() {
                         <form action="" onSubmit={(e) => e.preventDefault()} ref={formRef} onClick={(e) => {
                             e.preventDefault()
                             formRef.current.classList.add('ouvert')
-                            setIsLittleScreen(false)
+                            if (window.innerWidth < 991) {
+                                setIsLittleScreen(true)
+                            }
                         }} className="header__form">
                             <div className="header__search-icon">
                                 <svg
@@ -236,7 +235,7 @@ export default function VideoHeader() {
 
                             {options && (
                                 <>
-                                    <div style={inputValue != '' && !loading && (!isLittleScreen) ? {display: 'block'} : {}}
+                                    <div style={(inputValue != '' && !loading) || (isLittleScreen) ? {display: 'block'} : {}}
                                          className="header__search-close" onClick={handleCloseClick}>
                                         <img src={headerClose} alt="close"/>
                                     </div>
