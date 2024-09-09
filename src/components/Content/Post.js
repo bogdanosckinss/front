@@ -69,8 +69,7 @@ export default function Post({post, isLastLine, findMoreAsync}) {
               >{fetchedPost?.users?.name}</span
               >
                     <span className="videos-result__author-city"
-                    >г. <span>{fetchedPost?.users?.city}</span>, <span>{fetchedPost?.users?.age}</span> лет</span
-                    >
+                    >г. <span>{fetchedPost?.users?.city}</span>{fetchedPost?.users?.age ? <>, <span>{fetchedPost?.users?.age}</span> лет</> : ''}</span>
                 </div>
             </div>
 
