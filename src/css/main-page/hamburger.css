@@ -89,7 +89,7 @@
 }
 .top__hamburger.active {
   top: 0;
-  left: auto;
+  left: 0;
   right: 0;
   bottom: 0;
 
