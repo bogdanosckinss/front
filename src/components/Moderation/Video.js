@@ -29,6 +29,7 @@ export default function Video({video}) {
 
     const renderVideo = useMemo(() => (
         <Plyr
+            style={{height: '440px'}}
             clickToPlay={true}
             options={{controls: ['progress', 'play-large', 'play', 'current-time', 'volume', 'mute', 'fullscreen']}}
             source={{

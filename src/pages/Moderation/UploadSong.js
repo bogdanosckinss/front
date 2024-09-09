@@ -170,7 +170,7 @@ export default function UploadSong() {
                 </form> :
                 <div>
                     <label>Пароль</label>
-                    <input style={{border: 'solid black'}} type={password} value={password}
+                    <input style={{border: 'solid black'}} type='password' value={password}
                            onChange={(e) => setPassword(e.target.value)}/>
                     <button onClick={() => {
                         if (password == process.env.REACT_APP_SECRET_PASSWORD) {
