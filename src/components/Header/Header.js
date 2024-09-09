@@ -109,6 +109,21 @@ export default function Header() {
         }
     };
 
+    const debouncedGetVideos = useCallback(
+        debounce(async (query) => {
+            try {
+                setSearchParams({query: query})
+                const response = await privateAxios.get(`content/search/videos?query=${query}`);
+                dispatch(setPosts(response.data));
+            } catch (err) {
+                console.log(err);
+            } finally {
+                dispatch(setLoading(false))
+            }
+        }, 1000),
+        [privateAxios, dispatch]
+    )
+
     const debouncedGetResults = useCallback(
         debounce(async (query) => {
             setOptions([]);
@@ -221,6 +236,11 @@ export default function Header() {
                                             }
                                         }}
                                         onChange={handleInputChange}
+                                        onKeyDown={async (e) => {
+                                            if (e.key == 'Enter') {
+                                                debouncedGetVideos(inputValue)
+                                            }
+                                        }}
                                     />
                                 </label>
                                 <div style={loading ? {display: "block"} : {}} className="header__search-load">

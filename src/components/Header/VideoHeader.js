@@ -154,6 +154,21 @@ export default function VideoHeader() {
         [privateAxios, dispatch]
     );
 
+    const debouncedGetVideos = useCallback(
+        debounce(async (query) => {
+            try {
+                setSearchParams({query: query})
+                const response = await privateAxios.get(`content/search/videos?query=${query}`);
+                dispatch(setPosts(response.data));
+            } catch (err) {
+                console.log(err);
+            } finally {
+                dispatch(setLoading(false))
+            }
+        }, 1000),
+        [privateAxios, dispatch]
+    )
+
     return (
         <header className="header video-header">
             <div className="header__container">
@@ -178,7 +193,7 @@ export default function VideoHeader() {
                                 </svg>
                             </a>
                         </div>
-                        <form action="" ref={formRef} onClick={(e) => {
+                        <form action="" onSubmit={(e) => e.preventDefault()} ref={formRef} onClick={(e) => {
                             e.preventDefault()
                             formRef.current.classList.add('ouvert')
                             setIsLittleScreen(false)
@@ -208,6 +223,11 @@ export default function VideoHeader() {
                                         }
                                     }}
                                     onChange={handleInputChange}
+                                    onKeyDown={async (e) => {
+                                        if (e.key == 'Enter') {
+                                            debouncedGetVideos(inputValue)
+                                        }
+                                    }}
                                 />
                             </label>
                             <div style={loading ? {display: "block"} : {}} className="header__search-load">
