@@ -454,7 +454,7 @@
   font-family: 'myfontRegular';
 }
 .plyr--video .plyr__controls {
-  background: rgba(0, 0, 0, 0.25);
+  background: none !important;
   padding: 0;
   height: 40px;
   z-index: 6;
