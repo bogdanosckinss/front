@@ -237,8 +237,8 @@ export default function Login() {
                         ><input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Ваше имя"
                         /></label>
                         <label className="login__label"
-                        ><input ref={phoneRef} value={phone} pattern='[0-9]*' className="js-phone-input" onChange={(e) => handleNumberInput(e)} onFocus={handleInputFocus} type="text" placeholder="Ваш номер телефона"
-                        /></label>
+                        ><input ref={phoneRef} value={phone} pattern='[0-9]*' className="js-phone-input" onChange={(e) => handleNumberInput(e)} onFocus={handleInputFocus} inputMode='tel' placeholder="Ваш номер телефона"/>
+                        </label>
                         <div className="login__agree">
                             <label className="login__label-check">
                                 <input
