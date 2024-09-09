@@ -586,6 +586,7 @@
   margin-right: var(--plyr-control-spacing, 6px);
 }
 .plyr__controls__item.plyr__volume {
+  z-index: 100;
   position: relative;
 }
 

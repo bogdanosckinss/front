@@ -1,11 +1,12 @@
 @import url('./video-header.css');
 
 .plyr__volume > input {
-  visibility: hidden;
+  /*visibility: hidden;*/
+  opacity: 0;
 }
 
 .plyr__volume:hover > input {
-  visibility: visible !important;
+  opacity: 100% !important;
 }
 
 .plyr__progress input[type=range], .plyr__progress__buffer {
