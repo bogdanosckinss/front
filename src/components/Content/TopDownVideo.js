@@ -101,7 +101,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
 
     function toggleShare(e) {
         e.preventDefault()
-        if (navigator.canShare) {
+        if (navigator.canShare && window.innerWidth < 991) {
             navigator.share({
                 title: 'Звезды будущего',
                 text: '',
