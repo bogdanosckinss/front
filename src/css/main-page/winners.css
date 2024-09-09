@@ -636,11 +636,14 @@
   .prizes__right-block:first-child .prizes__right-img {
     width: 341px;
     height: 268px;
-    left: 42px;
     top: -14px;
+    left: 57%;
+    transform: translateX(-50%);
   }
   .prizes__right-block:nth-child(2) .prizes__right-img {
     top: 11px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .prizes__subtitle {
@@ -661,8 +664,14 @@
 }
 @media (max-width: 370px) {
   .prizes__right-block:nth-child(2) .prizes__right-img {
-    top: -2px;
-    left: 23px;
+    /*top: -2px;*/
+    /*left: 23px;*/
+  }
+  .prizes__right-block {
+    height: 390px;
+  }
+  .prizes__right-block:last-child {
+    height: 365px;
   }
   .winners__block-number {
     font-size: 70px;

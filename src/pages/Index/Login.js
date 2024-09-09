@@ -301,7 +301,7 @@ export default function Login() {
                     </button>
                     <form className="form">
                         <h1 className="login__title">Введите код из СМС</h1>
-                        <p className="code__text">Код был отправлен на Email</p>
+                        <p className="code__text">Код был отправлен на номер</p>
                         <p className="code__text">{phone}</p>
                         <ul className={'code__list js-code__list ' + (error ? 'error' : '')} ref={codeListRef}>
                             {[...Array(6)].map((_, index) => (

@@ -6,7 +6,7 @@ import UploadSong from "./pages/Moderation/UploadSong.js";
 import VideoModeration from "./pages/Moderation/VideoModeration.js";
 import TopDownVideos from "./pages/TopDownVideos.js";
 import Account from "./pages/Account.js";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {setLoading} from "./features/auth/authSlice.js";
 import Middleware from "./middleware/Middleware.js";
 import Index from "./pages/Index.js";
@@ -15,7 +15,6 @@ import Rules from "./pages/Rules.js";
 function App() {
     const refresh = useRefreshToken()
     const dispatch = useDispatch()
-    const { loading, isAuthenticated } = useSelector((state) => state.auth)
 
     useEffect(() => {
         dispatch(setLoading(true))
@@ -26,12 +25,6 @@ function App() {
     }, [])
 
     function AuthenticatedRouteComponent(props) {
-        // if (loading) {
-        //     return(
-        //         <div>Loading...</div>
-        //     )
-        // }
-
         return(
             props.children
         )

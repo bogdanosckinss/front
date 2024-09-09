@@ -44,10 +44,16 @@ export default function Video({video}) {
 
     return (
         <article style={{border: 'solid green', marginBottom: 10, width: '277px'}}>
-            <p>Username: {video?.users?.name}</p>
+            <p>Имя: {video?.users?.name + ' ' + video?.users?.name}</p>
+            <p>Возраст: {video?.users?.age}</p>
+            <p>Номер телефона: {video?.users?.phone_number}</p>
+            <p>Адрес электронной почты: {video?.users?.email}</p>
+            <p>Город: {video?.users?.city}</p>
+            <p>Ссылка на соцсеть: {video?.users?.social_media_link}</p>
+            <p>Выбранная песня: {video?.song?.author_name + ' | ' + video?.song?.title}</p>
             {renderVideo}
-            <button onClick={() => acceptVideo(video.id)} style={{background: 'green'}}>Accept</button>
-            <button onClick={() => declineVideo(video.id)} style={{background: 'crimson', color: 'white'}}>Decline
+            <button onClick={() => acceptVideo(video.id)} style={{background: 'green', color: 'white'}}>Принять</button>
+            <button onClick={() => declineVideo(video.id)} style={{background: 'crimson', color: 'white'}}>Отклонить
             </button>
         </article>
     )

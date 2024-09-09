@@ -53,7 +53,7 @@
 .footer__date {
   border-radius: 12px;
   background: var(--darkBlue);
-  padding: 14px 15px 12px;
+  padding: 10px 15px 8px;
   font-size: 14px;
   font-family: 'myfontBold';
 
@@ -62,7 +62,7 @@
   color: #fff;
 }
 .footer__apply {
-  padding: 10px 56px;
+  padding: 10px 15px 8px;
   font-weight: 400;
   font-size: 14px;
   text-align: center;
@@ -109,7 +109,57 @@
   font-size: 12px;
   color: #0647c7;
 }
+.footer-support {
+  width: 100%;
+  margin-top: 32px;
+}
+.footer-support a {
+  display: flex;
+  align-items: center;
+  padding: 9px 25px;
+  border-radius: 12px;
+  background: rgba(0, 115, 230, 0.25);
+  transition: all 0.2s ease-out;
+}
+.footer-support:hover a {
+  background: rgba(0, 115, 230, 1);
+  color: white !important;
+}
+.footer-support:hover .footer-support__text {
+  color: #fff;
+}
+.footer-support__icon {
+  margin-right: 6px;
+}
+.footer-support__text {
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+  color: #0647c7;
+  font-family: 'myfontBold';
+  white-space: nowrap;
+  transition: all 0.2s ease-out;
+}
+.footer-support-mob {
+  display: none;
+}
+@media (max-width: 768px) {
+  .footer-support-mob {
+    display: block;
+    width: 200px;
+    margin-top: 10px;
+  }
+  .footer-support-web {
+    display: none;
+  }
+}
 @media (max-width: 550px) {
+  .footer__block {
+    gap: 28px;
+  }
+  .footer-support-mob {
+    margin-top: 28px;
+  }
   .footer__logo {
     width: 200px;
     height: 70px;

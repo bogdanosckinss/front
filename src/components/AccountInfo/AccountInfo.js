@@ -546,6 +546,7 @@ export default function AccountInfo() {
                                                             type="phone"
                                                             className={'account__form-input js-account__form-input ' + (phone && !alreadyUploaded ? 'active' : '')}
                                                             placeholder="+ 7 (___) ___-__-__"
+                                                            readOnly={true}
                                                         />
                                                     </label>
                                                     {isPhoneValid() ? '' : <div className="account-typing-error">
@@ -558,7 +559,6 @@ export default function AccountInfo() {
                                                             type="email"
                                                             className={'account__form-input ' + (email && !alreadyUploaded ? 'active' : '')}
                                                             placeholder="Почта участника/родителя"
-                                                            readOnly={true}
                                                         />
                                                     </label>
                                                     {!isEmailValid() && isPhoneValid() ?

@@ -41,14 +41,14 @@ export default function VideoModeration() {
 
     return(
         <>
-            {accessApproved ? <div>
+            {accessApproved ? <div className='moderation'>
                     {videos.map(video => {
                         return (
                             <Video video={video}/>
                         )
                     })}
 
-                    <button onClick={findMore}>Load more</button>
+                    <button style={{border: 'solid', borderRadius: '10px'}} onClick={findMore}>Загрузить ещё видео</button>
                 </div> :
                 <div>
                     <label>Пароль</label>

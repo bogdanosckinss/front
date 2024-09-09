@@ -56,10 +56,14 @@ export default function Post({post, isLastLine, findMoreAsync}) {
             <div className="videos-result__play">
                 <a href=""> <img src={playImage} alt="img"/> </a>
             </div>
+
+
             <div className="videos-result__author">
                 <div className="videos-result__author-icon">
                     {fetchedPost?.users?.image ? <img src={fetchedPost?.users?.image} alt="img"/> : fetchedPost?.users?.name.split('')[0]?.toUpperCase()}
                 </div>
+
+
                 <div className="videos-result__author-info">
               <span className="videos-result__author-nickname"
               >{fetchedPost?.users?.name}</span
@@ -69,6 +73,8 @@ export default function Post({post, isLastLine, findMoreAsync}) {
                     >
                 </div>
             </div>
+
+
             <div className="videos-result__info">
                 <div className="videos-result__song-info">
                     <div className="videos-result__song-img">

@@ -1,16 +1,11 @@
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import videoHeartBtn from "../../img/video-heart-btn.svg";
-import {addLike, removeLike} from "../../features/posts/postsSlice.js";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
-import useFetchProfile from "../../hooks/useFetchProfile.js";
-import {useDispatch} from "react-redux";
 import Plyr from "plyr-react";
 import { useInView } from 'react-intersection-observer'
 
 export default function TopDownVideo({video, userInteracts, isLastLine, findMoreAsync}) {
     const privateAxios = useAxiosPrivate()
-    const profile = useFetchProfile()
-    const dispatch = useDispatch()
     const [share, setShare] = useState(false)
     const [firstRender, setFirstRender] = useState(true)
     const [likes, setLikes] = useState(0)
@@ -139,6 +134,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
 
     async function toggleLike() {
         runHeartsAnimation()
+
         try {
             privateAxios.post('content/toggle-like', {
                 videoId: video.id
@@ -155,16 +151,6 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
 
         setLikes(val => val + 1)
         //dispatch(addLike({postId: video.id, userId: profile.id}))
-    }
-
-    async function vote() {
-        try {
-            privateAxios.post('content/vote', {
-                videoId: video.id
-            })
-        } catch (err) {
-            console.log(err)
-        }
     }
 
     const renderVideo = useMemo(() => (
@@ -239,14 +225,17 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
 
                     <div className="video__author-info">
                         <div className="video__author-img">
-                            <div className="video__author-name">{video?.users?.name.split('')[0]?.toUpperCase()}</div>
+                            {video?.users?.image ?
+                                <img src={video?.users?.image} alt="img"/>
+                                :
+                                <div className="video__author-name">{video?.users?.name.split('')[0]?.toUpperCase()}</div>
+                            }
                         </div>
                         <div className="video__author-data">
                             <div className="video__author-name">{video?.users?.name}</div>
                             <div className="video__author-ditails">
                     <span className="video__author-city"
-                    >г. <span>{video?.users?.city}</span>, <span>{video?.users?.age}</span> лет</span
-                    >
+                    >г. <span>{video?.users?.city}</span>, <span>{video?.users?.age}</span> лет</span>
                             </div>
                         </div>
                     </div>

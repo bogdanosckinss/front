@@ -8,7 +8,7 @@ export default function UnderReview() {
                 <img src={appChecking} alt=""/>
             </div>
             <div className="application-checking__title">
-                Видео на ходится на проверке модератором
+                Видео находится на проверке модератором
             </div>
             <div className="application-checking__text">
                 Видео, загруженные после 20:00 по МСК, публикуются на следующий

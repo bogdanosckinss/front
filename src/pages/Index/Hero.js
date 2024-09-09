@@ -64,9 +64,8 @@ export default function Hero() {
                                 </button>
                             </div>
                             <div className="hero__rules">
-                                Нажимая кнопку вы соглашаетесь с <a href=""
-                            >Правилами участия в конкурсе</a
-                            >
+                                Нажимая кнопку вы соглашаетесь с <a href="/rules"
+                            >Правилами участия в конкурсе</a>
                             </div>
                         </div>
                     </div>

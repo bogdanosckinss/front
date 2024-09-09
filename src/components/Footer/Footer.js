@@ -2,6 +2,7 @@ import React from "react";
 import '../../css/footer.css'
 import footerLogo from '../../img/footer_logo.svg'
 import footerLogoMobile from '../../img/footer_logo-mob.svg'
+import footerSupport from '../../img/footer-support.svg'
 
 export default function Footer() {
     return (
@@ -33,10 +34,26 @@ export default function Footer() {
                                         <div className="footer__date">9 - 29 сентября 2024 года</div>
                                         <div className="footer__apply">Приём заявок</div>
                                     </div>
+                                    <div className="footer-support footer-support-web">
+                                        <a target="_blank" href="https://t.me/kidsprojecttop">
+                                            <div className="footer-support__icon">
+                                                <img src={footerSupport} alt=""/>
+                                            </div>
+                                            <div className="footer-support__text">Служба поддержки</div>
+                                        </a>
+                                    </div>
                                 </div>
                                 <div className="footer__end">
                                     <div className="footer__date">3 октября 2024 года</div>
                                     <div className="footer__apply">Объявление результатов</div>
+                                </div>
+                                <div className="footer-support footer-support-mob">
+                                    <a target="_blank" href="https://t.me/kidsprojecttop">
+                                        <div className="footer-support__icon">
+                                            <img src={footerSupport} alt="" />
+                                        </div>
+                                        <div className="footer-support__text">Служба поддержки</div>
+                                    </a>
                                 </div>
                             </div>
 

@@ -104,6 +104,10 @@
   bottom: -55px;
   left: 0;
 }
+
+.moderation .plyr__controls::after {
+  width: 0 !important;
+}
 .video-main__item .plyr__controls .plyr__controls__item:first-child {
   z-index: 6;
   margin: 0 5px;
