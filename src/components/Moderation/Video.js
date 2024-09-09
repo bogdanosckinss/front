@@ -43,7 +43,7 @@ export default function Video({video}) {
     ), [video])
 
     return (
-        <article style={{border: 'solid green', marginBottom: 10}}>
+        <article style={{border: 'solid green', marginBottom: 10, width: '277px'}}>
             <p>Username: {video?.users?.name}</p>
             {renderVideo}
             <button onClick={() => acceptVideo(video.id)} style={{background: 'green'}}>Accept</button>
