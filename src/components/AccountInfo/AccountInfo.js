@@ -18,6 +18,7 @@ import UnderReviewMob from "./UnderReviewMob.js";
 import TryAgain from "./TryAgain.js";
 import NetworkError from "./Errors/NetworkError.js";
 import MemoryLimitation from "./Errors/MemoryLimitation.js";
+import {value} from "lodash/seq.js";
 
 export default function AccountInfo() {
     const privateAxios = useAxiosPrivate()
@@ -104,7 +105,7 @@ export default function AccountInfo() {
         }
 
         setCanUpload(false)
-    }, [errorDuringLoading, alreadyUploaded, video, selectedSong, name, lastname, age, phone, city, email, acceptRules, acceptPrivacyPolicy])
+    }, [errorDuringLoading, alreadyUploaded, video, selectedSong, name, lastname, age, phone, city, email, acceptRules, acceptPrivacyPolicy, uploadingVideo])
 
     function removeVideo() {
         setVideo('')
@@ -684,7 +685,7 @@ export default function AccountInfo() {
                                                     <div className="account-form__radios">
                                                         <label className="account-form__label-check">
                                                             <input value={acceptRules}
-                                                                   onChange={(e) => setAcceptRules(e.target.value)}
+                                                                   onChange={(e) => setAcceptRules(value => !value)}
                                                                    className="account-form__check-input"
                                                                    type="checkbox"/>
                                                             <span className="account-form__checkmark"></span>
@@ -697,7 +698,7 @@ export default function AccountInfo() {
                                                         </label>
                                                         <label className="account-form__label-check">
                                                             <input value={acceptPrivacyPolicy}
-                                                                   onChange={(e) => setAcceptPrivacyPolicy(e.target.value)}
+                                                                   onChange={(e) => setAcceptPrivacyPolicy(value => !value)}
                                                                    className="account-form__check-input"
                                                                    type="checkbox"/>
                                                             <span className="account-form__checkmark"></span>
