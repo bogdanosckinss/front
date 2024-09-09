@@ -99,7 +99,7 @@ export default function AccountInfo() {
     useEffect(() => {
         const fieldsToValidate = [video, name, lastname, age, phone, city, email]
 
-        if (!errorDuringLoading && !alreadyUploaded && !fieldsToValidate.some(field => field == '' && field != null) && selectedSong && acceptRules && acceptPrivacyPolicy) {
+        if (isPhoneValid() && !errorDuringLoading && !alreadyUploaded && !fieldsToValidate.some(field => field == '' && field != null) && selectedSong && acceptRules && acceptPrivacyPolicy) {
             setCanUpload(true)
             return
         }
