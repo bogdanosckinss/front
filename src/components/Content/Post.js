@@ -33,7 +33,7 @@ export default function Post({post, isLastLine, findMoreAsync}) {
     }, [post])
 
     function getLikes() {
-        return fetchedPost?.videoLikes?.length ?? 0
+        return fetchedPost?.videoLikes
     }
 
     function selectVideoIndex() {
