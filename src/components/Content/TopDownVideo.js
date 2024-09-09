@@ -385,7 +385,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
                             </a>
                         </li>
                         <li className="account-share-social">
-                            <a href={'https://t.me/share/url?url=' + videoLink()}>
+                            <a href={'https://t.me/share/url?url=' + videoLink()} >
                                 <svg
                                     width="24"
                                     height="19"

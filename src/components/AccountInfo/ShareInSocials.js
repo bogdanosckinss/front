@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function ShareInSocials() {
+export default function ShareInSocials({link}) {
     return (
         <ul className="account-share-socials">
             <li className="account-share-social">
-                <a href="">
+                <a href={'https://vk.com/share.php?url=' + link}>
                     <svg
                         width="29"
                         height="19"
@@ -40,7 +40,7 @@ export default function ShareInSocials() {
                 </a>
             </li>
             <li className="account-share-social">
-                <a href="">
+                <a href={'https://t.me/share/url?url=' + link} >
                     <svg
                         width="24"
                         height="19"

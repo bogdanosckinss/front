@@ -23,7 +23,7 @@ export default function ShareWithFriends({link, tryAgain, canShare, removeVideo}
                     <CopyLink input={input} link={link}/>
                 </div>
 
-                <ShareInSocials/>
+                <ShareInSocials link={link}/>
             </div>
 
             {tryAgain ?  <TryUploadingAgain removeVideo={removeVideo}/> : '' }
