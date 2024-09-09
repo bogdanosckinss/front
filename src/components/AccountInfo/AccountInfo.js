@@ -18,7 +18,6 @@ import UnderReviewMob from "./UnderReviewMob.js";
 import TryAgain from "./TryAgain.js";
 import NetworkError from "./Errors/NetworkError.js";
 import MemoryLimitation from "./Errors/MemoryLimitation.js";
-import {value} from "lodash/seq.js";
 
 export default function AccountInfo() {
     const privateAxios = useAxiosPrivate()
@@ -294,7 +293,7 @@ export default function AccountInfo() {
     const renderVideo = useMemo(() => (
         <Plyr
             clickToPlay={true}
-            options={{controls: ['progress', 'play-large', 'play', 'current-time', 'volume', 'mute', 'fullscreen']}}
+            options={{controls: ['progress', 'play-large', 'play', 'current-time', 'duration', 'volume', 'mute', 'fullscreen']}}
             source={{
                 type: 'video', title: 'Video', sources: [
                     {

@@ -256,6 +256,31 @@
   left: 1px;
   top: -5px;
 }
+.account-main .plyr__controls {
+  justify-content: start;
+}
+.account-main .plyr__controls button:nth-child(2) {
+  padding-top: 3px !important;
+  margin: 0;
+  padding-left: 5px;
+  padding-right: 2px !important;
+}
+.account-main .plyr__controls div:nth-child(4) {
+  margin-right: auto;
+}
+.account-main .plyr__controls div:nth-child(4)::before {
+  margin-right: 5px !important;
+}
+.account-main .plyr__controls .plyr__volume {
+  top: -35px !important;
+  margin: 0 !important;
+  left: 0 !important;
+}
+.account-main .plyr__controls button:nth-child(6) {
+  right: 0;
+  bottom: -37px !important;
+  position: absolute;
+}
 .account__select-song {
   font-size: 14px;
   line-height: 1;
