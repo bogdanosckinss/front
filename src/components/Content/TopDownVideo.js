@@ -101,6 +101,14 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
 
     function toggleShare(e) {
         e.preventDefault()
+        if (navigator.canShare()) {
+            navigator.share({
+                title: 'Звезды будущего',
+                text: '',
+                url: videoLink()
+            })
+            return
+        }
         setShare(share => !share)
         copyBtnRef.current.classList.add('active')
     }
