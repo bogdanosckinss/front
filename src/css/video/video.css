@@ -95,14 +95,14 @@
   position: absolute;
   content: '';
   display: block;
-  border-radius: 17px;
+  border-radius: 0;
   width: 100%;
   height: 150px;
   background-image: url(../../img/video-bg.svg);
   background-size: cover;
-  bottom: 0;
+  background-position: bottom;
+  bottom: -55px;
   left: 0;
-  /* z-index: 1; */
 }
 .video-main__item .plyr__controls .plyr__controls__item:first-child {
   z-index: 6;
