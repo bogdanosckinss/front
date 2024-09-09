@@ -9,10 +9,14 @@ export default function VideoModeration() {
     const [videos, setVideos] = useState([])
     const [noMoreVideosFound, setNoMoreVideosFound] = useState(false)
     const [skipVideosCount, setSkipVideosCount] = useState(0)
+    const [password, setPassword] = useState('')
+    const [accessApproved, setAccessApproved] = useState(false)
 
     useEffect(() => {
-        findMore()
-    }, [])
+        if (accessApproved) {
+            findMore()
+        }
+    }, [accessApproved])
 
     const findMore = useCallback(
         debounce(async () => {
@@ -36,14 +40,26 @@ export default function VideoModeration() {
     )
 
     return(
-        <div>
-            {videos.map(video => {
-                return(
-                   <Video video={video} />
-                )
-            })}
+        <>
+            {accessApproved ? <div>
+                    {videos.map(video => {
+                        return (
+                            <Video video={video}/>
+                        )
+                    })}
 
-            <button onClick={findMore}>Load more</button>
-        </div>
+                    <button onClick={findMore}>Load more</button>
+                </div> :
+                <div>
+                    <label>Пароль</label>
+                    <input style={{border: 'solid black'}} type={password} value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <button onClick={() => {
+                        if (password == process.env.REACT_APP_SECRET_PASSWORD) {
+                            setAccessApproved(true)
+                        }
+                    }}>Войти
+                    </button>
+                </div>}
+        </>
     )
 }

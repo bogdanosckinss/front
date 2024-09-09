@@ -12,6 +12,8 @@ export default function UploadSong() {
     const [description, setDescription] = useState('')
     const [authorName, setAuthorName] = useState('')
     const [songs, setSongs] = useState([])
+    const [password, setPassword] = useState('')
+    const [accessApproved, setAccessApproved] = useState(false)
     const uploadFileService = new UploadFileService()
 
     async function getSongs() {
@@ -67,8 +69,10 @@ export default function UploadSong() {
     }
 
     useEffect(() => {
-        getSongs()
-    }, [])
+        if (accessApproved) {
+            getSongs()
+        }
+    }, [accessApproved])
 
     async function upload(event) {
         event.preventDefault()
@@ -106,60 +110,75 @@ export default function UploadSong() {
     }
 
     return (
-        <form style={{border: 'solid black 1px', padding: 10, margin: 10}}>
-            <div>
+        <>
+            {accessApproved ?
+                <form style={{border: 'solid black 1px', padding: 10, margin: 10}}>
+                    <div>
 
-                <button onClick={test}>TEST</button>
-                <div>
-                    <label>Minus</label>
-                    <input onChange={async (e) => await uploadSongMinus(e.target.files[0])} type='file'
-                           accept='audio/*'/>
-                </div>
-
-                <div>
-                    <label>Plus</label>
-                    <input onChange={async (e) => await uploadSong(e.target.files[0])} type='file'
-                           accept='audio/*'/>
-                </div>
-
-                <div>
-                    <label>Image</label>
-                    <img style={{width: 300}} src={imageLink}/>
-                    <input onChange={async (e) => await uploadImage(e.target.files[0])} type='file' accept='image/*'/>
-                </div>
-
-                <div>
-                    <label>Title</label>
-                    <input value={title} onChange={(e) => setTitle(e.target.value)} type='text'/>
-                </div>
-
-                <div>
-                    <label>Description</label>
-                    <input value={description} onChange={(e) => setDescription(e.target.value)} type='text'/>
-                </div>
-
-                <div>
-                    <label>Author</label>
-                    <input value={authorName} onChange={(e) => setAuthorName(e.target.value)} type='text'/>
-                </div>
-
-
-                <button onClick={async (e) => {
-                    await upload(e)
-                }}>Upload Content
-                </button>
-            </div>
-
-            <div style={{marginTop: 100}}>
-                {songs.map(song => {
-                    return(
-                        <div style={{border: 'solid orange', marginBottom: 10}}>
-                            <p>Song name: {song.title}</p>
-                            <p>Singer: {song.author_name}</p>
+                        <button onClick={test}>TEST</button>
+                        <div>
+                            <label>Minus</label>
+                            <input onChange={async (e) => await uploadSongMinus(e.target.files[0])} type='file'
+                                   accept='audio/*'/>
                         </div>
-                    )
-                })}
-            </div>
-        </form>
-    )
-}
+
+                        <div>
+                            <label>Plus</label>
+                            <input onChange={async (e) => await uploadSong(e.target.files[0])} type='file'
+                                   accept='audio/*'/>
+                        </div>
+
+                        <div>
+                            <label>Image</label>
+                            <img style={{width: 300}} src={imageLink}/>
+                            <input onChange={async (e) => await uploadImage(e.target.files[0])} type='file'
+                                   accept='image/*'/>
+                        </div>
+
+                        <div>
+                            <label>Title</label>
+                            <input value={title} onChange={(e) => setTitle(e.target.value)} type='text'/>
+                        </div>
+
+                        <div>
+                            <label>Description</label>
+                            <input value={description} onChange={(e) => setDescription(e.target.value)} type='text'/>
+                        </div>
+
+                        <div>
+                            <label>Author</label>
+                            <input value={authorName} onChange={(e) => setAuthorName(e.target.value)} type='text'/>
+                        </div>
+
+
+                        <button onClick={async (e) => {
+                            await upload(e)
+                        }}>Upload Content
+                        </button>
+                    </div>
+
+                    <div style={{marginTop: 100}}>
+                        {songs.map(song => {
+                            return (
+                                <div style={{border: 'solid orange', marginBottom: 10}}>
+                                    <p>Song name: {song.title}</p>
+                                    <p>Singer: {song.author_name}</p>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </form> :
+                <div>
+                    <label>Пароль</label>
+                    <input style={{border: 'solid black'}} type={password} value={password}
+                           onChange={(e) => setPassword(e.target.value)}/>
+                    <button onClick={() => {
+                        if (password == process.env.REACT_APP_SECRET_PASSWORD) {
+                            setAccessApproved(true)
+                        }
+                    }}>Войти
+                    </button>
+                </div> }
+                </>
+                )
+            }
