@@ -158,6 +158,7 @@ export default function Login() {
                 {
                     withCredentials: true
                 })
+            window.ym(98274871,'reachGoal','confirmed')
             dispatch(setIsAuthenticated(true))
             hideModal()
             navigate('/videos')

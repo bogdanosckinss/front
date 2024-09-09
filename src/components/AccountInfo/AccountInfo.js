@@ -213,6 +213,7 @@ export default function AccountInfo() {
                 social_media_link: socialMediaLink,
                 age: age,
             })
+            window.ym(98274871,'reachGoal','videoUploaded')
             setErrorDuringLoading(false)
             setAlreadyUploaded(true)
             setUnderModeration(true)
