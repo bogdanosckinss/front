@@ -28,7 +28,6 @@
   position: absolute;
   bottom: 0;
   z-index: 1;
-
   background-image: url(../../img/videobg.svg);
   background-size: cover;
 }

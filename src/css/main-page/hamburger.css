@@ -76,14 +76,14 @@
   position: fixed;
   right: -100%;
   top: -100%;
-  border-radius: 27px 0 27px 27px;
+  border-radius: 0 0 27px 27px;
   min-width: 250px;
   background: #0647c7;
   display: block;
-  width: 67vw;
+  width: 100vw;
   height: 430px;
   z-index: 7;
-  padding: 70px 55px 25px;
+  padding: 49px 55px 25px;
   transition: all 0.2s linear;
   opacity: 0;
 }

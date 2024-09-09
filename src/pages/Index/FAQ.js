@@ -103,7 +103,8 @@ export default function FAQ() {
                                 </AccordionItemHeading>
                                 <AccordionItemPanel className="ac-panel">
                                     <p className="ac-text">
-                                        Да, трансфер оплачиваем мы.
+                                        Да, мы организуем трансфер для победителей по России, если они
+                                        проживают не в Москве и МО.
                                     </p>
                                 </AccordionItemPanel>
                             </AccordionItem>

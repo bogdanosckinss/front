@@ -305,6 +305,7 @@
   z-index: 1;
   font-size: 18px;
   line-height: 1.25;
+  font-family: 'myfontRegular';
 }
 .form-problems__buttin svg {
   position: absolute;
