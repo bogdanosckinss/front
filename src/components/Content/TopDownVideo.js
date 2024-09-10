@@ -3,8 +3,10 @@ import videoHeartBtn from "../../img/video-heart-btn.svg";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import Plyr from "plyr-react";
 import { useInView } from 'react-intersection-observer'
+import {useParams} from "react-router-dom";
 
 export default function TopDownVideo({video, userInteracts, isLastLine, findMoreAsync}) {
+    const params = useParams()
     const privateAxios = useAxiosPrivate()
     const [share, setShare] = useState(false)
     const [firstRender, setFirstRender] = useState(true)
@@ -35,12 +37,14 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
     }, [])
 
     useEffect(() => {
+        const videoId = params.id
+
         if (firstRender) {
             setFirstRender(value => !value)
             return
         }
 
-        if (isLastLine) {
+        if (isLastLine && !videoId) {
             findMoreAsync()
         }
 
