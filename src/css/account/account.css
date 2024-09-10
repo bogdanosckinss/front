@@ -246,6 +246,12 @@
 .plyr__volume button {
   position: relative;
 }
+.plyr audio, .plyr iframe, .plyr video {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
 .plyr__volume button::after {
   display: block;
   z-index: 5;

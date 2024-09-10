@@ -234,7 +234,7 @@ export default function Header() {
                                         value={inputValue}
                                         onClick={() => {
                                             if (options.length > 0) {
-                                                ref.current.classList.add('active')
+                                                ref.current?.classList?.add('active')
                                             }
                                         }}
                                         onChange={handleInputChange}
