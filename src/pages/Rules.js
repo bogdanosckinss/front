@@ -712,7 +712,7 @@ export default function Rules() {
                                 <div className="footer__s">
                                     <div className="footer__left">
                                         <div className="footer__logo">
-                                            <a href="">
+                                            <a href="/">
                                                 <picture>
                                                     <source
                                                         srcSet={footerLogo}

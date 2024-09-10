@@ -24,14 +24,6 @@ export default function Login() {
     const [hideConfirmation, setHideConfirmation] = useState(false);
     const [isMasked, setIsMasked] = useState(false)
     const phoneRef = useRef(null)
-
-    function isEmailValid() {
-        if (phone == null) {
-            return true
-        }
-        return phone?.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-    }
-
     const handleCheckboxChange = (e) => {
         setIsChecked(e.target.checked)
     }
@@ -63,21 +55,50 @@ export default function Login() {
         return phone.replaceAll('(', '').replaceAll(')', '').replaceAll('-', '').replaceAll(' ', '')
     }
 
+    function cleanedNumber(value) {
+        return ('' + value).replace(/\D/g, '')
+    }
+
     function handleNumberInput(event) {
-        const value = event.target.value
+        const phone = event.target.value
+        const cleaned = cleanedNumber(phone)
+        let value = ''
 
-        if (value == '') {
-            setPhone('+7 (___) ___-__-__');
-            return
+        if (cleaned.length == 1 && cleaned != '7') {
+            value = '+ 7 (' + cleaned.slice(0, 4)
+        }else {
+            value = '+ 7 (' + cleaned.slice(1, 4)
         }
 
-        let input = value.replace(/\D/g, '');
-
-        if (input.length > 1) {
-            input = `+7 (${input.substring(1, 4)}) ${input.substring(4, 7)}-${input.substring(7, 9)}-${input.substring(9, 11)}`;
+        if (cleaned.length > 4) {
+            value += ') ' + cleaned.slice(4, 7)
         }
 
-        setPhone(input)
+        if (cleaned.length > 7) {
+            value += '-' + cleaned.slice(7, 9)
+        }
+
+        if (cleaned.length > 9) {
+            value += '-' + cleaned.slice(9, 11)
+        }
+
+        setPhone(value)
+
+        //
+        // const value = event.target.value
+        //
+        // if (value == '') {
+        //     setPhone('+7 (___) ___-__-__');
+        //     return
+        // }
+        //
+        // let input = value.replace(/\D/g, '');
+        //
+        // if (input.length > 1) {
+        //     input = `+7 (${input.substring(1, 4)}) ${input.substring(4, 7)}-${input.substring(7, 9)}-${input.substring(9, 11)}`;
+        // }
+
+        // setPhone(input)
     }
 
     const handleInputFocus = () => {
@@ -109,10 +130,10 @@ export default function Login() {
     function checkReplacement(str) {
         const validChars = /^[\d\+\(\)\-\s]*$/;
         if (!validChars.test(str)) {
-            return false;
+            return false
         }
 
-        return !/_/.test(str) && phone.length == 18
+        return !/_/.test(str) && phone.length == 19
     }
 
 

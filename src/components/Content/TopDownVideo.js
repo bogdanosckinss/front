@@ -236,7 +236,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
                             }
                         </div>
                         <div className="video__author-data">
-                            <div className="video__author-name">{video?.users?.name}</div>
+                            <div className="video__author-name">{video?.users?.name + ' ' + video?.users?.lastname}</div>
                             <div className="video__author-ditails">
                     <span className="video__author-city"
                     >г. <span>{video?.users?.city}</span>{video?.users?.age ? <>, <span>{video?.users?.age}</span> лет</> : '' }</span>
