@@ -742,16 +742,15 @@ export default function Rules() {
                                 <div className="footer__botton">
                                     <div className="footer__polits">
                                         <div className="footer__polit">
-                                            <a href="https://www.detmir.ru/privacy_policy/"
+                                            <a target="_blank" href="https://www.detmir.ru/privacy_policy/"
                                             >Политика конфиденциальности</a
                                             >
                                         </div>
                                         <div className="footer__polit">
-                                            <a href="https://bonus.detmir.ru/pdn_lk"
+                                            <a target="_blank" href="https://bonus.detmir.ru/pdn_lk"
                                             >Политика обработки персональных данных
                                             </a>
                                         </div>
-
                                     </div>
 
                                     <p className="footer__botton-p">© KIDS PROJECT, 2024</p>

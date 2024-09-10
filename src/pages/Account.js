@@ -58,17 +58,17 @@ export default function Account() {
                             <div className="footer__botton">
                                 <div className="footer__polits">
                                     <div className="footer__polit">
-                                        <a href="https://www.detmir.ru/privacy_policy/"
+                                        <a target="_blank" href="https://www.detmir.ru/privacy_policy/"
                                         >Политика конфиденциальности</a
                                         >
                                     </div>
                                     <div className="footer__polit">
-                                        <a href="https://bonus.detmir.ru/pdn_lk"
+                                        <a target="_blank" href="https://bonus.detmir.ru/pdn_lk"
                                         >Политика обработки персональных данных
                                         </a>
                                     </div>
                                     <div className="footer__polit">
-                                        <a href="/rules">Правила участия в конкурсе</a>
+                                        <a target="_blank" href="/rules">Правила участия в конкурсе</a>
                                     </div>
                                 </div>
 
