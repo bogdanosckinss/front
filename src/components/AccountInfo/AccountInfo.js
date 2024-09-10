@@ -805,7 +805,7 @@ export default function AccountInfo() {
                                         }
                                     </form>
                                     {alreadyUploaded ? '' : <div className="account__sent-information">
-                                        Информация о ФИО, возрасте и городе учассника является публичной
+                                        Информация о ФИО, возрасте и городе участника является публичной
                                         информацией после публикации
                                     </div>}
                                     {alreadyUploaded && underModeration && !allowed ? <UnderReview/> : ''}

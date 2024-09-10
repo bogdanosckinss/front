@@ -31,7 +31,7 @@ export default function MemoryLimitation() {
                 </svg>
             </div>
             <div className="account-error-video__text">
-                Видео превышает допустимый размер в 50Mб. Пожалуйста,
+                Видео превышает допустимый размер в 150Mб. Пожалуйста,
                 прикрепите видео соответствующее параметрам загрузки.
             </div>
         </div>

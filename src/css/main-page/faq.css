@@ -63,6 +63,9 @@
 .ac-text a {
   color: #0073e6;
 }
+.ac-trigger br {
+  display: none;
+}
 @media (max-width: 1200px) {
   .ac .ac-trigger {
     font-size: 24px !important;
@@ -100,6 +103,9 @@
   }
   .faq__title {
     font-size: 36px;
+  }
+  .ac-trigger br {
+    display: block;
   }
 }
 @media (max-width: 550px) {

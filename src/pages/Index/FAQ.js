@@ -19,7 +19,7 @@ export default function FAQ() {
                             <AccordionItem activeClassName='is-active faq__item ac' className="faq__item ac">
                                 <AccordionItemHeading className="ac-header">
                                     <AccordionItemButton className="ac-trigger">
-                                        Кто может принять участие в розыгрыше?
+                                        Кто может принять участие <br />в розыгрыше?
                                     </AccordionItemButton>
                                 </AccordionItemHeading>
                                 <AccordionItemPanel className="ac-panel">
@@ -38,7 +38,12 @@ export default function FAQ() {
                                 </AccordionItemHeading>
                                 <AccordionItemPanel className="ac-panel">
                                     <p className="ac-text">
-                                        Для участия нужно: записать видео, где ребенок поет один из треков, который заявлен в конкурсе, и загрузить видео на сайт like.detmir.ru с 9 по 29 сентября 2024г. Список треков, которые можно использовать, здесь. Важно исполнить трек самостоятельно: петь можно под минус или инструментальный аккомпанемент, но голос ребенка-участника должно быть хорошо слышно, чтобы жюри могло оценить вокальные данные ребенка.
+                                        Для участия нужно: записать видео, где ребенок поет один из
+                                        треков, который заявлен в конкурсе, и загрузить видео на сайт <a target="_blank" href="like.detmir.ru">like.detmir.ru</a> с 9 по
+                                        29 сентября 2024г. Список треков, которые можно использовать, <a href="#songs">здесь</a>. Важно исполнить трек самостоятельно:
+                                        петь можно под минус или инструментальный аккомпанемент, но голос
+                                        ребенка-участника должно быть хорошо слышно, чтобы жюри могло
+                                        оценить вокальные данные ребенка.
                                     </p>
                                 </AccordionItemPanel>
                             </AccordionItem>
@@ -59,7 +64,7 @@ export default function FAQ() {
                             <AccordionItem activeClassName='is-active faq__item ac' className="faq__item ac">
                                 <AccordionItemHeading className="ac-header">
                                     <AccordionItemButton className="ac-trigger">
-                                        Могу ли я просить проголосовать за себя друзей?
+                                        Могу ли я просить проголосовать <br />за себя друзей?
                                     </AccordionItemButton>
                                 </AccordionItemHeading>
                                 <AccordionItemPanel className="ac-panel">
@@ -117,7 +122,11 @@ export default function FAQ() {
                                 </AccordionItemHeading>
                                 <AccordionItemPanel className="ac-panel">
                                     <p className="ac-text">
-                                        3 октября на сайте like.detmir.ru будут опубликованы итоги конкурса, и с каждым победителем мы свяжемся по контактным данным, указанным при загрузке видео на сайт. Призы вручим победителям 19 октября в концертном зале «Москва» на сцене Премии «СуперЛайкШоу».
+                                        3 октября на сайте <a target="_blank" href="like.detmir.ru">like.detmir.ru</a> будут
+                                        опубликованы итоги конкурса, и с каждым победителем мы свяжемся по
+                                        контактным данным, указанным при загрузке видео на сайт. Призы
+                                        вручим победителям 19 октября в концертном зале «Москва» на сцене
+                                        Премии «СуперЛайкШоу».
                                     </p>
                                 </AccordionItemPanel>
                             </AccordionItem>
@@ -132,7 +141,7 @@ export default function FAQ() {
                                     <p className="ac-text">
                                         Если ролик не проходит модерацию, убедитесь, что он соответствует следующим
                                         требованиям: длительность 30 – 60 секунд, формат видео mp4, mov, avi, размером
-                                        не более 50 Мб. Также проверьте, что в ролике ребенок исполняет один из треков,
+                                        не более 150 Мб. Также проверьте, что в ролике ребенок исполняет один из треков,
                                         указанных в списке на сайте конкурса. Если все условия соблюдены, пожалуйста,
                                         обратитесь в <a target="_blank" href="https://t.me/kidsprojecttop"
                                     >службу поддержки</a>

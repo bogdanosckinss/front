@@ -63,7 +63,7 @@ export default function Songs() {
     return (
         <>
             <div id="songminus" className="songs">
-                <div className="songs__wrapper">
+                <div id="songs" className="songs__wrapper">
                     <div className="container">
                         <div className="songs__title">
                             Выбирайте песню и покажите талант ребёнка всей стране
