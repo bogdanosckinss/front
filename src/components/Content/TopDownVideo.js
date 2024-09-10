@@ -13,6 +13,8 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
     const copyBtnRef = useRef(null)
     const playerRef = useRef()
     const inputREF = useRef()
+    const videoDownRef = useRef()
+    const postContainerRef = useRef()
 
     useEffect(() => {
         setLikes(video.videoLikes)
@@ -29,15 +31,16 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
     }, [])
 
     function runHeartsAnimation() {
-        const post = postRef.current
+        const post = postContainerRef.current
 
         const hearts = post.querySelectorAll('.video-heart');
         const likeText = post.querySelector('.video__btn-span-text');
-        const likesContainer = post.querySelector('.video__likes');
+        const likesContainer = videoDownRef.current.querySelector('.video__likes');
+        console.log(likesContainer)
         const heartsContainer = post.querySelector('.video__hearts');
 
-        if (post.classList.contains('liked')) {
-            post.classList.remove('liked');
+        if (post?.classList?.contains('liked')) {
+            post?.classList?.remove('liked');
             likesContainer.classList.remove('active');
             likeText.textContent = 'Голосовать';
 
@@ -47,7 +50,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
 
             heartsContainer.style.display = 'none';
         } else {
-            post.classList.add('liked');
+            post?.classList?.add('liked');
             likesContainer.classList.add('active');
             likeText.textContent = 'Голос Принят';
 
@@ -185,7 +188,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
             {/*</Helmet>*/}
 
             <li ref={postRef} className={'video-main__item ' + (isLiked() ? 'liked' : '')}>
-                <div className="video-main__item-cover">
+                <div ref={postContainerRef} className="video-main__item-cover">
                     <span>
                         {renderVideo}
                     </span>
@@ -278,7 +281,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
                     </div>
                 </div>
 
-                <div className="video__down">
+                <div ref={videoDownRef} className="video__down">
                     <div className={'video__likes ' + (isLiked() ? 'active' : '')}>
                         <div className="video__like-icon" onClick={toggleLike}>
                             <svg fill={isLiked() ? '#FF0199' : 'none'} xmlns="http://www.w3.org/2000/svg">
