@@ -855,6 +855,7 @@
   align-items: flex-start;
   padding: 7px;
   margin-top: 48px;
+  height: 40px;
 }
 .application-checking-block {
   background: rgba(255, 1, 153, 0.28);

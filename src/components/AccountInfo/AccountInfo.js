@@ -231,6 +231,17 @@ export default function AccountInfo() {
         setUploadingImage(true)
         const link = await uploadFileService.upload(image, 'images')
         setImage(link)
+
+        if (alreadyUploaded) {
+            try {
+                await privateAxios.put('/users/image', {
+                    image: link
+                })
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
         setUploadingImage(false)
     }
 
@@ -320,10 +331,6 @@ export default function AccountInfo() {
                                 <label className="account__upload-label">
                                     <input
                                         onChange={async (e) => {
-                                            if (alreadyUploaded && !underModeration) {
-                                                return
-                                            }
-
                                             if (e.target.files.length == 0) {
                                                 return
                                             }
