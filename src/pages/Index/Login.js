@@ -83,25 +83,9 @@ export default function Login() {
         }
 
         setPhone(value)
-
-        //
-        // const value = event.target.value
-        //
-        // if (value == '') {
-        //     setPhone('+7 (___) ___-__-__');
-        //     return
-        // }
-        //
-        // let input = value.replace(/\D/g, '');
-        //
-        // if (input.length > 1) {
-        //     input = `+7 (${input.substring(1, 4)}) ${input.substring(4, 7)}-${input.substring(7, 9)}-${input.substring(9, 11)}`;
-        // }
-
-        // setPhone(input)
     }
 
-    const handleInputFocus = () => {
+    const handleInputFocus = (event) => {
         if (!isMasked) {
             setPhone('+7 (___) ___-__-__');
             setIsMasked(true);
@@ -258,7 +242,14 @@ export default function Login() {
                         ><input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Ваше имя"
                         /></label>
                         <label className="login__label"
-                        ><input ref={phoneRef} value={phone} pattern='[0-9]*' className="js-phone-input" onChange={(e) => handleNumberInput(e)} onFocus={handleInputFocus} inputMode='tel' placeholder="Ваш номер телефона"/>
+                        ><input ref={phoneRef} onClick={(event) => {
+                            if (phone == '+7 (___) ___-__-__') {
+                                event.target.setSelectionRange(2, 2)
+                            }
+                            if (phone == '+ 7 (') {
+                                event.target.setSelectionRange(5, 5)
+                            }
+                        }} value={phone} pattern='[0-9]*' className="js-phone-input" onChange={(e) => handleNumberInput(e)} onFocus={handleInputFocus} inputMode='tel' placeholder="Ваш номер телефона"/>
                         </label>
                         <div className="login__agree">
                             <label className="login__label-check">
