@@ -10,6 +10,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
     const [share, setShare] = useState(false)
     const [firstRender, setFirstRender] = useState(true)
     const [likes, setLikes] = useState(0)
+    const [liked, setLiked] = useState(false)
     const copyBtnRef = useRef(null)
     const playerRef = useRef()
     const inputREF = useRef()
@@ -17,6 +18,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
     const postContainerRef = useRef()
 
     useEffect(() => {
+        setLiked(video?.is_liked_by_me)
         setLikes(video.videoLikes)
         const handleClickOutside = (event) => {
             if (copyBtnRef.current && !copyBtnRef.current.contains(event.target)) {
@@ -36,11 +38,10 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
         const hearts = post.querySelectorAll('.video-heart');
         const likeText = post.querySelector('.video__btn-span-text');
         const likesContainer = videoDownRef.current.querySelector('.video__likes');
-        console.log(likesContainer)
         const heartsContainer = post.querySelector('.video__hearts');
-
-        if (post?.classList?.contains('liked')) {
-            post?.classList?.remove('liked');
+        setLiked(value => !value)
+        if (post.classList.contains('liked')) {
+            post.classList.remove('liked');
             likesContainer.classList.remove('active');
             likeText.textContent = 'Голосовать';
 
@@ -50,7 +51,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
 
             heartsContainer.style.display = 'none';
         } else {
-            post?.classList?.add('liked');
+            post.classList.add('liked');
             likesContainer.classList.add('active');
             likeText.textContent = 'Голос Принят';
 
@@ -99,7 +100,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
     }
 
     function isLiked() {
-        return video?.is_liked_by_me ?? false
+        return liked
     }
 
     async function toggleLike() {

@@ -88,9 +88,20 @@ export default function Login() {
     const handleInputFocus = (event) => {
         if (!isMasked) {
             setPhone('+7 (___) ___-__-__');
-            setIsMasked(true);
+            setIsMasked(true)
         }
     }
+
+    useEffect(() => {
+        if (isMasked) {
+            if (phone == '+7 (___) ___-__-__' || phone == '') {
+                phoneRef.current.setSelectionRange(2, 2)
+            }
+            if (phone == '+ 7 (') {
+                phoneRef.current.setSelectionRange(5, 5)
+            }
+        }
+    }, [isMasked])
 
 
     function hideModal() {
