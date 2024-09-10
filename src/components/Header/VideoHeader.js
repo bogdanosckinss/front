@@ -183,9 +183,9 @@ export default function VideoHeader() {
                                     <path
                                         d="M21.0005 27.0002L13.5005 18.0002L21.0005 9.00024"
                                         stroke="#E1F0FF"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                     />
                                 </svg>
                             </a>

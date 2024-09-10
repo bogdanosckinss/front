@@ -2,25 +2,17 @@ import React, {useEffect, useMemo, useRef, useState} from "react";
 import videoHeartBtn from "../../img/video-heart-btn.svg";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import Plyr from "plyr-react";
-import { useInView } from 'react-intersection-observer'
 import {useParams} from "react-router-dom";
 
-export default function TopDownVideo({video, userInteracts, isLastLine, findMoreAsync}) {
+export default function TopDownVideo({postRef, video, userInteracts, isLastLine, findMoreAsync}) {
     const params = useParams()
     const privateAxios = useAxiosPrivate()
     const [share, setShare] = useState(false)
     const [firstRender, setFirstRender] = useState(true)
     const [likes, setLikes] = useState(0)
-    const postRef = useRef()
     const copyBtnRef = useRef(null)
     const playerRef = useRef()
     const inputREF = useRef()
-    const { ref, inView } = useInView({
-        threshold: 0.5,
-        rootMargin: '0px',
-        triggerOnce: false,
-        root: document.getElementById('postlist'),
-    })
 
     useEffect(() => {
         setLikes(video.videoLikes)
@@ -35,35 +27,6 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [])
-
-    useEffect(() => {
-        const videoId = params.id
-
-        if (firstRender) {
-            setFirstRender(value => !value)
-            return
-        }
-
-        if (isLastLine && !videoId) {
-            findMoreAsync()
-        }
-
-        // try {
-        //     if (inView == true) {
-        //         const promise = playerRef.current.plyr.play()
-        //         if(promise !== undefined){
-        //             promise.then(() => {}).catch(error => {
-        //                 playerRef.current.plyr.config.muted = true;
-        //                 playerRef.current.plyr.play()
-        //             });
-        //         }
-        //         return
-        //     }
-        //     playerRef.current.plyr.pause()
-        // } catch (e) {
-        //     console.log(e)
-        // }
-    }, [inView])
 
     function runHeartsAnimation() {
         const post = postRef.current
@@ -222,7 +185,7 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
             {/*</Helmet>*/}
 
             <li ref={postRef} className={'video-main__item ' + (isLiked() ? 'liked' : '')}>
-                <div ref={ref} className="video-main__item-cover">
+                <div className="video-main__item-cover">
                     <span>
                         {renderVideo}
                     </span>
@@ -413,16 +376,16 @@ export default function TopDownVideo({video, userInteracts, isLastLine, findMore
                                     <path
                                         d="M14.5309 3.17432C19.975 3.17432 21.5312 4.72987 21.5312 10.1743C21.5312 15.6188 19.9151 17.1743 14.5309 17.1743C9.14663 17.1743 7.53125 15.6188 7.53125 10.1743C7.53125 4.72987 9.0868 3.17432 14.5309 3.17432Z"
                                         stroke="#0647C7"
-                                        stroke-width="1.6"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeWidth="1.6"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                     />
                                     <path
                                         d="M4.23383 9.17432C3.73068 10.2837 3.53125 11.7874 3.53125 13.7897C3.53125 19.5333 5.23539 21.1743 10.9155 21.1743C12.9126 21.1743 14.4183 20.9714 15.5312 20.4587"
                                         stroke="#0647C7"
-                                        stroke-width="1.6"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeWidth="1.6"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                     />
                                 </svg>
                                 <span className="tooltiptext js-myTooltip"

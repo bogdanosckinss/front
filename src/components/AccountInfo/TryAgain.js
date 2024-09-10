@@ -21,8 +21,9 @@ export default function TryAgain({removeVideo}) {
                     конкурса, и попробуйте снова
                 </div>
                 <div className="try-again__text">
-                    Если у вас возникли вопросы или нужна помощь, не стесняйтесь
-                    обратиться в службу поддержки
+                    Если у вас возникли вопросы или нужна помощь, не
+                    стесняйтесь обратиться в <a target="_blank" href="https://t.me/kidsprojecttop"
+                    >службу поддержки</a>
                 </div>
             </div>
             <button onClick={tryAgain} className="try-again__btn button-special">

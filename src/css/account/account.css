@@ -994,6 +994,9 @@
   font-size: 12px;
   line-height: 1.32;
 }
+.try-again__text a {
+  text-decoration: underline;
+}
 .try-again__btn {
   width: 260px;
   height: 50px;

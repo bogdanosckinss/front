@@ -200,8 +200,8 @@ export default function Header() {
                                     >
                                         <path
                                             d="M21.0005 27.0002L13.5005 18.0002L21.0005 9.00024"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
                                         />
                                     </svg>
                                 </a>

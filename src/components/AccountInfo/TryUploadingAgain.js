@@ -22,7 +22,8 @@ export default function TryUploadingAgain({removeVideo}) {
                 </div>
                 <div className="try-again__text">
                     Если у вас возникли вопросы или нужна помощь, не
-                    стесняйтесь обратиться в службу поддержки
+                    стесняйтесь обратиться в <a target="_blank" href="https://t.me/kidsprojecttop"
+                    >службу поддержки</a>
                 </div>
             </div>
             <button onClick={tryAgain} className="try-again__btn button-special">

@@ -1,15 +1,14 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import Post from "../Content/Post.js";
 import {setPosts} from "../../features/posts/postsSlice.js";
 import {useSearchParams} from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
-import debounce from "lodash/debounce.js";
+import {InView} from "react-intersection-observer";
 
 export default function VideosResult() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [skipVideosCount, setSkipVideosCount] = useState(0)
-    const [noMoreVideosFound, setNoMoreVideosFound] = useState(false)
     const privateAxios = useAxiosPrivate()
     const dispatch = useDispatch()
     const { posts, query } = useSelector((state) => state.posts)
@@ -32,30 +31,23 @@ export default function VideosResult() {
     }
 
     function findMoreAsync() {
-        findMore(searchParams.get('query') ?? query)
-    }
-
-    const findMore = useCallback(
-        debounce(async (query) => {
-            let response = {}
-            try {
-                response = await privateAxios.get('content/search/videos?query=' + query + '&skip=' + skipVideosCount)
+        const composedQuery = searchParams.get('query') ?? query
+        privateAxios
+            .get('content/search/videos?query=' + composedQuery + '&skip=' + skipVideosCount)
+            .then(response => {
+                if (response.data.length == 0) {
+                    return
+                }
 
                 const allVideos = [...posts, ...response.data]
                 dispatch(setPosts(allVideos))
                 setSkipVideosCount(allVideos.length)
-
-                if (response.data.length == 0) {
-                    setNoMoreVideosFound(true)
-                    return
-                }
                 setSearchParams({skip: allVideos.length})
-            } catch (err) {
-                console.log(err)
-            }
-        }, 1000),
-        [privateAxios, dispatch, skipVideosCount]
-    )
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     useEffect(() => {
         dispatch(setPosts([]))
@@ -74,16 +66,28 @@ export default function VideosResult() {
         <div className="videos-result">
             <div className="videos-result__wrapper">
                 <div className="videos-result__container">
-                    <ul className="videos-result__list">
+                    <ul id='videos-result__list' className="videos-result__list">
                         {
                             posts?.map((post, key) => {
                                 return (
-                                    <Post key={key} post={post} isLastLine={isLastLine(key)} findMoreAsync={findMoreAsync} />
+                                    <InView onChange={(inView, entry) => {
+                                        if (isLastLine(key) && inView) {
+                                            findMoreAsync()
+                                        }
+                                    }} threshold={1} triggerOnce={true} key={post.id + 'view'}>
+                                        {({ref}) => {
+                                            return(
+                                                <Post
+                                                    postRef={ref}
+                                                    key={post.id + '-main'}
+                                                    post={post}
+                                                />
+                                            )
+                                        }}
+                                    </InView>
                                 )
                             })
                         }
-
-                        {/*{ !noMoreVideosFound ? <button onClick={findMoreAsync}>LOAD MORE</button> : 'No more videos found' }*/}
                     </ul>
                 </div>
             </div>

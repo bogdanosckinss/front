@@ -1,10 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import TopDownVideo from "./TopDownVideo.js";
 import {useSearchParams} from "react-router-dom";
-import {useCallback, useEffect, useState} from "react";
-import debounce from "lodash/debounce.js";
+import React, {useEffect, useState} from "react";
 import {setPosts} from "../../features/posts/postsSlice.js";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import {InView} from "react-intersection-observer";
 
 export default function VideoMain() {
     const [skipVideosCount, setSkipVideosCount] = useState(0)
@@ -12,7 +12,6 @@ export default function VideoMain() {
     const [videos, setVideos] = useState([])
     const [userInteracts, setUserInteracts] = useState(true)
     const dispatch = useDispatch()
-    const [noMoreVideosFound, setNoMoreVideosFound] = useState(false)
     const privateAxios = useAxiosPrivate()
     const { posts, query } = useSelector((state) => state.posts)
 
@@ -20,7 +19,8 @@ export default function VideoMain() {
         const id = searchParams.get('video')
         const videoIndex = posts.findIndex(video => video.id == id)
         setVideos(posts.filter((video, index) => index >= videoIndex))
-    }, [posts]);
+        setSkipVideosCount(posts.length)
+    }, [posts])
 
     useEffect(() => {
         document.body.addEventListener("mousemove", function () {
@@ -28,33 +28,26 @@ export default function VideoMain() {
                 setUserInteracts(true)
             }
         })
-    }, []);
+    }, [])
 
     function findMoreAsync() {
-        findMore(searchParams.get('query') ?? query)
-    }
-
-    const findMore = useCallback(
-        debounce(async (query) => {
-            let response = {}
-            try {
-                response = await privateAxios.get('content/search/videos?query=' + query + '&skip=' + skipVideosCount)
+        const composedQuery = searchParams.get('query') ?? query
+        privateAxios
+            .get('content/search/videos?query=' + composedQuery + '&skip=' + skipVideosCount)
+            .then(response => {
+                if (response.data.length == 0) {
+                    return
+                }
 
                 const allVideos = [...posts, ...response.data]
                 dispatch(setPosts(allVideos))
                 setSkipVideosCount(allVideos.length)
-
-                if (response.data.length == 0) {
-                    setNoMoreVideosFound(true)
-                    return
-                }
-                // setSearchParams({skip: allVideos.length})
-            } catch (err) {
-                console.log(err)
-            }
-        }, 1000),
-        [privateAxios, dispatch, skipVideosCount]
-    )
+                setSearchParams({skip: allVideos.length})
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     function isLastLine(key) {
         return key == posts.length - 1
@@ -69,7 +62,24 @@ export default function VideoMain() {
                             {
                                 videos.map((video, key) => {
                                     return(
-                                        <TopDownVideo key={key} video={video} userInteracts={userInteracts} isLastLine={isLastLine} findMoreAsync={findMoreAsync} />
+                                        <InView onChange={(inView, entry) => {
+                                            if (isLastLine(key) && inView) {
+                                                findMoreAsync()
+                                            }
+                                        }} threshold={0.4} triggerOnce={true} key={video.id + 'view'}>
+                                            {({ref}) => {
+                                                return(
+                                                    <TopDownVideo
+                                                        postRef={ref}
+                                                        key={video.id + '-topdown'}
+                                                        video={video}
+                                                        userInteracts={userInteracts}
+                                                        isLastLine={isLastLine}
+                                                        findMoreAsync={findMoreAsync}
+                                                    />
+                                                )
+                                            }}
+                                        </InView>
                                     )
                                 })
                             }

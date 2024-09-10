@@ -4,29 +4,12 @@ import {setSelectedVideoIndex} from "../../features/posts/postsSlice.js";
 import playImage from "../../img/play.svg";
 import heart from "../../img/heart.svg";
 import {createSearchParams, useNavigate} from "react-router-dom";
-import {useInView} from "react-intersection-observer";
 
-export default function Post({post, isLastLine, findMoreAsync}) {
+export default function Post({postRef, post}) {
     const { query } = useSelector((state) => state.posts)
     const [fetchedPost, setFetchedPost] = useState({})
-    const [firstRender, setFirstRender] = useState(true)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { ref, inView } = useInView({
-        threshold: 0.5,
-        rootMargin: '0px',
-        triggerOnce: true,
-        root: document.getElementById('postlist'),
-    })
-
-    useEffect(() => {
-        if (firstRender) {
-            setFirstRender(value => !value)
-            return
-        }
-
-        findMoreAsync()
-    }, [inView])
 
     useEffect(() => {
         setFetchedPost(post)
@@ -49,7 +32,7 @@ export default function Post({post, isLastLine, findMoreAsync}) {
     }
 
     return (
-        <li ref={ref} className="videos-result__item" onClick={selectVideoIndex}>
+        <li ref={postRef} className="videos-result__item" onClick={selectVideoIndex}>
             <video className="videos-result__video" loop>
                 {fetchedPost?.link ? <source type="video/mp4" src={fetchedPost?.link}/> : '' }
             </video>
