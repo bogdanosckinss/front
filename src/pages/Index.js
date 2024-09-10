@@ -13,7 +13,9 @@ import Join from "./Index/Join.js";
 import Login from "./Index/Login.js";
 import Footer from "../components/Footer/Footer.js";
 import {Helmet} from "react-helmet";
+import {useSelector} from "react-redux";
 export default function Index() {
+    const { loading, isAuthenticated } = useSelector((state) => state.auth)
     useEffect(() => {
         document.body.classList.forEach(item => document.body.classList.remove(item))
         document.body.classList.add('body-main')
@@ -42,6 +44,9 @@ export default function Index() {
 
     return(
         <>
+            <div className="loader-popup" style={loading ? {display: 'block'} : {display: 'none'}}>
+                <div className="loader-popup__loading loader"></div>
+            </div>
             <Helmet>
                 <link
                     rel="stylesheet"
@@ -64,11 +69,11 @@ export default function Index() {
                                 </div>
                                 <div className="prizes__left-text">
                                     <div className="prizes__subtitle">
-                                        Выступление на премии «СуперЛайкШоу-2024»
+                                        Выступление на премии «СуперЛайкШоу-2024»
                                     </div>
                                     <p>
-                                        Победители исполнят трек детского мира и выступят
-                                        с ним на розовой дорожке Музыкальной Премии СТС Kids х Kids
+                                        Победители исполнят трек детского мира и выступят
+                                        с ним на розовой дорожке Музыкальной Премии СТС Kids х Kids
                                         Project
                                     </p>
                                 </div>
@@ -80,8 +85,8 @@ export default function Index() {
                                 <div className="prizes__left-text">
                                     <div className="prizes__subtitle">Подарочный сертификат</div>
                                     <p>
-                                        Каждый победитель получит подарочный сертификат на запись
-                                        своей песни в профессиональной студии звукозаписи
+                                        Каждый победитель получит подарочный сертификат на запись
+                                        своей песни в профессиональной студии звукозаписи
                                     </p>
                                 </div>
                             </div>
