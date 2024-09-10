@@ -310,7 +310,7 @@ export default function Login() {
                                         <input
                                             className="js-code__input"
                                             maxLength="1"
-                                            type="text"
+                                            type="number"
                                             ref={(el) => inputsRef.current[index] = el}
                                             onInput={(e) => handleCodeInputChange(e, index)}
                                             onKeyDown={(e) => handleCodeInputKeyDown(e, index)}

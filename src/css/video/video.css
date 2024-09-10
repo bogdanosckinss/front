@@ -104,7 +104,14 @@
   bottom: -55px;
   left: 0;
 }
-
+@media (max-width: 480px) {
+  .plyr--video .plyr__controls {
+    padding: 10px !important;
+    padding: var(--plyr-control-spacing, 10px) !important;
+    padding-top: 35px !important;
+    padding-top: calc(var(--plyr-control-spacing, 10px)* 3.5);
+  }
+}
 .moderation .plyr__controls::after {
   width: 0 !important;
 }

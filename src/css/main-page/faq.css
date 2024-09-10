@@ -60,9 +60,12 @@
 .ac .ac-trigger:focus {
   color: var(--pink) !important;
 }
+.ac-text a {
+  color: #0073e6;
+}
 @media (max-width: 1200px) {
   .ac .ac-trigger {
-    font-size: 24px;
+    font-size: 24px !important;
   }
   .faq {
     padding: 80px 0 0;
@@ -76,9 +79,6 @@
     line-height: 1.25 !important;
     font-size: 22px !important;
     padding-right: 60px !important;
-  }
-  .ac-text a {
-    color: #0073e6;
   }
   .faq__item {
     height: min-content;
