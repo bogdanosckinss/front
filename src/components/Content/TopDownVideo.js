@@ -18,6 +18,12 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
     const postContainerRef = useRef()
 
     useEffect(() => {
+        // console.log(window.innerWidth)
+        // if (window.innerWidth < 991) {
+        //     console.log(copyBtnRef.current)
+        //     copyBtnRef.current.style.visibility = 'hidden'
+        // }
+
         setLiked(video?.is_liked_by_me)
         setLikes(video.videoLikes)
         const handleClickOutside = (event) => {
@@ -75,8 +81,11 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
             })
             return
         }
-        setShare(share => !share)
-        copyBtnRef.current.classList.add('active')
+
+        if (window.innerWidth >= 880) {
+            setShare(share => !share)
+            copyBtnRef.current.classList.add('active')
+        }
     }
 
     function videoLink() {
