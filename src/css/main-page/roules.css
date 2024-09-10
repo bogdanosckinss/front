@@ -39,13 +39,14 @@
   order: 0;
 }
 .roules__item:nth-child(1) .roules__img {
-  left: -8px;
+  left: -8.2px;
+  bottom: -0.5px;
 }
 .roules__item:nth-child(2) .roules__img {
   bottom: -1px;
 }
 .roules__item:nth-child(3) .roules__img {
-  left: -7px;
+  left: -8.2px;
   bottom: -1px;
 }
 .roules__item:nth-child(4) .roules__img {
