@@ -23,17 +23,17 @@ export default function VideosResult() {
             const query = searchParams.get('query') ?? ''
             response = await privateAxios.get('content/search/videos?query=' + query)
             setSkipVideosCount(response.data.length)
+            dispatch(setPosts(response.data))
         } catch (err) {
             console.log(err)
         }
-
-        dispatch(setPosts(response.data))
     }
 
     function findMoreAsync() {
         const composedQuery = searchParams.get('query') ?? query
+        const toSkip = posts.length
         privateAxios
-            .get('content/search/videos?query=' + composedQuery + '&skip=' + skipVideosCount)
+            .get('content/search/videos?query=' + composedQuery + '&skip=' + toSkip)
             .then(response => {
                 if (response.data.length == 0) {
                     return

@@ -33,7 +33,7 @@ export default function VideoMain() {
     function findMoreAsync() {
         const composedQuery = searchParams.get('query') ?? query
         privateAxios
-            .get('content/search/videos?query=' + composedQuery + '&skip=' + skipVideosCount)
+            .get('content/search/videos?query=' + composedQuery + '&skip=' + posts.length)
             .then(response => {
                 if (response.data.length == 0) {
                     return
