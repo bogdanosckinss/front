@@ -330,11 +330,12 @@ export default function Login() {
                                 <span className="checkmark"></span>
                                 <p>
                                     Даю согласие на обработку данных в соответствии c <a
+                                    target="_blank"
                                     href="https://bonus.detmir.ru/pdn_lk">
                                     политикой обработки персональных данных
                                 </a>
                                     <br/>
-                                    и <a href="https://www.detmir.ru/privacy_policy/"
+                                    и <a target="_blank" href="https://www.detmir.ru/privacy_policy/"
                                 >политикой конфиденциальности</a
                                 >.
                                 </p>
@@ -482,13 +483,14 @@ export default function Login() {
                                 <span className="checkmark"></span>
                                 <p>
                                     Даю согласие на обработку данных в соответствии c <a
+                                        target="_blank"
                                         href="https://bonus.detmir.ru/pdn_lk
 "
                                     >
                                         политикой обработки персональных данных
                                     </a>
                                     <br/>
-                                    и <a href="https://www.detmir.ru/privacy_policy/">
+                                    и <a target="_blank" href="https://www.detmir.ru/privacy_policy/">
                                         политикой конфиденциальности
                                     </a>.
                                 </p>
