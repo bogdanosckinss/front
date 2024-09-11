@@ -88,7 +88,7 @@ export default function Share({link}) {
                         </a>
                     </li>
                     <li className="account-share-social">
-                        <a href="">
+                        <a href="https://likee.video/">
                             <svg
                                 width="26"
                                 height="23"

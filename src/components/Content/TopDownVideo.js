@@ -333,7 +333,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
                             </a>
                         </li>
                         <li className="account-share-social">
-                            <a href="">
+                            <a href="https://likee.video">
                                 <svg
                                     width="26"
                                     height="23"
