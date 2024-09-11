@@ -30,7 +30,7 @@ export default function Login() {
 
     async function sendCodeViaSms(event) {
         event.preventDefault()
-
+        localStorage.setItem('check','checked')
         const formattedPhone = unmaskedPhone()
 
         let response = {}
