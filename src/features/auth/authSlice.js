@@ -4,7 +4,8 @@ const initialState = {
   isAuthenticated: false,
   userInfo: null,
   loading: true,
-  showAuth: false
+  showAuth: false,
+  showEmailAuth: false
 }
 
 export const authSlice = createSlice({
@@ -25,9 +26,12 @@ export const authSlice = createSlice({
     },
     setShowAuth: (state, action) => {
       state.showAuth = action.payload
+    },
+    setShowEmailAuth: (state, action) => {
+      state.showEmailAuth = action.payload
     }
   },
 })
 
-export const {setShowAuth, setLoading, setIsAuthenticated, setUserInfo } = authSlice.actions
+export const {setShowEmailAuth, setShowAuth, setLoading, setIsAuthenticated, setUserInfo } = authSlice.actions
 export default authSlice.reducer

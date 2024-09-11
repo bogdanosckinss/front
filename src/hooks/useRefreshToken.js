@@ -21,17 +21,6 @@ const useRefreshToken = () => {
         },
       )
 
-      // const parsedToken = parseJWT(response.data.accessToken)
-      // dispatch(
-      //   setUserInfo({
-      //     user: {
-      //       id: parsedToken.id,
-      //       name: parsedToken.name,
-      //     },
-      //     accessToken: response.data.accessToken,
-      //   })
-      // )  TODO: fix
-        console.log('AUTH')
       dispatch(setIsAuthenticated(true))
 
       localStorage.setItem('accessToken', response.data.accessToken)

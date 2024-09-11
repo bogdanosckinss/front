@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
-import {setIsAuthenticated, setShowAuth} from "../../features/auth/authSlice.js";
+import {setIsAuthenticated, setShowAuth, setShowEmailAuth} from "../../features/auth/authSlice.js";
 import Timer from "../../components/Timer/Timer.js";
 import Support from "../../components/Support/Support.js";
 import {useNavigate} from "react-router-dom";
@@ -9,20 +9,23 @@ import {useNavigate} from "react-router-dom";
 export default function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { showAuth } = useSelector((state) => state.auth)
+    const { showAuth, showEmailAuth } = useSelector((state) => state.auth)
     const [isChecked, setIsChecked] = useState(false);
     const privateAxios = useAxiosPrivate()
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
     const [code, setCode] = useState('')
     const [token, setToken] = useState('')
     const [restart, setRestart] = useState(false)
+    const [isAllowedToResendCode, setIsAllowedToResendCode] = useState(false)
     const inputsRef = useRef([]);
     const codeListRef = useRef(null);
     const [error, setError] = useState(false);
     const [support, setSupport] = useState(false);
     const [hideConfirmation, setHideConfirmation] = useState(false);
     const [isMasked, setIsMasked] = useState(false)
+    const [sentViaPhone, setSentViaPhone] = useState(false)
     const phoneRef = useRef(null)
     const handleCheckboxChange = (e) => {
         setIsChecked(e.target.checked)
@@ -31,6 +34,7 @@ export default function Login() {
     async function sendCodeViaSms(event) {
         event.preventDefault()
         const formattedPhone = unmaskedPhone()
+        setSentViaPhone(true)
 
         let response = {}
         try {
@@ -42,10 +46,36 @@ export default function Login() {
             })
 
             setRestart(true)
+            setIsAllowedToResendCode(false)
             setToken(response.data.confirmationToken)
             localStorage.setItem('confirmationToken', response.data.confirmationToken)
             localStorage.setItem('confirmationCode', response.data.confirmationCode)
             localStorage.setItem('checks','checked')
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    async function sendCodeViaEmail(event) {
+        event.preventDefault()
+
+        setSentViaPhone(false)
+        let response = {}
+        try {
+            response = await privateAxios.post('auth/create/email', {
+                email: email,
+                name: name
+            },{
+                withCredentials: true
+            })
+
+            setRestart(true)
+            setIsAllowedToResendCode(false)
+            setToken(response.data.confirmationToken)
+            localStorage.setItem('confirmationToken', response.data.confirmationToken)
+            localStorage.setItem('confirmationCode', response.data.confirmationCode)
+            localStorage.setItem('checks', 'checked')
+            dispatch(setShowEmailAuth(false))
         } catch (err) {
             console.log(err)
         }
@@ -106,6 +136,7 @@ export default function Login() {
 
     function hideModal() {
         dispatch(setShowAuth(false))
+        dispatch(setShowEmailAuth(false))
         setToken('')
         setSupport(false)
         setHideConfirmation(false)
@@ -118,8 +149,21 @@ export default function Login() {
         setHideConfirmation(false)
     }
 
+    function showEmailModal() {
+        dispatch(setShowAuth(true))
+        dispatch(setShowEmailAuth(true))
+        setToken('')
+        setSupport(false)
+        setHideConfirmation(false)
+    }
+
     function resetRestart() {
         setRestart(false)
+        setIsAllowedToResendCode(false)
+    }
+
+    function allowResendCode() {
+        setIsAllowedToResendCode(true)
     }
 
     function checkReplacement(str) {
@@ -132,7 +176,14 @@ export default function Login() {
     }
 
 
-
+    function isEmailValid() {
+        if (email == null) {
+            return true;
+        }
+        return email?.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    }
 
 
 
@@ -176,7 +227,7 @@ export default function Login() {
         setError(false)
 
         try {
-            await privateAxios.post('auth/confirm-phone', {
+            const response = await privateAxios.post('auth/confirm-phone', {
                     confirmationToken: localStorage.getItem('confirmationToken'),
                     confirmationCode: code
                 },
@@ -184,6 +235,7 @@ export default function Login() {
                     withCredentials: true
                 })
             window.ym(98274871,'reachGoal','confirmed')
+            localStorage.setItem('rf', response.data.refreshToken)
             dispatch(setIsAuthenticated(true))
             hideModal()
             navigate('/videos')
@@ -226,8 +278,10 @@ export default function Login() {
 
     return (
         <div className="login">
-            <div id='login-bg' onClick={hideModal} className="login-bg js-login-bg" style={showAuth ? {display: 'block'} : {display: 'none'}}></div>
-            <div className="login__container forms-popup js-forms-popup" style={showAuth && !token ? {display: 'block'} : {display: 'none'}}>
+            <div id='login-bg' onClick={hideModal} className="login-bg js-login-bg"
+                 style={showAuth ? {display: 'block'} : {display: 'none'}}></div>
+            <div className="login__container forms-popup js-forms-popup"
+                 style={showAuth && !token ? {display: 'block'} : {display: 'none'}}>
                 <div className="login__forw-wrapper">
                     <button className="login-btn-close js-login-btn-close" onClick={hideModal}>
                         <svg
@@ -250,7 +304,8 @@ export default function Login() {
                     <form className="form">
                         <h1 className="login__title">Вход или регистрация</h1>
                         <label className="login__label"
-                        ><input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Ваше имя"
+                        ><input value={name} onChange={(e) => setName(e.target.value)} type="text"
+                                placeholder="Ваше имя"
                         /></label>
                         <label className="login__label"
                         ><input ref={phoneRef} onClick={(event) => {
@@ -260,7 +315,9 @@ export default function Login() {
                             if (phone == '+ 7 (') {
                                 event.target.setSelectionRange(5, 5)
                             }
-                        }} value={phone} pattern='[0-9]*' className="js-phone-input" onChange={(e) => handleNumberInput(e)} onFocus={handleInputFocus} inputMode='tel' placeholder="Ваш номер телефона"/>
+                        }} value={phone} pattern='[0-9]*' className="js-phone-input"
+                                onChange={(e) => handleNumberInput(e)} onFocus={handleInputFocus} inputMode='tel'
+                                placeholder="Ваш номер телефона"/>
                         </label>
                         <div className="login__agree">
                             <label className="login__label-check">
@@ -272,20 +329,21 @@ export default function Login() {
                                 />
                                 <span className="checkmark"></span>
                                 <p>
-                                    Даю согласие на обработку данных в соответствии c <a href="https://bonus.detmir.ru/pdn_lk">
+                                    Даю согласие на обработку данных в соответствии c <a
+                                    href="https://bonus.detmir.ru/pdn_lk">
                                     политикой обработки персональных данных
-                                    </a>
+                                </a>
                                     <br/>
-                                    и <a href="https://www.detmir.ru/privacy_policy/"
-                                    >политикой конфиденциальности</a
-                                    >.
+                                    и <a href="https://www.detmir.ru/privacy_policy/"
+                                >политикой конфиденциальности</a
+                                >.
                                 </p>
                             </label>
                         </div>
                         <button
                             onClick={sendCodeViaSms}
                             className={'login__button js-login__button ' + ((isChecked && checkReplacement(phone) && name) ? 'active' : '')}
-                            disabled={!isChecked || !checkReplacement(phone) || !name }>
+                            disabled={!isChecked || !checkReplacement(phone) || !name}>
                             <span>Получить код по СМС</span>
                             <svg
                                 width="361"
@@ -302,7 +360,8 @@ export default function Login() {
                     </form>
                 </div>
             </div>
-            <div className="login__container forms-popup js-forms-popup" style={showAuth && token && !hideConfirmation ? {display: 'block'} : {display: 'none'}}>
+            <div className="login__container forms-popup js-forms-popup"
+                 style={showAuth && token && !hideConfirmation ? {display: 'block'} : {display: 'none'}}>
                 <div className="login__forw-wrapper">
                     <button onClick={hideModal} className="login-btn-close js-login-btn-close">
                         <svg
@@ -323,9 +382,9 @@ export default function Login() {
                         </svg>
                     </button>
                     <form className="form">
-                        <h1 className="login__title">Введите код из СМС</h1>
-                        <p className="code__text">Код был отправлен на номер</p>
-                        <p className="code__text">{phone}</p>
+                        <h1 className="login__title">Введите код из {sentViaPhone ? 'СМС' : 'Email'}</h1>
+                        <p className="code__text">Код был отправлен на {sentViaPhone ? 'номер' : 'почту'}</p>
+                        <p className="code__text">{sentViaPhone ? phone : email}</p>
                         <ul className={'code__list js-code__list ' + (error ? 'error' : '')} ref={codeListRef}>
                             {[...Array(6)].map((_, index) => (
                                 <li key={index}>
@@ -344,11 +403,16 @@ export default function Login() {
                             ))}
                         </ul>
                         <p className={'code__error-text ' + (error ? 'error' : '')}>Введён неверный код</p>
-                        <code className="code__text-p">Запросить код в СМС через 00:<Timer restart={restart} resetRestart={resetRestart} /></code>
-                        <code className="code__text-p" style={{cursor: 'pointer'}} onClick={() => {
-                            setSupport(true)
-                            setHideConfirmation(true)
-                        }}>Не приходит СМС</code>
+                        <code className="code__text-p">Запросить код в {sentViaPhone ? 'СМС' : 'Email'} через 00:<Timer restart={restart}
+                                                                                           resetRestart={resetRestart}
+                                                                                           allowResendCode={allowResendCode}
+                        /></code>
+                        <code className="code__text-p" style={isAllowedToResendCode ? {cursor: 'pointer'} : {cursor: 'not-allowed'}} onClick={() => {
+                            if (isAllowedToResendCode) {
+                                setSupport(true)
+                                setHideConfirmation(true)
+                            }
+                        }}>Не приходит {sentViaPhone ? 'СМС' : 'Email'}</code>
                         <div className="code__agree"></div>
                         <button onClick={confirmPhone}
                                 className={'login__button js-code-login__button ' + (isCodeValid() ? 'accept active' : 'error')}
@@ -369,7 +433,96 @@ export default function Login() {
                     </form>
                 </div>
             </div>
-            <Support support={support} showAuth={showAuth} token={token} close={() => hideModal()} tryAgain={showModal} />
+
+            <div
+                className="login__container forms-popup js-forms-popup"
+                style={showAuth && showEmailAuth ? {display: 'block'} : {display: 'none'}}
+            >
+                <div className="login__forw-wrapper">
+                    <button className="login-btn-close js-login-btn-close" onClick={hideModal}>
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M7 7L12 12M12 12L7 17M12 12L17 7M12 12L17 17"
+                                stroke="black"
+                                strokeOpacity="0.25"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            ></path>
+                        </svg>
+                    </button>
+                    <form className="form">
+                        <h1 className="login__title">Вход или регистрация</h1>
+                        <label className="login__label">
+                            <input type="text" placeholder="Ваше имя" value={name} onChange={(e) => setName(e.target.value)} />
+                        </label>
+                        <label className="login__label">
+                            <input
+                                className="js-phone-input"
+                                type="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </label>
+                        <div className="login__agree">
+                            <label className="login__label-check">
+                                <input
+                                    checked={isChecked}
+                                    onChange={(e) => setIsChecked(e.target.checked)}
+                                    className="login__check-input js-login__check-input"
+                                    type="checkbox"
+                                />
+                                <span className="checkmark"></span>
+                                <p>
+                                    Даю согласие на обработку данных в соответствии c <a
+                                        href="https://bonus.detmir.ru/pdn_lk
+"
+                                    >
+                                        политикой обработки персональных данных
+                                    </a>
+                                    <br/>
+                                    и <a href="https://www.detmir.ru/privacy_policy/">
+                                        политикой конфиденциальности
+                                    </a>.
+                                </p>
+                            </label>
+                        </div>
+                        <button
+                            onClick={sendCodeViaEmail}
+                            className={'login__button js-login__button ' + ((isChecked && isEmailValid() && name) ? 'active' : '')}
+                            disabled={!isChecked || !isEmailValid() || !name}>
+                            <span>Получить код по Email</span>
+                            <svg
+                                width="361"
+                                height="55"
+                                viewBox="0 0 361 55"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M180.5 0.413057C232.765 0.336102 322.982 -1.58876 346.051 4.39624C364.426 6.3994 366.176 43.9566 349.551 49.465C337.663 55.3602 326.645 54.3521 170.5 54C63.2073 53.7586 31.2866 55.3313 13.1157 49.9643C-3.07175 45.1832 -4.82174 11.4056 10.9282 4.89578C20.9906 -2.11504 131.18 0.485724 180.5 0.413057Z"
+                                />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <Support
+                support={support}
+                showAuth={showAuth}
+                token={token}
+                close={() => hideModal()}
+                tryAgain={showModal}
+                tryEmail={showEmailModal}
+            />
         </div>
     )
 }

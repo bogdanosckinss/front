@@ -10,7 +10,7 @@
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
-  padding-bottom: 270px;
+  padding-bottom: 100px;
 }
 .videos-result__item {
   width: 260px;

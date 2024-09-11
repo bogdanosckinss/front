@@ -232,7 +232,7 @@ export default function AccountInfo() {
         image: image,
         name: name,
         lastname: lastname,
-        phone_number: phoneclear,
+        phone_number: phoneclear ?? ('+' + cleanedNumber(phone)),
         email: email,
         city: city,
         social_media_link: socialMediaLink,
@@ -628,7 +628,7 @@ export default function AccountInfo() {
                                 (phone && !alreadyUploaded ? "active" : "")
                               }
                               placeholder="+ 7 (___) ___-__-__"
-                              readOnly={true}
+                              readOnly={phoneclear}
                             />
                           </label>
                           {isPhoneValid() ? (
@@ -648,6 +648,7 @@ export default function AccountInfo() {
                                 (email && !alreadyUploaded ? "active" : "")
                               }
                               placeholder="Почта участника/родителя"
+                              readOnly={!phoneclear}
                             />
                           </label>
                           {!isEmailValid() && isPhoneValid() ? (

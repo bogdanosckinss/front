@@ -327,16 +327,32 @@
   fill: white;
 }
 .form-problems__buttin:first-child:hover svg {
-  fill: white;
+  fill: #0540b3;
 }
 .form-problems__buttin:first-child:hover {
-  color: #0647c7;
 }
 .form-problems__buttin:last-child:hover svg {
-  fill: #0647c7;
+  fill: #e7edfa;
 }
 .form-problems__buttin:last-child:hover {
-  color: white;
+}
+.form-problems__support-link {
+  transition: all 0.2s ease-out;
+  font-size: 18px;
+  line-height: 1.25;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #0647c7;
+  font-family: 'myfontRegular';
+  display: block;
+  width: 100%;
+  margin: 32px auto 0;
+  text-align: center;
+  opacity: 0.5;
+  width: 152px;
+}
+.form-problems__support-link:hover {
+  opacity: 1;
 }
 @media (max-width: 600px) {
   .form {
@@ -344,7 +360,7 @@
     max-width: 340px;
     height: min-content;
     min-height: 297px;
-    padding: 33px 18px 25px 15px;
+    padding: 33px 18px 50px 15px;
     border-radius: 14px;
     background-color: var(--blue);
   }

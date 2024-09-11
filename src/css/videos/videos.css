@@ -54,6 +54,12 @@
   height: 100%;
   object-fit: contain;
 }
+.footer-videos {
+  position: static !important;
+}
+.footer-videos .footer__block {
+  padding-top: 33px !important;
+}
 @media screen and (max-width: 650px) {
   .videos-not-found__container {
     max-width: 371px;

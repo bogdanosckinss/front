@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-export default function Timer({restart, resetRestart}) {
+export default function Timer({restart, resetRestart, allowResendCode}) {
     const [seconds, setSeconds] = useState(60)
     const [isActive, setIsActive] = useState(true)
 
@@ -11,6 +11,10 @@ export default function Timer({restart, resetRestart}) {
             resetRestart()
             setIsActive(true)
             setSeconds(60)
+        }
+
+        if (seconds == 0 && !restart) {
+            allowResendCode()
         }
 
         if (isActive) {

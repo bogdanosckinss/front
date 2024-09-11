@@ -350,6 +350,7 @@
   background: rgba(255, 255, 255, 0.1);
   display: block;
   color: #fff;
+  font-family: 'myfontRegular';
 }
 .account__form-labels input:focus-within::placeholder {
   color: rgba(255, 255, 255, 0.1);
@@ -359,6 +360,7 @@
   font-size: 16px;
   line-height: 1;
   color: rgba(255, 255, 255, 0.6);
+  font-family: 'myfontRegular';
 }
 .account__form-labels input.active {
   background-color: #fff;
@@ -1002,6 +1004,7 @@
 }
 .try-again__text a {
   text-decoration: underline;
+  text-decoration-skip-ink: none;
 }
 .try-again__btn {
   width: 260px;
