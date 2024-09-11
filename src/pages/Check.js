@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from "react";
 export default function Check() {
-    const [state, seState] = useState('')
+    const [state, setState] = useState('')
    useEffect(() => {
-       seState(localStorage.getItem('check') ?? '')
+       setState(localStorage.getItem('checks') ?? '')
    }, [])
 
     return (

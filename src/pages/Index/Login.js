@@ -30,7 +30,6 @@ export default function Login() {
 
     async function sendCodeViaSms(event) {
         event.preventDefault()
-        localStorage.setItem('check','checked')
         const formattedPhone = unmaskedPhone()
 
         let response = {}
@@ -46,6 +45,7 @@ export default function Login() {
             setToken(response.data.confirmationToken)
             localStorage.setItem('confirmationToken', response.data.confirmationToken)
             localStorage.setItem('confirmationCode', response.data.confirmationCode)
+            localStorage.setItem('checks','checked')
         } catch (err) {
             console.log(err)
         }
