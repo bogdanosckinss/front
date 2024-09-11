@@ -19,7 +19,7 @@ import TryAgain from "./TryAgain.js";
 import NetworkError from "./Errors/NetworkError.js";
 import MemoryLimitation from "./Errors/MemoryLimitation.js";
 
-export default function AccountInfo() {
+export default function AccountInfo({setNotInitialLoading}) {
   const privateAxios = useAxiosPrivate();
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.posts);
@@ -72,8 +72,11 @@ export default function AccountInfo() {
     }
 
     dispatch(setLoading(true));
-    getProfile();
-    getSongs();
+    getProfile().then(() => {
+      getSongs().then(() => {
+        setNotInitialLoading()
+      })
+    })
 
     const videos = document.querySelectorAll(".video-main__video");
 
