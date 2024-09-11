@@ -31,6 +31,7 @@ export default function AccountInfo() {
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [phone, setPhone] = useState(null);
+  const [phoneclear, setPhoneClear] = useState(null);
   const [age, setAge] = useState(0);
   const [email, setEmail] = useState(null);
   const [city, setCity] = useState("");
@@ -183,6 +184,7 @@ export default function AccountInfo() {
     try {
       const response = await privateAxios.get("users");
       setPhone(response.data.phone_number);
+      setPhoneClear(response.data.phone_number);
       setCity(response.data.city);
       setAge(response.data.age);
       setName(response.data.name);
@@ -230,7 +232,7 @@ export default function AccountInfo() {
         image: image,
         name: name,
         lastname: lastname,
-        phone_number: phone,
+        phone_number: phoneclear,
         email: email,
         city: city,
         social_media_link: socialMediaLink,
