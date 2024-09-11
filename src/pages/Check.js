@@ -1,13 +1,15 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 export default function Check() {
-    const [state, setState] = useState('')
+    const [check, setCheck] = useState('')
+
    useEffect(() => {
-       setState(localStorage.getItem('checks') ?? '')
+       setCheck(localStorage.getItem('checks') ?? '')
+       alert(localStorage.getItem('checks') ?? '')
    }, [])
 
     return (
-        <>
-            <h1>{{state}}</h1>
-        </>
+        <div>
+
+        </div>
     )
 }
