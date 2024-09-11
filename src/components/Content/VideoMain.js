@@ -67,7 +67,7 @@ export default function VideoMain() {
                                                 findMoreAsync()
                                             }
                                         }} threshold={0.4} triggerOnce={true} key={video.id + 'view'}>
-                                            {({ref}) => {
+                                            {({ref, inView}) => {
                                                 return(
                                                     <TopDownVideo
                                                         postRef={ref}
@@ -76,6 +76,7 @@ export default function VideoMain() {
                                                         userInteracts={userInteracts}
                                                         isLastLine={isLastLine}
                                                         findMoreAsync={findMoreAsync}
+                                                        inView={inView}
                                                     />
                                                 )
                                             }}

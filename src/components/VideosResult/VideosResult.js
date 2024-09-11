@@ -6,7 +6,7 @@ import {useSearchParams} from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import {InView} from "react-intersection-observer";
 
-export default function VideosResult() {
+export default function VideosResult({setNotInitialLoading}) {
     const [searchParams, setSearchParams] = useSearchParams()
     const [skipVideosCount, setSkipVideosCount] = useState(0)
     const privateAxios = useAxiosPrivate()
@@ -53,6 +53,7 @@ export default function VideosResult() {
         dispatch(setPosts([]))
         async function fetchPosts() {
             await getContent()
+            setNotInitialLoading()
         }
 
         fetchPosts()
@@ -75,12 +76,13 @@ export default function VideosResult() {
                                             findMoreAsync()
                                         }
                                     }} threshold={1} triggerOnce={true} key={post.id + 'view'}>
-                                        {({ref}) => {
+                                        {({ref, inView}) => {
                                             return(
                                                 <Post
                                                     postRef={ref}
                                                     key={post.id + '-main'}
                                                     post={post}
+                                                    inView={inView}
                                                 />
                                             )
                                         }}

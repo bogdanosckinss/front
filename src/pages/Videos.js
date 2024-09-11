@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import '../css/styles.css'
 import '../css/videos/videos.css'
 import footerLogo from '../img/footer_logo.svg'
@@ -10,21 +10,29 @@ import VideosResult from "../components/VideosResult/VideosResult.js";
 import {useSelector} from "react-redux";
 
 export default function Videos() {
+    const [initialLoading, setInitialLoading] = useState(true)
     const { searchOptions, query, loading, hideNotFoundNote } = useSelector((state) => state.posts)
 
     useEffect(() => {
         document.body.classList.forEach(item => document.body.classList.remove(item))
         document.body.classList.add('videos-body')
-    }, []);
+    }, [])
+
+    function setNotInitialLoading() {
+        setInitialLoading(false)
+    }
 
     return (
         <>
+            <div className="loader-popup" style={initialLoading ? {display: 'block'} : {display: 'none'}}>
+                <div className="loader-popup__loading loader"></div>
+            </div>
             <main className="videos-main-block-cover">
                 <Header/>
                 <div className='videos-cover-main'>
                     {searchOptions.length == 0 && query != '' && !loading && !hideNotFoundNote ?
                         <NotFound query={query}/> : ''}
-                    <VideosResult/>
+                    <VideosResult setNotInitialLoading={setNotInitialLoading}/>
                 </div>
             </main>
             <footer className="footer footer-videos">
@@ -57,7 +65,7 @@ export default function Videos() {
                                     <div className="footer-support footer-support-web">
                                         <a target="_blank" href="https://t.me/kidsprojecttop">
                                             <div className="footer-support__icon">
-                                                <img src={footerLogoSupport} alt="" />
+                                                <img src={footerLogoSupport} alt=""/>
                                             </div>
                                             <div className="footer-support__text">Служба поддержки</div>
                                         </a>

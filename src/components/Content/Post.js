@@ -4,8 +4,9 @@ import {setSelectedVideoIndex} from "../../features/posts/postsSlice.js";
 import playImage from "../../img/play.svg";
 import heart from "../../img/heart.svg";
 import {createSearchParams, useNavigate} from "react-router-dom";
+import {LazyLoadComponent} from "react-lazy-load-image-component";
 
-export default function Post({postRef, post}) {
+export default function Post({postRef, post, inView}) {
     const { query } = useSelector((state) => state.posts)
     const [fetchedPost, setFetchedPost] = useState({})
     const dispatch = useDispatch()
@@ -33,9 +34,11 @@ export default function Post({postRef, post}) {
 
     return (
         <li ref={postRef} className="videos-result__item" onClick={selectVideoIndex}>
-            <video className="videos-result__video" loop>
-                {fetchedPost?.link ? <source type="video/mp4" src={fetchedPost?.link}/> : '' }
-            </video>
+            <LazyLoadComponent>
+                <video className="videos-result__video" loop preload={inView}>
+                    {fetchedPost?.link ? <source type="video/mp4" src={fetchedPost?.link}/> : ''}
+                </video>
+            </LazyLoadComponent>
             <div className="videos-result__play">
                 <a href=""> <img src={playImage} alt="img"/> </a>
             </div>

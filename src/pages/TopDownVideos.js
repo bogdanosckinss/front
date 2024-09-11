@@ -2,7 +2,7 @@ import VideoHeader from "../components/Header/VideoHeader.js";
 import VideoMain from "../components/Content/VideoMain.js";
 import '../css/styles.css'
 import '../css/videos/videos.css'
-import {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate.js";
 import {useDispatch} from "react-redux";
 import {setPosts} from "../features/posts/postsSlice.js";
@@ -11,6 +11,7 @@ import {useParams, useSearchParams} from "react-router-dom";
 export default function TopDownVideos() {
     const params = useParams()
     const [searchParams, setSearchParams] = useSearchParams()
+    const [initialLoading, setInitialLoading] = useState(true)
     const privateAxios = useAxiosPrivate()
     const dispatch = useDispatch()
 
@@ -44,6 +45,7 @@ export default function TopDownVideos() {
         dispatch(setPosts([]))
         async function fetchPosts() {
             await getContent()
+            setInitialLoading(false)
         }
 
         fetchPosts()
@@ -51,6 +53,9 @@ export default function TopDownVideos() {
 
     return(
         <>
+            <div className="loader-popup" style={initialLoading ? {display: 'block'} : {display: 'none'}}>
+                <div className="loader-popup__loading loader"></div>
+            </div>
             <div>
                 <main>
                     <VideoHeader/>

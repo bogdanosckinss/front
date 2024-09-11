@@ -4,7 +4,7 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import Plyr from "plyr-react";
 import {useParams} from "react-router-dom";
 
-export default function TopDownVideo({postRef, video, userInteracts, isLastLine, findMoreAsync}) {
+export default function TopDownVideo({postRef, video, userInteracts, isLastLine, findMoreAsync, inView}) {
     const params = useParams()
     const privateAxios = useAxiosPrivate()
     const [share, setShare] = useState(false)
@@ -136,6 +136,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
     const renderVideo = useMemo(() => (
         <Plyr
             muted={false}
+            preload={inView}
             ref={playerRef}
             options={{
                 controls: ['progress', 'play-large', 'play', 'current-time', 'duration'],
