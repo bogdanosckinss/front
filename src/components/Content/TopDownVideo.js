@@ -318,7 +318,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
                 <div ref={copyBtnRef} className={'share-popup js-share-popup'}>
                     <ul className="account-share-socials">
                         <li className="account-share-social">
-                            <a href={'https://vk.com/share.php?url=' + videoLink()}>
+                            <a target="_blank" href={'https://vk.com/share.php?url=' + videoLink()}>
                                 <svg
                                     width="29"
                                     height="19"
@@ -333,7 +333,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
                             </a>
                         </li>
                         <li className="account-share-social">
-                            <a href="https://likee.video">
+                            <a target="_blank" href="https://likee.video">
                                 <svg
                                     width="26"
                                     height="23"
@@ -354,7 +354,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
                             </a>
                         </li>
                         <li className="account-share-social">
-                            <a href={'https://t.me/share/url?url=' + videoLink()} >
+                            <a target="_blank" href={'https://t.me/share/url?url=' + videoLink()} >
                                 <svg
                                     width="24"
                                     height="19"
