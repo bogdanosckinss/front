@@ -158,7 +158,7 @@
 }
 @media (max-width: 550px) {
   .mobile__menu {
-    top: 45px;
+    top: 35px;
     right: 32px;
   }
   .top__hamburger {
