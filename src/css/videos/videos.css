@@ -1,8 +1,12 @@
 @import url('./header.css');
 @import url('./videos-result.css');
 
-.videos-main-block-cover {
+.videos-body .videos-main-block-cover {
   /* margin-top: 164px; */
+  height: 100vh;
+}
+.body-account .videos-main-block-cover {
+  height: 100%;
 }
 .videos-cover-main {
   margin-top: 148px;

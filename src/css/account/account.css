@@ -688,7 +688,8 @@
 }
 .account__sent-btn span {
   font-family: 'myfontExtraBold';
-  font-size: 16px;
+
+  font-size: 20px;
   line-height: 1;
   /* text-transform: uppercase; */
   text-align: center;
@@ -1122,15 +1123,18 @@
   background: rgba(0, 0, 0, 0.75);
   border-radius: 2px;
   padding: 3px 4px;
-  width: 110px;
+  width: min-content;
   height: 18px;
   font-size: 12px;
   line-height: 1;
   color: #fff;
-  left: -23px;
+  left: auto;
+  right: -10px;
   transition: all 0.2s ease-out;
   opacity: 0;
   visibility: hidden;
+  white-space: nowrap;
+  max-width: 160px;
 }
 .support:hover .support-hint {
   opacity: 1;
@@ -1180,6 +1184,8 @@
 }
 .footer-account-page {
   position: static !important;
+  margin-top: auto;
+  width: 100%;
 }
 .footer-account-page .footer__container {
   margin-top: 0;
