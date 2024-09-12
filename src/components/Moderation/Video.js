@@ -44,7 +44,7 @@ export default function Video({video}) {
 
     return (
         <article style={{border: 'solid green', marginBottom: 10, width: '277px'}}>
-            <img src={video?.users?.image} alt='Нету фото' />
+            <img src={video?.users?.image} style={{width: '100%'}} alt='Нету фото' />
             <p>Имя: {video?.users?.name + ' ' + video?.users?.name}</p>
             <p>Возраст: {video?.users?.age}</p>
             <p>Номер телефона: {video?.users?.phone_number}</p>
