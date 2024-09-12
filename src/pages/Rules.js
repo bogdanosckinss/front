@@ -896,7 +896,11 @@ export default function Rules() {
                 >
                   Список песен <br />
                   для участия в конкурсе «Конкурс талантов»
-                  <ul>
+                  <ul
+                    style={{
+                      textAlign: "left",
+                    }}
+                  >
                     <li>1. Малявка (Милана STAR)</li>
                     <li>2. Barbie (Милана STAR)</li>
                     <li>3. Все из-за тебя (Милана STAR)</li>
