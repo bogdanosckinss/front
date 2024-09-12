@@ -32,7 +32,7 @@ export default function Footer() {
                 <div className="footer__temp">
                   <div className="footer__start">
                     <div className="footer__date">
-                      10 - 29 сентября 2024 года
+                      9 - 29 сентября 2024 года
                     </div>
                     <div className="footer__apply">Приём заявок</div>
                   </div>
