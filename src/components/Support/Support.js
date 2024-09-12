@@ -24,7 +24,9 @@ export default function Support({support, showAuth, token, close, tryAgain, tryE
                 </button>
                 <form className="form form-problems">
                     <h1 className="login__title">Проблемы со входом?</h1>
-                    <p className="code__text">Обратитесь в службу поддержки</p>
+                    <p className="code__text">
+                        Попробуйте снова или используйте способ получения кода по Email
+                    </p>
                     <div className="form-problems__btns">
                         <button onClick={(e) => {
                             e.preventDefault()
