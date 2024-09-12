@@ -948,13 +948,13 @@ export default function Rules() {
                   <div className="footer__temp">
                     <div className="footer__start">
                       <div className="footer__date">
-                        9 - 29 сентября 2024 года
+                        10 - 29 сентября 2024 года
                       </div>
                       <div className="footer__apply">Приём заявок</div>
                     </div>
                   </div>
                   <div className="footer__end">
-                    <div className="footer__date">1 октября 2024 года</div>
+                    <div className="footer__date">3 октября 2024 года</div>
                     <div className="footer__apply">Объявление результатов</div>
                   </div>
                 </div>
