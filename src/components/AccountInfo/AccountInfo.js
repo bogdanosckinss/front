@@ -261,13 +261,13 @@ export default function AccountInfo({setNotInitialLoading}) {
     const link = await uploadFileService.upload(image, "images");
     setImage(link);
 
-    try {
-      await privateAxios.put("/users/image", {
-        image: link,
-      });
-    } catch (e) {
-      console.log(e)
-    }
+    // try {
+    //   await privateAxios.put("/users/image", {
+    //     image: link,
+    //   });
+    // } catch (e) {
+    //   console.log(e)
+    // }
 
     setUploadingImage(false);
   }
