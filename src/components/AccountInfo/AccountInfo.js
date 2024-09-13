@@ -104,7 +104,7 @@ export default function AccountInfo({setNotInitialLoading}) {
       isPhoneValid() &&
       !errorDuringLoading &&
       !alreadyUploaded &&
-      !fieldsToValidate.some((field) => field == "" && field != null) &&
+      !fieldsToValidate.some((field) => field == "" || field == null) &&
       selectedSong &&
       acceptRules &&
       acceptPrivacyPolicy
