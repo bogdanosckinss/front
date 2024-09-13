@@ -48,12 +48,16 @@ export default function DeclinedVideos() {
         [privateAxios, skipVideosCount]
     );
 
+    function approved() {
+
+    }
+
     return (
         <>
             {accessApproved ? (
                 <div className="moderation">
                     {videos.map((video) => {
-                        return <Video video={video} />;
+                        return <Video approved={approved} declined={approved} video={video} />;
                     })}
 
                     <button
