@@ -73,7 +73,7 @@ export default function Video({ video }) {
         style={{ width: "100%" }}
         alt="Нету фото"
       />
-      <p>Имя: {video?.users?.name + " " + video?.users?.name}</p>
+      <p>Имя: {video?.users?.name + " " + video?.users?.lastname}</p>
       <p>Возраст: {video?.users?.age}</p>
       <p>Номер телефона: {video?.users?.phone_number}</p>
       <p>Адрес электронной почты: {video?.users?.email}</p>
