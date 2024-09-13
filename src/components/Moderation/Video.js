@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import Plyr from "plyr-react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 
-export default function Video({ video }) {
+export default function Video({ video, approved, declined }) {
   const privateAxios = useAxiosPrivate();
   const ref = useRef()
 
@@ -15,6 +15,7 @@ export default function Video({ video }) {
           if (ref.current) {
               ref.current.style.display = 'none'
           }
+          approved()
       })
     } catch (e) {
       console.log(e);
@@ -30,6 +31,7 @@ export default function Video({ video }) {
           if (ref.current) {
               ref.current.style.display = 'none'
           }
+          declined()
       })
     } catch (e) {
       console.log(e);
@@ -92,6 +94,7 @@ export default function Video({ video }) {
       <p>
         Выбранная песня: {video?.song?.author_name + " | " + video?.song?.title}
       </p>
+      <p>Дата и время публикации: {video?.created_at?.replace('T', ' ')?.replace('Z', '')}</p>
       {renderVideo}
       <button
         onClick={() => acceptVideo(video.id)}

@@ -107,7 +107,8 @@ export default function AccountInfo({setNotInitialLoading}) {
       !fieldsToValidate.some((field) => field == "" || field == null) &&
       selectedSong &&
       acceptRules &&
-      acceptPrivacyPolicy
+      acceptPrivacyPolicy &&
+      isEmailValid()
     ) {
       setCanUpload(true);
       return;
@@ -127,7 +128,7 @@ export default function AccountInfo({setNotInitialLoading}) {
     email,
     acceptRules,
     acceptPrivacyPolicy,
-    uploadingVideo,
+    uploadingVideo
   ]);
 
   function removeVideo() {
