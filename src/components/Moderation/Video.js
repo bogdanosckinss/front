@@ -1,16 +1,21 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import Plyr from "plyr-react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 
 export default function Video({ video }) {
   const privateAxios = useAxiosPrivate();
+  const ref = useRef()
 
   function acceptVideo(videoId) {
     try {
       privateAxios.post("content/update-video-moderation/status", {
         allowed: true,
         videoId: videoId,
-      });
+      }).then(() => {
+          if (ref.current) {
+              ref.current.style.display = 'none'
+          }
+      })
     } catch (e) {
       console.log(e);
     }
@@ -21,7 +26,11 @@ export default function Video({ video }) {
       privateAxios.post("content/update-video-moderation/status", {
         allowed: false,
         videoId: videoId,
-      });
+      }).then(() => {
+          if (ref.current) {
+              ref.current.style.display = 'none'
+          }
+      })
     } catch (e) {
       console.log(e);
     }
@@ -60,6 +69,7 @@ export default function Video({ video }) {
 
   return (
     <article
+        ref={ref}
       style={{
         border: "solid #0647C7",
         margin: "10px auto",
