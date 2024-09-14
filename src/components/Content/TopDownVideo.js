@@ -135,6 +135,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
 
     const renderVideo = useMemo(() => (
         <Plyr
+            poster={video?.preview_url}
             muted={false}
             preload={inView}
             ref={playerRef}
