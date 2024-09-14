@@ -41,6 +41,7 @@ export default function AccountInfo({setNotInitialLoading}) {
   const [acceptRules, setAcceptRules] = useState(false);
   const [acceptPrivacyPolicy, setAcceptPrivacyPolicy] = useState(false);
   const [alreadyUploaded, setAlreadyUploaded] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [errorDuringLoading, setErrorDuringLoading] = useState(false);
   const [underModeration, setUnderModeration] = useState(false);
   const [allowed, setAllowed] = useState(false);
@@ -229,6 +230,11 @@ export default function AccountInfo({setNotInitialLoading}) {
 
   async function sendVideoRequest(event) {
     event.preventDefault();
+    if (uploading) {
+      return
+    }
+
+    setUploading(true)
     try {
       await privateAxios.post("/content/create", {
         video: video,
@@ -936,7 +942,7 @@ export default function AccountInfo({setNotInitialLoading}) {
                     ) : (
                       <button
                         onClick={sendVideoRequest}
-                        disabled={!canUpload}
+                        disabled={!canUpload || uploading}
                         className={
                           "account__sent-btn " +
                           (canUpload ? "" : "not-allowed")
