@@ -23,4 +23,26 @@ export class UploadFileService {
 
         return prom.Location
     }
+
+    async uploadBlob(file, folder){
+        const s3 = new AWS.S3({
+            endpoint: new AWS.Endpoint('https://storage.yandexcloud.net'),
+            accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
+            secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
+        })
+
+        const prom = await new Promise((resolve, reject) => {
+            s3.upload({
+                Bucket: 'like2024',
+                Key: folder + '/' + uuidv4() + '.jpeg',
+                Body: file,
+                ContentType: file.type
+            }, (err, data) => {
+                if (err) return reject(err);
+                return resolve(data);
+            })
+        })
+
+        return prom.Location
+    }
 }

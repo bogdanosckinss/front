@@ -26,6 +26,7 @@ export default function AccountInfo({setNotInitialLoading}) {
   const { loading: authLoading } = useSelector((state) => state.auth);
   const [canUpload, setCanUpload] = useState(false);
   const [video, setVideo] = useState("");
+  const [previewImage, setPreviewImage] = useState("");
   const [videoId, setVideoId] = useState("");
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
@@ -109,7 +110,8 @@ export default function AccountInfo({setNotInitialLoading}) {
       selectedSong &&
       acceptRules &&
       acceptPrivacyPolicy &&
-      isEmailValid()
+      isEmailValid() &&
+      !uploadingVideo
     ) {
       setCanUpload(true);
       return;
@@ -247,6 +249,7 @@ export default function AccountInfo({setNotInitialLoading}) {
         city: city,
         social_media_link: socialMediaLink,
         age: age,
+        preview_url: previewImage
       });
       window.ym(98274871, "reachGoal", "videoUploaded");
       setErrorDuringLoading(false);
@@ -280,10 +283,54 @@ export default function AccountInfo({setNotInitialLoading}) {
   }
 
   async function uploadVideo(video) {
-    setUploadingVideo(true);
-    const link = await uploadFileService.upload(video, "videos");
-    setVideo(link);
-    setUploadingVideo(false);
+    setUploadingVideo(true)
+    const link = await uploadFileService.upload(video, "videos")
+    getVideoImage(link)
+  }
+
+  function getVideoImage(path) {
+    let canvas = document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
+    let video;
+
+    function exportFrame(path) {
+      video = document.createElement('video');
+      let img = new Image();
+
+      function initCanvas() {
+        canvas.width = this.videoWidth;
+        canvas.height = this.videoHeight;
+      }
+
+      function drawFrame(e) {
+        video.pause()
+        ctx.drawImage(this, 0, 0);
+
+        canvas.toBlob((blob) => {
+          img.onload = URL.revokeObjectURL(path)
+          img.src = URL.createObjectURL(blob)
+          img.style.visibility = 'hidden'
+
+          uploadFileService.uploadBlob(blob, "images").then(response => {
+            setPreviewImage(response)
+            setVideo(path)
+            setUploadingVideo(false)
+          })
+        }, 'image/jpeg')
+
+        URL.revokeObjectURL(this.src)
+      }
+
+      video.addEventListener('loadedmetadata', initCanvas, false);
+      video.addEventListener('timeupdate', drawFrame, false);
+
+      video.muted = true;
+      video.setAttribute('crossOrigin', 'anonymous');
+      video.src = path
+      video.play()
+    }
+
+    exportFrame(path)
   }
 
   function onDropDownClick(event) {
