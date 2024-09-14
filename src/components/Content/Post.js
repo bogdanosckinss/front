@@ -39,8 +39,8 @@ export default function Post({postRef, post, inView}) {
     return (
         <li ref={postRef} className="videos-result__item" onClick={selectVideoIndex}>
             <LazyLoadComponent>
-                <video className="videos-result__video" loop preload={inView}>
-                    {fetchedPost?.link ? <source type="video/mp4" src={fetchedPost?.link + '#t=0.1'} /> : ''}
+                <video className="videos-result__video" poster={fetchedPost?.preview_url} preload={'none'}>
+                    {fetchedPost?.link ? <source type="video/mp4" src={fetchedPost?.link + '#t=0.1'}/> : ''}
                 </video>
             </LazyLoadComponent>
             <div className="videos-result__play">
