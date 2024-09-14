@@ -137,7 +137,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
         <Plyr
             poster={video?.preview_url}
             muted={false}
-            preload={inView}
+            preload={inView ? '' : 'none'}
             ref={playerRef}
             options={{
                 controls: ['progress', 'play-large', 'play', 'current-time', 'duration'],
