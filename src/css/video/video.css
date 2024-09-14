@@ -1,4 +1,4 @@
-@import url('./video-header.css');
+@import url("./video-header.css");
 
 .plyr__volume > input {
   /*visibility: hidden;*/
@@ -9,9 +9,10 @@
   opacity: 100% !important;
 }
 
-.plyr__progress input[type=range], .plyr__progress__buffer {
+.plyr__progress input[type="range"],
+.plyr__progress__buffer {
   width: calc(100% + var(--plyr-range-thumb-height, 21px)) !important;
-  margin-left: calc(var(--plyr-range-thumb-height, 20px)*-.5) !important;
+  margin-left: calc(var(--plyr-range-thumb-height, 20px) * -0.5) !important;
 }
 
 .plyr__volume {
@@ -26,7 +27,8 @@
   bottom: 3px;
 }
 
-.icon--not-pressed, .icon--pressed {
+.icon--not-pressed,
+.icon--pressed {
   fill: white !important;
 }
 
@@ -41,7 +43,7 @@
   background-color: transparent;
   width: 10px;
   height: 6px;
-  content: '';
+  content: "";
   left: 1px;
   top: -5px;
 }
@@ -93,23 +95,24 @@
 }
 .plyr__controls::after {
   position: absolute;
-  content: '';
+  content: "";
   display: block;
   border-radius: 0;
   width: 100%;
-  height: 150px;
+  height: 300px;
   background-image: url(../../img/video-bg.svg);
   background-size: cover;
   background-position: bottom;
   bottom: -55px;
   left: 0;
+  z-index: -1;
 }
 @media (max-width: 480px) {
   .plyr--video .plyr__controls {
     padding: 10px !important;
     padding: var(--plyr-control-spacing, 10px) !important;
     padding-top: 35px !important;
-    padding-top: calc(var(--plyr-control-spacing, 10px)* 3.5);
+    padding-top: calc(var(--plyr-control-spacing, 10px) * 3.5);
   }
 }
 .moderation .plyr__controls::after {
@@ -143,7 +146,7 @@
   object-fit: cover;
 }
 .video__author-name {
-  font-family: 'myfontExtraBold';
+  font-family: "myfontExtraBold";
   font-size: 19px;
   line-height: 1.25;
   color: #fff;
@@ -222,7 +225,7 @@
   text-transform: none;
   text-align: center;
   color: var(--pink);
-  font-family: 'myfontExtraBold';
+  font-family: "myfontExtraBold";
   transition: all 0.2s ease-in;
 }
 .video__btn-span {
@@ -387,7 +390,7 @@
   font-size: 16px;
   line-height: 1;
   color: #0647c7;
-  font-family: 'myfontRegular';
+  font-family: "myfontRegular";
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -401,7 +404,7 @@
   height: 42px;
 }
 .tooltiptext {
-  font-family: 'myfontRegular';
+  font-family: "myfontRegular";
   position: absolute;
   bottom: -36px;
   white-space: nowrap;
@@ -443,7 +446,7 @@
 }
 @media screen and (max-width: 1100px) {
   .plyr__controls::after {
-    height: 200px;
+    height: 250px;
   }
 }
 @media screen and (max-width: 650px) {
