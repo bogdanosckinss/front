@@ -7,7 +7,7 @@ import {createSearchParams, useNavigate} from "react-router-dom";
 import {LazyLoadComponent} from "react-lazy-load-image-component";
 
 export default function Post({postRef, post, inView}) {
-    const { query } = useSelector((state) => state.posts)
+    const { query, posts } = useSelector((state) => state.posts)
     const [fetchedPost, setFetchedPost] = useState({})
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -23,11 +23,15 @@ export default function Post({postRef, post, inView}) {
     function selectVideoIndex() {
         dispatch(setSelectedVideoIndex(fetchedPost?.id))
 
+        const postIndex = posts.findIndex(post => post.id == fetchedPost?.id)
+        const postsBeforeSelected = posts.filter((post, index) => index < postIndex)
+
         navigate({
             pathname: '/videos-top-down',
             search: createSearchParams({
                 video: fetchedPost?.id,
-                query: query
+                query: query,
+                skip: postsBeforeSelected?.length ?? 0
             }).toString(),
         }, {replace: false})
     }
@@ -36,7 +40,7 @@ export default function Post({postRef, post, inView}) {
         <li ref={postRef} className="videos-result__item" onClick={selectVideoIndex}>
             <LazyLoadComponent>
                 <video className="videos-result__video" loop preload={inView}>
-                    {fetchedPost?.link ? <source type="video/mp4" src={fetchedPost?.link}/> : ''}
+                    {fetchedPost?.link ? <source type="video/mp4" src={fetchedPost?.link + '#t=0.1'} /> : ''}
                 </video>
             </LazyLoadComponent>
             <div className="videos-result__play">

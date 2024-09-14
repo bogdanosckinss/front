@@ -18,8 +18,9 @@ export default function TopDownVideos() {
     async function getContent(event) {
         const query = searchParams.get('query')
         const skip = searchParams.get('skip') ?? 0
+        const videoIdFromUrl = searchParams.get('video') ?? 0
         const videoId = params.id
-        let requestUrl = 'content/search/videos?query=' + query + '&skip=' + skip
+        let requestUrl = 'content/search/videos?query=' + query + '&skip=' + skip + '&video=' + videoIdFromUrl
 
         if (videoId) {
             requestUrl = 'content/video/' + videoId
