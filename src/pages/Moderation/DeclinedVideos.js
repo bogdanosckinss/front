@@ -30,7 +30,7 @@ export default function DeclinedVideos() {
             let response = {};
             try {
                 response = await privateAxios.get(
-                    "content/videos-to-moderate/declined?skip=" + skipVideosCount
+                    "content/videos-to-moderate/declined?skip=" + videos.length
                 );
 
                 const allVideos = [...videos, ...response.data];
@@ -45,7 +45,7 @@ export default function DeclinedVideos() {
                 console.log(err);
             }
         }, 1000),
-        [privateAxios, skipVideosCount]
+        [privateAxios, videos]
     );
 
     function approved() {

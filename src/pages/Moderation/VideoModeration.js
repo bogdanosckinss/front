@@ -54,22 +54,22 @@ export default function VideoModeration() {
       let response = {};
       try {
         response = await privateAxios.get(
-          "content/videos-to-moderate?skip=" + skipVideosCount
+          "content/videos-to-moderate?skip=" + videos.length
         )
 
-        const allVideos = [...videos, ...response.data];
-        setVideos(allVideos);
-        setSkipVideosCount(allVideos.length);
+        const allVideos = [...videos, ...response.data]
+        setVideos(allVideos)
+        setSkipVideosCount(allVideos.length)
 
         if (response.data.length == 0) {
-          setNoMoreVideosFound(true);
+          setNoMoreVideosFound(true)
           return;
         }
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
     }, 1000),
-    [privateAxios, skipVideosCount]
+    [privateAxios, videos]
   );
 
   return (
