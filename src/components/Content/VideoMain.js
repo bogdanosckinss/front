@@ -44,7 +44,7 @@ export default function VideoMain() {
                 const allVideos = [...posts, ...response.data]
                 dispatch(setPosts(allVideos))
                 setSkipVideosCount(allVideos.length)
-                setSearchParams({skip: allVideos.length})
+                setSearchParams({skip: posts.length})
             })
             .catch(error => {
                 console.log(error)
