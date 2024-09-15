@@ -31,7 +31,7 @@ export default function Post({postRef, post, inView}) {
             search: createSearchParams({
                 video: fetchedPost?.id,
                 query: query,
-                skip: postsBeforeSelected?.length ?? 0
+                skip: (postsBeforeSelected?.length) ?? 0
             }).toString(),
         }, {replace: false})
     }

@@ -18,7 +18,7 @@ export default function VideoMain() {
     useEffect(() => {
         const id = searchParams.get('video')
         const videoIndex = posts.findIndex(video => video.id == id)
-        setVideos(posts.filter((video, index) => index >= videoIndex))
+        setVideos(posts) // .filter((video, index) => index >= videoIndex)
         setSkipVideosCount(posts.length)
     }, [posts])
 
@@ -32,8 +32,10 @@ export default function VideoMain() {
 
     function findMoreAsync() {
         const composedQuery = searchParams.get('query') ?? query
+        const amountToSkipFromParams = parseInt(searchParams.get('skip')) ?? 0
+        const amountToSkip = amountToSkipFromParams > posts.length ? amountToSkipFromParams + posts.length : posts.length
         privateAxios
-            .get('content/search/videos?query=' + composedQuery + '&skip=' + posts.length)
+            .get('content/search/videos?query=' + composedQuery + '&skip=' + amountToSkip)
             .then(response => {
                 if (response.data.length == 0) {
                     return
@@ -63,6 +65,7 @@ export default function VideoMain() {
                                 videos.map((video, key) => {
                                     return(
                                         <InView onChange={(inView, entry) => {
+                                            console.log(video.id)
                                             if (isLastLine(key) && inView) {
                                                 findMoreAsync()
                                             }
