@@ -6,7 +6,7 @@ import {setPosts} from "../../features/posts/postsSlice.js";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import {InView} from "react-intersection-observer";
 
-export default function VideoMain() {
+export default function VideoMain({canUploadMore}) {
     const [skipVideosCount, setSkipVideosCount] = useState(0)
     const [searchParams, setSearchParams] = useSearchParams()
     const [videos, setVideos] = useState([])
@@ -16,9 +16,7 @@ export default function VideoMain() {
     const { posts, query } = useSelector((state) => state.posts)
 
     useEffect(() => {
-        const id = searchParams.get('video')
-        const videoIndex = posts.findIndex(video => video.id == id)
-        setVideos(posts) // .filter((video, index) => index >= videoIndex)
+        setVideos(posts)
         setSkipVideosCount(posts.length)
     }, [posts])
 
@@ -65,8 +63,7 @@ export default function VideoMain() {
                                 videos.map((video, key) => {
                                     return(
                                         <InView onChange={(inView, entry) => {
-                                            console.log(video.id)
-                                            if (isLastLine(key) && inView) {
+                                            if (isLastLine(key) && inView && canUploadMore) {
                                                 findMoreAsync()
                                             }
                                         }} threshold={0.4} triggerOnce={true} key={video.id + 'view'}>

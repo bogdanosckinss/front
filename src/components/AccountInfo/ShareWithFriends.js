@@ -18,6 +18,7 @@ export default function ShareWithFriends({link, tryAgain, canShare, removeVideo}
                         className="account-share-block-left__input"
                         type="text"
                         value={link}
+                        onChange={() => {}}
                         id="application-approved-myInput"
                     />
                     <CopyLink input={input} link={link}/>

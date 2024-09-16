@@ -5,10 +5,8 @@ import Plyr from "plyr-react";
 import {useParams} from "react-router-dom";
 
 export default function TopDownVideo({postRef, video, userInteracts, isLastLine, findMoreAsync, inView}) {
-    const params = useParams()
     const privateAxios = useAxiosPrivate()
     const [share, setShare] = useState(false)
-    const [firstRender, setFirstRender] = useState(true)
     const [likes, setLikes] = useState(0)
     const [liked, setLiked] = useState(false)
     const copyBtnRef = useRef(null)
@@ -18,14 +16,9 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
     const postContainerRef = useRef()
 
     useEffect(() => {
-        // console.log(window.innerWidth)
-        // if (window.innerWidth < 991) {
-        //     console.log(copyBtnRef.current)
-        //     copyBtnRef.current.style.visibility = 'hidden'
-        // }
-
         setLiked(video?.is_liked_by_me)
         setLikes(video.videoLikes)
+
         const handleClickOutside = (event) => {
             if (copyBtnRef.current && !copyBtnRef.current.contains(event.target)) {
                 copyBtnRef.current.classList.remove('active');
@@ -33,6 +26,15 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
 
             }
         }
+
+        const videoElement = postContainerRef.current.getElementsByTagName('video')[0]
+        videoElement.addEventListener('play', () => {
+            Array.from(document.body.getElementsByTagName('video')).forEach((element, indx) => {
+                if (element != videoElement && !element.paused) {
+                    element.pause()
+                }
+            })
+        })
 
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -184,21 +186,6 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
 
     return (
         <>
-            {/*<Helmet>*/}
-            {/*    <meta property="og:url" content={window.location.href} />*/}
-            {/*    <meta property="og:type" content='article' />*/}
-            {/*    <meta property="og:title" content={video?.users?.name} />*/}
-            {/*    <meta property="og:site_name" content={video?.song?.title} />*/}
-            {/*    <meta name="twitter:title" content={video?.users?.name} />*/}
-
-            {/*    <meta name="description" content={video?.song?.title} />*/}
-            {/*    <meta property="og:description" content={video?.song?.title} />*/}
-            {/*    <meta name="twitter:description" content={video?.song?.title} />*/}
-
-            {/*    <meta property="og:image" content={video?.users?.image} />*/}
-            {/*    <meta name="twitter:image" content={video?.users?.image} />*/}
-            {/*</Helmet>*/}
-
             <li ref={postRef} className={'video-main__item ' + (isLiked() ? 'liked' : '')}>
                 <div ref={postContainerRef} className="video-main__item-cover">
                     <span>
@@ -279,7 +266,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
                           d="M1.28235 13.9402L1.28237 13.9402C1.21935 13.2059 1.6095 12.5318 2.26382 12.0162L2.26621 12.0143L2.26622 12.0143C2.97901 11.462 3.95644 11.1219 5.01189 11.0325L5.01301 11.0324C6.23276 10.9326 7.4087 11.1801 8.23333 11.7614L8.24185 11.7674C8.30262 11.8102 8.38874 11.8709 8.46657 11.946L11.0604 2.91091L11.0631 2.90118L11.0633 2.90123C11.1383 2.66403 11.3521 2.49263 11.6127 2.48566L11.6187 2.4855L11.6187 2.48555L21.1853 2.38386C21.3081 2.38133 21.4301 2.41591 21.5337 2.48891C21.5341 2.48922 21.5348 2.4897 21.5358 2.49036C21.5498 2.49969 21.6169 2.54454 21.6705 2.62389C21.7783 2.77031 21.8122 2.96142 21.7586 3.13518L18.7432 13.6655C18.6017 14.343 18.1067 14.9088 17.46 15.3152C16.8035 15.7276 15.9554 16.0005 15.0351 16.0775L15.0347 16.0775C14.0451 16.1593 13.0731 16.01 12.294 15.6396L12.292 15.6386C12.1174 15.5543 11.9509 15.4566 11.8008 15.3508C11.2556 14.9664 10.9061 14.4445 10.8477 13.8397L10.8475 13.8379C10.7754 13.0513 11.221 12.3394 11.9551 11.8169L11.9554 11.8167C12.6521 11.3217 13.5875 11.0096 14.5823 10.9306C15.8006 10.8311 16.9796 11.074 17.8049 11.6558L17.8134 11.6618C17.8742 11.7046 17.9603 11.7653 18.0381 11.8404L20.4125 3.56902L12.0695 3.65553L9.17429 13.7672C9.03283 14.4447 8.53787 15.0105 7.8911 15.4169C7.23467 15.8294 6.38658 16.1022 5.46625 16.1792L5.46585 16.1793C4.47621 16.261 3.50424 16.1117 2.72518 15.7413L2.72316 15.7403C2.55009 15.6568 2.38497 15.56 2.23585 15.4552L1.28235 13.9402ZM1.28235 13.9402L1.28274 13.9442C1.34101 14.5475 1.689 15.0684 2.23194 15.4525L1.28235 13.9402ZM7.56325 12.712L7.66899 12.7865C7.90796 12.9836 8.01319 13.1894 8.03184 13.3751C8.05703 13.6684 7.87077 14.0286 7.37971 14.3621C6.89903 14.6885 6.19193 14.9364 5.37341 15.0034L5.37191 15.0036C4.57267 15.0723 3.7961 14.9452 3.24144 14.6776C3.11925 14.6177 3.0128 14.5568 2.92467 14.4947C2.60751 14.2711 2.47778 14.0384 2.46017 13.8365L2.46012 13.8359C2.43409 13.5424 2.62012 13.1814 3.11211 12.8473C3.59279 12.5209 4.29989 12.273 5.11841 12.206L5.11979 12.2059C6.11288 12.1208 7.02501 12.3325 7.56325 12.712ZM17.1348 12.6064L17.2406 12.6809C17.4796 12.878 17.5848 13.0839 17.6034 13.2696C17.6286 13.5628 17.4423 13.923 16.9513 14.2565C16.4706 14.5829 15.7635 14.8308 14.945 14.8978L14.9435 14.898C14.1444 14.9666 13.368 14.8396 12.8133 14.5721C12.691 14.5122 12.5845 14.4513 12.4963 14.3891C12.1791 14.1655 12.0494 13.9328 12.0318 13.7309L12.0316 13.7287C12.007 13.4649 12.1638 13.1177 12.6479 12.7738C13.1513 12.4193 13.8936 12.1654 14.6899 12.1004L14.6914 12.1003C15.6845 12.0152 16.5966 12.2269 17.1348 12.6064Z"
                           fill="white"
                           stroke="white"
-                          stroke-width="0.75"
+                          strokeWidth="0.75"
                       />
                     </svg>
                   </span>
@@ -376,6 +363,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
                             className="share-popup-input js-share-popup-input"
                             type="text"
                             value={videoLink()}
+                            onChange={() => {}}
                             id="myInput"
                             ref={inputREF}
                         />

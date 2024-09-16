@@ -13,7 +13,7 @@ export default function SupportOthers() {
                     Голосуй за других учатсников и находи новых творческих друзей на
                     конкурсе
                 </div>
-                <button onClick={() => navigate('/videos')} className="support-others__btn button-special">
+                <button onClick={() => navigate('/videos')} className="support-others__btn button-special" style={{zIndex: 20}}>
                     <span>
                         <a href='/videos'>Голосовать</a>
                     </span>

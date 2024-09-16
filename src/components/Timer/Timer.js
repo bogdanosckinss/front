@@ -8,6 +8,9 @@ export default function Timer({restart, resetRestart, allowResendCode}) {
         let interval = null;
 
         if (restart) {
+            if (document.getElementById('code__dont-receive')) {
+                document.getElementById('code__dont-receive').classList.remove('code__not-received')
+            }
             resetRestart()
             setIsActive(true)
             setSeconds(60)
@@ -15,6 +18,10 @@ export default function Timer({restart, resetRestart, allowResendCode}) {
 
         if (seconds == 0 && !restart) {
             allowResendCode()
+
+            if (document.getElementById('code__dont-receive')) {
+                document.getElementById('code__dont-receive').classList.add('code__not-received')
+            }
         }
 
         if (isActive) {

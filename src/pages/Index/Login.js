@@ -408,7 +408,7 @@ export default function Login() {
                                                                                            resetRestart={resetRestart}
                                                                                            allowResendCode={allowResendCode}
                         /></code>
-                        <code className="code__text-p" style={isAllowedToResendCode ? {cursor: 'pointer'} : {cursor: 'not-allowed'}} onClick={() => {
+                        <code id="code__dont-receive" className="code__text-p" style={isAllowedToResendCode ? {cursor: 'pointer'} : {cursor: 'not-allowed'}} onClick={() => {
                             if (isAllowedToResendCode) {
                                 setSupport(true)
                                 setHideConfirmation(true)

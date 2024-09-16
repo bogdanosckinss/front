@@ -60,7 +60,7 @@ export default function TopDownVideos() {
             <div>
                 <main>
                     <VideoHeader/>
-                    <VideoMain/>
+                    <VideoMain canUploadMore={!(params.id)} />
                 </main>
             </div>
         </>
