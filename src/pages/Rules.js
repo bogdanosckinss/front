@@ -76,7 +76,7 @@ export default function Rules() {
                     <a href="/#prizes">Призы</a>
                   </li>
                   <li>
-                    <a href="/#voting">Как проголосовать</a>
+                    <a href="/#voting">Вопросы и ответы</a>
                   </li>
                 </ul>
                 <button
@@ -123,7 +123,7 @@ export default function Rules() {
             </li>
 
             <li>
-              <a href="/#prizes">Как проголосовать</a>
+              <a href="/#prizes">Вопросы и ответы</a>
             </li>
             <li>
               <a href="/#voting"> Призы</a>
