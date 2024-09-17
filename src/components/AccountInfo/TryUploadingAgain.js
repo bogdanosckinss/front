@@ -4,7 +4,8 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 export default function TryUploadingAgain({removeVideo}) {
     const privateAxios = useAxiosPrivate()
 
-    async function tryAgain(){
+    async function tryAgain(e){
+        e.preventDefault()
         try {
             await privateAxios.delete('/content/video')
             removeVideo()
