@@ -7,6 +7,7 @@ import debounce from "lodash/debounce.js";
 import headerLoading from "../../img/header-loading.svg";
 import headerClose from "../../img/header-close.svg";
 import searchArrow from "../../img/search-arrow.svg";
+import {setIsAuthenticated, setShowAuth, setUserInfo} from "../../features/auth/authSlice.js";
 
 export default function VideoHeader() {
     const navigate = useNavigate()
@@ -21,6 +22,7 @@ export default function VideoHeader() {
     const dispatch = useDispatch()
     const ref = useRef()
     const formRef = useRef()
+    const { isAuthenticated } = useSelector((state) => state.auth)
     const { loading } = useSelector((state) => state.posts)
 
     useEffect(() => {
@@ -166,6 +168,12 @@ export default function VideoHeader() {
         [privateAxios, dispatch]
     )
 
+    function toggleAuth() {
+        if (!isAuthenticated) {
+            dispatch(setShowAuth(true))
+        }
+    }
+
     return (
         <header className="header video-header">
             <div className="header__container">
@@ -271,24 +279,48 @@ export default function VideoHeader() {
                                 </>
                             )}
                         </form>
-                        <a onClick={() => {
-                            navigate({
-                                pathname: '/account',
-                            }, {replace: false})
-                        }} style={{cursor: 'pointer'}} role='button' className="header__button-block header__button-block-new">
-                            <span>Участвовать</span>
-                            <svg
-                                width="149"
-                                height="44"
-                                viewBox="0 0 149 44"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M72.1291 0.28748C94.6518 0.219193 130.854 -0.425051 140.795 4.88577C150.737 10.1966 151.263 30.8606 144.428 37.8403C139.305 43.0714 134.472 44.2664 67.1835 43.9539C20.9475 43.7398 14.3814 42.8581 6.55099 38.0956C-1.27947 33.3331 -2.90852 13.5212 6.18777 6.92948C18.8269 -2.22711 50.8753 0.351962 72.1291 0.28748Z"
-                                />
-                            </svg>
-                        </a>
+
+                        {
+                            isAuthenticated ?
+                                <a onClick={() => {
+                                    navigate({
+                                        pathname: '/account',
+                                    }, {replace: false})
+                                }} style={{cursor: 'pointer'}} role='button'
+                                   className="header__button-block header__button-block-new">
+                                    <span>Участвовать</span>
+                                    <svg
+                                        width="149"
+                                        height="44"
+                                        viewBox="0 0 149 44"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M72.1291 0.28748C94.6518 0.219193 130.854 -0.425051 140.795 4.88577C150.737 10.1966 151.263 30.8606 144.428 37.8403C139.305 43.0714 134.472 44.2664 67.1835 43.9539C20.9475 43.7398 14.3814 42.8581 6.55099 38.0956C-1.27947 33.3331 -2.90852 13.5212 6.18777 6.92948C18.8269 -2.22711 50.8753 0.351962 72.1291 0.28748Z"
+                                        />
+                                    </svg>
+                                </a>
+                                :
+                                <a onClick={(event) => {
+                                    event.preventDefault()
+                                    toggleAuth()
+                                }} style={{cursor: 'pointer'}} role='button'
+                                   className="header__button-block header__button-block-new">
+                                    <span>Войти</span>
+                                    <svg
+                                        width="149"
+                                        height="44"
+                                        viewBox="0 0 149 44"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M72.1291 0.28748C94.6518 0.219193 130.854 -0.425051 140.795 4.88577C150.737 10.1966 151.263 30.8606 144.428 37.8403C139.305 43.0714 134.472 44.2664 67.1835 43.9539C20.9475 43.7398 14.3814 42.8581 6.55099 38.0956C-1.27947 33.3331 -2.90852 13.5212 6.18777 6.92948C18.8269 -2.22711 50.8753 0.351962 72.1291 0.28748Z"
+                                        />
+                                    </svg>
+                                </a>
+                        }
                     </div>
                 </div>
             </div>

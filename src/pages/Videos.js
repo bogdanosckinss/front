@@ -8,12 +8,14 @@ import Header from "../components/Header/Header.js";
 import NotFound from "../components/NotFound/NotFound.js";
 import VideosResult from "../components/VideosResult/VideosResult.js";
 import { useSelector } from "react-redux";
+import Login from "./Index/Login.js";
 
 export default function Videos() {
   const [initialLoading, setInitialLoading] = useState(true);
   const { searchOptions, query, loading, hideNotFoundNote } = useSelector(
     (state) => state.posts
-  );
+  )
+  const { loading: authLoading } = useSelector((state) => state.auth)
 
   useEffect(() => {
     document.body.classList.forEach((item) =>
@@ -30,7 +32,7 @@ export default function Videos() {
     <>
       <div
         className="loader-popup"
-        style={initialLoading ? { display: "block" } : { display: "none" }}
+        style={initialLoading || authLoading ? { display: "block" } : { display: "none" }}
       >
         <div className="loader-popup__loading loader"></div>
       </div>
@@ -47,6 +49,7 @@ export default function Videos() {
           )}
           <VideosResult setNotInitialLoading={setNotInitialLoading} />
         </div>
+        <Login redirectAfterLogin={false} />
       </main>
       <footer className="footer footer-videos">
         <div className="footer__wrapper">

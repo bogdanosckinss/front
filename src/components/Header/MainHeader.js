@@ -9,11 +9,11 @@ import {
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 
 export default function MainHeader() {
-  const dispatch = useDispatch();
-  const privateAxios = useAxiosPrivate();
-  const { isAuthenticated } = useSelector((state) => state.auth);
-  const mobhead = useRef();
-  const burger = useRef();
+  const dispatch = useDispatch()
+  const privateAxios = useAxiosPrivate()
+  const { isAuthenticated } = useSelector((state) => state.auth)
+  const mobhead = useRef()
+  const burger = useRef()
 
   function toggleMob(e) {
     e.preventDefault();

@@ -8,9 +8,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {setHideNotFoundNote, setLoading, setPosts, setQuery, setSearchOptions} from "../../features/posts/postsSlice.js";
 import debounce from 'lodash/debounce.js';
 import {useNavigate, useSearchParams} from "react-router-dom";
+import {setShowAuth} from "../../features/auth/authSlice.js";
 
 export default function Header() {
     const [searchParams, setSearchParams] = useSearchParams()
+    const { isAuthenticated } = useSelector((state) => state.auth)
     const privateAxios = useAxiosPrivate()
     const [inputValue, setInputValue] = useState('');
     const [isFirstRender, setIsFirstRender] = useState(true);
@@ -176,7 +178,13 @@ export default function Header() {
             }
         }, 1000),
         [privateAxios, dispatch]
-    );
+    )
+
+    function toggleAuth() {
+        if (!isAuthenticated) {
+            dispatch(setShowAuth(true))
+        }
+    }
 
     return (
         <>
@@ -251,8 +259,9 @@ export default function Header() {
 
                                 {((options && showResults) || isLittleScreen) && (
                                     <>
-                                        <div style={(inputValue != '' && !loading) || (isLittleScreen) ? {display: 'block'} : {}}
-                                             className="header__search-close" onClick={handleCloseClick}>
+                                        <div
+                                            style={(inputValue != '' && !loading) || (isLittleScreen) ? {display: 'block'} : {}}
+                                            className="header__search-close" onClick={handleCloseClick}>
                                             <img src={headerClose} alt="close"/>
                                         </div>
                                         <ul ref={ref} className="header-search__result-list">
@@ -289,24 +298,47 @@ export default function Header() {
 
 
                             </form>
-                            <a role='button' onClick={() => {
-                                navigate({
-                                    pathname: '/account',
-                                }, {replace: false})
-                            }} style={{cursor: 'pointer'}} className="header__button-block header__button-block-new">
-                                <span>Участвовать</span>
-                                <svg
-                                    width="149"
-                                    height="44"
-                                    viewBox="0 0 149 44"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M72.1291 0.28748C94.6518 0.219193 130.854 -0.425051 140.795 4.88577C150.737 10.1966 151.263 30.8606 144.428 37.8403C139.305 43.0714 134.472 44.2664 67.1835 43.9539C20.9475 43.7398 14.3814 42.8581 6.55099 38.0956C-1.27947 33.3331 -2.90852 13.5212 6.18777 6.92948C18.8269 -2.22711 50.8753 0.351962 72.1291 0.28748Z"
-                                    />
-                                </svg>
-                            </a>
+                            {
+                                isAuthenticated ?
+                                    <a role='button' onClick={() => {
+                                        navigate({
+                                            pathname: '/account',
+                                        }, {replace: false})
+                                    }} style={{cursor: 'pointer'}}
+                                       className="header__button-block header__button-block-new">
+                                        <span>Участвовать</span>
+                                        <svg
+                                            width="149"
+                                            height="44"
+                                            viewBox="0 0 149 44"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M72.1291 0.28748C94.6518 0.219193 130.854 -0.425051 140.795 4.88577C150.737 10.1966 151.263 30.8606 144.428 37.8403C139.305 43.0714 134.472 44.2664 67.1835 43.9539C20.9475 43.7398 14.3814 42.8581 6.55099 38.0956C-1.27947 33.3331 -2.90852 13.5212 6.18777 6.92948C18.8269 -2.22711 50.8753 0.351962 72.1291 0.28748Z"
+                                            />
+                                        </svg>
+                                    </a>
+                                    :
+                                    <a role='button' onClick={(event) => {
+                                        event.preventDefault()
+                                        toggleAuth()
+                                    }} style={{cursor: 'pointer'}}
+                                       className="header__button-block header__button-block-new">
+                                        <span>Войти</span>
+                                        <svg
+                                            width="149"
+                                            height="44"
+                                            viewBox="0 0 149 44"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M72.1291 0.28748C94.6518 0.219193 130.854 -0.425051 140.795 4.88577C150.737 10.1966 151.263 30.8606 144.428 37.8403C139.305 43.0714 134.472 44.2664 67.1835 43.9539C20.9475 43.7398 14.3814 42.8581 6.55099 38.0956C-1.27947 33.3331 -2.90852 13.5212 6.18777 6.92948C18.8269 -2.22711 50.8753 0.351962 72.1291 0.28748Z"
+                                            />
+                                        </svg>
+                                    </a>
+                            }
                         </div>
                     </div>
                 </div>

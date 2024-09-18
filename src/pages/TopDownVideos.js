@@ -4,11 +4,13 @@ import '../css/styles.css'
 import '../css/videos/videos.css'
 import React, {useEffect, useState} from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate.js";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setPosts} from "../features/posts/postsSlice.js";
 import {useParams, useSearchParams} from "react-router-dom";
+import Login from "./Index/Login.js";
 
 export default function TopDownVideos() {
+    const { loading } = useSelector((state) => state.auth)
     const params = useParams()
     const [searchParams, setSearchParams] = useSearchParams()
     const [initialLoading, setInitialLoading] = useState(true)
@@ -54,13 +56,14 @@ export default function TopDownVideos() {
 
     return(
         <>
-            <div className="loader-popup" style={initialLoading ? {display: 'block'} : {display: 'none'}}>
+            <div className="loader-popup" style={initialLoading || loading ? {display: 'block'} : {display: 'none'}}>
                 <div className="loader-popup__loading loader"></div>
             </div>
             <div>
                 <main>
-                    <VideoHeader/>
+                    <VideoHeader />
                     <VideoMain canUploadMore={!(params.id)} />
+                    <Login redirectAfterLogin={false}  />
                 </main>
             </div>
         </>

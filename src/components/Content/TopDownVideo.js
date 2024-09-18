@@ -2,18 +2,22 @@ import React, {useEffect, useMemo, useRef, useState} from "react";
 import videoHeartBtn from "../../img/video-heart-btn.svg";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import Plyr from "plyr-react";
-import {useParams} from "react-router-dom";
+import {setShowAuth} from "../../features/auth/authSlice.js";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function TopDownVideo({postRef, video, userInteracts, isLastLine, findMoreAsync, inView}) {
     const privateAxios = useAxiosPrivate()
     const [share, setShare] = useState(false)
     const [likes, setLikes] = useState(0)
     const [liked, setLiked] = useState(false)
+    const [likeAfterLogin, setLikeAfterLogin] = useState(false)
     const copyBtnRef = useRef(null)
     const playerRef = useRef()
     const inputREF = useRef()
     const videoDownRef = useRef()
     const postContainerRef = useRef()
+    const { isAuthenticated } = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         setLiked(video?.is_liked_by_me)
@@ -39,6 +43,12 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [])
+
+    useEffect(() => {
+        if (isAuthenticated && likeAfterLogin) {
+            toggleLike()
+        }
+    }, [likeAfterLogin, isAuthenticated]);
 
     function runHeartsAnimation() {
         const post = postContainerRef.current
@@ -115,7 +125,14 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
     }
 
     async function toggleLike() {
+        if (!isAuthenticated) {
+            setLikeAfterLogin(true)
+            toggleAuth()
+            return
+        }
+
         runHeartsAnimation()
+        setLikeAfterLogin(false)
 
         try {
             privateAxios.post('content/toggle-like', {
@@ -127,12 +144,14 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
 
         if (isLiked()) {
             setLikes(val => val - 1)
-            //dispatch(removeLike({postId: video.id, userId: profile.id}))
             return
         }
 
         setLikes(val => val + 1)
-        //dispatch(addLike({postId: video.id, userId: profile.id}))
+    }
+
+    function toggleAuth() {
+        dispatch(setShowAuth(true))
     }
 
     const renderVideo = useMemo(() => (

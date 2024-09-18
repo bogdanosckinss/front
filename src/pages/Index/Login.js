@@ -1,12 +1,12 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
-import {setIsAuthenticated, setShowAuth, setShowEmailAuth} from "../../features/auth/authSlice.js";
+import {setIsAuthenticated, setLoading, setShowAuth, setShowEmailAuth} from "../../features/auth/authSlice.js";
 import Timer from "../../components/Timer/Timer.js";
 import Support from "../../components/Support/Support.js";
 import {useNavigate} from "react-router-dom";
 
-export default function Login() {
+export default function Login({redirectAfterLogin = true, postLoginAction = () => {}}) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { showAuth, showEmailAuth } = useSelector((state) => state.auth)
@@ -232,6 +232,7 @@ export default function Login() {
     async function confirmPhone(event) {
         event.preventDefault()
         setError(false)
+        dispatch(setLoading(true))
 
         try {
             const response = await privateAxios.post('auth/confirm-phone', {
@@ -245,11 +246,20 @@ export default function Login() {
             localStorage.setItem('rf', response.data.refreshToken)
             dispatch(setIsAuthenticated(true))
             hideModal()
-            navigate('/videos')
+            dispatch(setLoading(false))
+
+            if (postLoginAction) {
+                postLoginAction()
+            }
+
+            if (redirectAfterLogin) {
+                navigate('/videos')
+            }
         } catch (err) {
             console.log(err)
             dispatch(setIsAuthenticated(false))
             setError(true)
+            dispatch(setLoading(false))
         }
     }
 
