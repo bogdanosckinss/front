@@ -17,6 +17,7 @@ export default function Login() {
     const [email, setEmail] = useState('')
     const [code, setCode] = useState('')
     const [token, setToken] = useState('')
+    const [tokenSent, setTokenSent] = useState(false)
     const [restart, setRestart] = useState(false)
     const [isAllowedToResendCode, setIsAllowedToResendCode] = useState(false)
     const inputsRef = useRef([]);
@@ -35,6 +36,9 @@ export default function Login() {
         event.preventDefault()
         const formattedPhone = unmaskedPhone()
         setSentViaPhone(true)
+        setRestart(true)
+        setIsAllowedToResendCode(false)
+        setTokenSent(true)
 
         let response = {}
         try {
@@ -45,9 +49,7 @@ export default function Login() {
                 withCredentials: true
             })
 
-            setRestart(true)
-            setIsAllowedToResendCode(false)
-            setToken(response.data.confirmationToken)
+            //setToken(response.data.confirmationToken)
             localStorage.setItem('confirmationToken', response.data.confirmationToken)
             localStorage.setItem('confirmationCode', response.data.confirmationCode)
             localStorage.setItem('checks','checked')
@@ -60,6 +62,10 @@ export default function Login() {
         event.preventDefault()
 
         setSentViaPhone(false)
+        setRestart(true)
+        setIsAllowedToResendCode(false)
+        setTokenSent(true)
+
         let response = {}
         try {
             response = await privateAxios.post('auth/create/email', {
@@ -69,8 +75,6 @@ export default function Login() {
                 withCredentials: true
             })
 
-            setRestart(true)
-            setIsAllowedToResendCode(false)
             setToken(response.data.confirmationToken)
             localStorage.setItem('confirmationToken', response.data.confirmationToken)
             localStorage.setItem('confirmationCode', response.data.confirmationCode)
@@ -138,6 +142,7 @@ export default function Login() {
         dispatch(setShowAuth(false))
         dispatch(setShowEmailAuth(false))
         setToken('')
+        setTokenSent(false)
         setSupport(false)
         setHideConfirmation(false)
     }
@@ -145,6 +150,7 @@ export default function Login() {
     function showModal() {
         dispatch(setShowAuth(true))
         setToken('')
+        setTokenSent(false)
         setSupport(false)
         setHideConfirmation(false)
     }
@@ -153,6 +159,7 @@ export default function Login() {
         dispatch(setShowAuth(true))
         dispatch(setShowEmailAuth(true))
         setToken('')
+        setTokenSent(false)
         setSupport(false)
         setHideConfirmation(false)
     }
@@ -281,7 +288,7 @@ export default function Login() {
             <div id='login-bg' onClick={hideModal} className="login-bg js-login-bg"
                  style={showAuth ? {display: 'block'} : {display: 'none'}}></div>
             <div className="login__container forms-popup js-forms-popup"
-                 style={showAuth && !token ? {display: 'block'} : {display: 'none'}}>
+                 style={showAuth && !tokenSent ? {display: 'block'} : {display: 'none'}}>
                 <div className="login__forw-wrapper">
                     <button className="login-btn-close js-login-btn-close" onClick={hideModal}>
                         <svg
@@ -362,7 +369,7 @@ export default function Login() {
                 </div>
             </div>
             <div className="login__container forms-popup js-forms-popup"
-                 style={showAuth && token && !hideConfirmation ? {display: 'block'} : {display: 'none'}}>
+                 style={showAuth && tokenSent && !hideConfirmation ? {display: 'block'} : {display: 'none'}}>
                 <div className="login__forw-wrapper">
                     <button onClick={hideModal} className="login-btn-close js-login-btn-close">
                         <svg
@@ -520,7 +527,7 @@ export default function Login() {
             <Support
                 support={support}
                 showAuth={showAuth}
-                token={token}
+                token={tokenSent}
                 close={() => hideModal()}
                 tryAgain={showModal}
                 tryEmail={showEmailModal}
