@@ -7,7 +7,7 @@ export default function Middleware(props) {
     const { loading, isAuthenticated } = useSelector((state) => state.auth)
 
     useEffect(() => {
-        const isVideoRoute = window.location.pathname.split('/')[1] == 'videos' || window.location.pathname.split('/')[1] == 'rules' || window.location.pathname.split('/')[1] == 'check'
+        const isVideoRoute = window.location.pathname.split('/')[1] == 'videos' || window.location.pathname.split('/')[1] == 'rules' || window.location.pathname.split('/')[1] == 'check' || window.location.pathname.split('/')[1] == 'video'
         const isListVideosRoute = window.location.pathname.split('/')[1] == 'videos-top-down'
 
         if (loading || isVideoRoute || isListVideosRoute) {
