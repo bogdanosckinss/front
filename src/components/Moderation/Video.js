@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import Plyr from "plyr-react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 
-export default function Video({ video, approved, declined }) {
+export default function Video({ video, approved, declined, deleted }) {
   const privateAxios = useAxiosPrivate();
   const ref = useRef()
 
@@ -38,6 +38,19 @@ export default function Video({ video, approved, declined }) {
     }
   }
 
+    function deleteVideo(videoId) {
+        try {
+            privateAxios.delete("content/update-video-moderation/delete/" + videoId).then(() => {
+                if (ref.current) {
+                    ref.current.style.display = 'none'
+                }
+                deleted()
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
   const renderVideo = useMemo(
     () => (
       <Plyr
@@ -70,57 +83,76 @@ export default function Video({ video, approved, declined }) {
   );
 
   return (
-    <article
-        ref={ref}
-      style={{
-        border: "solid #0647C7",
-        margin: "10px auto",
-        width: "300px",
-        padding: "10px 15px",
-        borderRadius: "20px",
-      }}
-    >
-      <img
-        src={video?.users?.image}
-        style={{ width: "100%" }}
-        alt="Нету фото"
-      />
-      <p>Имя: {video?.users?.name + " " + video?.users?.lastname}</p>
-      <p>Возраст: {video?.users?.age}</p>
-      <p>Номер телефона: {video?.users?.phone_number}</p>
-      <p>Адрес электронной почты: {video?.users?.email}</p>
-      <p>Город: {video?.users?.city}</p>
-      <p>Ссылка на соцсеть: {video?.users?.social_media_link}</p>
-      <p>
-        Выбранная песня: {video?.song?.author_name + " | " + video?.song?.title}
-      </p>
-      <p>Дата и время публикации: {video?.created_at?.replace('T', ' ')?.replace('Z', '')}</p>
-      {renderVideo}
-      <button
-        onClick={() => acceptVideo(video.id)}
-        style={{
-          color: "white",
-          backgroundColor: "#06C92E",
-          padding: "8px 25px",
-          borderRadius: "10px",
-          fontSize: "20px",
-          margin: "10px 10px 0 0",
-        }}
+      <article
+          ref={ref}
+          style={{
+              border: "solid #0647C7",
+              margin: "10px auto",
+              width: "300px",
+              padding: "10px 15px",
+              borderRadius: "20px",
+          }}
       >
-        Принять
-      </button>
-      <button
-        onClick={() => declineVideo(video.id)}
-        style={{
-          background: "crimson",
-          color: "white",
-          padding: "8px 13px",
-          borderRadius: "10px",
-          fontSize: "20px",
-        }}
-      >
-        Отклонить
-      </button>
-    </article>
+          <p>ID: {video?.id}</p>
+          <img
+              src={video?.users?.image}
+              style={{width: "100%"}}
+              alt="Нету фото"
+          />
+          <p>Имя: {video?.users?.name + " " + video?.users?.lastname}</p>
+          <p>Возраст: {video?.users?.age}</p>
+          <p>Номер телефона: {video?.users?.phone_number}</p>
+          <p>Адрес электронной почты: {video?.users?.email}</p>
+          <p>Город: {video?.users?.city}</p>
+          <p>Ссылка на соцсеть: {video?.users?.social_media_link}</p>
+          <p>
+              Выбранная песня: {video?.song?.author_name + " | " + video?.song?.title}
+          </p>
+          <p>Дата и время публикации: {video?.created_at?.replace('T', ' ')?.replace('Z', '')}</p>
+          {renderVideo}
+          <button
+              onClick={() => acceptVideo(video.id)}
+              style={{
+                  color: "white",
+                  backgroundColor: "#06C92E",
+                  padding: "8px 25px",
+                  borderRadius: "10px",
+                  fontSize: "20px",
+                  margin: "10px 10px 0 0",
+              }}
+          >
+              Принять
+          </button>
+          <button
+              onClick={() => declineVideo(video.id)}
+              style={{
+                  background: "crimson",
+                  color: "white",
+                  padding: "8px 13px",
+                  borderRadius: "10px",
+                  fontSize: "20px",
+              }}
+          >
+              Отклонить
+          </button>
+          <button
+              onClick={() => {
+                  if (window.confirm('Вы уверенны что хотите удалить это видео с ID ' + video.id + '?')) {
+                      deleteVideo(video.id)
+                  }
+              }}
+              style={{
+                  display: 'flex',
+                  margin: '10px auto',
+                  background: "black",
+                  color: "white",
+                  padding: "8px 13px",
+                  borderRadius: "10px",
+                  fontSize: "20px",
+              }}
+          >
+              Удалить
+          </button>
+      </article>
   );
 }

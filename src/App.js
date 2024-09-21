@@ -13,6 +13,7 @@ import Index from "./pages/Index.js";
 import Rules from "./pages/Rules.js";
 import Check from "./pages/Check.js";
 import DeclinedVideos from "./pages/Moderation/DeclinedVideos.js";
+import AcceptedVideos from "./pages/Moderation/AcceptedVideos.js";
 
 function App() {
     const refresh = useRefreshToken()
@@ -37,6 +38,7 @@ function App() {
             <Middleware>
                 <Routes>
                     <Route path="/check" element={<Check />} />
+                    <Route path="/video-moderation/accepted" element={<AcceptedVideos />} />
                     <Route path="/video-moderation/declined" element={<DeclinedVideos />} />
                     <Route path="/video-moderation" element={<VideoModeration />} />
                     <Route path="/song" element={<UploadSong />} />

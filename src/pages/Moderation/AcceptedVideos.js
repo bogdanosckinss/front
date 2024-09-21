@@ -3,7 +3,7 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import debounce from "lodash/debounce.js";
 import Video from "../../components/Moderation/Video.js";
 
-export default function DeclinedVideos() {
+export default function AcceptedVideos() {
     const privateAxios = useAxiosPrivate();
     const [videos, setVideos] = useState([]);
     const [noMoreVideosFound, setNoMoreVideosFound] = useState(false);
@@ -35,7 +35,7 @@ export default function DeclinedVideos() {
             let response = {};
             try {
                 response = await privateAxios.get(
-                    "content/videos-to-moderate/declined?skip=" + videos.length
+                    "content/videos-to-moderate/approved?skip=" + videos.length
                 );
 
                 const allVideos = [...videos, ...response.data];
@@ -44,7 +44,7 @@ export default function DeclinedVideos() {
 
                 if (response.data.length == 0) {
                     setNoMoreVideosFound(true);
-                    return;
+                    return
                 }
             } catch (err) {
                 console.log(err);
@@ -63,15 +63,15 @@ export default function DeclinedVideos() {
     }
 
     function approved() {
-        setAcceptedVideosCount(count => count + 1)
-        setDeclinedVideosCount(count => count - 1)
     }
 
     function declined() {
+        setDeclinedVideosCount(count => count + 1)
+        setAcceptedVideosCount(count => count - 1)
     }
 
     function deleted() {
-        setDeclinedVideosCount(count => count - 1)
+        setAcceptedVideosCount(count => count - 1)
     }
 
     return (
@@ -79,7 +79,7 @@ export default function DeclinedVideos() {
             {accessApproved ? (
                 <>
                     <nav>
-                        <h1 style={{textAlign: 'center', textTransform: 'uppercase'}}>Список отклонённых видео</h1>
+                        <h1 style={{textAlign: 'center', textTransform: 'uppercase'}}>Список принятых видео</h1>
                         <ul style={{display: 'flex', gap: '10px'}}>
                             <li style={{
                                 background: 'green',

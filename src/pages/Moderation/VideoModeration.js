@@ -49,6 +49,10 @@ export default function VideoModeration() {
     setUnderModerationVideosCount(count => count - 1)
   }
 
+  function deleted() {
+    setUnderModerationVideosCount(count => count - 1)
+  }
+
   const findMore = useCallback(
     debounce(async () => {
       let response = {};
@@ -76,13 +80,36 @@ export default function VideoModeration() {
     <>
       {accessApproved ? (
           <>
+            <nav>
+              <h1 style={{textAlign: 'center', textTransform: 'uppercase'}}>Список видео под модерацией</h1>
+              <ul style={{display: 'flex', gap: '10px'}}>
+                <li style={{
+                  background: 'green',
+                  color: 'white',
+                  padding: '4px',
+                  borderRadius: '4px',
+                  cursor: 'pointer'
+                }}>
+                  <a href='/video-moderation/accepted'>Принятые ({acceptedVideosCount})</a>
+                </li>
+                <li style={{
+                  background: 'orange',
+                  color: 'white',
+                  padding: '4px',
+                  borderRadius: '4px',
+                  cursor: 'pointer'
+                }}>
+                  <a href='/video-moderation'>Под модерацией ({underModerationVideosCount})</a>
+                </li>
+                <li style={{background: 'red', color: 'white', padding: '4px', borderRadius: '4px', cursor: 'pointer'}}>
+                  <a href='/video-moderation/declined'>Отклонённые ({declinedVideosCount})</a>
+                </li>
+              </ul>
+            </nav>
             <h1>Общее количество загруженных видео {totalVideosCount}</h1>
-            <h2>
-              Принятых видео {acceptedVideosCount} | Отклонённых видео {declinedVideosCount} | Под модерацией {underModerationVideosCount}
-            </h2>
             <div className="moderation">
               {videos.map((video) => {
-                return <Video approved={approved} declined={declined} video={video}/>;
+                return <Video approved={approved} declined={declined} deleted={deleted} video={video}/>;
               })}
 
               <button
