@@ -9,6 +9,7 @@ export default function UsersModeration() {
     const [password, setPassword] = useState("");
     const [accessApproved, setAccessApproved] = useState(false);
     const [withAuthors, setWithAuthors] = useState(true);
+    const [skipCount, setSkipCount] = useState(0);
 
     useEffect(() => {
         const key = localStorage.getItem('md_key')
@@ -24,16 +25,17 @@ export default function UsersModeration() {
             let response = {};
             try {
                 response = await privateAxios.get(
-                    "users/list?skip=" + users.length + (withAuthors ? '&authors=true' : '')
+                    "users/list?skip=" + skipCount + (withAuthors ? '&authors=true' : '')
                 )
 
                 const allUsers = [...users, ...response.data]
                 setUsers(allUsers)
+                setSkipCount(allUsers.length)
             } catch (err) {
                 console.log(err)
             }
         }, 1000),
-        [privateAxios, users, withAuthors]
+        [privateAxios, users, withAuthors, skipCount]
     );
 
     useEffect(() => {
@@ -46,7 +48,7 @@ export default function UsersModeration() {
         <>
             {accessApproved ? (
                 <>
-                    <h1>Пользователи</h1>
+                    <h1>Пользователи {skipCount}</h1>
                     <button style={withAuthors ? {background: 'green', color: 'white'} : {}} onClick={() => {
                         setUsers([])
                         setWithAuthors(true)
@@ -61,7 +63,7 @@ export default function UsersModeration() {
                         flexWrap: 'wrap'
                     }}>
                         {users.map((user) => {
-                            return <User user={user} />
+                            return <User user={user} onDelete={() => setSkipCount(count => count - 1)} />
                         })}
 
                         <button

@@ -1,13 +1,14 @@
 import React, {useRef, useState} from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 
-export default function User({ user }) {
+export default function User({ user, onDelete }) {
     const privateAxios = useAxiosPrivate()
     const ref = useRef()
     const [showData, setShowData] = useState(false)
 
     function deleteUser(userId) {
         try {
+            onDelete()
             privateAxios.delete("users/delete/" + userId).then(() => {
                 if (ref.current) {
                     ref.current.style.display = 'none'
