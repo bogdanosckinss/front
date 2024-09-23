@@ -284,7 +284,7 @@ export default function AccountInfo({ setNotInitialLoading }) {
 
   async function uploadVideo(video) {
     setUploadingVideo(true);
-    const link = await uploadFileService.upload(video, "videos");
+    const link = await uploadFileService.uploadVideo(video, "videos");
     getVideoImage(link);
   }
 
