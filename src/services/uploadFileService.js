@@ -32,9 +32,10 @@ export class UploadFileService {
         })
 
         const prom = await new Promise((resolve, reject) => {
+            const extension = file.name.split('.')
             s3.upload({
                 Bucket: 'like2024',
-                Key: folder + '/' + uuidv4() + '.mp4',
+                Key: folder + '/' + uuidv4() + '.' + extension[extension.length - 1],
                 Body: file,
                 ContentType: file.type
             }, (err, data) => {

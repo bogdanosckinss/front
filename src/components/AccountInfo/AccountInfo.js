@@ -615,7 +615,7 @@ export default function AccountInfo({ setNotInitialLoading }) {
                                             await uploadVideo(e.target.files[0]);
                                           }}
                                           type="file"
-                                          accept="video/*"
+                                          accept=".mp4, .avi, .mov"
                                           className="account__upload-video-input"
                                           name="filename"
                                           hidden
