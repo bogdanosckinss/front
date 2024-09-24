@@ -305,9 +305,6 @@ export default function AccountInfo({ setNotInitialLoading }) {
       let img = new Image();
 
       function initCanvas() {
-        privateAxios.post("/content/log", {
-          message: this.videoWidth + ' ' + this.videoHeight
-        })
         canvas.width = this.videoWidth;
         canvas.height = this.videoHeight;
       }
@@ -338,8 +335,11 @@ export default function AccountInfo({ setNotInitialLoading }) {
       video.addEventListener("timeupdate", drawFrame, false);
 
       video.muted = true;
-      video.setAttribute("crossOrigin", "anonymous");
+      //video.setAttribute("crossOrigin", "anonymous");
       video.src = path;
+      privateAxios.post("/content/log", {
+        message: path
+      })
       video.play();
     }
 
