@@ -19,12 +19,12 @@ export default function Login({redirectAfterLogin = true, postLoginAction = () =
     const [token, setToken] = useState('')
     const [tokenSent, setTokenSent] = useState(false)
     const [restart, setRestart] = useState(false)
-    const [isAllowedToResendCode, setIsAllowedToResendCode] = useState(false)
+    const [isAllowedToResendCode, setIsAllowedToResendCode] = useState(true)
     const inputsRef = useRef([]);
     const codeListRef = useRef(null);
     const [error, setError] = useState(false);
     const [support, setSupport] = useState(false);
-    const [hideConfirmation, setHideConfirmation] = useState(false);
+    const [hideConfirmation, setHideConfirmation] = useState(true);
     const [isMasked, setIsMasked] = useState(false)
     const [sentViaPhone, setSentViaPhone] = useState(false)
     const phoneRef = useRef(null)
@@ -61,6 +61,7 @@ export default function Login({redirectAfterLogin = true, postLoginAction = () =
     async function sendCodeViaEmail(event) {
         event.preventDefault()
 
+        setHideConfirmation(false)
         setSentViaPhone(false)
         setRestart(true)
         setIsAllowedToResendCode(false)
@@ -137,14 +138,20 @@ export default function Login({redirectAfterLogin = true, postLoginAction = () =
         }
     }, [isMasked])
 
+    useEffect(() => {
+        if (!isAllowedToResendCode) {
+            setHideConfirmation(false)
+        }
+    }, [showAuth]);
+
 
     function hideModal() {
         dispatch(setShowAuth(false))
         dispatch(setShowEmailAuth(false))
-        setToken('')
-        setTokenSent(false)
+        //setToken('')
+        //setTokenSent(false)
         setSupport(false)
-        setHideConfirmation(false)
+        setHideConfirmation(true)
     }
 
     function showModal() {
@@ -298,7 +305,7 @@ export default function Login({redirectAfterLogin = true, postLoginAction = () =
             <div id='login-bg' onClick={hideModal} className="login-bg js-login-bg"
                  style={showAuth ? {display: 'block'} : {display: 'none'}}></div>
             <div className="login__container forms-popup js-forms-popup"
-                 style={showAuth && !tokenSent ? {display: 'block'} : {display: 'none'}}>
+                 style={showAuth && !tokenSent && 1 > 2 ? {display: 'block'} : {display: 'none'}}>
                 <div className="login__forw-wrapper">
                     <button className="login-btn-close js-login-btn-close" onClick={hideModal}>
                         <svg
@@ -379,7 +386,7 @@ export default function Login({redirectAfterLogin = true, postLoginAction = () =
                 </div>
             </div>
             <div className="login__container forms-popup js-forms-popup"
-                 style={showAuth && tokenSent && !hideConfirmation ? {display: 'block'} : {display: 'none'}}>
+                 style={showAuth && !hideConfirmation ? {display: 'block'} : {display: 'none'}}>
                 <div className="login__forw-wrapper">
                     <button onClick={hideModal} className="login-btn-close js-login-btn-close">
                         <svg
@@ -454,7 +461,7 @@ export default function Login({redirectAfterLogin = true, postLoginAction = () =
 
             <div
                 className="login__container forms-popup js-forms-popup"
-                style={showAuth && showEmailAuth ? {display: 'block'} : {display: 'none'}}
+                style={showAuth && isAllowedToResendCode && hideConfirmation ? {display: 'block'} : {display: 'none'}}
             >
                 <div className="login__forw-wrapper">
                     <button className="login-btn-close js-login-btn-close" onClick={hideModal}>

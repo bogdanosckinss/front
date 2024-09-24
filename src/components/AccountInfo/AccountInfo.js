@@ -32,6 +32,7 @@ export default function AccountInfo({ setNotInitialLoading }) {
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [phone, setPhone] = useState(null);
+  const [isPhoneFieldTouched, setIsPhoneFieldTouched] = useState(false);
   const [phoneclear, setPhoneClear] = useState(null);
   const [age, setAge] = useState(0);
   const [email, setEmail] = useState(null);
@@ -272,15 +273,6 @@ export default function AccountInfo({ setNotInitialLoading }) {
     setUploadingImage(true);
     const link = await uploadFileService.upload(image, "images");
     setImage(link);
-
-    // try {
-    //   await privateAxios.put("/users/image", {
-    //     image: link,
-    //   });
-    // } catch (e) {
-    //   console.log(e)
-    // }
-
     setUploadingImage(false);
   }
 
@@ -700,22 +692,25 @@ export default function AccountInfo({ setNotInitialLoading }) {
                                       onChange={(e) =>
                                           handleNumberInput(e.target.value)
                                       }
-                                      onFocus={(e) => handleNumberInput(e.target.value)}
+                                      onFocus={(e) => {
+                                        setIsPhoneFieldTouched(true)
+                                        handleNumberInput(e.target.value)
+                                      }}
                                       type="phone"
                                       className={
                                           "account__form-input js-account__form-input " +
-                                          (phone && !alreadyUploaded ? "active" : "")
+                                          ((phone && !alreadyUploaded && isPhoneFieldTouched) ? "active" : "")
                                       }
                                       placeholder="+ 7 (___) ___-__-__"
                                       readOnly={phoneclear}
                                   />
                                 </label>
-                                {isPhoneValid() ? (
-                                    ""
-                                ) : (
+                                {!isPhoneValid() && isPhoneFieldTouched ? (
                                     <div className="account-typing-error">
                                       Номер указан неверно. Пожалуйста, попробуйте ещё.
                                     </div>
+                                ) : (
+                                    ''
                                 )}
                                 <label className="account__form-labels" htmlFor="">
                                   <input
