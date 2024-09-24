@@ -36,8 +36,7 @@ export class UploadFileService {
             s3.upload({
                 Bucket: 'like2024',
                 Key: folder + '/' + uuidv4() + '.' + extension[extension.length - 1],
-                Body: file,
-                ContentType: file.type
+                Body: file
             }, (err, data) => {
                 if (err) return reject(err);
                 return resolve(data);
