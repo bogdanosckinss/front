@@ -290,6 +290,7 @@ export default function AccountInfo({ setNotInitialLoading }) {
       const link = await uploadFileService.uploadVideo(video, "videos");
       getVideoImage(link);
     } catch (err) {
+      setUploadingVideo(false);
       window.alert('Произошла ошибка')
     }
   }
