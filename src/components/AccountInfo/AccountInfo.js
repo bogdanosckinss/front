@@ -336,9 +336,9 @@ export default function AccountInfo({ setNotInitialLoading }) {
       video.setAttribute("crossOrigin", "anonymous");
       video.src = path;
       video.play().catch(err => {
-        privateAxios.post("/content/log", {
-          message: JSON.stringify(err)
-        })
+        setPreviewImage('');
+        setVideo(path);
+        setUploadingVideo(false);
       })
     }
 
