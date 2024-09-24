@@ -310,9 +310,6 @@ export default function AccountInfo({ setNotInitialLoading }) {
       }
 
       function drawFrame(e) {
-        privateAxios.post("/content/log", {
-          message: 'frame'
-        })
         video.pause();
         ctx.drawImage(this, 0, 0);
 
@@ -335,6 +332,7 @@ export default function AccountInfo({ setNotInitialLoading }) {
       video.addEventListener("timeupdate", drawFrame, false);
 
       video.muted = true;
+      video.autoplay = false;
       video.setAttribute("crossOrigin", "anonymous");
       video.src = path;
       video.play().catch(err => {
