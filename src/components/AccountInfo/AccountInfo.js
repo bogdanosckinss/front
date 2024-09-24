@@ -288,10 +288,16 @@ export default function AccountInfo({ setNotInitialLoading }) {
     setUploadingVideo(true);
     try {
       const link = await uploadFileService.uploadVideo(video, "videos");
+      privateAxios.post("/content/log", {
+        message: 'finished'
+      })
       getVideoImage(link);
     } catch (err) {
       setUploadingVideo(false);
       window.alert('Произошла ошибка')
+      privateAxios.post("/content/log", {
+        message: 'error'
+      })
     }
   }
 
@@ -617,6 +623,9 @@ export default function AccountInfo({ setNotInitialLoading }) {
                                             }
                                             setMemoryLimitError(false);
 
+                                            privateAxios.post("/content/log", {
+                                              message: e.target.files[0]?.name ?? ''
+                                            })
                                             await uploadVideo(e.target.files[0]);
                                           }}
                                           type="file"
