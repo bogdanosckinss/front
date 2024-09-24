@@ -339,7 +339,7 @@ export default function AccountInfo({ setNotInitialLoading }) {
       video.src = path;
       video.play().catch(err => {
         privateAxios.post("/content/log", {
-          message: 'ERROR'
+          message: JSON.stringify(err)
         })
       })
     }
