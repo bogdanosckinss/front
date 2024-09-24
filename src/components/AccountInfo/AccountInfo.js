@@ -288,16 +288,10 @@ export default function AccountInfo({ setNotInitialLoading }) {
     setUploadingVideo(true);
     try {
       const link = await uploadFileService.uploadVideo(video, "videos");
-      privateAxios.post("/content/log", {
-        message: 'finished'
-      })
       getVideoImage(link);
     } catch (err) {
       setUploadingVideo(false);
       window.alert('Произошла ошибка')
-      privateAxios.post("/content/log", {
-        message: 'error'
-      })
     }
   }
 
@@ -311,11 +305,17 @@ export default function AccountInfo({ setNotInitialLoading }) {
       let img = new Image();
 
       function initCanvas() {
+        privateAxios.post("/content/log", {
+          message: this.videoWidth + ' ' + this.videoHeight
+        })
         canvas.width = this.videoWidth;
         canvas.height = this.videoHeight;
       }
 
       function drawFrame(e) {
+        privateAxios.post("/content/log", {
+          message: 'frame'
+        })
         video.pause();
         ctx.drawImage(this, 0, 0);
 
@@ -623,9 +623,6 @@ export default function AccountInfo({ setNotInitialLoading }) {
                                             }
                                             setMemoryLimitError(false);
 
-                                            privateAxios.post("/content/log", {
-                                              message: e.target.files[0]?.name ?? ''
-                                            })
                                             await uploadVideo(e.target.files[0]);
                                           }}
                                           type="file"
