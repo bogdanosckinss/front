@@ -159,7 +159,7 @@ export default function Login({redirectAfterLogin = true, postLoginAction = () =
         setToken('')
         setTokenSent(false)
         setSupport(false)
-        setHideConfirmation(false)
+        setHideConfirmation(true)
     }
 
     function showEmailModal() {
@@ -304,89 +304,89 @@ export default function Login({redirectAfterLogin = true, postLoginAction = () =
         <div className="login">
             <div id='login-bg' onClick={hideModal} className="login-bg js-login-bg"
                  style={showAuth ? {display: 'block'} : {display: 'none'}}></div>
+            {/*<div className="login__container forms-popup js-forms-popup"*/}
+            {/*     style={showAuth && !tokenSent && 1 > 2 ? {display: 'block'} : {display: 'none'}}>*/}
+            {/*    <div className="login__forw-wrapper">*/}
+            {/*        <button className="login-btn-close js-login-btn-close" onClick={hideModal}>*/}
+            {/*            <svg*/}
+            {/*                width="24"*/}
+            {/*                height="24"*/}
+            {/*                viewBox="0 0 24 24"*/}
+            {/*                fill="none"*/}
+            {/*                xmlns="http://www.w3.org/2000/svg"*/}
+            {/*            >*/}
+            {/*                <path*/}
+            {/*                    d="M7 7L12 12M12 12L7 17M12 12L17 7M12 12L17 17"*/}
+            {/*                    stroke="black"*/}
+            {/*                    strokeOpacity="0.25"*/}
+            {/*                    strokeWidth="2"*/}
+            {/*                    strokeLinecap="round"*/}
+            {/*                    strokeLinejoin="round"*/}
+            {/*                ></path>*/}
+            {/*            </svg>*/}
+            {/*        </button>*/}
+            {/*        <form className="form">*/}
+            {/*            <h1 className="login__title">Вход или регистрация</h1>*/}
+            {/*            <label className="login__label"*/}
+            {/*            ><input value={name} onChange={(e) => setName(e.target.value)} type="text"*/}
+            {/*                    placeholder="Ваше имя"*/}
+            {/*            /></label>*/}
+            {/*            <label className="login__label"*/}
+            {/*            ><input ref={phoneRef} onClick={(event) => {*/}
+            {/*                if (phone == '+7 (___) ___-__-__') {*/}
+            {/*                    event.target.setSelectionRange(2, 2)*/}
+            {/*                }*/}
+            {/*                if (phone == '+ 7 (') {*/}
+            {/*                    event.target.setSelectionRange(5, 5)*/}
+            {/*                }*/}
+            {/*            }} value={phone} pattern='[0-9]*' className="js-phone-input"*/}
+            {/*                    onChange={(e) => handleNumberInput(e)} onFocus={handleInputFocus} inputMode='tel'*/}
+            {/*                    placeholder="Ваш номер телефона"/>*/}
+            {/*            </label>*/}
+            {/*            <div className="login__agree">*/}
+            {/*                <label className="login__label-check">*/}
+            {/*                    <input*/}
+            {/*                        className="login__check-input js-login__check-input"*/}
+            {/*                        type="checkbox"*/}
+            {/*                        checked={isChecked}*/}
+            {/*                        onChange={handleCheckboxChange}*/}
+            {/*                    />*/}
+            {/*                    <span className="checkmark"></span>*/}
+            {/*                    <p>*/}
+            {/*                        Даю согласие на обработку данных в соответствии c <a*/}
+            {/*                        target="_blank"*/}
+            {/*                        href="https://bonus.detmir.ru/pdn_lk">*/}
+            {/*                        политикой обработки персональных данных*/}
+            {/*                    </a>*/}
+            {/*                        <br/>*/}
+            {/*                        и <a target="_blank" href="https://www.detmir.ru/privacy_policy/"*/}
+            {/*                    >политикой конфиденциальности</a*/}
+            {/*                    >.*/}
+            {/*                    </p>*/}
+            {/*                </label>*/}
+            {/*            </div>*/}
+            {/*            <button*/}
+            {/*                onClick={sendCodeViaSms}*/}
+            {/*                className={'login__button js-login__button ' + ((isChecked && checkReplacement(phone) && name) ? 'active' : '')}*/}
+            {/*                disabled={!isChecked || !checkReplacement(phone) || !name}>*/}
+            {/*                <span>Получить код по СМС</span>*/}
+            {/*                <svg*/}
+            {/*                    width="361"*/}
+            {/*                    height="55"*/}
+            {/*                    viewBox="0 0 361 55"*/}
+            {/*                    fill="none"*/}
+            {/*                    xmlns="http://www.w3.org/2000/svg"*/}
+            {/*                >*/}
+            {/*                    <path*/}
+            {/*                        d="M180.5 0.413057C232.765 0.336102 322.982 -1.58876 346.051 4.39624C364.426 6.3994 366.176 43.9566 349.551 49.465C337.663 55.3602 326.645 54.3521 170.5 54C63.2073 53.7586 31.2866 55.3313 13.1157 49.9643C-3.07175 45.1832 -4.82174 11.4056 10.9282 4.89578C20.9906 -2.11504 131.18 0.485724 180.5 0.413057Z"*/}
+            {/*                    />*/}
+            {/*                </svg>*/}
+            {/*            </button>*/}
+            {/*        </form>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <div className="login__container forms-popup js-forms-popup"
-                 style={showAuth && !tokenSent && 1 > 2 ? {display: 'block'} : {display: 'none'}}>
-                <div className="login__forw-wrapper">
-                    <button className="login-btn-close js-login-btn-close" onClick={hideModal}>
-                        <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M7 7L12 12M12 12L7 17M12 12L17 7M12 12L17 17"
-                                stroke="black"
-                                strokeOpacity="0.25"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            ></path>
-                        </svg>
-                    </button>
-                    <form className="form">
-                        <h1 className="login__title">Вход или регистрация</h1>
-                        <label className="login__label"
-                        ><input value={name} onChange={(e) => setName(e.target.value)} type="text"
-                                placeholder="Ваше имя"
-                        /></label>
-                        <label className="login__label"
-                        ><input ref={phoneRef} onClick={(event) => {
-                            if (phone == '+7 (___) ___-__-__') {
-                                event.target.setSelectionRange(2, 2)
-                            }
-                            if (phone == '+ 7 (') {
-                                event.target.setSelectionRange(5, 5)
-                            }
-                        }} value={phone} pattern='[0-9]*' className="js-phone-input"
-                                onChange={(e) => handleNumberInput(e)} onFocus={handleInputFocus} inputMode='tel'
-                                placeholder="Ваш номер телефона"/>
-                        </label>
-                        <div className="login__agree">
-                            <label className="login__label-check">
-                                <input
-                                    className="login__check-input js-login__check-input"
-                                    type="checkbox"
-                                    checked={isChecked}
-                                    onChange={handleCheckboxChange}
-                                />
-                                <span className="checkmark"></span>
-                                <p>
-                                    Даю согласие на обработку данных в соответствии c <a
-                                    target="_blank"
-                                    href="https://bonus.detmir.ru/pdn_lk">
-                                    политикой обработки персональных данных
-                                </a>
-                                    <br/>
-                                    и <a target="_blank" href="https://www.detmir.ru/privacy_policy/"
-                                >политикой конфиденциальности</a
-                                >.
-                                </p>
-                            </label>
-                        </div>
-                        <button
-                            onClick={sendCodeViaSms}
-                            className={'login__button js-login__button ' + ((isChecked && checkReplacement(phone) && name) ? 'active' : '')}
-                            disabled={!isChecked || !checkReplacement(phone) || !name}>
-                            <span>Получить код по СМС</span>
-                            <svg
-                                width="361"
-                                height="55"
-                                viewBox="0 0 361 55"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M180.5 0.413057C232.765 0.336102 322.982 -1.58876 346.051 4.39624C364.426 6.3994 366.176 43.9566 349.551 49.465C337.663 55.3602 326.645 54.3521 170.5 54C63.2073 53.7586 31.2866 55.3313 13.1157 49.9643C-3.07175 45.1832 -4.82174 11.4056 10.9282 4.89578C20.9906 -2.11504 131.18 0.485724 180.5 0.413057Z"
-                                />
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div className="login__container forms-popup js-forms-popup"
-                 style={showAuth && !hideConfirmation ? {display: 'block'} : {display: 'none'}}>
+                 style={showAuth && !hideConfirmation && !support ? {display: 'block'} : {display: 'none'}}>
                 <div className="login__forw-wrapper">
                     <button onClick={hideModal} className="login-btn-close js-login-btn-close">
                         <svg
@@ -461,7 +461,7 @@ export default function Login({redirectAfterLogin = true, postLoginAction = () =
 
             <div
                 className="login__container forms-popup js-forms-popup"
-                style={showAuth && isAllowedToResendCode && hideConfirmation ? {display: 'block'} : {display: 'none'}}
+                style={showAuth && isAllowedToResendCode && hideConfirmation && !support ? {display: 'block'} : {display: 'none'}}
             >
                 <div className="login__forw-wrapper">
                     <button className="login-btn-close js-login-btn-close" onClick={hideModal}>
