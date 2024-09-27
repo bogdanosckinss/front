@@ -480,7 +480,7 @@
     height: 100px;
   }
   .video__bottom {
-    height: 89px;
+    height: 95px;
   }
   .video-main {
     margin-top: 122px;
@@ -489,10 +489,10 @@
     padding-bottom: 10px;
   }
   .video-main__item {
-    height: 458px;
+    height: 555px;
   }
   .video-main__item-cover {
-    height: 393px;
+    height: 500px;
   }
   .video-main__container {
     padding: 0 10px;
