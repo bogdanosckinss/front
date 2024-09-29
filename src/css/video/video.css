@@ -161,7 +161,7 @@
   position: absolute;
   bottom: 45px;
   width: 100%;
-  /*height: 108px;*/
+    /*height: 108px;*/
 }
 .video__btn {
   position: relative;
@@ -489,10 +489,10 @@
     padding-bottom: 10px;
   }
   .video-main__item {
-    height: 458px;
+    height: 555px;
   }
   .video-main__item-cover {
-    height: 393px;
+    height: 500px;
   }
   .video-main__container {
     padding: 0 10px;
