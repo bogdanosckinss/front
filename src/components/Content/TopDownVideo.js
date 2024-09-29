@@ -44,11 +44,11 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [])
 
-    useEffect(() => {
-        if (isAuthenticated && likeAfterLogin) {
-            toggleLike()
-        }
-    }, [likeAfterLogin, isAuthenticated]);
+    // useEffect(() => {
+    //     if (isAuthenticated && likeAfterLogin) {
+    //         toggleLike()
+    //     }
+    // }, [likeAfterLogin, isAuthenticated]);
 
     function runHeartsAnimation() {
         const post = postContainerRef.current
@@ -125,6 +125,7 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
     }
 
     async function toggleLike() {
+        return
         if (!isAuthenticated) {
             setLikeAfterLogin(true)
             toggleAuth()
@@ -228,56 +229,56 @@ export default function TopDownVideo({postRef, video, userInteracts, isLastLine,
                         </div>
                     </div>
                     <div className="video__bottom">
-                        <div className="video__hearts">
-                            <div className="video__hearts-cover">
-                                <img
-                                    src={videoHeartBtn}
-                                    alt=""
-                                    className="video-heart"
-                                />
-                                <img
-                                    src={videoHeartBtn}
-                                    alt=""
-                                    className="video-heart"
-                                />
-                                <img
-                                    src={videoHeartBtn}
-                                    alt=""
-                                    className="video-heart"
-                                />
-                                <img
-                                    src={videoHeartBtn}
-                                    alt=""
-                                    className="video-heart"
-                                />
-                                <img
-                                    src={videoHeartBtn}
-                                    alt=""
-                                    className="video-heart"
-                                />
-                                <img
-                                    src={videoHeartBtn}
-                                    alt=""
-                                    className="video-heart"
-                                />
-                            </div>
-                        </div>
-                        <button className="video__btn" onClick={toggleLike}>
-                  <span className="video__btn-span">
-                    <svg
-                        width="160"
-                        height="51"
-                        viewBox="0 0 160 51"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                          d="M77.4541 0.855978C101.639 0.77838 140.514 0.0462847 151.189 6.08131C161.865 12.1163 162.43 35.5981 155.091 43.5296C149.589 49.4741 144.399 50.832 72.1434 50.4769C22.494 50.2336 15.4432 49.2316 7.03464 43.8197C-1.3739 38.4079 -3.12322 15.8943 6.64461 8.4037C20.2168 -2.00152 54.6312 0.929253 77.4541 0.855978Z"
-                      />
-                    </svg>
-                  </span>
-                            <span className="video__btn-span-text">{isLiked() ? 'Голос Принят' : 'Голосовать'}</span>
-                        </button>
+                        {/*<div className="video__hearts">*/}
+                        {/*    <div className="video__hearts-cover">*/}
+                        {/*        <img*/}
+                        {/*            src={videoHeartBtn}*/}
+                        {/*            alt=""*/}
+                        {/*            className="video-heart"*/}
+                        {/*        />*/}
+                        {/*        <img*/}
+                        {/*            src={videoHeartBtn}*/}
+                        {/*            alt=""*/}
+                        {/*            className="video-heart"*/}
+                        {/*        />*/}
+                        {/*        <img*/}
+                        {/*            src={videoHeartBtn}*/}
+                        {/*            alt=""*/}
+                        {/*            className="video-heart"*/}
+                        {/*        />*/}
+                        {/*        <img*/}
+                        {/*            src={videoHeartBtn}*/}
+                        {/*            alt=""*/}
+                        {/*            className="video-heart"*/}
+                        {/*        />*/}
+                        {/*        <img*/}
+                        {/*            src={videoHeartBtn}*/}
+                        {/*            alt=""*/}
+                        {/*            className="video-heart"*/}
+                        {/*        />*/}
+                        {/*        <img*/}
+                        {/*            src={videoHeartBtn}*/}
+                        {/*            alt=""*/}
+                        {/*            className="video-heart"*/}
+                        {/*        />*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
+                  {/*      <button className="video__btn" onClick={toggleLike}>*/}
+                  {/*          <span className="video__btn-span">*/}
+                  {/*  <svg*/}
+                  {/*      width="160"*/}
+                  {/*      height="51"*/}
+                  {/*      viewBox="0 0 160 51"*/}
+                  {/*      fill="none"*/}
+                  {/*      xmlns="http://www.w3.org/2000/svg"*/}
+                  {/*  >*/}
+                  {/*    <path*/}
+                  {/*        d="M77.4541 0.855978C101.639 0.77838 140.514 0.0462847 151.189 6.08131C161.865 12.1163 162.43 35.5981 155.091 43.5296C149.589 49.4741 144.399 50.832 72.1434 50.4769C22.494 50.2336 15.4432 49.2316 7.03464 43.8197C-1.3739 38.4079 -3.12322 15.8943 6.64461 8.4037C20.2168 -2.00152 54.6312 0.929253 77.4541 0.855978Z"*/}
+                  {/*    />*/}
+                  {/*  </svg>*/}
+                  {/*</span>*/}
+                  {/*              <span className="video__btn-span-text">{isLiked() ? 'Голос Принят' : 'Голосовать'}</span>*/}
+                  {/*      </button>*/}
                         <div className="video__song-info">
                   <span className="video__song-icon">
                     <svg fill="none" xmlns="http://www.w3.org/2000/svg">
