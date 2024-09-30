@@ -1,6 +1,9 @@
 .results-trial .plyr__progress {
   padding-left: var(--plyr-control-spacing, 10px) !important;
 }
+.results-trial .plyr__progress__buffer {
+  top: 2.5px !important;
+}
 .results-trial .plyr__controls {
   padding-left: 0 !important;
 }
