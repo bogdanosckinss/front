@@ -1,18 +1,31 @@
 import photo from "../../img/photo.jpg";
 import heart from "../../img/heart.svg";
-import React, {useEffect, useMemo, useRef} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import Plyr from "plyr-react";
 import videoMp4 from "../../img/video.mp4";
 
 export default function SingleVideo() {
     const postContainerRef = useRef()
     const infoRef = useRef()
+    const [width, setWidth] = useState(window.innerWidth)
+
+    function handleWindowSizeChange() {
+        setWidth(window.innerWidth)
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowSizeChange)
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange)
+        }
+    }, [])
+
     const renderVideo = useMemo(() => (
     <Plyr
         poster={photo}
         muted={false}
         options={{
-            controls: ['progress', 'play-large', 'play', 'current-time', 'duration', "volume", "mute", 'fullscreen'],
+            controls: ['progress', 'play-large', 'play', 'current-time', 'duration', ...[...(width > 768 ? ["volume", "mute"] : [])], 'fullscreen'],
             invertTime: false,
             i18n: {
                 restart: "Restart",
@@ -52,7 +65,7 @@ export default function SingleVideo() {
                 }
             ]
         }}/>
-), [])
+), [width])
 
     function classObserver(targetElement, observableClassName, callback){
         const ref = {prevStateHasClass: targetElement.classList.contains(observableClassName)};
@@ -84,7 +97,6 @@ export default function SingleVideo() {
 
         const container = postContainerRef.current.getElementsByTagName('div')[0]
         classObserver(container, 'plyr--hide-controls', (classAdded, mutation, observer) => {
-            console.log('Change detected. Class ', classAdded? 'added': 'removed')
             if (classAdded) {
                 infoRef.current.classList.remove('up')
                 return
@@ -92,21 +104,6 @@ export default function SingleVideo() {
 
             infoRef.current.classList.add('up')
         })
-
-        // postContainerRef.current.addEventListener('mouseover', () => {
-        //     console.log('pause')
-        //     infoRef.current.classList.add('up')
-        // })
-        // postContainerRef.current.addEventListener('mouseout', () => {
-        //     if (videoElement.paused) {
-        //         return
-        //     }
-        //     infoRef.current.classList.remove('up')
-        // })
-        // videoElement.addEventListener('pause', () => {
-        //     console.log('pause')
-        //     infoRef.current.classList.add('up')
-        // })
     }, []);
 
     return (
