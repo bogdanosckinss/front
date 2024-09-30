@@ -16,7 +16,6 @@ const useAxiosPrivate = () => {
     const requestIntercept = fetcher().interceptors.request.use(
       async (config) => {
           const cookies = getCookie('rf')
-          console.log(document.cookie)
           config.withCredentials = true
           if (cookies) {
               config.headers['Cookie'] = cookies

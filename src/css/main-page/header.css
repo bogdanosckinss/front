@@ -4,6 +4,13 @@
   left: calc((100vw - 1160px) / 2);
   transform: none; */
 }
+
+.results-trial .header {
+  top: 33px;
+  max-width: 1160px;
+  left: calc((100vw - 1160px) / 2);
+  transform: none;
+}
 .body-main .header__button-block {
   width: 91px;
 }
@@ -38,13 +45,14 @@
   color: white;
 }
 @media screen and (max-width: 1200px) {
+  .results-trial .header {
+    left:15px;
+    width: calc(100% - 30px)
+  }
 }
 @media screen and (max-width: 1110px) {
   .header__nav {
     display: none;
-  }
-  .body-main .header {
-
   }
   .header__container {
     padding: 0;

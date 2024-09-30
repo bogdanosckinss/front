@@ -20,6 +20,19 @@
   border-radius: 12px;
   overflow: hidden;
 }
+.results-trial .videos-result__item::after {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 182px;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  background-image: url(../../img/videobg.svg);
+  background-size: cover;
+  display: none;
+}
+
 .videos-result__item::after {
   display: block;
   content: '';

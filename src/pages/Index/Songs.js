@@ -75,7 +75,7 @@ export default function Songs() {
                             {
                                 songs.map((song, key) => {
                                     return (
-                                        <li className="songs__item">
+                                        <li key={key} className="songs__item">
                                             <div className="songs__img">
                                                 <img src={song?.image_link} alt="img"/>
                                             </div>

@@ -62,7 +62,7 @@ export default function Support({support, showAuth, token, close, tryAgain, tryE
                         {/*        />*/}
                         {/*    </svg>*/}
                         {/*</button>*/}
-                        <a target="_blank" href='https://t.me/kidsprojecttop' class="form-problems__buttin">
+                        <a target="_blank" href='https://t.me/kidsprojecttop' className="form-problems__buttin">
                             <span>Служба поддержки </span>
                             <svg
                                 width="203"

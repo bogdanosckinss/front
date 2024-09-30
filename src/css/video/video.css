@@ -479,6 +479,9 @@
   .plyr__controls::after {
     height: 100px;
   }
+  .results-trial .video__bottom {
+    height: 95px;
+  }
   .video__bottom {
     /*height: 89px;*/
   }

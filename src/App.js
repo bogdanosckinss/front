@@ -11,10 +11,10 @@ import {setLoading} from "./features/auth/authSlice.js";
 import Middleware from "./middleware/Middleware.js";
 import Index from "./pages/Index.js";
 import Rules from "./pages/Rules.js";
-import Check from "./pages/Check.js";
 import DeclinedVideos from "./pages/Moderation/DeclinedVideos.js";
 import AcceptedVideos from "./pages/Moderation/AcceptedVideos.js";
 import UsersModeration from "./pages/Moderation/UsersModeration.js";
+import Results from "./pages/Results.js";
 
 function App() {
     const refresh = useRefreshToken()
@@ -38,7 +38,7 @@ function App() {
         <Router>
             <Middleware>
                 <Routes>
-                    <Route path="/check" element={<Check />} />
+                    <Route path="/results-lcfssa" element={<Results />} />
                     <Route path="/users-moderation" element={<UsersModeration />} />
                     <Route path="/video-moderation/accepted" element={<AcceptedVideos />} />
                     <Route path="/video-moderation/declined" element={<DeclinedVideos />} />
