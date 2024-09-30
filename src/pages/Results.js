@@ -14,7 +14,7 @@ import Footer from "../components/Footer/Footer.js";
 import {Helmet} from "react-helmet";
 import {useSelector} from "react-redux";
 import NewHero from "../components/NewHero.js";
-import RealWinners from "../components/RealWinners.js";
+import RealWinners from "../components/RealWinners/RealWinners.js";
 
 
 export default function Results() {
