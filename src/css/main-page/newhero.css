@@ -289,7 +289,7 @@
   color: #0073e6;
   position: relative;
   z-index: 7;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.212;
   text-align: center;
 }
@@ -527,6 +527,9 @@
   }
   .results-trial .hero__bottom {
     display: block;
+  }
+  .results-trial .bear {
+    left: calc(100% / 4 - 100px);
   }
 }
 @media screen and (max-width: 1200px) {
@@ -825,9 +828,6 @@
   .results-trial .line1 {
     font-size: 8px;
   }
-  .results-trial .cloud-text {
-    font-size: 6px;
-  }
   .results-trial .cloud {
     width: 141px;
     height: 82px;
@@ -837,7 +837,7 @@
     padding: 26px 18px;
   }
   .results-trial .cloud-text {
-    font-size: 6px;
+    font-size: 8px;
   }
   .results-trial .new-hero-item.bear.animate .c1 {
     --width: 44px;
