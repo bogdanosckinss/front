@@ -4,7 +4,7 @@ import heart from '../../img/heart.svg'
 import SingleVideo from "./SingleVideo.js";
 export default function RealWinners() {
     return (
-        <div className="real-winners">
+        <div id="winnersnew" className="real-winners">
             <div className="real-winners__wrapper">
                 <div className="container">
                     <div className="real-winners__title">Победители конкурса</div>

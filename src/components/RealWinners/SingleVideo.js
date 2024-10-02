@@ -1,13 +1,15 @@
 import photo from "../../img/photo.jpg";
 import heart from "../../img/heart.svg";
-import React, {useEffect, useMemo, useRef, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import Plyr from "plyr-react";
 import videoMp4 from "../../img/video.mp4";
+import userPhoto from '../../img/photo.jpg'
 
 export default function SingleVideo() {
     const postContainerRef = useRef()
     const infoRef = useRef()
     const [width, setWidth] = useState(window.innerWidth)
+    const isInitialRenderRef = useRef(true)
 
     function handleWindowSizeChange() {
         setWidth(window.innerWidth)
@@ -70,7 +72,6 @@ export default function SingleVideo() {
     function classObserver(targetElement, observableClassName, callback){
         const ref = {prevStateHasClass: targetElement.classList.contains(observableClassName)};
         return new MutationObserver(function(mutations, observer) {
-            // Use traditional 'for loops' for IE 11
             for(const mutation of mutations) {
                 if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                     const currentStateHasClass = mutation.target.classList.contains(observableClassName);
@@ -84,6 +85,26 @@ export default function SingleVideo() {
         }).observe(targetElement, { attributes: true });
     };
 
+    useEffect(() => {
+        const container = postContainerRef.current.getElementsByTagName('div')[0]
+        container.classList.add('plyr--hide-controls')
+
+        classObserver(container, 'plyr--hide-controls', (classAdded, mutation, observer) => {
+            if (isInitialRenderRef.current) {
+                container.classList.add('plyr--hide-controls')
+                infoRef.current.classList.remove('up')
+                return
+            }
+
+            if (classAdded) {
+                infoRef.current.classList.remove('up')
+                return
+            }
+
+            infoRef.current.classList.add('up')
+        })
+    }, [])
+
 
     useEffect(() => {
         const videoElement = postContainerRef.current.getElementsByTagName('video')[0]
@@ -92,19 +113,15 @@ export default function SingleVideo() {
                 if (element != videoElement && !element.paused) {
                     element.pause()
                 }
+
+                if (element == videoElement && !element.paused) {
+                    isInitialRenderRef.current = false
+                }
             })
         })
-
-        const container = postContainerRef.current.getElementsByTagName('div')[0]
-        classObserver(container, 'plyr--hide-controls', (classAdded, mutation, observer) => {
-            if (classAdded) {
-                infoRef.current.classList.remove('up')
-                return
-            }
-
-            infoRef.current.classList.add('up')
-        })
     }, []);
+
+
 
     return (
         <li ref={postContainerRef} className="videos-result__item">
@@ -112,6 +129,7 @@ export default function SingleVideo() {
 
             <div className="real-winners__author">
                 <div className="real-winners__author-icon">
+                    <img src={userPhoto} alt="img"/>
                     <span>К</span>
                 </div>
                 <div className="real-winners__author-info">

@@ -111,7 +111,7 @@
   top: -120px;
   width: 271px;
   height: 202px;
-  background-image: url(../../img/bear/cloud-top.svg);
+  background-image: url(../../img/bear/cloud-top.png);
   background-repeat: no-repeat;
   background-size: contain;
   left: 50%;
@@ -128,7 +128,7 @@
   bottom: -120px;
   width: 185px;
   height: 193px;
-  background-image: url(../../img/bear/cloud-star.svg);
+  background-image: url(../../img/bear/cloud-star.png);
   background-repeat: no-repeat;
   background-size: contain;
   left: 50%;
@@ -426,6 +426,14 @@
   background-color: var(--pink);
   font-size: 22px;
   color: white;
+  position: relative;
+  overflow: hidden;
+}
+.results-trial .real-winners__author-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
 }
 .results-trial .real-winners__author-info {
   display: flex;
@@ -508,6 +516,18 @@
 }
 .results-trial .videos-result__item video {
   object-fit: cover;
+}
+.results-trial .hero__bottom {
+  display: flex;
+  justify-content: center;
+}
+@media screen and (min-width: 1440px) {
+  .results-trial .new-hero__btn {
+    margin-left: calc((100% - 320px) / 2 + 4%);
+  }
+  .results-trial .hero__bottom {
+    display: block;
+  }
 }
 @media screen and (max-width: 1200px) {
   .results-trial .real-winners__title {
