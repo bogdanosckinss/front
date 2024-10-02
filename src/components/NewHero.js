@@ -90,7 +90,7 @@ export default function NewHero() {
                 <span className="animText t6">за </span>
                 <span className="animText t5"> ви</span
                 ><span className="animText t4">део </span>
-                <span className="animText t3"> и  </span>
+                <span className="animText t3"> и </span>
                 <span className="animText t2">эмо</span
                 ><span className="animText t1">ции!</span>
               </span>
