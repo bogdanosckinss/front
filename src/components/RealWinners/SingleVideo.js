@@ -1,6 +1,6 @@
 import photo from "../../img/photo.jpg";
 import heart from "../../img/heart.svg";
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import Plyr from "plyr-react";
 import videoMp4 from "../../img/video.mp4";
 import userPhoto from '../../img/photo.jpg'
