@@ -107,7 +107,7 @@ export default function NewHero() {
                     </div>
 
                     <div className="hero__bottom">
-                        <a href="#winnersnew" className="button-special new-hero__btn">
+                        <a href="#winnersnew" className="button-special new-hero__btn" style={{opacity: '0'}}>
                             <span className="">Победители конкурса</span>
                             <svg
                                 height="55"
