@@ -11,11 +11,11 @@ export default function Middleware(props) {
         const isListVideosRoute = window.location.pathname.split('/')[1] == 'videos-top-down'
         const isAccessClosed = window.location.pathname.split('/')[1] == 'videos' || window.location.pathname.split('/')[1] == 'videos-top-down' || window.location.pathname.split('/')[1] == 'video'
 
-        // if (isAccessClosed && window.location.pathname != '/') {
-        //     navigate({
-        //         pathname: '/',
-        //     }, {replace: true})
-        // }
+        if (isAccessClosed && window.location.pathname != '/') {
+            navigate({
+                pathname: '/',
+            }, {replace: true})
+        }
 
         if (loading || isVideoRoute || isListVideosRoute) {
             return
