@@ -97,7 +97,7 @@ export default function Index() {
                 <Songs/>
                 <Winners/>
                 <FAQ/>
-                <Join/>
+                <div style={{marginTop: '120px'}}></div>
                 <Login/>
             </main>
 
