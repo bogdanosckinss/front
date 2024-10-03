@@ -5,7 +5,7 @@ import Plyr from "plyr-react";
 import videoMp4 from "../../img/video.mp4";
 import userPhoto from '../../img/photo.jpg'
 
-export default function SingleVideo() {
+export default function SingleVideo({poster, link, age, city, singer, song, song_icon, likes, name}) {
     const postContainerRef = useRef()
     const infoRef = useRef()
     const [width, setWidth] = useState(window.innerWidth)
@@ -24,7 +24,7 @@ export default function SingleVideo() {
 
     const renderVideo = useMemo(() => (
     <Plyr
-        poster={photo}
+        poster={poster}
         muted={false}
         options={{
             controls: ['progress', 'play-large', 'play', 'current-time', 'duration', ...[...(width > 768 ? ["volume", "mute"] : [])], 'fullscreen'],
@@ -62,7 +62,7 @@ export default function SingleVideo() {
         source={{
             type: 'video', title: 'Video', sources: [
                 {
-                    src: videoMp4,
+                    src: link,
                     size: 720
                 }
             ]
@@ -129,32 +129,32 @@ export default function SingleVideo() {
 
             <div className="real-winners__author">
                 <div className="real-winners__author-icon">
-                    <img src={userPhoto} alt="img"/>
-                    <span>К</span>
+                    {/*<img src={userPhoto} alt="img"/>*/}
+                    <span>{name.split('')[0]}</span>
                 </div>
                 <div className="real-winners__author-info">
               <span className="real-winners__author-nickname"
-              >Светлана Иванова</span
+              >{name}</span
               >
                     <span className="real-winners__author-city"
-                    >г. <span>Москва</span>, <span>10</span> лет</span
+                    >г. <span>{city}</span>, <span>{age}</span> лет</span
                     >
                 </div>
             </div>
             <div ref={infoRef} className="videos-result__info up">
                 <div className="videos-result__song-info">
                     <div className="real-winners__song-img">
-                        <img src={photo} alt="iocn"/>
+                        <img src={song_icon} alt="iocn"/>
                     </div>
                     <div className="real-winners__song">
-                        <div className="real-winners__song-singer">Марьяна Локель</div>
-                        <div className="real-winners__song-name">Нано краска топ!</div>
+                        <div className="real-winners__song-singer">{singer}</div>
+                        <div className="real-winners__song-name">{song}</div>
                     </div>
                 </div>
 
                 <div className="real-winners__likes">
                     <span><img src={heart} alt="icon"/></span>
-                    <span>1203</span>
+                    <span>{likes}</span>
                 </div>
             </div>
         </li>

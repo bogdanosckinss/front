@@ -1,6 +1,4 @@
-import React, {useEffect, useMemo, useRef} from "react";
-import photo from '../../img/photo.jpg'
-import heart from '../../img/heart.svg'
+import React from "react";
 import SingleVideo from "./SingleVideo.js";
 export default function RealWinners() {
     return (
@@ -13,9 +11,33 @@ export default function RealWinners() {
                         которую вы указывали при регистрации заявки
                     </div>
                     <ul className="videos-result__list">
-                        <SingleVideo />
-                        <SingleVideo />
-                        <SingleVideo />
+                        <SingleVideo
+                            age={14}
+                            city={'Тула'}
+                            singer={'Milana Star'}
+                            song={'Barbie'}
+                            song_icon={'https://like2024.storage.yandexcloud.net/images/00182e06-ad78-4bca-b00c-c7de56f93048.jpeg'}
+                            likes={198}
+                            name={'Низор Дармарик'}
+                            link={'https://like2024.storage.yandexcloud.net/videos/1678f2b6-00c3-4168-ad6a-b2dc7663d4a7.mp4'}
+                            poster={''}
+                        />
+                        {/*<SingleVideo*/}
+                        {/*    name={'Ника Романовская'}*/}
+                        {/*    link={'https://like2024.storage.yandexcloud.net/videos/b945b9de-c1aa-4abb-91f6-f4edb208600f.MOV'}*/}
+                        {/*    poster={'https://like2024.storage.yandexcloud.net/images/2bc54583-8920-4b8c-b0fe-28eb199c1509.jpeg'}*/}
+                        {/*/>*/}
+                        <SingleVideo
+                            age={9}
+                            city={'Москва'}
+                            singer={'Марьяна Локель, Вау Вероника'}
+                            song={'Не малышка'}
+                            song_icon={'https://like2024.storage.yandexcloud.net/images/2b0b3cfe-4756-482a-8441-3cecf8d6d7f4.jpeg'}
+                            likes={7662}
+                            name={'Софья Носова'}
+                            link={'https://like2024.storage.yandexcloud.net/videos/2e0963ef-7ca9-48fc-b147-6cc3b0b32df9.mp4'}
+                            poster={'https://like2024.storage.yandexcloud.net/images/663901fe-e9d5-40d0-9a95-7e9b8f073c3f.jpeg'}
+                        />
                     </ul>
                 </div>
             </div>
