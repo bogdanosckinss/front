@@ -81,7 +81,7 @@ export default function Results() {
 
             <main>
                 <NewHero />
-                {/*<RealWinners />*/}
+                <RealWinners />
                 <div className="prizes">
                     <div className="container">
                         <div id="prizes" className="prizes__title">
