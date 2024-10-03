@@ -72,7 +72,7 @@ function App() {
                     } />
 
                     <Route path="/" element={
-                            <Index />
+                            <Results />
                     } />
                 </Routes>
             </Middleware>
