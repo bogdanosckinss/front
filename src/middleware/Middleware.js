@@ -9,6 +9,13 @@ export default function Middleware(props) {
     useEffect(() => {
         const isVideoRoute = window.location.pathname.split('/')[1] == 'videos' || window.location.pathname.split('/')[1] == 'rules' || window.location.pathname.split('/')[1] == 'check' || window.location.pathname.split('/')[1] == 'video' || window.location.pathname.split('/')[1] == 'results-lcfssa'
         const isListVideosRoute = window.location.pathname.split('/')[1] == 'videos-top-down'
+        const isAccessClosed = window.location.pathname.split('/')[1] == 'videos' || window.location.pathname.split('/')[1] == 'videos-top-down' || window.location.pathname.split('/')[1] == 'video'
+
+        if (isAccessClosed && window.location.pathname != '/') {
+            navigate({
+                pathname: '/',
+            }, {replace: true})
+        }
 
         if (loading || isVideoRoute || isListVideosRoute) {
             return
