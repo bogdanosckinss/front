@@ -15,6 +15,7 @@ import {Helmet} from "react-helmet";
 import {useSelector} from "react-redux";
 import NewHero from "../components/NewHero.js";
 import RealWinners from "../components/RealWinners/RealWinners.js";
+import ResultsHeader from "../components/Header/ResultsHeader.js";
 
 
 export default function Results() {
@@ -76,7 +77,7 @@ export default function Results() {
                     href="https://unpkg.com/accordion-js@3.3.4/dist/accordion.min.css"
                 />
             </Helmet>
-            <MainHeader/>
+            <ResultsHeader />
 
             <main>
                 <NewHero />
@@ -119,8 +120,8 @@ export default function Results() {
                 </div>
                 <Songs/>
                 <Winners/>
-                <FAQ/>
-                <Join/>
+                <FAQ />
+                <div style={{marginTop: '120px'}}></div>
                 <Login/>
             </main>
 
