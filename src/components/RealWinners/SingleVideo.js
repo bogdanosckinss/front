@@ -2,7 +2,7 @@ import heart from "../../img/heart.svg";
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import Plyr from "plyr-react";
 
-export default function SingleVideo({link, age, city, singer, song, song_icon, likes, name}) {
+export default function SingleVideo({link, age, city, singer, song, song_icon, likes, name, photo}) {
     const postContainerRef = useRef()
     const infoRef = useRef()
     const [width, setWidth] = useState(window.innerWidth)
@@ -125,7 +125,7 @@ export default function SingleVideo({link, age, city, singer, song, song_icon, l
 
             <div className="real-winners__author">
                 <div className="real-winners__author-icon">
-                    {/*<img src={userPhoto} alt="img"/>*/}
+                    {photo ? <img src={photo} alt="img"/> : '' }
                     <span>{name.split('')[0]}</span>
                 </div>
                 <div className="real-winners__author-info">
