@@ -27,7 +27,7 @@ export default function Post({postRef, post, inView}) {
         const postsBeforeSelected = posts.filter((post, index) => index < postIndex)
 
         navigate({
-            pathname: '/videos-top-down',
+            pathname: '/valerie-top-down',
             search: createSearchParams({
                 video: fetchedPost?.id,
                 query: query,

@@ -39,6 +39,10 @@ function App() {
         <Router>
             <Middleware>
                 <Routes>
+                    <Route path="/valerie-top-down" element={
+                        <TopDownVideos />
+                    } />
+                    <Route path="/valerie" element={<Videos />} />
                     <Route path="/closed-access-upload" element={<ClosedAccess />} />
                     <Route path="/results-lcfssa" element={<Results />} />
                     <Route path="/users-moderation" element={<UsersModeration />} />
@@ -68,7 +72,7 @@ function App() {
                     } />
 
                     <Route path="/" element={
-                            <Results />
+                            <Index />
                     } />
                 </Routes>
             </Middleware>
