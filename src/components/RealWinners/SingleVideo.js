@@ -1,11 +1,8 @@
-import photo from "../../img/photo.jpg";
 import heart from "../../img/heart.svg";
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import Plyr from "plyr-react";
-import videoMp4 from "../../img/video.mp4";
-import userPhoto from '../../img/photo.jpg'
 
-export default function SingleVideo({poster, link, age, city, singer, song, song_icon, likes, name}) {
+export default function SingleVideo({link, age, city, singer, song, song_icon, likes, name}) {
     const postContainerRef = useRef()
     const infoRef = useRef()
     const [width, setWidth] = useState(window.innerWidth)
@@ -24,7 +21,6 @@ export default function SingleVideo({poster, link, age, city, singer, song, song
 
     const renderVideo = useMemo(() => (
     <Plyr
-        poster={poster}
         muted={false}
         options={{
             controls: ['progress', 'play-large', 'play', 'current-time', 'duration', ...[...(width > 768 ? ["volume", "mute"] : [])], 'fullscreen'],
