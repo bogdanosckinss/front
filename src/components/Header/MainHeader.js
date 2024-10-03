@@ -75,21 +75,6 @@ export default function MainHeader() {
                     <a href="#voting">Вопросы и ответы</a>
                   </li>
                 </ul>
-                <button
-                  onClick={(e) => toggleAuth(e)}
-                  className="header__button-block header__button-real js-header__button-block"
-                >
-                  <span>{isAuthenticated ? "Выйти" : "Войти"}</span>
-                  <svg
-                    width="91"
-                    height="44"
-                    viewBox="0 0 91 44"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M44.052 0.28748C57.8075 0.219193 79.9174 -0.425051 85.989 4.88577C92.0606 10.1966 92.3821 30.8606 88.2079 37.8403C85.079 43.0714 82.1271 44.2664 41.0316 43.9539C12.7935 43.7398 8.78331 42.8581 4.00095 38.0956C-0.781407 33.3331 -1.77633 13.5212 3.77912 6.92948C11.4983 -2.22711 31.0715 0.351962 44.052 0.28748Z" />
-                  </svg>
-                </button>
               </nav>
             </div>
           </div>
@@ -121,25 +106,6 @@ export default function MainHeader() {
               <a href="#prizes"> Призы</a>
             </li>
           </ul>
-          <button
-            onClick={(e) => toggleAuth(e, true)}
-            className="button-special join__button header-hamb-btn js-header__button-block-mob"
-          >
-            <span className="">{isAuthenticated ? "Выйти" : "Войти"}</span>
-            <svg
-              width="188"
-              height="45"
-              viewBox="0 0 188 45"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M91.0085 0.78748C119.426 0.719193 165.104 0.0749492 177.648 5.38577C190.191 10.6966 190.855 31.3606 182.232 38.3403C175.768 43.5714 169.669 44.7664 84.7685 44.4539C26.4305 44.2398 18.1457 43.3581 8.2657 38.5956C-1.61434 33.8331 -3.66979 14.0212 7.80742 7.42948C23.7547 -1.72711 64.1916 0.851962 91.0085 0.78748Z"
-                fill="white"
-                fillOpacity="0.3"
-              />
-            </svg>
-          </button>
         </div>
       </div>
     </>
